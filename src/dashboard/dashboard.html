@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Online</title>
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/pemesanan.css">
+</head>
+<body>
+
+<!-- Sidebar Section -->
+<aside id="sidebar">
+    <div class="container-sidebar">
+        <div class="side-head">
+            <img src="../img/logo_restoran.png" alt="logo-resto">
+            <h1>Restorant</h1>
+        </div>
+        <nav class="box-menu">
+            <hr>
+            <ul>
+                <li><a href="#"><i class="bi bi-house-fill"></i><span>Dashboard</span></a></li>
+                <li><a href="src/menu-digital/menu.html"><i class="bi bi-cart-fill"></i><span>Menu</span></a></li>
+                <li><a href="src/pemesanan/pemesanan.html"><i class="bi bi-bag-check-fill"></i><span>Shopping</span></a></li>
+                <li><a href="src/payment/payment.html"><i class="bi bi-calculator"></i><span>Payment</span></a></li>
+                <li><a href=""><i class="bi bi-person-hearts"></i><span>Loyalty</span></a></li>
+                <li><a href="src/feedback/feedback.html"><i class="bi bi-envelope-paper-heart-fill"></i><span>FeedBack</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- Main Content Section -->
+<div class="body-box">
+    <div class="content-box">
+        <!-- Data Table Section (Pemesanan) -->
+        <div class="table-box">
+            <h2>Daftar Pemesanan</h2>
+            <table id="myTable" class="display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Pemesan</th>
+                        <th>Nama Item</th>
+                        <th>Jumlah Pesanan</th>
+                        <th>Harga Satuan</th>
+                        <th>Diskon</th>
+                        <th>Total Harga</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Reservation Table (Meja) -->
+        <div class="table-box">
+            <h2>Reservasi Meja</h2>
+            <table id="reservationTable" class="display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Pemesan</th>
+                        <th>Nomor Meja</th>
+                        <th>Jumlah Orang</th>
+                        <th>Total Harga</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Data Table Section (Pemesanan) -->
+        <!-- <div class="table-box">
+            <h2>Daftar Pemesanan</h2>
+            <table id="myTable" class="display responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Pemesan</th>
+                        <th>Nama Item</th>
+                        <th>Jumlah Pesanan</th>
+                        <th>Harga Satuan</th>
+                        <th>Diskon</th>
+                        <th>Total Harga</th>
+                        <th>Tanggal Pemesanan</th>
+                        <th>Status Pembayaran</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div> -->
+
+        <!-- Form untuk menambah menu -->
+<div class="add-menu-form">
+    <h2>Tambah Menu Baru</h2>
+    <input type="text" id="menuName" placeholder="Nama Menu" required>
+    <input type="number" id="menuPrice" placeholder="Harga Menu" required>
+    <select id="menuCategory" required>
+        <option value="Makanan">Makanan</option>
+        <option value="Minuman">Minuman</option>
+    </select>
+    <input type="file" id="menuImage" accept="image/*" required>
+    <button onclick="addMenu()">Tambah Menu</button>
+</div>
+
+
+    </div>
+</div>
+
+<!-- JavaScript Links -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Script to handle orders and reservation -->
+<script>
+    $(document).ready(function () {
+        // Pemesanan Table
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        const table = $('#myTable').DataTable({
+            responsive: true,
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            fixedHeader: true,
+            paging: true,
+            columnDefs: [
+                { targets: [7], className: 'text-center' }  // Menyusun tombol aksi di tengah
+            ],
+            language: {
+                paginate: {
+                    first: "«",
+                    last: "»",
+                    next: "›",
+                    previous: "‹"
+                },
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                search: "Cari: ",
+                emptyTable: "Tidak ada data tersedia",
+                searchPlaceholder: "Cari data...",
+                zeroRecords: "Data tidak ditemukan"
+            },
+            autoWidth: false
+        });
+
+        orders.forEach((order, index) => {
+            order.menuItems.forEach(item => {
+                const discount = order.discount ? `${order.discount}%` : '0%';
+                const totalAfterDiscount = item.total - (item.total * (order.discount / 100));
+                table.row.add([
+                    index + 1,  // No.
+                    order.orderName,  // Nama Pemesan
+                    item.name,  // Nama Item
+                    item.quantity,  // Jumlah Pesanan
+                    item.price.toLocaleString(),  // Harga Satuan
+                    discount,  // Diskon
+                    totalAfterDiscount.toLocaleString(),  // Total Harga setelah Diskon
+                    `<button class="deleteBtn"><i class="bi bi-trash"></i></button>`
+                ]).draw();
+            });
+        });
+
+        const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+        const reservationTable = $('#reservationTable').DataTable({
+            responsive: true,
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            fixedHeader: true,
+            paging: true,
+            columnDefs: [
+                { targets: [4], className: 'text-center' }
+            ],
+            language: {
+                paginate: {
+                    first: "«",
+                    last: "»",
+                    next: "›",
+                    previous: "‹"
+                },
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                search: "Cari: ",
+                emptyTable: "Tidak ada data tersedia",
+                searchPlaceholder: "Cari data...",
+                zeroRecords: "Data tidak ditemukan"
+            },
+            autoWidth: false
+        });
+        
+
+        reservations.forEach((reservation, index) => {
+            reservationTable.row.add([
+                index + 1,  // No.
+                reservation.reservationName,  // Nama Pemesan
+                reservation.tables.join(", "),  // Nomor Meja
+                reservation.numPeople,  // Jumlah Orang
+                reservation.totalPrice.toLocaleString(),  // Total Harga
+                `<button class="deleteBtn"><i class="bi bi-trash"></i></button>`  // Tombol hapus
+            ]).draw();
+        });
+
+        // Menghapus data reservasi meja ketika tombol delete ditekan
+    $('#reservationTable').on('click', '.deleteBtn', function () {
+        const row = $(this).closest('tr');
+        const rowIndex = reservationTable.row(row).index();  // Mendapatkan index baris
+        reservations.splice(rowIndex, 1);  // Menghapus reservasi dari array
+        localStorage.setItem('reservations', JSON.stringify(reservations));  // Simpan kembali ke localStorage
+        reservationTable.row(row).remove().draw();  // Menghapus baris dari DataTable
+    });
+
+        // Menghapus data pesanan ketika tombol delete ditekan
+        $('#myTable').on('click', '.deleteBtn', function () {
+            const row = $(this).closest('tr');
+            const rowIndex = table.row(row).index(); // Mendapatkan index baris
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.splice(rowIndex, 1);  // Menghapus pesanan dari array
+            localStorage.setItem('orders', JSON.stringify(orders));  // Simpan kembali ke localStorage
+            table.row(row).remove().draw();  // Menghapus baris dari DataTable
+        });
+
+        // Menyimpan data reservasi meja saat form disubmit
+        $('#reservationForm').on('submit', function (e) {
+            e.preventDefault();
+            
+            const reservationName = $('#reservationName').val();
+            const tableNumber = $('#tableNumber').val();
+            const numPeople = $('#numPeople').val();
+            const totalPrice = $('#totalPrice').text().replace('Total: Rp ', '').replace(',', '');
+
+            if (!reservationName || !tableNumber || !numPeople || !totalPrice) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+
+            // Menyimpan reservasi ke localStorage
+            const newReservation = {
+                name: reservationName,
+                tableNumber: tableNumber,
+                numPeople: numPeople,
+                totalPrice: parseInt(totalPrice)
+            };
+            
+            reservations.push(newReservation);
+            localStorage.setItem('reservations', JSON.stringify(reservations));
+
+            // Menambahkan data ke tabel
+            reservationTable.row.add([
+                reservations.length,  // No.
+                reservationName,  // Nama Pemesan
+                tableNumber,  // Nomor Meja
+                numPeople,  // Jumlah Orang
+                totalPrice  // Total Harga
+            ]).draw();
+            
+            alert("Reservasi berhasil!");
+        });
+    });
+</script>
+
+<!-- pay ment  -->
+<!-- <script>
+    $(document).ready(function () {
+        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        const table = $('#myTable').DataTable({
+            responsive: true,
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            fixedHeader: true,
+            paging: true,
+            columnDefs: [
+                { targets: [9], className: 'text-center' }
+            ],
+            language: {
+                paginate: {
+                    first: "«",
+                    last: "»",
+                    next: "›",
+                    previous: "‹"
+                },
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                search: "Cari: ",
+                emptyTable: "Tidak ada data tersedia",
+                searchPlaceholder: "Cari data...",
+                zeroRecords: "Data tidak ditemukan"
+            },
+            autoWidth: false
+        });
+
+        transactions.forEach((transaction, index) => {
+            table.row.add([
+                index + 1,
+                transaction.orderName,
+                transaction.menuItemName,
+                transaction.quantity,
+                transaction.price.toLocaleString(),
+                transaction.discount ? `${transaction.discount}%` : '0%',
+                (transaction.totalPrice).toLocaleString(),
+                transaction.orderDate,
+                transaction.paymentStatus,
+                `<button class="deleteBtn"><i class="bi bi-trash"></i></button>`
+            ]).draw();
+        });
+
+        // Delete transaction from table and localStorage
+        $('#myTable').on('click', '.deleteBtn', function () {
+            const row = $(this).closest('tr');
+            const rowIndex = table.row(row).index();
+            transactions.splice(rowIndex, 1);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            table.row(row).remove().draw();
+        });
+
+        // Auto delete transactions that are pending for more than 3 minutes
+        setInterval(() => {
+            const now = new Date().getTime();
+            transactions.forEach((transaction, index) => {
+                if (transaction.paymentStatus === "Pending") {
+                    const orderTime = new Date(transaction.orderDate).getTime();
+                    if (now - orderTime > 3 * 60 * 1000) {  // More than 3 minutes
+                        transactions.splice(index, 1);
+                        localStorage.setItem('transactions', JSON.stringify(transactions));
+                        table.row(index).remove().draw();
+                    }
+                }
+            });
+        }, 60000); // Check every minute
+    });
+</script> -->
+
+
+<script>
+    function addMenu() {
+        const name = document.getElementById("menuName").value;
+        const price = parseFloat(document.getElementById("menuPrice").value);
+        const category = document.getElementById("menuCategory").value;
+        const menuImage = document.getElementById("menuImage").files[0];
+    
+        if (name && price && category && menuImage) {
+            const reader = new FileReader();
+            
+            reader.onloadend = function() {
+                const newMenu = {
+                    name,
+                    price,
+                    category,
+                    image: reader.result // Gambar dalam format Base64
+                };
+    
+                // Ambil data menu dari localStorage
+                const menuList = JSON.parse(localStorage.getItem("menuList")) || [];
+    
+                // Tambahkan menu baru ke array menu
+                menuList.push(newMenu);
+    
+                // Simpan kembali ke localStorage
+                localStorage.setItem("menuList", JSON.stringify(menuList));
+    
+                // Clear form input setelah menambah menu
+                document.getElementById("menuName").value = "";
+                document.getElementById("menuPrice").value = "";
+                document.getElementById("menuCategory").value = "Makanan";
+                document.getElementById("menuImage").value = "";
+    
+                alert("Menu berhasil ditambahkan!");
+            };
+    
+            // Baca gambar sebagai URL Data (Base64)
+            reader.readAsDataURL(menuImage);
+        } else {
+            alert("Silakan isi semua form.");
+        }
+    }
+    
+    
+</script>
+
+</body>
+</html>

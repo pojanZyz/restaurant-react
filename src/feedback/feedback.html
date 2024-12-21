@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback-Restoran</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/feedback.css">
+</head>
+<body>
+    <div class="body-box">
+        <div class="content-fb-box">
+            <main class="container-fb">
+                <div class="fb-header">
+                    <h1>Berikan Feed Back Terbaik Anda</h1>
+                </div>
+                <div class="content-box">
+                    <div class="input-box">
+                        <form id="feedback-form">
+                            <div class="input">
+                                <label for="username">Nama :</label>
+                                <input type="text" name="username" id="username" placeholder="Nama Anda" required>
+                            </div>
+                            <div class="input">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" placeholder="Email Anda" required>
+                            </div>
+                            <div class="input">
+                                <label for="pesan">Pesan:</label>
+                                <textarea name="pesan" id="pesan" placeholder="Pesan Anda" required></textarea>
+                            </div>
+                            <div class="positif">
+                                <label for="positif">Ulasan Positif : </label>
+                                <input type="checkbox" id="positif">
+                            </div>
+                            <div class="btn-box">
+                                <button type="submit">Submit</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+            <div class="dashboard">
+                <h1>Statistik Ulasan</h1>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <h2>Total Ulasan</h2>
+                        <p id="total-ulasan">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h2>Ulasan Positif</h2>
+                        <p id="ulasan-positif">0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h2>Ulasan Negatif</h2>
+                        <p id="ulasan-negatif">0</p>
+                    </div>
+                </div>
+                <h2>Daftar Ulasan</h2>
+                <table class="review-table">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Pesan</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="review-list">
+                        <!-- Ulasan terbaru akan diisi di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mengambil data ulasan dari Local Storage
+        function getUlasan() {
+            const storedUlasan = localStorage.getItem("ulasan");
+            return storedUlasan ? JSON.parse(storedUlasan) : [];
+        }
+
+        // Fungsi untuk menyimpan data ulasan ke Local Storage
+        function saveUlasan(data) {
+            localStorage.setItem("ulasan", JSON.stringify(data));
+        }
+
+        // Fungsi untuk memperbarui statistik dan daftar ulasan
+        function updateDashboard() {
+            const ulasan = getUlasan();
+
+            // Hitung statistik
+            const totalUlasan = ulasan.length;
+            const ulasanPositif = ulasan.filter((u) => u.positif).length;
+            const ulasanNegatif = totalUlasan - ulasanPositif;
+
+            // Tampilkan statistik
+            document.getElementById("total-ulasan").textContent = totalUlasan;
+            document.getElementById("ulasan-positif").textContent = ulasanPositif;
+            document.getElementById("ulasan-negatif").textContent = ulasanNegatif;
+
+            // Tampilkan daftar ulasan
+            const reviewList = document.getElementById("review-list");
+            reviewList.innerHTML = ""; // Hapus daftar lama
+
+            ulasan.forEach((u) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${u.nama}</td>
+                    <td>${u.email}</td>
+                    <td>${u.pesan}</td>
+                    <td>${u.tanggal}</td>
+                `;
+                reviewList.appendChild(row);
+            });
+        }
+
+        // Tambahkan ulasan baru saat form disubmit
+        document.getElementById("feedback-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const nama = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const pesan = document.getElementById("pesan").value;
+            const positif = document.getElementById("positif").checked;
+
+            const newUlasan = {
+                nama,
+                email,
+                pesan,
+                tanggal: new Date().toISOString().split("T")[0], // Format tanggal: YYYY-MM-DD
+                positif,
+            };
+
+            const ulasan = getUlasan();
+            ulasan.push(newUlasan); // Tambahkan ulasan baru
+            saveUlasan(ulasan); // Simpan ke Local Storage
+
+            updateDashboard(); // Perbarui tampilan
+            this.reset(); // Reset form
+        });
+
+        // Perbarui dashboard saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", updateDashboard);
+    </script>
+</body>
+</html>
+

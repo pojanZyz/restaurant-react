@@ -1,0 +1,187 @@
+<!-- Order Section -->
+        <div class="order-box">
+            <h3>Pesanan Take-Away atau Delivery</h3>
+            <form id="orderForm">
+                <div>
+                    <label for="orderName">Nama Pemesan:</label>
+                    <input type="text" id="orderName" name="orderName" required>
+                </div>
+                <div id="orderItems">
+                    <label for="menuItems">Pilih Barang:</label>
+                    <select id="menuItems" name="menuItems">
+                        <option value="">Pilih Menu</option>
+                        <!-- Menu items will be dynamically added here -->
+                    </select>
+                </div>
+                <div>
+                    <label for="itemQuantity">Jumlah:</label>
+                    <input type="number" id="itemQuantity" name="itemQuantity" min="1" required>
+                </div>
+                <div>
+                    <label for="orderType">Jenis Pemesanan:</label>
+                    <select id="orderType" name="orderType" required>
+                        <option value="">Pilih Jenis</option>
+                        <option value="TakeAway">Take-Away</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+                <div id="deliveryAddressBox" style="display: none;">
+                    <label for="deliveryAddress">Alamat Pengantaran:</label>
+                    <textarea id="deliveryAddress" name="deliveryAddress"></textarea>
+                </div>
+                <div>
+                    <label for="paymentMethod">Metode Pembayaran:</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">Pilih Metode Pembayaran</option>
+                        <option value="COD">COD (Bayar di Tempat)</option>
+                        <option value="TF">Transfer</option>
+                    </select>
+                </div>
+                <div id="transferDetailsBox" style="display: none;">
+                    <label for="transferProof">Bukti Transfer:</label>
+                    <input type="file" id="transferProof" name="transferProof">
+                </div>
+                <div id="orderSummary">
+                    <h4>Ringkasan Pesanan:</h4>
+                    <ul id="orderList"></ul>
+                    <p id="totalPrice"></p>
+                    <button type="button" id="addItem" class="btn btn-secondary">Tambahkan Menu</button>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitOrder">Pesan</button>
+            </form>
+        </div>
+
+
+        <!-- ini order -->
+    <script>
+        $(document).ready(function () {
+            // Daftar kode diskon yang valid beserta diskon yang diterapkan (misalnya, diskon 10%)
+            const discountCodes = {
+                'DISKON10': 10, // Diskon 10%
+                'DISKON20': 20, // Diskon 20%
+                'DISKON50': 50  // Diskon 50%
+            };
+        
+            // Fungsi untuk mengambil menu dari halaman menu.html
+            function loadMenuItems() {
+                const iframe = $('<iframe>', { 
+                    src: '../menu-digital/menu.html', 
+                    style: 'display:none;' 
+                }).appendTo('body');
+        
+                iframe.on('load', function () {
+                    const menuDoc = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                    const menuItems = $(menuDoc).find('.menu-item'); // Pastikan class sesuai dengan elemen di menu.html
+        
+                    menuItems.each(function () {
+                        const name = $(this).data('name');
+                        const price = $(this).data('price');
+                        const option = `<option value="${name}" data-price="${price}">${name} - Rp ${price}</option>`;
+                        $('#menuItems').append(option);
+                    });
+        
+                    iframe.remove();
+                });
+            }
+        
+            loadMenuItems();
+        
+            $('#addItem').on('click', function () {
+                const selectedOption = $('#menuItems option:selected');
+                const name = selectedOption.val();
+                const price = parseInt(selectedOption.data('price'));
+                const quantity = parseInt($('#itemQuantity').val());
+        
+                if (!name || !quantity || quantity <= 0) {
+                    alert('Silakan pilih menu dan masukkan jumlah yang valid.');
+                    return;
+                }
+        
+                const total = price * quantity;
+                const listItem = `<li>${name} x${quantity} = Rp ${total.toLocaleString()}</li>`;
+                $('#orderList').append(listItem);
+        
+                // Update total harga
+                const currentTotal = parseInt($('#totalPrice').data('total')) || 0;
+                const newTotal = currentTotal + total;
+                $('#totalPrice').data('total', newTotal).text(`Total: Rp ${newTotal.toLocaleString()}`);
+        
+                // Hitung diskon
+                updateTotalWithDiscount();
+        
+                // Enable the submit button after an item is added
+                $('#submitOrder').prop('disabled', false);
+            });
+        
+            // Update total harga dengan diskon
+            function updateTotalWithDiscount() {
+                const discountCode = $('#discountCode').val().toUpperCase();
+                let discountPercentage = 0;
+        
+                // Validasi kode diskon
+                if (discountCodes[discountCode]) {
+                    discountPercentage = discountCodes[discountCode];
+                    $('#discountMessage').text(`Diskon ${discountPercentage}% diterapkan.`);
+                } else {
+                    $('#discountMessage').text('');
+                }
+        
+                let totalPrice = parseInt($('#totalPrice').data('total')) || 0;
+        
+                if (discountPercentage > 0) {
+                    const discountAmount = (discountPercentage / 100) * totalPrice;
+                    totalPrice -= discountAmount;
+                }
+        
+                $('#totalPrice').text(`Total: Rp ${totalPrice.toLocaleString()}`);
+            }
+        
+            // Event listener untuk input kode diskon
+            $('#discountCode').on('input', function () {
+                updateTotalWithDiscount();
+            });
+        
+            // Tombol Pesan (akan diaktifkan setelah ada item di pesanan)
+            $('#submitOrder').on('click', function () {
+                const orderName = $('#orderName').val();
+                const menuItems = $('#menuItems').val();
+                const orderType = $('#orderType').val();
+                const paymentMethod = $('#paymentMethod').val();
+        
+                // Validasi input
+                if (!orderName || !menuItems || !orderType || !paymentMethod) {
+                    showNotification('error', 'Semua kolom harus diisi dengan benar!');
+                    return;
+                }
+        
+                // Jika pesanan valid
+                showNotification('success', 'Pesanan berhasil dibuat!');
+        
+                // Kosongkan form pesanan setelah sukses
+                $('#orderList').empty(); // Kosongkan daftar pesanan
+                $('#totalPrice').data('total', 0).text('Total: Rp 0'); // Reset total harga
+                $('#discountCode').val(''); // Reset kode diskon
+                $('#discountMessage').text(''); // Reset pesan diskon
+                $('#submitOrder').prop('disabled', true); // Nonaktifkan tombol pesanan
+            });
+        
+            // Fungsi untuk menampilkan notifikasi
+            function showNotification(type, message) {
+                const notificationBox = $('<div>', {
+                    class: `notification ${type}`,
+                    text: message
+                });
+        
+                $('body').append(notificationBox);
+                setTimeout(function () {
+                    notificationBox.fadeOut(function () {
+                        notificationBox.remove();
+                    });
+                }, 3000); // Notifikasi hilang setelah 3 detik
+            }
+        });
+        
+    </script>
+
+
+    betulkan ulang dari awal

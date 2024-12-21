@@ -1,0 +1,213 @@
+/* General Payment Summary Styling */
+.payment-summary {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.payment-summary table {
+    width: 100%;
+    margin-bottom: 15px;
+    border-collapse: collapse;
+}
+
+.payment-summary table th,
+.payment-summary table td {
+    text-align: left; /* Rata kiri */
+}
+
+.payment-summary td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.payment-summary table th {
+    font-weight: bold;
+    padding: 10px;
+}
+
+.payment-summary table td {
+    padding: 10px;
+}
+
+.total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Optional: Tambahkan sedikit efek striping */
+.payment-summary table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Buttons */
+.payment-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.payment-button button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.payment-button button:hover {
+    background-color: #218838;
+}
+
+/* Tombol + dan - */
+.payment-summary .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Jarak antara tombol dan angka */
+}
+
+.payment-summary .quantity-controls button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.payment-summary .quantity-controls button:hover {
+    background-color: #0056b3;
+}
+
+.payment-summary .quantity-controls span {
+    min-width: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Discount Section */
+.discount-section {
+    margin-top: 15px;
+}
+
+.discount-section input {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.discount-section button {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.discount-section button:hover {
+    background-color: #e0a800;
+}
+
+/* Receipt Styling */
+.receipt-card {
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    color: black;
+    max-width: 400px; /* Maksimal lebar untuk layar besar */
+    width: 100%; /* Penuh di layar kecil */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek card */
+}
+
+.receipt-card h4 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid black;
+    padding-bottom: 8px;
+}
+
+.receipt-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.receipt-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.receipt-card th, .receipt-card td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.receipt-card th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.receipt-card tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.receipt-card .total {
+    font-weight: bold;
+    text-align: right;
+}
+
+.receipt-card-footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px dashed black;
+    padding-top: 8px;
+}
+/* Form Styling */
+.customer-name, .order-type, .delivery-address, .payment-method {
+    margin-bottom: 15px;
+}
+
+.customer-name label,
+.order-type label,
+.delivery-address label,
+.payment-method label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.customer-name input,
+.delivery-address textarea,
+.order-type select,
+.payment-method select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.delivery-address textarea {
+    resize: none;
+    height: 80px;
+}

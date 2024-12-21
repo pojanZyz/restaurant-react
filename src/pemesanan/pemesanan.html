@@ -1,0 +1,491 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Online</title>
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-r5lIOHyB2YceC8Wu"></script>
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/pemesanan.css">
+</head>
+<body>
+
+<!-- Sidebar Section -->
+<aside id="sidebar">
+    <div class="container-sidebar">
+        <div class="side-head">
+            <img src="../img/logo_restoran.png" alt="logo-resto">
+            <h1>Restorant</h1>
+        </div>
+        <nav class="box-menu">
+            <hr>
+            <ul>
+                <li><a href="../../index.html"><i class="bi bi-house-fill"></i><span>Dashboard</span></a></li>
+                <li><a href="../menu-digital/menu.html"><i class="bi bi-cart-fill"></i><span>Menu</span></a></li>
+                <li><a href="#"><i class="bi bi-bag-check-fill"></i><span>Shopping</span></a></li>
+                <li><a href="../payment/payment.html"><i class="bi bi-calculator"></i><span>Payment</span></a></li>
+                <li><a href=""><i class="bi bi-person-hearts"></i><span>Loyalty</span></a></li>
+                <li><a href="../feedback/feedback.html"><i class="bi bi-envelope-paper-heart-fill"></i><span>FeedBack</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- Main Content Section -->
+<div class="body-box">
+    <div class="content-box">
+        <!-- Table Reservation Section -->
+        <div class="reservation-box">
+            <h3>Reservasi Meja</h3>
+            <div class="table-grid">
+                <div class="table-item available" data-table="1" data-price="50000">Meja 1 (Kosong) - Rp 50,000</div>
+                <div class="table-item occupied" data-table="2" data-price="50000">Meja 2 (Terisi) - Rp 50,000</div>
+                <div class="table-item available" data-table="3" data-price="5000">Meja 3 (Kosong) - Rp 50,000</div>
+                <div class="table-item available" data-table="4" data-price="50000">Meja 4 (Kosong) - Rp 50,000</div>
+            </div>
+            
+        </div>
+
+        <!-- Reservation Form Section -->
+        <div class="reservation-box">
+            <h3>Reservasi Meja</h3>
+            <form id="reservationForm">
+                <div>
+                    <label for="reservationName">Nama Pemesan:</label>
+                    <input type="text" id="reservationName" name="reservationName" required>
+                </div>
+                <div>
+                    <label for="reservationTime">Waktu Reservasi:</label>
+                    <input type="datetime-local" id="reservationTime" name="reservationTime" required>
+                </div>
+                <div>
+                    <label for="numPeople">Jumlah Orang:</label>
+                    <input type="number" id="numPeople" name="numPeople" min="1" placeholder="max 4 orang / meja" required>
+                </div>
+                <div>
+                    <label for="tableNumber">Nomor Meja:</label>
+                    <select id="tableNumber" name="tableNumber" class="select-meja" multiple required>
+                        <option value="1">Meja 1</option>
+                        <option value="2">Meja 2</option>
+                        <option value="3">Meja 3</option>
+                        <option value="4">Meja 4</option>
+                    </select>
+                </div>
+                <p id="totalPrice">Total: Rp 0</p>
+                <button type="submit" class="btn btn-primary">Reservasi</button>
+            </form>
+        </div>
+
+        <!-- Order Section -->
+        <div class="order-box">
+            <h3>Pesanan Take-Away atau Delivery</h3>
+            <form id="orderForm">
+                <div>
+                    <label for="orderName">Nama Pemesan:</label>
+                    <input type="text" id="orderName" name="orderName" required>
+                </div>
+                <div id="orderItems">
+                    <label for="menuItems">Pilih Barang:</label>
+                    <select id="menuItems" name="menuItems">
+                        <option value="">Pilih Menu</option>
+                        <!-- Menu items will be dynamically added here -->
+                    </select>
+                </div>
+                <div>
+                    <label for="itemQuantity">Jumlah:</label>
+                    <input type="number" id="itemQuantity" name="itemQuantity" min="1" required>
+                </div>
+                <div>
+                    <label for="orderType">Jenis Pemesanan:</label>
+                    <select id="orderType" name="orderType" required>
+                        <option value="">Pilih Jenis</option>
+                        <option value="TakeAway">Take-Away</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="paymentMethod">Metode Pembayaran:</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">Pilih Metode Pembayaran</option>
+                        <option value="COD">COD (Bayar di Tempat)</option>
+                        <option value="TF">Transfer</option>
+                    </select>
+                </div>
+                <div id="deliveryAddressBox" style="display: none;">
+                    <label for="deliveryAddress">Alamat Pengantaran:</label>
+                    <textarea id="deliveryAddress" name="deliveryAddress"></textarea>
+                </div>
+                <div id="transferDetailsBox" style="display: none;">
+                    <label for="transferProof">Bukti Transfer:</label>
+                    <input type="file" id="transferProof" name="transferProof">
+                </div>
+                <div id="orderSummary">
+                    <h4>Ringkasan Pesanan:</h4>
+                    <ul id="orderList"></ul>
+                    <p id="totalPriceOrder">Total: Rp </p>
+                    <button type="button" id="addItem" class="btn btn-secondary">Tambahkan Menu</button>
+                </div>
+                <div>
+                    <label for="discountCode">Kode Diskon:</label>
+                    <input type="text" id="discountCode" name="discountCode">
+                    <p id="discountMessage"></p>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitOrder" disabled>Pesan</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+    
+
+    <!-- JavaScript Links -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <!-- ini data table -->
+    <script>
+        $(document).ready(function() {
+            var table = $('#myTable').DataTable({
+                responsive: true,
+                scrollY: "400px",
+                scrollX: true,
+                scrollCollapse: true,
+                fixedHeader: true,
+                paging: true,
+                columnDefs: [
+                    { targets: [5, 6], visible: true },
+                    { targets: [5, 6], visible: false, responsivePriority: 1 },
+                ],
+                columnDefs: [
+                    { targets: [0, 3, 4, 5], className: 'text-center' },
+                ],
+                language: {
+                    paginate: {
+                        first: "«",
+                        last: "»",
+                        next: "›",
+                        previous: "‹"
+                    },
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    search: "Cari: ",
+                    emptyTable: "Tidak ada data tersedia",
+                    searchPlaceholder: "Cari data...",
+                    zeroRecords: "Data tidak ditemukan"
+                },
+                autoWidth: false
+            });
+        
+            // Misalkan data pertama (order) yang ingin dimasukkan adalah:
+            var firstOrderData = [
+                ['', '', '', '', '', '', '']
+            ];
+        
+            // Menghapus data yang sudah ada dan menambahkan data pertama (order)
+            table.clear().rows.add(firstOrderData).draw();
+        });
+        
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi Select2 untuk memilih meja
+            $('#tableNumber').select2({
+                placeholder: "Pilih Meja",
+                allowClear: true,
+                closeOnSelect: false,
+            });
+    
+            // Menandai meja yang dipilih
+            $('.table-item').click(function() {
+                var tableStatus = $(this).hasClass('available') ? 'Kosong' : 'Terisi';
+                alert('Meja ' + $(this).text() + ' dipilih! Status: ' + tableStatus);
+            });
+    
+            // Fungsi untuk menghitung dan menampilkan total harga
+            function updateTotalPrice() {
+                const selectedTables = $('#tableNumber').val(); // Meja yang dipilih
+                const numPeople = $('#numPeople').val(); // Jumlah orang
+    
+                if (!selectedTables || selectedTables.length === 0 || !numPeople || numPeople <= 0) {
+                    $('#totalPrice').text('Total: Rp 0'); // Jika tidak ada meja atau jumlah orang tidak valid
+                    return;
+                }
+    
+                let totalPrice = 0;
+    
+                // Menghitung total harga berdasarkan meja yang dipilih
+                selectedTables.forEach(function(table) {
+                    // Mengambil harga meja berdasarkan data-price
+                    const tablePrice = $(`.table-item[data-table="${table}"]`).data('price');
+                    totalPrice += tablePrice * numPeople; // Total harga = harga per meja * jumlah orang
+                });
+    
+                // Menampilkan total harga yang dihitung
+                $('#totalPrice').text(`Total: Rp ${totalPrice.toLocaleString()}`);
+            }
+    
+            // Ketika jumlah orang diubah, update total harga
+            $('#numPeople').on('input', function() {
+                updateTotalPrice();
+            });
+    
+            // Ketika meja dipilih/dihapus, update total harga
+            $('#tableNumber').on('change', function() {
+                updateTotalPrice();
+            });
+    
+            // Menghitung dan menampilkan total harga saat form disubmit
+            $('#reservationForm').on('submit', function(e) {
+                e.preventDefault();
+    
+                const selectedTables = $('#tableNumber').val();
+                const numPeople = $('#numPeople').val();
+    
+                if (!selectedTables || selectedTables.length === 0) {
+                    alert("Pilih meja terlebih dahulu!");
+                    return;
+                }
+    
+                // Validasi apakah semua meja yang dipilih tersedia
+                for (var i = 0; i < selectedTables.length; i++) {
+                    var table = selectedTables[i];
+                    if ($('.table-item[data-table="' + table + '"]').hasClass('occupied')) {
+                        alert("Meja " + table + " sudah terisi!");
+                        return;
+                    }
+                }
+    
+                // Validasi jumlah orang
+                if (numPeople > selectedTables.length * 4) {  // Misalnya, 1 meja bisa menampung 4 orang
+                    alert("Jumlah orang melebihi kapasitas meja yang dipilih!");
+                    return;
+                }
+    
+                // Menandai meja yang dipilih
+                for (var i = 0; i < selectedTables.length; i++) {
+                    var table = selectedTables[i];
+                    $('.table-item[data-table="' + table + '"]').removeClass('available').addClass('occupied').text("Meja " + table + " (Terisi)");
+                }
+    
+                let totalPrice = 0;
+    
+                // Menghitung total harga berdasarkan meja yang dipilih
+                selectedTables.forEach(function(table) {
+                    const tablePrice = $(`.table-item[data-table="${table}"]`).data('price');
+                    totalPrice += tablePrice * numPeople; // Harga total = harga per meja * jumlah orang
+                });
+    
+                // Menampilkan total harga setelah submit
+                alert('Reservasi berhasil untuk Meja ' + selectedTables.join(', ') + '. Total harga: Rp ' + totalPrice.toLocaleString());
+    
+                // Simpan data reservasi ke localStorage
+                const reservationData = {
+                    tables: selectedTables,
+                    numPeople: numPeople,
+                    totalPrice: totalPrice,
+                    reservationName: $('#reservationName').val()
+                };
+
+                let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+                reservations.push(reservationData);
+                localStorage.setItem('reservations', JSON.stringify(reservations));
+            });
+
+            
+        });
+    </script>
+    
+
+    <script>
+        $(document).ready(function () {
+            const discountCodes = {
+                'DISKON10': 10,
+                'DISKON20': 20,
+                'DISKON50': 50
+            };
+        
+            // Mengisi menu items
+            function loadMenuItems() {
+                $.get('../menu-digital/menu.html', function (data) {
+                    const menuItems = $(data).find('.menu-item');
+                    menuItems.each(function () {
+                        const name = $(this).data('name');
+                        const price = $(this).data('price');
+                        const option = `<option value="${item.name}" data-price="${item.price}">${item.name} - Rp ${item.price}</option>`;
+                        $('#menuItems').append(option);
+                    });
+                });
+            }
+        
+            loadMenuItems();
+        
+            // Menambahkan item pesanan ke dalam tabel
+            $('#addItem').on('click', function () {
+                const selectedOption = $('#menuItems option:selected');
+                const name = selectedOption.val();
+                const price = parseInt(selectedOption.data('price'));
+                let quantity = parseInt($('#itemQuantity').val());
+        
+                if (!name || !quantity || quantity <= 0) {
+                    alert('Silakan pilih menu dan masukkan jumlah yang valid.');
+                    return;
+                }
+        
+                const total = price * quantity;
+                const listItem = `<li>${name} x${quantity} = Rp ${total.toLocaleString()}
+                                    <button class="minus">-</button>
+                                    <button class="plus">+</button>
+                                  </li>`;
+                $('#orderList').append(listItem);
+        
+                const currentTotal = parseInt($('#totalPrice').data('total')) || 0;
+                const newTotal = currentTotal + total;
+                $('#totalPriceOrder').data('total', newTotal).text(`Total: Rp ${newTotal.toLocaleString()}`);
+        
+                // Update total dengan diskon jika ada
+                updateTotalWithDiscount();
+                $('#submitOrder').prop('disabled', false);
+            });
+        
+            // Fungsi untuk mengupdate total dengan diskon
+            function updateTotalWithDiscount() {
+                const discountCode = $('#discountCode').val().toUpperCase();
+                let discountPercentage = 0;
+        
+                if (discountCodes[discountCode]) {
+                    discountPercentage = discountCodes[discountCode];
+                    $('#discountMessage').text(`Diskon ${discountPercentage}% diterapkan.`);
+                } else {
+                    $('#discountMessage').text('');
+                }
+        
+                let totalPrice = parseInt($('#totalPriceOrder').data('total')) || 0;
+        
+                if (discountPercentage > 0) {
+                    const discountAmount = (discountPercentage / 100) * totalPrice;
+                    totalPrice -= discountAmount;
+                }
+        
+                $('#totalPriceOrder').text(`Total: Rp ${totalPrice.toLocaleString()}`);
+            }
+        
+            // Mengupdate harga total saat kode diskon diinput
+            $('#discountCode').on('input', function () {
+                updateTotalWithDiscount();
+            });
+        
+            // Mengupdate jumlah item pesanan (+ dan -)
+            $('#orderList').on('click', '.plus', function () {
+                const listItem = $(this).closest('li');
+                let quantity = parseInt(listItem.text().match(/x(\d+)/)[1]);
+                const name = listItem.text().split(' x')[0];
+                const price = $('#menuItems option:selected').data('price');
+                quantity++;
+                const total = price * quantity;
+                listItem.text(`${name} x${quantity} = Rp ${total.toLocaleString()}`);
+                listItem.append('<button class="minus">-</button><button class="plus">+</button>');
+                updateTotalWithDiscount();
+            });
+        
+            $('#orderList').on('click', '.minus', function () {
+                const listItem = $(this).closest('li');
+                let quantity = parseInt(listItem.text().match(/x(\d+)/)[1]);
+                const name = listItem.text().split(' x')[0];
+                const price = $('#menuItems option:selected').data('price');
+                if (quantity > 1) {
+                    quantity--;
+                    const total = price * quantity;
+                    listItem.text(`${name} x${quantity} = Rp ${total.toLocaleString()}`);
+                    listItem.append('<button class="minus">-</button><button class="plus">+</button>');
+                    updateTotalWithDiscount();
+                }
+            });
+
+            // Menampilkan text area saat memilih COD
+            $('#paymentMethod').change(function() {
+                if ($(this).val() === 'COD') {
+                    $('#deliveryAddressBox').show();  // Menampilkan text area untuk COD
+                } else {
+                    $('#deliveryAddressBox').hide();  // Menyembunyikan text area jika tidak memilih COD
+                }
+            });
+        
+            // Tampilkan kolom bukti transfer jika memilih Transfer
+            $('#paymentMethod').change(function() {
+                if ($(this).val() === 'TF') {
+                    $('#transferDetailsBox').show();
+                } else {
+                    $('#transferDetailsBox').hide();
+                }
+            });
+        
+            $('#submitOrder').on('click', function (event) {
+                event.preventDefault();
+        
+                const orderName = $('#orderName').val();
+                const menuItems = $('#menuItems').val();
+                const orderType = $('#orderType').val();
+                const paymentMethod = $('#paymentMethod').val();
+                const orderList = $('#orderList').children().length; // Menghitung item dalam daftar pesanan
+        
+                if (!orderName || !orderType || !paymentMethod || orderList === 0) {
+                    alert('Semua kolom harus diisi dan tambahkan setidaknya satu menu!');
+                    return;
+                }
+        
+                // Buat data pesanan
+                const orderData = {
+                    orderName: orderName,
+                    menuItems: [],
+                    discount: parseInt($('#discountCode').val()) || 0,  // Menambahkan diskon
+                    totalPrice: $('#totalPriceOrder').data('total'),
+                    paymentMethod: paymentMethod,
+                    orderType: orderType
+                };
+        
+                // Ambil data dari order list
+                $('#orderList li').each(function() {
+                    const item = {
+                        name: $(this).text().split(' x')[0],
+                        quantity: parseInt($(this).text().match(/x(\d+)/)[1]),
+                        price: parseInt($('#menuItems option:selected').data('price')), // Harga satuan
+                        total: parseInt($(this).text().match(/=\sRp\s([\d,]+)/)[1].replace(',', ''))
+                    };
+                    orderData.menuItems.push(item);
+                });
+        
+                // Simpan ke localStorage
+                let orders = JSON.parse(localStorage.getItem('orders')) || [];
+                orders.push(orderData);
+                localStorage.setItem('orders', JSON.stringify(orders));
+        
+                alert('Pesanan berhasil dibuat!');
+        
+                // Reset form setelah pesanan berhasil
+                $('#orderForm')[0].reset();
+                $('#orderList').empty();
+                $('#totalPriceOrder').data('total', 0).text('Total: Rp 0');
+                $('#discountCode').val('');
+                $('#discountMessage').text('');
+                $('#submitOrder').prop('disabled', true);
+            });
+        
+        });
+        
+    </script>
+</body>
+</html>
