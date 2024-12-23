@@ -1,122 +1,128 @@
-import React, { useState } from 'react';
-import { jsPDF } from "jspdf";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import html2canvas from "html2canvas";
 import "../css/payment.css";
 import "../css/app.css";
 
-const Payment = ({ cart }) => {
-  const [customerName, setCustomerName] = useState('');
-  const [orderType, setOrderType] = useState('TakeAway');
-  const [paymentMethod, setPaymentMethod] = useState('Cash');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [discountCode, setDiscountCode] = useState('');
-  const [discountMessage, setDiscountMessage] = useState('');
-  const [showReceipt, setShowReceipt] = useState(false);
-
-  // Tambahkan properti quantity ke setiap produk
-  const [cartState, setCartState] = useState(
-    cart.map((item) => ({ ...item, quantity: 1 }))
-  );
-
-  const handleIncrease = (id) => {
-    setCartState((prevCart) =>
-      prevCart.map((item) =>
-        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+const Payment = ({
+  cart,
+  customerName,
+  setCustomerName,
+  orderType,
+  setOrderType,
+  paymentMethod = "TF",
+  setPaymentMethod = "TF",
+  deliveryAddress,
+  setDeliveryAddress,
+  discountCode,
+  setDiscountCode,
+  showReceipt,
+  setShowReceipt,
+  handleIncrease,
+  handleDecrease,
+}) => {
+  // Daftar kode diskon yang valid
+  const validDiscountCodes = {
+    DISKON10: 10, // diskon 10%
+    DISKON20: 20, // diskon 20%
+    DISKON50: 50, // diskon 50%
   };
 
-  const handleDecrease = (id) => {
-    setCartState((prevCart) =>
-      prevCart.map((item) =>
-        item._id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
+  // State untuk total setelah diskon, discountAmount, dan indikator diskon diterapkan
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
+  const [isDiscountApplied, setIsDiscountApplied] = useState(false);
 
-  const totalAmount = cartState.reduce(
-    (total, product) => total + product.productPrice * product.quantity,
+  // Menghitung total sebelum diskon
+  const totalBeforeDiscount = cart.reduce(
+    (acc, product) => acc + product.totalPrice,
     0
   );
 
-  const handleDiscount = () => {
-    if (discountCode === 'DISKON10') {
-      setDiscountMessage('Diskon 10% berhasil diterapkan!');
+  // Fungsi untuk menerapkan diskon
+  const applyDiscount = () => {
+    if (discountCode && validDiscountCodes[discountCode]) {
+      const discountPercentage = validDiscountCodes[discountCode];
+      const calculatedDiscountAmount =
+        (totalBeforeDiscount * discountPercentage) / 100;
+      setDiscountAmount(calculatedDiscountAmount);
+      setTotalAfterDiscount(totalBeforeDiscount - calculatedDiscountAmount);
+      setIsDiscountApplied(true);
+      Swal.fire(
+        "Diskon diterapkan!",
+        `Anda mendapat diskon ${discountPercentage}%`,
+        "success"
+      );
     } else {
-      setDiscountMessage('Kode diskon tidak valid.');
+      setDiscountAmount(0);
+      setIsDiscountApplied(false);
+      Swal.fire(
+        "Kode diskon tidak valid!",
+        "Masukkan kode diskon yang benar.",
+        "error"
+      );
     }
   };
 
-  const handleShowReceipt = () => {
-    setShowReceipt(!showReceipt);
-  };
-
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    
-    // Setting font and size for title
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.text('Bon Pesanan', 20, 10);
-  
-    // Setting font for text
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    
-    // Customer Name
-    doc.text(`Nama Pelanggan: ${customerName}`, 20, 30);
-    doc.text(`Pesan Via: ${orderType}`, 20, 40);
-    if (orderType === 'Delivery') {
-      doc.text(`Alamat Pengiriman: ${deliveryAddress}`, 20, 50);
-    }
-    doc.text(`Metode Pembayaran: ${paymentMethod}`, 20, 60);
-    
-    // Drawing table header
-    let yPosition = 70;
-    const colWidths = [60, 40, 40, 40]; // Column widths
-    doc.setFont("helvetica", "bold");
-    
-    // Header row
-    doc.text('Nama Produk', 20, yPosition);
-    doc.text('Jumlah', 80, yPosition);
-    doc.text('Harga', 120, yPosition);
-    doc.text('Total', 160, yPosition);
-  
-    // Draw table header line
-    doc.line(20, yPosition + 2, 200, yPosition + 2);
-  
-    // Drawing table rows
-    doc.setFont("helvetica", "normal");
-    yPosition += 10;
-    cartState.forEach((product) => {
-      doc.text(product.productName, 20, yPosition);
-      doc.text(product.quantity.toString(), 80, yPosition);
-      doc.text(`Rp ${product.productPrice.toLocaleString()}`, 120, yPosition);
-      doc.text(`Rp ${(product.productPrice * product.quantity).toLocaleString()}`, 160, yPosition);
-  
-      yPosition += 10;
+  // Menampilkan gambar bon pesanan
+  const downloadIMG = () => {
+    const receiptElement = document.querySelector(".receipt-card");
+    html2canvas(receiptElement).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "bon_pesanan.png";
+      link.click();
     });
-  
-    // Draw the bottom border of the table
-    doc.line(20, yPosition, 200, yPosition);
-  
-    // Total amount
-    yPosition += 10;
-    doc.setFont("helvetica", "bold");
-    doc.text(`Total: Rp ${totalAmount.toLocaleString()}`, 20, yPosition);
-    
-    // Footer with thank you message
-    yPosition += 20;
-    doc.setFont("helvetica", "normal");
-    doc.text('Terima kasih telah berbelanja!', 20, yPosition);
-    
-    // Save the PDF
-    doc.save("bon_pesanan.pdf");
   };
 
+  const handlePayment = () => {
+    if (
+      !customerName ||
+      !paymentMethod ||
+      (orderType === "Delivery" && !deliveryAddress)
+    ) {
+      Swal.fire(
+        "Gagal!",
+        "Pastikan semua data sudah diisi dengan benar.",
+        "error"
+      );
+      return;
+    }
 
+    const totalToDisplay = isDiscountApplied
+      ? totalAfterDiscount
+      : totalBeforeDiscount;
 
+    Swal.fire({
+      title: "Konfirmasi Pembayaran",
+      text: `Total pembayaran adalah Rp ${totalToDisplay.toLocaleString()}.\nLanjutkan proses pembayaran?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Bayar Sekarang",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Berhasil!", "Pembayaran Anda berhasil diproses.", "success");
+
+        // Reset semua data setelah pembayaran berhasil
+        setCustomerName("");
+        setOrderType("");
+        setPaymentMethod("");
+        setDeliveryAddress("");
+        setDiscountCode("");
+        setShowReceipt(false);
+        setDiscountAmount(0);
+        setTotalAfterDiscount(0);
+        setIsDiscountApplied(false);
+
+        // Reset cart (menghapus semua item)
+        cart.length = 0;
+      }
+    });
+  };
 
   return (
     <div className="body-box">
@@ -129,42 +135,54 @@ const Payment = ({ cart }) => {
               <th>Harga</th>
               <th>Jumlah</th>
               <th>Total</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {cartState.map((product) => (
+            {cart.map((product) => (
               <tr key={product._id}>
                 <td>{product.productName}</td>
                 <td>Rp {product.productPrice.toLocaleString()}</td>
+                <td>{product.quantity}</td>
+                <td>Rp {product.totalPrice.toLocaleString()}</td>
                 <td>
                   <div className="quantity-controls">
-                  <button onClick={() => {
-                      setCartState((prevCart) => {
-                        // Mengurangi jumlah produk, bahkan jika jumlahnya 1
-                        const updatedCart = prevCart.map((item) =>
-                          item._id === product._id
-                            ? { ...item, quantity: item.quantity - 1 }
-                            : item
-                        );
-                        // Menghapus produk jika jumlahnya 0
-                        return updatedCart.filter((item) => item.quantity > 0);
-                      });
-                    }}> - </button>
+                    <button onClick={() => handleDecrease(product._id)}>
+                      -
+                    </button>
                     <span>{product.quantity}</span>
-                    <button onClick={() => handleIncrease(product._id)}>+</button>
+                    <button onClick={() => handleIncrease(product._id)}>
+                      +
+                    </button>
                   </div>
                 </td>
-                <td>Rp {(product.productPrice * product.quantity).toLocaleString()}</td>
               </tr>
             ))}
             <tr>
-              <td colSpan="3">Total</td>
-              <td className="total-amount">Rp {totalAmount.toLocaleString()}</td>
+              <td colSpan="4">Total</td>
+              <td className="total-amount">
+                Rp {totalBeforeDiscount.toLocaleString()}
+              </td>
             </tr>
+            {isDiscountApplied && (
+              <>
+                <tr>
+                  <td colSpan="4">Diskon</td>
+                  <td className="total-amount">
+                    - Rp {discountAmount.toLocaleString()}
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan="4">Total Setelah Diskon</td>
+                  <td className="total-amount">
+                    Rp {totalAfterDiscount.toLocaleString()}
+                  </td>
+                </tr>
+              </>
+            )}
           </tbody>
         </table>
 
-        {/* Customer Name */}
         <div className="customer-name">
           <label>Nama Pelanggan:</label>
           <input
@@ -176,42 +194,25 @@ const Payment = ({ cart }) => {
           />
         </div>
 
-        {/* Order Type */}
-        <div className="order-type">
-          <label>Pesan Via:</label>
-          <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
-            <option value="Dine_in">Dine in</option>
-            <option value="TakeAway">Take-Away</option>
-            <option value="Delivery">Delivery</option>
-          </select>
+        <div className="delivery-address">
+          <label>Alamat Pengiriman:</label>
+          <textarea
+            placeholder="Masukkan alamat pengiriman"
+            value={deliveryAddress}
+            onChange={(e) => setDeliveryAddress(e.target.value)}
+            required
+          />
         </div>
 
-        {/* Delivery Address */}
-        {orderType === 'Delivery' && (
-          <div className="delivery-address">
-            <label>Alamat Pengiriman:</label>
-            <textarea
-              placeholder="Masukkan alamat pengiriman"
-              value={deliveryAddress}
-              onChange={(e) => setDeliveryAddress(e.target.value)}
-              required
-            />
-          </div>
-        )}
-
-        {/* Payment Method */}
         <div className="payment-method">
           <label>Metode Pembayaran:</label>
-          <select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <option value="Cash">Cash</option>
-            <option value="TF">Transfer</option>
-          </select>
+          <input
+            type="text"
+            value={paymentMethod} // Jika paymentMethod kosong, tampilkan "TF"
+            readOnly
+          />
         </div>
 
-        {/* Discount Section */}
         <div className="discount-section">
           <input
             type="text"
@@ -219,54 +220,65 @@ const Payment = ({ cart }) => {
             value={discountCode}
             onChange={(e) => setDiscountCode(e.target.value)}
           />
-          <button onClick={handleDiscount}>Terapkan Diskon</button>
-          <p>{discountMessage}</p>
+          <button onClick={applyDiscount}>Terapkan Diskon</button>
         </div>
 
-        {/* Show Receipt */}
         <div className="payment-button">
-          <button>Bayar Sekarang</button>
-          <button onClick={handleShowReceipt} className="receipt-button">
-            {showReceipt ? 'Tutup Bon' : 'Tampilkan Bon'}
+          <button onClick={handlePayment}>Bayar Sekarang</button>
+          <button
+            onClick={() => setShowReceipt(!showReceipt)}
+            className="receipt-button"
+          >
+            {showReceipt ? "Tutup Bon" : "Tampilkan Bon"}
           </button>
         </div>
       </div>
 
-      {/* Receipt */}
       {showReceipt && (
-        <div className="receipt-card">
-          <h4>Bon Pesanan</h4>
-          <p>Nama Pelanggan: {customerName}</p>
-          <p>Pesan Via: {orderType}</p>
-          {orderType === 'Delivery' && <p>Alamat Pengiriman: {deliveryAddress}</p>}
-          <p>Metode Pembayaran: {paymentMethod}</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Nama Produk</th>
-                <th>Jumlah</th>
-                <th>Harga</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartState.map((product) => (
-                <tr key={product._id}>
-                  <td>{product.productName}</td>
-                  <td>{product.quantity}</td>
-                  <td>Rp {product.productPrice.toLocaleString()}</td>
-                  <td>Rp {(product.productPrice * product.quantity).toLocaleString()}</td>
+        <div>
+          <div className="receipt-card">
+            <h4>Bon Pesanan</h4>
+            <p>Nama Pelanggan: {customerName}</p>
+            <p>Pesan Via: {orderType}</p>
+            {orderType === "Delivery" && (
+              <p>Alamat Pengiriman: {deliveryAddress}</p>
+            )}
+            <p>Metode Pembayaran: {paymentMethod}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama Produk</th>
+                  <th>Jumlah</th>
+                  <th>Harga</th>
+                  <th>Total</th>
                 </tr>
-              ))}
-              <tr>
-                <td colSpan="3">Total</td>
-                <td>Rp {totalAmount.toLocaleString()}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="receipt-card-footer">
-            <p>Terima kasih telah berbelanja!</p>
-            <button onClick={downloadPDF}>Download PDF</button>
+              </thead>
+              <tbody>
+                {cart.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.productName}</td>
+                    <td>{product.quantity}</td>
+                    <td>Rp {product.productPrice.toLocaleString()}</td>
+                    <td>Rp {product.totalPrice.toLocaleString()}</td>
+                  </tr>
+                ))}
+                {isDiscountApplied && (
+                  <tr>
+                    <td colSpan="3">Diskon</td>
+                    <td>- Rp {discountAmount.toLocaleString()}</td>
+                  </tr>
+                )}
+                <tr>
+                  <td colSpan="3">Total Setelah Diskon</td>
+                  <td>Rp {totalAfterDiscount.toLocaleString()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="img-box">
+            <button onClick={downloadIMG} className="img-button">
+              Download IMG
+            </button>
           </div>
         </div>
       )}

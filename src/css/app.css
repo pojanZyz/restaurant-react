@@ -1,7 +1,9 @@
 :root {
-    --bg-primary: #0284c7;
-    --bg-secondary: #0ea5e9;
-    --bg: linear-gradient(to bottom right, #000, #083344);
+    --warnaUtama: #b45309;
+    --warnaKedua: #fde68a;
+    --warnaKetiga: #92400e;
+    --warnaElemen: #f3f4f6;
+    --bg: linear-gradient(to bottom right, #fff, #fff);
 }
 
 /* Reset styling */
@@ -23,7 +25,7 @@
 /* Side-bar */
 #sidebar {
     width: 15%;
-    background-color: #0c4a6e;
+    background-color: var(--warnaUtama);
     color: #fff;
     position: fixed;
     height: 100vh;
@@ -95,7 +97,8 @@
 }
 
 .box-menu a:hover {
-    background-color: #333;
+    background-color: var(--warnaKedua);
+    color: #000;
     transform: scale(1.05); 
 }
 
@@ -109,18 +112,19 @@
 
 /* Active state untuk menu */
 .box-menu .active {
-    background-color: #4caf50; /* Warna background aktif */
+    background-color: var(--warnaKetiga); /* Warna background aktif */
     color: white; /* Warna teks aktif */
     transition: transform 1s ease-out;
 }
 
-.box-menu .active:hover {
-    background-color: #4caf50;
+.box-menu .active:hover, .box-menu i:hover {
+    background-color: var(--warnaKedua);
+    color: #000;
     transform: scale(1.1);
 }
 
-.box-menu .active i {
-    color: white; /* Warna ikon aktif */
+.box-menu .active i:hover {
+    color: #000; /* Warna ikon aktif */
 }
 
 /* Responsif untuk layar tablet (768px - 1280px) */

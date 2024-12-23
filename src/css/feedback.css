@@ -14,24 +14,31 @@
 .container-fb, 
 .dashboard {
     margin-top: 65px;
+    padding: 20px;
     width: 90%;
     max-width: 60vw;  
-    background: #1a1a1a; /* Menggunakan warna gelap seperti hitam untuk container */
+    border: 2px solid var(--warnaUtama);
+    box-shadow: 0px 0px 5px var(--warnaUtama);
+    background: var(--warnaElemen); /* Menggunakan warna gelap seperti hitam untuk container */
     color: #fff; /* Mengubah warna teks menjadi putih agar kontras dengan background gelap */
     border-radius: 15px;
     overflow: hidden;
     animation: fadeIn 1s ease-in-out; /* Animasi fade in pada container */
+    transition: box-shadow .1s ease-in;
     margin-bottom: 30px;
 }
 
 .container-fb:hover, .dashboard:hover{
-    box-shadow: 0 0px 10px rgba(255, 255, 255, 0.3); /* Efek bayangan lebih besar */
+    transition: box-shadow .2s ease-in;
+    box-shadow: 0 0px 10px var(--warnaUtama); /* Efek bayangan lebih besar */
 }
 
 .fb-header {
-    background: var(--bg-primary); /* Transparan dengan sedikit gelap */
+    background: #fff; /* Transparan dengan sedikit gelap */
+    border-radius: 10px;
+    margin-bottom: 10px;
     width: 100%;
-    color: #ccc;
+    color: #000;
     backdrop-filter: blur(8px); /* Efek blur lebih kuat */
     text-align: center;
     padding: 30px 20px; /* Tambah padding untuk header */
@@ -50,7 +57,7 @@
     blink 0.7s step-end infinite;
 }
 
-.content-box-fb {
+.content-box {
     padding: 30px;  /* Menambah padding */
 }
 
@@ -58,11 +65,15 @@
     margin-bottom: 25px; /* Jarak antar input lebih besar */
 }
 
+.input-box .input input{
+    background-color: #fff;
+}
+
 .input label {
     font-size: 16px;  /* Ukuran font label lebih besar */
     margin-bottom: 8px;
     display: block;
-    color: #bbb; /* Mengubah warna label menjadi lebih terang agar kontras */
+    color: #000; /* Mengubah warna label menjadi lebih terang agar kontras */
 }
 
 .input input,
@@ -74,21 +85,22 @@
     font-size: 16px; /* Ukuran font lebih besar */
     box-sizing: border-box;
     transition: all 0.3s ease; /* Transisi pada perubahan */
-    background-color: #333; /* Menggunakan latar belakang gelap untuk input */
-    color: #fff; /* Mengubah warna teks menjadi putih */
+    background-color: #fff; /* Menggunakan latar belakang gelap untuk input */
+    color: #000; /* Mengubah warna teks menjadi putih */
 }
 
 .positif{
-    color: #bbb;
+    color: #000;
     font-size: 16px;
 }
 
 .input input:focus,
 .input textarea:focus {
     outline: none;
-    border-color: #6a11cb;
-    box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
-    background-color: #444; /* Background lebih gelap saat fokus */
+    color: white;
+    border-color: var(--warnaUtama);
+    box-shadow: 0 0 8px var(--warnaKedua);
+    background-color: #bfbfbf; /* Background lebih gelap saat fokus */
 }
 
 .input textarea {
@@ -117,11 +129,10 @@
 }
 
 .btn-box button[type="submit"] {
-    background: var(--bg-secondary); /* Warna tombol submit tetap ungu */
+    background: var(--warnaUtama); /* Warna tombol submit tetap ungu */
 }
 
 .btn-box button[type="submit"]:hover {
-    background: var(--bg-primary);
     transform: scale(1.05); /* Efek hover menambah ukuran tombol */
 }
 
@@ -190,7 +201,7 @@
         font-size: 20px;  /* Ukuran font header lebih kecil */
     }
 
-    .content-box-fb {
+    .content-box {
         padding: 20px;  /* Mengurangi padding pada konten */
     }
 
@@ -216,7 +227,7 @@
         flex-wrap: wrap;
     }
 
-    .content-box-fb {
+    .content-box {
         padding: 15px;  /* Mengurangi padding pada konten */
     }
     .side-head{
@@ -243,7 +254,7 @@
         width: 100%;
     }
 
-    .content-box-fb {
+    .content-box {
         padding: 10px;  /* Padding lebih kecil pada konten */
     }
 
@@ -263,7 +274,12 @@
     font-family: 'Arial', sans-serif;
     margin: 20px;
     padding: 20px;
-    background: #1a1a1a;
+    background: var(--warnaElemen);
+    color: #000;
+}
+
+.dashboard h1,.dashboard h2{
+    font-size: 20px;
 }
 
 .stats-container {
@@ -273,11 +289,8 @@
     margin-bottom: 30px;
 }
 
-.stats-container:hover{
-    box-shadow: 0 8px 30px rgba(3, 39, 57, 0.3);
-}
-
 .stat-box {
+    transition: transform .2s;
     background: #333;
     padding: 15px 20px;
     border-radius: 10px;
@@ -288,8 +301,9 @@
 
 .stat-box:hover,
 .review-table tr:hover{
-    background-color: #083344;
-    
+    box-shadow: 0px 0px 5px var(--warnaUtama);
+    transition: transform .2s;
+    transform: scale(1.01);
 }
 
 .stat-box h2 {
