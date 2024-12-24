@@ -55,7 +55,7 @@ const Register = () => {
             <form onSubmit={handleRegister}>
               <div id="username-group" className="inpt">
                 <input
-                  className="login-input"
+                  className="regist-input"
                   type="text"
                   id="username"
                   placeholder="Username"
@@ -70,7 +70,7 @@ const Register = () => {
 
               <div id="password-group" className="inpt">
                 <input
-                  className="login-input"
+                  className="regist-input"
                   type={inputType ? "password" : "text"}
                   id="password"
                   placeholder="Password"
@@ -88,7 +88,7 @@ const Register = () => {
               </div>
               <div id="gmail-group" className="inpt">
                 <input
-                  className="login-input"
+                  className="regist-input"
                   type="email"
                   id="gmail"
                   placeholder="G-mail"
@@ -97,7 +97,7 @@ const Register = () => {
                   onChange={(e) => setUseremail(e.target.value)} // Bind state
                 />
               </div>
-              <div id="button-group" className="btn">
+              <div id="btn-group" className="btn">
                 <button type="submit" disabled={loading}>
                   {loading ? "Loading..." : "Register"}
                 </button>

@@ -85,7 +85,7 @@ hr {
     right: 18px;
 }
 
-#input-fields .login-input {
+#input-fields .regist-input {
     font-size: 15px;
     padding: 5px 15px;
     width: 100%;
@@ -99,7 +99,7 @@ input::placeholder {
     color: black;
 }
 
-#input-fields .login-input:focus {
+#input-fields .regist-input:focus {
     outline: none;
     box-shadow: 0px 0px 15px #C79E73;
     border: solid #C79E73;
@@ -122,14 +122,14 @@ input::placeholder {
     mix-blend-mode: difference;
 }
 
-#button-group {
+#btn-group {
     display: flex;
     width: 100%;
     margin-top: 15px;
     justify-content: space-between;
 }
 
-#button-group button {
+#btn-group button {
     padding: 10px 30px;
     border-radius: 20px;
     width: 45%;
@@ -141,7 +141,7 @@ input::placeholder {
     color: white;
 }
 
-#button-group button:hover {
+#btn-group button:hover {
     animation: warna 3s linear;
     background-position: 50% 100%;
 }
@@ -161,9 +161,28 @@ input::placeholder {
 }
 
 @media (max-width: 1280px) {
-    #login-container {
+    #regist-container {
         width: 50%;
         height: auto;
+        padding: 20px;
+    }
+    
+    #logo-wrapper img{
+        width: 15rem;
+        margin-right: 20px;
+    }
+
+    #input-wrapper {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1185px) {
+    #regist-container {
+        width: 50%;
+        height: auto;
+        /* flex-direction: column; */
         padding: 20px;
     }
 
@@ -173,29 +192,16 @@ input::placeholder {
     }
 }
 
-@media (max-width: 1110px) {
-    #login-container {
-        width: 60%;
-        height: auto;
-        padding: 20px;
-    }
-
-    #input-wrapper {
-        margin-left: 0;
-        text-align: center;
-    }
-}
-
-@media (max-width: 912px) {
-    #login-container {
-        width: 50%;
+@media (max-width: 1155px) {
+    #regist-container {
+        width: 30%;
         height: auto;
         flex-direction: column;
         padding: 15px;
     }
 
-    #logo-wrapper img {
-        width: 10rem;
+    hr{
+        width: 40%;
     }
 
     #logo-wrapper {
@@ -205,20 +211,36 @@ input::placeholder {
     }
 
     #input-fields {
-        width: 100%;
+        width: 280px;
     }
 
-    #button-group {
+    #btn-group {
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
 
-    #button-group button {
+    #btn-group button {
         width: 100%;
     }
 }
 
+@media (max-width: 990px){
+    #regist-container{
+        width: 250px;
+        height: auto;
+        padding: 20px;
+        font-size: 10px;
+    }
 
+    .input-regist input, #btn-group button{
+        max-width: 70% !important ;
+    }
+
+    .input-regist label i {
+        right: 55px;
+        transform: translateY(3px);
+    }
+}
 
 

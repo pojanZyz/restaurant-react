@@ -46,7 +46,7 @@ body {
 
 #input-wrapper h1 a {
     font-style: none;
-    font-size: small;
+    font-size: 17px;
     text-decoration: none;
     color: white;
 }
@@ -82,13 +82,13 @@ hr {
 }
 
 #input-fields .login-input {
-    mix-blend-mode: difference;
+    font-size: 15px;
     padding: 5px 15px;
     width: 100%;
-    border: 2px solid #a5f3fc;
+    border: 2px solid var(--warnaKedua);
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #333;
+    color: white;
 }
 
 input::placeholder {
@@ -130,7 +130,7 @@ input::placeholder {
     width: 45%;
     cursor: pointer;
     border: 0px;
-    background: linear-gradient(90deg, var(--warnaUtama), var(--warnaKedua), var(--warnaKetiga), var(--warnaKeempat));
+    background: linear-gradient(90deg, var(--warnaUtama), var(--warnaKedua), var(--warnaKetiga), var(--warnaKeempat)) ;
     background-size: 200%;
     transition: 0.3s ease;
     color: white;
@@ -168,7 +168,7 @@ input::placeholder {
     }
 }
 
-@media (max-width: 1110px) {
+@media (max-width: 1185px) {
     #login-container {
         width: 60%;
         height: auto;
@@ -181,9 +181,9 @@ input::placeholder {
     }
 }
 
-@media (max-width: 912px) {
+@media (max-width: 1155px) {
     #login-container {
-        /* width: 50%; */
+        width: 320px;
         font-size: small;
         height: auto;
         flex-direction: column;
@@ -201,7 +201,7 @@ input::placeholder {
         justify-content: center;
     }
 
-    #input-fields {
+    .inpt{
         width: 100%;
     }
 
