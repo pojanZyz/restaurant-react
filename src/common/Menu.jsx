@@ -64,6 +64,8 @@ const Menu = ({ cart, addToCart }) => {
 
         {/* Search bar */}
         <div className="search-bar">
+          
+          <i class="bi bi-arrow-down-short"></i>
           <select
             id="limit"
             value={limit}
@@ -73,15 +75,17 @@ const Menu = ({ cart, addToCart }) => {
             <option value={20}>20</option>
             <option value={50}>50</option>
           </select>
-
+          <div className="search">
+            <label htmlFor="search" className="floating-table"><i class="bi bi-search"></i></label>
           <input
             value={search}
             type="text"
-            id="search"
+            id="search-input"
             placeholder="Cari menu makanan..."
             onChange={(e) => setSearch(e.target.value)}
           />
-          <select id="sortOptions" onChange={(e) => setSort(e.target.value)}>
+          </div>
+          <select className="sorting" id="sortOptions" onChange={(e) => setSort(e.target.value)}>
             <option value="">Default</option>
             <option value="asc">A-Z</option>
             <option value="dsc">Z-A</option>
@@ -105,6 +109,7 @@ const Menu = ({ cart, addToCart }) => {
         </div>
 
         {/* Menu grid */}
+        <div className="container-menuGrid">
         <div className="menu-grid" id="menuGrid">
           {products.map((product) => (
             <div
@@ -130,6 +135,7 @@ const Menu = ({ cart, addToCart }) => {
               </div>
             </div>
           ))}
+        </div>
         </div>
 
         {/* Pagination */}

@@ -2,6 +2,8 @@
     --warnaUtama: #b45309;
     --warnaKedua: #fde68a;
     --warnaKetiga: #92400e;
+    --warnaKeempat: #fcd34d;
+    --warnaKelima: #78350f;
     --warnaElemen: #f3f4f6;
     --bg: linear-gradient(to bottom right, #fff, #fff);
 }
@@ -144,7 +146,7 @@
     }
 
     .side-head h1 {
-        font-size: 16px;
+        font-size: 13px;
     }
 
     .box-menu a {
@@ -294,6 +296,9 @@
     .logout-btn {
         font-size: 14px;
         padding: 8px;
+    }
+    .logout-btn span{
+        display: none;
     }
 }
 

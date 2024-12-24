@@ -56,7 +56,9 @@ const Login = () => {
           <img src={logo} alt="logo restoran" />
         </div>
         <div id="input-wrapper" className="inputBox">
-          <h1>Login | <a href="/register">Register</a></h1>
+          <h1>
+            Login | <a href="/register">Register</a>
+          </h1>
           <hr id="divider" />
           <div id="input-fields" className="input">
             <form onSubmit={handleLogin}>
@@ -70,7 +72,9 @@ const Login = () => {
                   value={useremail}
                   onChange={(e) => setUseremail(e.target.value)} // Bind state
                 />
-                <label htmlFor="gmail"><i className="bi bi-person-fill"></i></label>
+                <label htmlFor="gmail">
+                  <i className="bi bi-person-fill"></i>
+                </label>
               </div>
               <div id="password-group" className="inpt">
                 <input
@@ -83,7 +87,11 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)} // Bind state
                 />
                 <label htmlFor="password">
-                  <i className="bi bi-eye-slash-fill" id="togglePassword" onClick={() => setInputType(!inputType)}></i>
+                  <i
+                    className="bi bi-eye-slash-fill"
+                    id="togglePassword"
+                    onClick={() => setInputType(!inputType)}
+                  ></i>
                 </label>
               </div>
 
@@ -94,7 +102,7 @@ const Login = () => {
 
               <div id="button-group" className="btn">
                 <button type="submit" disabled={loading}>
-                  {loading ? 'Logging in...' : 'Login'}
+                  {loading ? "Logging in..." : "Login"}
                 </button>
                 <button type="reset">Reset</button>
               </div>

@@ -12,13 +12,12 @@ const Feedback = () => {
           <div className="content-box-fb">
             <div className="input-box">
               <form id="feedback-form">
-                <div className="input">
-                  <label for="username">Nama :</label>
+              <div className="input">
+                  <label for="email">Nama:</label>
                   <input
-                    type="text"
-                    name="username"
+                    name="email"
                     id="username"
-                    placeholder="Nama Anda"
+                    placeholder="Nama anda"
                     required
                   />
                 </div>
