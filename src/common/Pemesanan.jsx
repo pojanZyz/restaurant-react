@@ -115,8 +115,12 @@ const Pemesanan = ({ cart }) => {
 
   return (
     <div className="body-box">
+      <div className="header">
+          
+      </div>
       <div className="content-box">
         {/* Table Reservation Section */}
+
         <div className="reservation-box">
           <h3>Reservasi Meja</h3>
           <div className="table-grid">

@@ -2,7 +2,7 @@ body {
     font-size: 1.5rem;
 }
 
-#login-main {
+.main-regist {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@ body {
     background-size: cover;
 }
 
-#login-container {
+.container-regist {
     display: flex;
     justify-content: center;
     color: white;
@@ -26,10 +26,15 @@ body {
     backdrop-filter: blur(5px);
 }
 
+#logo-wrapper{
+    display: flex;
+    align-items: center;
+}
+
 #logo-wrapper img {
-    width: 15rem;
-    border-radius: 200px;
-    background-color: white;
+    width: 17rem;
+    /* background-color: red; */
+    /* height: 100%; */
 }
 
 #input-wrapper {
@@ -73,33 +78,33 @@ hr {
     margin: 5px 0;
 }
 
-.input label i {
-    color: white;
+.input-regist label i {
     position: absolute;
     font-size: 20px;
-    transform: translateY(-30px) ;
+    transform: translateY(8px);
     right: 18px;
 }
 
 #input-fields .login-input {
-    mix-blend-mode: difference;
+    font-size: 15px;
     padding: 5px 15px;
     width: 100%;
-    border: 2px solid #a5f3fc;
+    border: 2px solid var(--warnaKedua);
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #333;
+    color: white;
 }
 
 input::placeholder {
-    color: #333;
+    color: black;
 }
 
 #input-fields .login-input:focus {
     outline: none;
     box-shadow: 0px 0px 15px #C79E73;
     border: solid #C79E73;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--warnaKedua);
+    color: black;
 }
 
 #remember {
@@ -183,16 +188,14 @@ input::placeholder {
 
 @media (max-width: 912px) {
     #login-container {
-        /* width: 50%; */
-        font-size: small;
+        width: 50%;
         height: auto;
         flex-direction: column;
         padding: 15px;
     }
 
     #logo-wrapper img {
-        width: 8.5rem !important;
-        margin-bottom: 20px;
+        width: 10rem;
     }
 
     #logo-wrapper {
