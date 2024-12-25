@@ -12,23 +12,21 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [token, setToken] = useState("")
-  const [role, setRole] = useState("")
 
   
   const navigate = useNavigate();
 
+
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-  
-    // Send login request to the API
+
     axios
       .post('https://cafemdn-api.vercel.app/api/login', { useremail, password })
       .then((res) => {
         setToken(res.data.accessToken);
         
-        const decoded = jwtDecode(res.data.accessToken); // Decode the JWT token
-        setRole(decoded.role);
+        const decoded = jwtDecode(res.data.accessToken); 
   
         // Navigate based on role
         if (decoded.role === "admin") {
@@ -38,10 +36,10 @@ const Login = () => {
         }
   
         alert("Login successful");
+        console.log(res.data.accessToken)
       })
       .catch((err) => {
-        setMessage(err.response.data.message);
-        alert(err.response.data.message);
+        alert(err.response?.data?.message);
         console.log(err.response.data.message);
       })
       .finally(() => {

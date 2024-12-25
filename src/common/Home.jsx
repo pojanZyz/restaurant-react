@@ -1,7 +1,6 @@
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import "../css/app.css";
 import "../css/home.css";
-import home from "../img/restoran_home.jpg"
 
 const Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,33 +11,19 @@ const Dashboard = () => {
 
   return(
     <div className="body-box">
-      <div className="container-box">
+      <div className="container-box quicksand">
         {/* Navbar */}
-        <div className={`navbar ${menuOpen ? 'open' : ''}`}>
-          <div className="content-hamburger">
-          <div className="hamburger" onClick={toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          </div>
-          <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#best-seller">Best Seller</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </div>
+        
 
         {/* Main Content */}
         <div className="main-home">
           {/* Home Section */}
           <div id="home" className="beranda">
             <div className="content-beranda">
-              <h1>Welcome to Our Restaurant</h1>
+              <h1 className="poppins-regular">Welcome to Our Restaurant</h1>
               <p>Experience the best dishes with a touch of elegance.</p>
               <div className="order-menu">
-                <a href="/menu">Order Now!!</a>
+                <a href="/menu" className="poppins-regular">Order Now!!</a>
               </div>
             </div>
           </div>

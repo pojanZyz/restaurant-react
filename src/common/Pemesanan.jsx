@@ -8,9 +8,9 @@ const Pemesanan = ({ cart }) => {
   const [numPeople, setNumPeople] = useState(1);
   const [selectedTables, setSelectedTables] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [tables, setTables] = useState([]); // State to store table data from API
+  const [tables, setTables] = useState([]);
 
-  // Fetch table data from the API
+  //get all tables
   useEffect(() => {
     const fetchTables = async () => {
       try {
@@ -18,19 +18,18 @@ const Pemesanan = ({ cart }) => {
           "https://cafemdn-api.vercel.app/api/table"
         );
         const data = await response.json();
-        console.log("Fetched table data:", data); // Log the fetched data
+        console.log("Fetched table data:", data);
         if (Array.isArray(data.data)) {
-          // Ensure the data is an array
-          setTables(data.data); // Set tables with data.data which is the array
+          setTables(data.data);
         } else {
           console.error("Data fetched is not an array:", data);
         }
       } catch (error) {
-        console.error("Error fetching table data:", error); // Log any errors that occur during fetch
+        console.error("Error fetching table data:", error);
       }
     };
     fetchTables();
-  }, []); // Fetch data when the component mounts
+  }, []);
 
   const customStyles = {
     option: (provided) => ({
@@ -50,6 +49,7 @@ const Pemesanan = ({ cart }) => {
     }),
   };
 
+  //handle 
   const handleTableClick = (table) => {
     if (table.status === "Available") {
       const isSelected = selectedTables.includes(table._id);
@@ -109,16 +109,16 @@ const Pemesanan = ({ cart }) => {
     value: table._id,
     label: `Meja ${table.tableNumber} (Kapasitas: ${table.capacity} orang) - ${
       table.status === "Available" ? "Kosong" : "Terisi"
-    } - Rp ${table.price}`,
+    }`,
     isDisabled: table.status === "Occupied",
   }));
 
   return (
     <div className="body-box">
-      <div className="header">
-          
-      </div>
       <div className="content-box">
+      <div style={{marginTop: "30px"}}>
+        <h2>Reservasi Meja</h2>
+      </div>
         {/* Table Reservation Section */}
 
         <div className="reservation-box">
@@ -193,6 +193,12 @@ const Pemesanan = ({ cart }) => {
                 )}
                 onChange={handleTableSelection}
               />
+            </div>
+            <div>
+              <label>Catatan (opsional)</label>
+              <textarea>
+                
+              </textarea>
             </div>
             <p>Total: Rp {totalPrice.toLocaleString()}</p>
             <button type="submit" className="btn btn-primary">

@@ -13,7 +13,7 @@ const Feedback = () => {
             <div className="input-box">
               <form id="feedback-form">
               <div className="input">
-                  <label for="email">Nama:</label>
+                  <label htmlFor="email">Nama:</label>
                   <input
                     name="email"
                     id="username"
@@ -22,7 +22,7 @@ const Feedback = () => {
                   />
                 </div>
                 <div className="input">
-                  <label for="email">Email:</label>
+                  <label htmlFor="email">Email:</label>
                   <input
                     type="email"
                     name="email"
@@ -32,7 +32,7 @@ const Feedback = () => {
                   />
                 </div>
                 <div className="input">
-                  <label for="pesan">Pesan:</label>
+                  <label htmlFor="pesan">Pesan:</label>
                   <textarea
                     name="pesan"
                     id="pesan"
@@ -41,7 +41,7 @@ const Feedback = () => {
                   ></textarea>
                 </div>
                 <div className="positif">
-                  <label for="positif">Ulasan Positif : </label>
+                  <label htmlFor="positif">Ulasan Positif : </label>
                   <input type="checkbox" id="positif" />
                 </div>
                 <div className="btn-box">
