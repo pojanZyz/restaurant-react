@@ -116,16 +116,13 @@ body {
 
   
 
-.main-home {
-    padding-top: 100px;
-}
 
 .main-home .beranda {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 88vh;
+    min-height: 100vh;
     background: url("../img/restoran_home.jpg") no-repeat center center/cover;
     overflow: hidden;
 }

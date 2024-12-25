@@ -61,13 +61,24 @@ const Menu = ({ cart, addToCart }) => {
       )}
 
       <div className="menu-container">
-
         {/* Search bar */}
-        <div className="search-bar">
-          
-          <i class="bi bi-arrow-down-short"></i>
+        <div className="search-bar ">
+          <div className="search">
+            <label htmlFor="search" className="floating-table">
+              <i className="bi bi-search"></i>
+            </label>
+            <input
+              value={search}
+              type="text"
+              id="search-input"
+              className="quicksand"
+              placeholder="Cari menu makanan..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
           <select
             id="limit"
+            className="quicksand"
             value={limit}
             onChange={(e) => setLimit(Number(e.target.value))}
           >
@@ -75,17 +86,11 @@ const Menu = ({ cart, addToCart }) => {
             <option value={20}>20</option>
             <option value={50}>50</option>
           </select>
-          <div className="search">
-            <label htmlFor="search" className="floating-table"><i class="bi bi-search"></i></label>
-          <input
-            value={search}
-            type="text"
-            id="search-input"
-            placeholder="Cari menu makanan..."
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          </div>
-          <select className="sorting" id="sortOptions" onChange={(e) => setSort(e.target.value)}>
+          <select
+            className="sorting quicksand"
+            id="sortOptions"
+            onChange={(e) => setSort(e.target.value)}
+          >
             <option value="">Default</option>
             <option value="asc">A-Z</option>
             <option value="dsc">Z-A</option>
@@ -93,61 +98,88 @@ const Menu = ({ cart, addToCart }) => {
           </select>
         </div>
 
-        {/* Category filter */}
+        {/* Category Filter */}
         <div className="category-filter">
-          {["", "food", "drink", "other"].map((cat) => (
-            <button
-              key={cat}
-              className={category === cat ? "active" : ""}
-              onClick={() => setCategory(cat)}
-            >
-              {cat === ""
-                ? "Semua"
-                : cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </button>
-          ))}
+          <button
+            className={
+              category === "" ? "active poppins-regular" : "poppins-regular"
+            }
+            onClick={() => setCategory("")}
+          >
+            <i className="bi bi-list"></i> All
+          </button>
+          <button
+            className={
+              category === "food" ? "active poppins-regular" : "poppins-regular"
+            }
+            onClick={() => setCategory("food")}
+          >
+            <i className="bi bi-basket3"></i> Food
+          </button>
+          <button
+            className={
+              category === "drink"
+                ? "active poppins-regular"
+                : "poppins-regular"
+            }
+            onClick={() => setCategory("drink")}
+          >
+            <i className="bi bi-cup-straw"></i> Drink
+          </button>
+          <button
+            className={
+              category === "other"
+                ? "active poppins-regular"
+                : "poppins-regular"
+            }
+            onClick={() => setCategory("other")}
+          >
+            <i className="bi bi-grid"></i> Other
+          </button>
         </div>
 
         {/* Menu grid */}
         <div className="container-menuGrid">
-        <div className="menu-grid" id="menuGrid">
-          {products.map((product) => (
-            <div
-              key={product._id}
-              className="menu-item"
-              data-name={product.productName}
-              data-price={product.productPrice}
-              data-category={product.productCategory}
-              data-description={product.productDescription}
-            >
-              <img src={product.productImagePath} alt={product.productName} />
-              <div className="menu-details">
-                <h3>{product.productName}</h3>
-                <p className="description">{product.productDescription}</p>
-                <p className="price">
-                  Rp {product.productPrice.toLocaleString()}
-                </p>
+          <div className="menu-grid" id="menuGrid">
+            {products.map((product) => (
+              <div
+                key={product._id}
+                className="menu-item"
+                data-name={product.productName}
+                data-price={product.productPrice}
+                data-category={product.productCategory}
+                data-description={product.productDescription}
+              >
+                <img src={product.productImagePath} alt={product.productName} />
+                <div className="menu-details">
+                  <h3 className="poppins-regular">{product.productName}</h3>
+                  <p className="description quicksand">
+                    {product.productDescription}
+                  </p>
+                  <div className="add-to-cart">
+                    <p className="price quicksand">
+                      Rp {product.productPrice.toLocaleString()}
+                    </p>
+                    <button onClick={() => handleAddToCart(product)}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="add-to-cart">
-                <button onClick={() => handleAddToCart(product)}>
-                  <i className="bi bi-cart"></i>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
 
         {/* Pagination */}
         <div className="pagination">
-          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+          <button className="quicksand" disabled={page === 1} onClick={() => setPage(page - 1)}>
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (pg) => (
               <button
                 key={pg}
-                className={page === pg ? "active" : ""}
+                className={page === pg ? "active poppins-regular" : "poppins-regular"}
                 onClick={() => setPage(pg)}
               >
                 {pg}
@@ -155,6 +187,7 @@ const Menu = ({ cart, addToCart }) => {
             )
           )}
           <button
+        className="quicksand"
             disabled={page === totalPages}
             onClick={() => setPage(page + 1)}
           >

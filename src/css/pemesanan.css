@@ -93,7 +93,7 @@ body {
     color: #555;
 }
 
-.reservation-box input, .reservation-box select,
+.reservation-box input, .reservation-box textarea, .reservation-box select,
 .order-box input, .order-box select,
 .order-box textarea {
     width: 100%;

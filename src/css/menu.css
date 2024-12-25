@@ -16,7 +16,6 @@
 .menu-container {
   font-family: 'Arial', sans-serif;
     min-height: 100vh;
-    /* padding: 10px 20px; */
 }
 
 /* Search bar */
@@ -27,8 +26,7 @@
   z-index: 10;
     justify-content: center;
     margin-bottom: 20px;
-    background-color: var(--warnaUtama);
-    box-shadow: 10px 0px 10px;
+    background-color: rgba(255, 255, 255, 0.874);
 }
 
 .search-bar .search {
@@ -58,7 +56,7 @@
 
 
 .search-bar .sorting {
-  width: 7%;
+  width: 8%;
     max-height: 47px ;
   padding: 10px;
     margin-top: 20px;
@@ -115,22 +113,20 @@
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
-    padding: 10px;
     background-color: #fff;
   display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
+    align-items: center;
 }
 
 /* Menu item image */
 .menu-item img {
-  width: 100%;
-  height: 250px;
+  width: 80%;
+  height: 170px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 /* Menu details (description and price) */
@@ -138,7 +134,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px;
+  max-width: 70%;
 }
 
 .menu-details h3 {
@@ -148,10 +144,7 @@
   }
   
   .menu-details .description {
-    font-size: 0.95rem !important;
-    /* Ukuran font lebih kecil */
-    color: #888 !important;
-    /* Warna description lebih pudar */
+    font-size: 0.85rem !important;
     margin-bottom: 10px;
     flex-grow: 1;
 }
@@ -165,6 +158,8 @@
   /* Add to cart button */
   .add-to-cart {
     margin-top: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 .add-to-cart button {
@@ -219,8 +214,8 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
-  padding-bottom: 20px;
+  margin-top: 50px;
+  padding-bottom: 100px;
 }
 
 .pagination button {
@@ -229,6 +224,7 @@
   background-color: #f9f9f9;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 15px;
 }
 
 .pagination button.active {
@@ -282,15 +278,13 @@
 
 /* General styling for the select dropdown */
 #limit {
-  padding: 8px 12px;
+  padding: 0px 10px;
   margin: 20px;
   font-size: 14px;
   color: #333;
-  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 4px;
   outline: none;
-  appearance: none;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
