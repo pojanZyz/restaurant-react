@@ -1,46 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 import "../css/login.css";
 import logo from "../img/logo_restoran.png";
+import useAuth from "../js/useAuth";
+import Loader from "../components/Loader";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [inputType, setInputType] = useState(false);
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [token, setToken] = useState("")
-
-  
+  const { token, userData, getToken } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (token) {
+      if (userData?.role === "admin") {
+        navigate("/admin");
+      } else if (userData?.role === "customer") {
+        navigate("/");
+      }
+    }
+  }, [token, userData, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
 
     axios
-      .post('https://cafemdn-api.vercel.app/api/login', { useremail, password })
+      .post("api/login", { useremail, password })
       .then((res) => {
-        setToken(res.data.accessToken);
-        
-        const decoded = jwtDecode(res.data.accessToken); 
-  
-        // Navigate based on role
+        const receivedToken = res.data.accessToken;
+        const decoded = jwtDecode(receivedToken);
         if (decoded.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/");
         }
-  
-        alert("Login successful");
-        console.log(res.data.accessToken)
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: `Login success! Welcome, ${decoded.username}.`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
       })
       .catch((err) => {
-        alert(err.response?.data?.message);
-        console.log(err.response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.response.data.message,
+        });
+        setUseremail("");
+        setPassword("");
       })
       .finally(() => {
         setLoading(false);
@@ -49,65 +66,65 @@ const Login = () => {
 
   return (
     <main id="login-main" className="main-login">
-      <section id="login-container" className="container-login">
-        <div id="logo-wrapper" className="img">
-          <img src={logo} alt="logo restoran" />
-        </div>
-        <div id="input-wrapper" className="inputBox">
-          <h1>
-            Login | <a href="/register">Register</a>
-          </h1>
-          <hr id="divider" />
-          <div id="input-fields" className="input">
+      {loading ? (
+        <Loader />
+      ) : (
+        <section id="login-container" className="container-login quicksand">
+          <div className="conLogin-1">
+            <Link to={"/"}>
+              <i class="bi bi-house-door-fill"></i>
+            </Link>
+            <img src={logo} alt="logo restoran" className="logo" />
+          </div>
+          <div id="input-wrapper" className="inputBox">
+            <h1 className="poppins-regular">Login</h1>
+            <hr id="divider" />
             <form onSubmit={handleLogin}>
-              <div id="gmail-group" className="inpt">
+              <div className="input-con">
                 <input
-                  className="login-input"
+                  className="quicksand"
                   type="email"
-                  id="gmail"
-                  placeholder="G-mail"
+                  placeholder="Email"
                   required
+                  maxLength={30}
                   value={useremail}
-                  onChange={(e) => setUseremail(e.target.value)} // Bind state
+                  onChange={(e) => setUseremail(e.target.value)}
                 />
-                <label htmlFor="gmail">
-                  <i className="bi bi-person-fill"></i>
-                </label>
+                <i className="bi bi-person-fill"></i>
               </div>
-              <div id="password-group" className="inpt">
+              <div className="input-con">
                 <input
-                  className="login-input"
+                  className="quicksand"
                   type={inputType ? "text" : "password"}
-                  id="password"
                   placeholder="Password"
                   required
+                  maxLength={30}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Bind state
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <label htmlFor="password">
-                  <i
-                    className="bi bi-eye-slash-fill"
-                    id="togglePassword"
-                    onClick={() => setInputType(!inputType)}
-                  ></i>
-                </label>
+                <i
+                  className={
+                    inputType ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"
+                  }
+                  onClick={() => setInputType(!inputType)}
+                ></i>
               </div>
 
-              <div id="remember-me" className="remember">
-                <input type="checkbox" id="remember" />
-                <span>Remember me</span>
-              </div>
+              <span className="register-anc">
+                Don't have an account? <a href="/register">Click here</a>
+              </span>
 
-              <div id="button-group" className="btn">
-                <button type="submit" disabled={loading}>
-                  {loading ? "Logging in..." : "Login"}
-                </button>
-                <button type="reset">Reset</button>
-              </div>
+              <button
+                className="login-btn poppins-regular"
+                type="submit"
+                disabled={loading || !password || !useremail}
+              >
+                {loading ? "Logging in..." : "Login"}
+              </button>
             </form>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </main>
   );
 };

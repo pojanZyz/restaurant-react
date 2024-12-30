@@ -1,7 +1,7 @@
 /* Loader Overlay */
 .loader-overlay {
   position: fixed;
-  top: 86px;
+  top: 0;
   right: 0;
   width: 85%;
   height: 100%;
@@ -14,119 +14,120 @@
 
 /* Menu container */
 .menu-container {
-  font-family: 'Arial', sans-serif;
-    min-height: 100vh;
+  font-family: "Arial", sans-serif;
+  min-height: 100vh;
 }
 
 /* Search bar */
-.search-bar {
+.control-panel {
   display: flex;
   position: fixed;
   width: 85vw;
   z-index: 10;
-    justify-content: center;
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.874);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  background-color: rgba(255, 255, 255, 0.874);
+  gap: 30px;
 }
 
-.search-bar .search {
-    width: 50%;
+.control-panel .search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: solid 1px rgba(0, 0, 0, 0.46);
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.355);
+  border-radius: 20px;
 }
 
-.search-bar .search input {
-    max-width: 1000px;
-    padding: 10px;
-    padding-left: 50px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
+.control-panel .search input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 300px;
+  font-size: large;
 }
 
-
-
-.search-bar input::placeholder{
+.control-panel input::placeholder {
   color: #333;
 }
 
-
-.search-bar label{
+.control-panel label {
   position: absolute;
   transform: translateY(25px) translateX(1rem);
 }
 
-
-.search-bar .sorting {
+.control-panel .sorting {
   width: 8%;
-    max-height: 47px ;
+  max-height: 47px;
   padding: 10px;
-    margin-top: 20px;
-  margin-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 15px;
-    color: #555;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
-.search-bar .bi-arrow-down-short{
+.control-panel .bi-arrow-down-short {
   position: absolute;
   font-size: 21px;
   transform: translateY(28px) translateX(-24.2rem);
 }
 
-.search-bar select {
+.control-panel select {
   width: 6%;
-    min-height: 47px ;
+  min-height: 47px;
   padding: 10px;
-    margin-top: 20px;
-  margin-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 10px;
-    color: #555;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 10px;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
-.search-bar select:focus {
+.control-panel select:focus {
   border-color: #007bff;
-    outline: none;
+  outline: none;
 }
 
 /* Menu grid */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-    /* Default two columns */
-    gap: 20px;
-    margin: 20px 0px;
-    margin-inline: 250px;
-    position: relative;
+  /* Default two columns */
+  gap: 20px;
+  margin: 20px 0px;
+  margin-inline: 250px;
+  position: relative;
 }
 
 /* Menu item */
 .menu-item {
   border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Menu item image */
 .menu-item img {
   width: 80%;
   height: 170px;
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-    border-radius: 10px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 /* Menu details (description and price) */
@@ -139,37 +140,37 @@
 
 .menu-details h3 {
   font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .menu-details .description {
-    font-size: 0.85rem !important;
-    margin-bottom: 10px;
-    flex-grow: 1;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.menu-details .description {
+  font-size: 0.85rem !important;
+  margin-bottom: 10px;
+  flex-grow: 1;
 }
 
 .menu-details .price {
   font-size: 1.1rem;
-    font-weight: bold;
-    color: #28a745;
-  }
-  
-  /* Add to cart button */
-  .add-to-cart {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Add to cart button */
+.add-to-cart {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-to-cart button {
   padding: 8px 12px;
-    background-color: var(--warnaUtama);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: var(--warnaUtama);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .add-to-cart button:hover {
@@ -179,20 +180,20 @@
 /* Category filter */
 .category-filter {
   display: flex;
-    justify-content: center;
-    padding-top: 110px;
-    margin-bottom: 20px;
-    gap: 10px;
+  justify-content: center;
+  padding-top: 150px;
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .category-filter button {
   padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--warnaKelima);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--warnaKelima);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .category-filter button:hover {
@@ -278,8 +279,6 @@
 
 /* General styling for the select dropdown */
 #limit {
-  padding: 0px 10px;
-  margin: 20px;
   font-size: 14px;
   color: #333;
   border: 1px solid #ddd;
@@ -312,7 +311,7 @@
 
 /* Optional arrow styling for dropdown */
 #limit::after {
-  content: '▼';
+  content: "▼";
   font-size: 10px;
   position: absolute;
   right: 10px;
@@ -355,7 +354,6 @@
     font-size: 1.25rem;
   }
 }
-
 
 /* Media query untuk perangkat mobile */
 @media (max-width: 768px) {

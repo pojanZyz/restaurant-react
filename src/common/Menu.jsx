@@ -22,7 +22,7 @@ const Menu = ({ cart, addToCart }) => {
     setLoading(true);
     axios
       .get(
-        `https://cafemdn-api.vercel.app/api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
+        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
       )
       .then((response) => {
         setProducts(response.data.data);
@@ -62,30 +62,17 @@ const Menu = ({ cart, addToCart }) => {
 
       <div className="menu-container">
         {/* Search bar */}
-        <div className="search-bar ">
+        <div className="control-panel ">
           <div className="search">
-            <label htmlFor="search" className="floating-table">
-              <i className="bi bi-search"></i>
-            </label>
+            <i className="bi bi-search"></i>
             <input
               value={search}
               type="text"
-              id="search-input"
               className="quicksand"
-              placeholder="Cari menu makanan..."
+              placeholder="Search..."
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <select
-            id="limit"
-            className="quicksand"
-            value={limit}
-            onChange={(e) => setLimit(Number(e.target.value))}
-          >
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
           <select
             className="sorting quicksand"
             id="sortOptions"
@@ -95,6 +82,16 @@ const Menu = ({ cart, addToCart }) => {
             <option value="asc">A-Z</option>
             <option value="dsc">Z-A</option>
             <option value="newest">Terbaru</option>
+          </select>
+          <select
+            id="limit"
+            className="quicksand"
+            value={limit}
+            onChange={(e) => setLimit(Number(e.target.value))}
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
           </select>
         </div>
 
@@ -172,14 +169,20 @@ const Menu = ({ cart, addToCart }) => {
 
         {/* Pagination */}
         <div className="pagination">
-          <button className="quicksand" disabled={page === 1} onClick={() => setPage(page - 1)}>
+          <button
+            className="quicksand"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (pg) => (
               <button
                 key={pg}
-                className={page === pg ? "active poppins-regular" : "poppins-regular"}
+                className={
+                  page === pg ? "active poppins-regular" : "poppins-regular"
+                }
                 onClick={() => setPage(pg)}
               >
                 {pg}
@@ -187,7 +190,7 @@ const Menu = ({ cart, addToCart }) => {
             )
           )}
           <button
-        className="quicksand"
+            className="quicksand"
             disabled={page === totalPages}
             onClick={() => setPage(page + 1)}
           >
