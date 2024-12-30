@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import axios from "axios";
-import Menu from "./common/Menu";
 import Sidebar from "./components/Sidebar";
-import Payment from "./common/Payment";
-import Pemesanan from "./common/Pemesanan";
-import Login from "./common/Login";
+import AdminSidebar from "./components/AdminSidebar"
+
 import Register from "./common/Register";
-import Feedback from "./common/Feedback";
+import Login from "./common/Login";
 import Home from "./common/Home";
+import Menu from "./common/Menu";
+import Order from "./common/Order";
+import Reservation from "./common/Reservation";
 import Loyalty from "./common/Loyalty";
+import Feedback from "./common/Feedback";
 
 import AdminHome from "./admin/AdminHome";
 import MenuAdmin from "./admin/MenuAdmin";
 import ReservationAdmin from "./admin/ReservationAdmin";
 import OrderAdmin from "./admin/OrderAdmin";
 import UserAdmin from "./admin/UserAdmin";
-
+import TableAdmin from "./admin/TableAdmin";
+import CommentAdmin from "./admin/CommentAdmin";
 function App() {
   const location = useLocation();
   const [cart, setCart] = useState([]); // Cart yang akan digunakan untuk seluruh aplikasi
@@ -31,7 +34,16 @@ function App() {
 
   const hideSidebar = ["/login", "/register"];
 
-  // Fungsi untuk menambah produk ke dalam keranjang
+  const renderSidebar = () => {
+    if (hideSidebar.includes(location.pathname)) {
+      return null; // Tidak ada sidebar untuk route tertentu
+    }
+    if (location.pathname.startsWith("/admin")) {
+      return <AdminSidebar />; // AdminSidebar untuk route admin
+    }
+    return <Sidebar />; // Sidebar umum untuk route lain
+  };
+
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item._id === product._id);
@@ -55,7 +67,6 @@ function App() {
     });
   };
 
-  // Fungsi untuk menghapus produk dari keranjang
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
   };
@@ -121,26 +132,24 @@ function App() {
   };
 
   axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = "https://cafemdn-api.vercel.app/"
 
   return (
     <>
-      {!hideSidebar.includes(location.pathname) && <Sidebar />}
+      {renderSidebar()}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+        <Route path="/login" element={<Login />} />
         <Route path="/loyalty" element={<Loyalty />} />
         <Route
           path="/menu"
           element={<Menu cart={cart} addToCart={addToCart} />}
         />
         <Route
-          path="/payment"
+          path="/order"
           element={
-            <Payment
+            <Order
               cart={cart}
               totalAfterDiscount={totalAfterDiscount}
               customerName={customerName}
@@ -156,19 +165,22 @@ function App() {
               discountAmount={discountAmount}
               showReceipt={showReceipt}
               setShowReceipt={setShowReceipt}
-              handleIncrease={handleIncrease}
-              handleDecrease={handleDecrease}
-              handleDiscountMenu={handleDiscountMenu}
+              handleIncrease={() => {}}
+              handleDecrease={() => {}}
+              handleDiscountMenu={() => {}}
             />
           }
         />
-        <Route path="/pemesanan" element={<Pemesanan cart={cart} />} />
+        <Route path="/reservation" element={<Reservation />} />
         <Route path="/feedback" element={<Feedback />} />
+        
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/menu" element={<MenuAdmin />} />
         <Route path="/admin/order" element={<OrderAdmin />} />
         <Route path="/admin/reservation" element={<ReservationAdmin />} />
         <Route path="/admin/user" element={<UserAdmin />} />
+        <Route path="/admin/table" element={<TableAdmin />} />
+        <Route path="/admin/comment"  element={<CommentAdmin />}/>
       </Routes>
     </>
   );

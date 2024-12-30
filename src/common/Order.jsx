@@ -4,7 +4,7 @@ import html2canvas from "html2canvas";
 import "../css/payment.css";
 import "../css/app.css";
 
-const Payment = ({
+const Order = ({
   cart,
   customerName,
   setCustomerName,
@@ -286,4 +286,4 @@ const Payment = ({
   );
 };
 
-export default Payment;
+export default Order;

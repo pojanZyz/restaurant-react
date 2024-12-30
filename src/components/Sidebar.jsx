@@ -1,62 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+import useAuth from "../js/useAuth";
 import "../css/app.css";
 import logo from "../img/logo_restoran.png";
-import axios from "axios";
 
 const Sidebar = () => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [token, setToken] = useState("");
-  const [userData, setUserData] = useState({
-    userId: "",
-    username: "",
-    useremail: "",
-    role: "",
-  });
+  const { token, userData, getToken } = useAuth();  
 
-  //check token
+  const navigate = useNavigate()
+
   useEffect(() => {
-    getToken();
-  }, []);
-  const getToken = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get("https://cafemdn-api.vercel.app/api/token");
-      console.log(res.data);
-      const decoded = jwtDecode(res.data.accessToken);
-      setUserData({
-        userId: decoded.userId,
-        username: decoded.username,
-        useremail: decoded.useremail,
-        role: decoded.role,
-      });
-
-      setToken(res.data.accessToken);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+    if(token){
+      if(userData.role === "admin"){
+        navigate('/admin')
+      }
     }
-  };
+  }, [token])
 
   //logout handler
   const handleLogout = () => {
     setLoading(true);
     axios
-      .delete("https://cafemdn-api.vercel.app/api/logout")
+      .delete("api/logout")
       .then((res) => {
-        alert(res.data.message);
-        setMessage(res.data.message);
+        Swal.fire({
+          icon: "info",
+          title: "Information",
+          text: res.data.message || "Logout success",
+          showConfirmButton: false,
+          timer: 2000
+        })
+        navigate('/')
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
       })
       .catch((err) => {
-        alert(err.response.data.message);
-        setMessage(err.response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.response.data.message || "Something went wrong",
+        })
       })
       .finally(() => {
         setLoading(false);
-        window.location.reload();
       });
   };
   return (
@@ -82,15 +73,15 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/pemesanan">
-                <i className="bi bi-bag-check-fill"></i>
-                <span>Shopping</span>
+              <NavLink to="/order">
+                <i className="bi bi-calculator"></i>
+                <span>Order</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/payment">
-                <i className="bi bi-calculator"></i>
-                <span>Payment</span>
+              <NavLink to="/reservation">
+                <i className="bi bi-bag-check-fill"></i>
+                <span>Reservation</span>
               </NavLink>
             </li>
             <li>
@@ -110,26 +101,35 @@ const Sidebar = () => {
       </div>
 
       <div className="logout-container">
-        <div className="auth-con poppins-regular">
-          {token ? (
-            <>
-            <span className="username quicksand">Welcome back, {userData.username}!</span>
-            <button className="logout-btn poppins-regular" onClick={handleLogout}>
-              <i className="bi bi-box-arrow-right logout-icon"></i>
-              <span>{loading ? "Wait..." : "Logout"}</span>
-            </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login" id="login" className="poppins-regular">
-                <span>Login</span>
-              </NavLink>
-              <NavLink to="/register" id="register">
-                <span>Register</span>
-              </NavLink>
-            </>
-          )}
-        </div>
+        {loading ? (
+          <p>Processing...</p>
+        ) : (
+          <div className="auth-con poppins-regular">
+            {token ? (
+              <>
+                <span className="username quicksand">
+                  Welcome back, {userData.username}!
+                </span>
+                <button
+                  className="logout-btn poppins-regular"
+                  onClick={handleLogout}
+                >
+                  <i className="bi bi-box-arrow-right logout-icon"></i>
+                  <span>{loading ? "Wait..." : "Logout"}</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" id="login" className="poppins-regular">
+                  <span>Login</span>
+                </NavLink>
+                <NavLink to="/register" id="register">
+                  <span>Register</span>
+                </NavLink>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </aside>
   );

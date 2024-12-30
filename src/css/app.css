@@ -19,7 +19,7 @@
 .quicksand {
   font-family: "Quicksand", serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
 }
 .poppins-regular {
@@ -78,7 +78,6 @@
     letter-spacing: 1px;
 }
 
-/* Menu box */
 .box-menu {
     display: flex;
     flex-direction: column;
@@ -133,8 +132,8 @@
 
 /* Active state untuk menu */
 .box-menu .active {
-    background-color: var(--warnaKetiga); /* Warna background aktif */
-    color: white; /* Warna teks aktif */
+    background-color: var(--warnaKetiga); 
+    color: white; 
     transition: transform 1s ease-out;
 }
 
@@ -145,7 +144,7 @@
 }
 
 .box-menu .active i:hover {
-    color: #000; /* Warna ikon aktif */
+    color: #000; 
 }
 
 
@@ -175,6 +174,20 @@
 .username{
     color: white;
     font-weight: bold;
+}
+
+
+.profile-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.profile-btn i{
+    color: white;  
+    font-size: 30px;
+}
+.profile-btn i:hover{
+    color: var(--warnaKeempat)
 }
 
 /* Responsif untuk layar tablet (768px - 1280px) */
