@@ -13,13 +13,13 @@ const Sidebar = () => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if(token){
-      if(userData.role === "admin"){
-        navigate('/admin')
-      }
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if(token){
+  //     if(userData.role === "admin"){
+  //       navigate('/admin')
+  //     }
+  //   }
+  // }, [token])
 
   //logout handler
   const handleLogout = () => {

@@ -117,14 +117,17 @@ const Reservation = () => {
         const res = await axios.post("api/reservation", reservationData, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setQrCode(res.data.qrCode)
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: res.data.message || "Reservation made successfully!",
-          showConfirmButton: false,
-          timer: 2000
-        });
+        // setQrCode(res.data.qrCode)
+        // Swal.fire({
+        //   icon: "success",
+        //   title: "Success",
+        //   text: res.data.message || "Reservation made successfully!",
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // });
+
+        const snapToken = res.data.token
+
       } catch (error) {
         Swal.fire({
           icon: "error",

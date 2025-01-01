@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../js/useAuth";
 import "../admin-css/admin-user.css";
 import Loader from "../components/Loader";
+import NoData from "../components/NoData";
 
 const UserAdmin = () => {
   const { token, getToken } = useAuth();
@@ -15,14 +16,30 @@ const UserAdmin = () => {
   const [sort, setSort] = useState("");
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [role, setRole] = useState("");
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 1000);
+    return () => clearTimeout(delay);
+  }, [search]);
+
+  useEffect(() => {
+    if (token) {
+      fetchUsers();
+    } else {
+      getToken();
+    }
+  }, [token, debouncedSearch, sort, role, page, limit]);
 
   const fetchUsers = async () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `api/user?search=${search}&role=${role}&sort=${sort}&page=${page}&limit=${limit}`,
+        `api/user?search=${debouncedSearch}&role=${role}&sort=${sort}&page=${page}&limit=${limit}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -36,14 +53,6 @@ const UserAdmin = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (token) {
-      fetchUsers();
-    } else {
-      getToken();
-    }
-  }, [token, search, sort, role, page, limit]);
 
   //handle delete
   const handleDelete = async (userId) => {
@@ -152,85 +161,91 @@ const UserAdmin = () => {
             </div>
           </div>
 
-          <div className="user-count-con">
-            <div>
-              <span className="poppins-regular">
-                {userCount || 0}
-                <i className="bi bi-person-fill"></i>
-              </span>
-              <span className="span-2">USERS</span>
-            </div>
-            <div>
-              <i class="bi bi-columns"></i>
-              <span className="span-2">
-                Page {page} of {totalPages}
-              </span>
-            </div>
-          </div>
+          {userCount === 0 ? (
+            <NoData str={"No users found"} />
+          ) : (
+            <>
+              <div className="user-count-con">
+                <div>
+                  <span className="poppins-regular">
+                    {userCount || 0}
+                    <i className="bi bi-person-fill"></i>
+                  </span>
+                  <span className="span-2">USERS</span>
+                </div>
+                <div>
+                  <i className="bi bi-columns"></i>
+                  <span className="span-2">
+                    Page {page} of {totalPages}
+                  </span>
+                </div>
+              </div>
 
-          <table className="user-table">
-            <thead className="poppins-regular">
-              <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Logged In?</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user._id}>
-                  <td>{user.username}</td>
-                  <td>{user.useremail}</td>
-                  <td>{user.role}</td>
-                  <td>{user.refreshToken ? "Yes" : "No"}</td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(user._id)}
-                      className="delete-button poppins-regular"
-                    >
-                      <i className="bi bi-trash-fill"></i>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="pagination">
-          <button
-            className="quicksand"
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
-          >
-            Previous
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pg) => (
-              <button
-                key={pg}
-                className={`page-btn
+              <table className="user-table">
+                <thead className="poppins-regular">
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Logged In?</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user) => (
+                    <tr key={user._id}>
+                      <td>{user.username}</td>
+                      <td>{user.useremail}</td>
+                      <td>{user.role}</td>
+                      <td>{user.refreshToken ? "Yes" : "No"}</td>
+                      <td>
+                        <button
+                          onClick={() => handleDelete(user._id)}
+                          className="delete-button poppins-regular"
+                        >
+                          <i className="bi bi-trash-fill"></i>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="pagination">
+                <button
+                  className="quicksand"
+                  disabled={page === 1}
+                  onClick={() => setPage(page - 1)}
+                >
+                  Previous
+                </button>
+                {Array.from(
+                  { length: totalPages },
+                  (_, index) => index + 1
+                ).map((pg) => (
+                  <button
+                    key={pg}
+                    className={`page-btn
                   ${
                     page === pg
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                onClick={() => setPage(pg)}
-              >
-                {pg}
-              </button>
-            )
+                    onClick={() => setPage(pg)}
+                  >
+                    {pg}
+                  </button>
+                ))}
+                <button
+                  className="quicksand"
+                  disabled={page === totalPages}
+                  onClick={() => setPage(page + 1)}
+                >
+                  Next
+                </button>
+              </div>
+            </>
           )}
-          <button
-            className="quicksand"
-            disabled={page === totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            Next
-          </button>
         </div>
       </div>
     </div>

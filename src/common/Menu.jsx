@@ -5,37 +5,47 @@ import "../css/app.css";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import NoData from "../components/NoData";
 
 const Menu = ({ cart, addToCart }) => {
   const [loading, setLoading] = useState(false);
-  const [sort, setSort] = useState("");
-  const [category, setCategory] = useState("");
   const [products, setProducts] = useState([]);
+  const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [message, setMessage] = useState("");
+  const [productCount, setProductCount] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    const delay = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 1000);
+    return () => clearTimeout(delay);
+  }, [search]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [sort, category, debouncedSearch, page, limit]);
+
+  const fetchProducts = async () => {
     setLoading(true);
-    axios
-      .get(
-        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
-      )
-      .then((response) => {
-        setProducts(response.data.data);
-        setTotalPages(response.data.totalPages); // Total halaman dari backend
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        setMessage(error.response.data.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [sort, category, search, page, limit]);
+    try {
+      const res = await axios.get(
+        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${debouncedSearch}&page=${page}`
+      );
+      setProducts(res.data.data);
+      setTotalPages(res.data.totalPages);
+      setProductCount(res.data.dataCount);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -46,10 +56,6 @@ const Menu = ({ cart, addToCart }) => {
       showConfirmButton: false,
       timer: 2000,
     });
-  };
-
-  const handleGoToPayment = () => {
-    navigate("/payment");
   };
 
   return (
@@ -135,72 +141,81 @@ const Menu = ({ cart, addToCart }) => {
           </button>
         </div>
 
-        {/* Menu grid */}
-        <div className="container-menuGrid">
-          <div className="menu-grid" id="menuGrid">
-            {products.map((product) => (
-              <div
-                key={product._id}
-                className="menu-item"
-                data-name={product.productName}
-                data-price={product.productPrice}
-                data-category={product.productCategory}
-                data-description={product.productDescription}
-              >
-                <img src={product.productImagePath} alt={product.productName} />
-                <div className="menu-details">
-                  <h3 className="poppins-regular">{product.productName}</h3>
-                  <p className="description quicksand">
-                    {product.productDescription}
-                  </p>
-                  <div className="add-to-cart">
-                    <p className="price quicksand">
-                      Rp {product.productPrice.toLocaleString()}
-                    </p>
-                    <button onClick={() => handleAddToCart(product)}>
-                      <i className="bi bi-cart"></i>
-                    </button>
+        {productCount === 0 ? (
+          <NoData str={"No product found"} />
+        ) : (
+          <>
+            {/* Menu grid */}
+            <div className="container-menuGrid">
+              <div className="menu-grid" id="menuGrid">
+                {products.map((product) => (
+                  <div
+                    key={product._id}
+                    className="menu-item"
+                    data-name={product.productName}
+                    data-price={product.productPrice}
+                    data-category={product.productCategory}
+                    data-description={product.productDescription}
+                  >
+                    <img
+                      src={product.productImagePath}
+                      alt={product.productName}
+                    />
+                    <div className="menu-details">
+                      <h3 className="poppins-regular">{product.productName}</h3>
+                      <p className="description quicksand">
+                        {product.productDescription}
+                      </p>
+                      <div className="add-to-cart">
+                        <p className="price quicksand">
+                          Rp {product.productPrice.toLocaleString()}
+                        </p>
+                        <button onClick={() => handleAddToCart(product)}>
+                          <i className="bi bi-cart"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* Pagination */}
-        <div className="pagination">
-          <button
-            className="quicksand"
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
-          >
-            Previous
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pg) => (
+            {/* Pagination */}
+            <div className="pagination">
               <button
-                key={pg}
-                className={
-                  page === pg ? "active poppins-regular" : "poppins-regular"
-                }
-                onClick={() => setPage(pg)}
+                className="quicksand"
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
               >
-                {pg}
+                Previous
               </button>
-            )
-          )}
-          <button
-            className="quicksand"
-            disabled={page === totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            Next
-          </button>
-        </div>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                (pg) => (
+                  <button
+                    key={pg}
+                    className={
+                      page === pg ? "active poppins-regular" : "poppins-regular"
+                    }
+                    onClick={() => setPage(pg)}
+                  >
+                    {pg}
+                  </button>
+                )
+              )}
+              <button
+                className="quicksand"
+                disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Floating cart button */}
-      <div className="floating-cart" onClick={handleGoToPayment}>
+      <div className="floating-cart" onClick={() => navigate("/order")}>
         <i className="bi bi-cart" style={{ fontSize: "2rem" }}></i>
         <span className="cart-count">
           {cart.reduce((total, item) => total + item.quantity, 0)}

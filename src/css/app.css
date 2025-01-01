@@ -392,3 +392,18 @@
         transform: rotate(360deg);
     }
 }
+
+
+/*no-data styling*/
+.no-data-con{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    margin: 20px;
+    margin-top: 50px;
+}
+.no-data-con i{
+    color: red;
+}
