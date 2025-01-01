@@ -22,7 +22,11 @@ const Menu = ({ cart, addToCart }) => {
     setLoading(true);
     axios
       .get(
+<<<<<<< HEAD
         `https://cafemdn-api.vercel.app/api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
+=======
+        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
+>>>>>>> 95b76e1 (Initial commit)
       )
       .then((response) => {
         setProducts(response.data.data);
@@ -61,6 +65,7 @@ const Menu = ({ cart, addToCart }) => {
       )}
 
       <div className="menu-container">
+<<<<<<< HEAD
 
         {/* Search bar */}
         <div className="search-bar">
@@ -68,6 +73,33 @@ const Menu = ({ cart, addToCart }) => {
           <i class="bi bi-arrow-down-short"></i>
           <select
             id="limit"
+=======
+        {/* Search bar */}
+        <div className="control-panel ">
+          <div className="search">
+            <i className="bi bi-search"></i>
+            <input
+              value={search}
+              type="text"
+              className="quicksand"
+              placeholder="Search..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <select
+            className="sorting quicksand"
+            id="sortOptions"
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="">Default</option>
+            <option value="asc">A-Z</option>
+            <option value="dsc">Z-A</option>
+            <option value="newest">Terbaru</option>
+          </select>
+          <select
+            id="limit"
+            className="quicksand"
+>>>>>>> 95b76e1 (Initial commit)
             value={limit}
             onChange={(e) => setLimit(Number(e.target.value))}
           >
@@ -75,6 +107,7 @@ const Menu = ({ cart, addToCart }) => {
             <option value={20}>20</option>
             <option value={50}>50</option>
           </select>
+<<<<<<< HEAD
           <div className="search">
             <label htmlFor="search" className="floating-table"><i class="bi bi-search"></i></label>
           <input
@@ -106,10 +139,53 @@ const Menu = ({ cart, addToCart }) => {
                 : cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
           ))}
+=======
+        </div>
+
+        {/* Category Filter */}
+        <div className="category-filter">
+          <button
+            className={
+              category === "" ? "active poppins-regular" : "poppins-regular"
+            }
+            onClick={() => setCategory("")}
+          >
+            <i className="bi bi-list"></i> All
+          </button>
+          <button
+            className={
+              category === "food" ? "active poppins-regular" : "poppins-regular"
+            }
+            onClick={() => setCategory("food")}
+          >
+            <i className="bi bi-basket3"></i> Food
+          </button>
+          <button
+            className={
+              category === "drink"
+                ? "active poppins-regular"
+                : "poppins-regular"
+            }
+            onClick={() => setCategory("drink")}
+          >
+            <i className="bi bi-cup-straw"></i> Drink
+          </button>
+          <button
+            className={
+              category === "other"
+                ? "active poppins-regular"
+                : "poppins-regular"
+            }
+            onClick={() => setCategory("other")}
+          >
+            <i className="bi bi-grid"></i> Other
+          </button>
+>>>>>>> 95b76e1 (Initial commit)
         </div>
 
         {/* Menu grid */}
         <div className="container-menuGrid">
+<<<<<<< HEAD
         <div className="menu-grid" id="menuGrid">
           {products.map((product) => (
             <div
@@ -136,18 +212,62 @@ const Menu = ({ cart, addToCart }) => {
             </div>
           ))}
         </div>
+=======
+          <div className="menu-grid" id="menuGrid">
+            {products.map((product) => (
+              <div
+                key={product._id}
+                className="menu-item"
+                data-name={product.productName}
+                data-price={product.productPrice}
+                data-category={product.productCategory}
+                data-description={product.productDescription}
+              >
+                <img src={product.productImagePath} alt={product.productName} />
+                <div className="menu-details">
+                  <h3 className="poppins-regular">{product.productName}</h3>
+                  <p className="description quicksand">
+                    {product.productDescription}
+                  </p>
+                  <div className="add-to-cart">
+                    <p className="price quicksand">
+                      Rp {product.productPrice.toLocaleString()}
+                    </p>
+                    <button onClick={() => handleAddToCart(product)}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+>>>>>>> 95b76e1 (Initial commit)
         </div>
 
         {/* Pagination */}
         <div className="pagination">
+<<<<<<< HEAD
           <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+=======
+          <button
+            className="quicksand"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+>>>>>>> 95b76e1 (Initial commit)
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (pg) => (
               <button
                 key={pg}
+<<<<<<< HEAD
                 className={page === pg ? "active" : ""}
+=======
+                className={
+                  page === pg ? "active poppins-regular" : "poppins-regular"
+                }
+>>>>>>> 95b76e1 (Initial commit)
                 onClick={() => setPage(pg)}
               >
                 {pg}
@@ -155,6 +275,10 @@ const Menu = ({ cart, addToCart }) => {
             )
           )}
           <button
+<<<<<<< HEAD
+=======
+            className="quicksand"
+>>>>>>> 95b76e1 (Initial commit)
             disabled={page === totalPages}
             onClick={() => setPage(page + 1)}
           >

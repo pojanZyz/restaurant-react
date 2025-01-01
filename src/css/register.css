@@ -16,6 +16,7 @@ body {
     display: flex;
     justify-content: center;
     color: white;
+<<<<<<< HEAD
     background: rgba(186, 229, 253, 0.2);
     box-shadow: 0px 0px 15px var(--warnaUtama);
     border: 3px solid var(--warnaKedua) ;
@@ -94,12 +95,80 @@ hr {
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
 }
+=======
+    background: rgba(241, 242, 243, 0.064);
+    box-shadow: 0px 0px 15px var(--warnaUtama);
+    border: 3px solid var(--warnaKedua) ;
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(25px);
+    gap: 20px;
+}
+
+.input-con-regist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid var(--warnaKeempat);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    color: #0d0d0d;
+    mix-blend-mode: difference;
+    padding: 5px 15px;
+    width: 300px;
+}
+.input-con-regist i{
+    color: rgb(0, 0, 0);
+}
+.input-con-regist input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 15px ;
+    font-weight: 600;
+    margin: 0;
+}
+
+.input-con-regist input::placeholder {
+    color: #404040e4;
+}
+
+.conRegis-1{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    height: 17rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.conRegis-1 i{
+    position: absolute;
+    transform: translateX(-6.5rem);
+    color: white;
+}
+.conRegis-1 i:hover{
+    cursor: pointer;
+    color: var(--warnaKedua);
+}
+.logoRegis{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    background-color: white;
+    margin-top: 40px;
+}
+>>>>>>> 95b76e1 (Initial commit)
 
 input::placeholder {
     color: black;
 }
 
+<<<<<<< HEAD
 #input-fields .regist-input:focus {
+=======
+#input-fields .login-input:focus {
+>>>>>>> 95b76e1 (Initial commit)
     outline: none;
     box-shadow: 0px 0px 15px #C79E73;
     border: solid #C79E73;
@@ -122,6 +191,7 @@ input::placeholder {
     mix-blend-mode: difference;
 }
 
+<<<<<<< HEAD
 #btn-group {
     display: flex;
     width: 100%;
@@ -144,6 +214,28 @@ input::placeholder {
 #btn-group button:hover {
     animation: warna 3s linear;
     background-position: 50% 100%;
+=======
+ form .regis-btn {
+    padding: 7px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0px;
+    background-color: green;
+    border: white solid 1px;
+    background-size: 200%;
+    color: white;
+    align-self: flex-end;
+}
+form .regis-btn:disabled{
+    background-color: rgb(2, 36, 2);
+    color: rgba(255, 255, 255, 0.364);
+    border: solid rgba(255, 255, 255, 0.352) 1px;
+    cursor: not-allowed;
+}
+
+form .regis-btn:hover {
+    background-color: rgb(79, 236, 79);
+>>>>>>> 95b76e1 (Initial commit)
 }
 
 @keyframes warna {
@@ -160,6 +252,7 @@ input::placeholder {
     }
 }
 
+<<<<<<< HEAD
 @media (max-width: 1280px) {
     #regist-container {
         width: 50%;
@@ -240,7 +333,128 @@ input::placeholder {
     .input-regist label i {
         right: 55px;
         transform: translateY(3px);
+=======
+@media (max-width: 724px) {
+    #regist-container {
+        width: 30rem;
+        height: auto;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .conRegis-1{
+        width: 15rem;
+    }
+    .conRegis-1 i{
+        transform: translateX(-90px);
+    }
+    .logoRegis{
+        width: 10rem;
+        height: 10rem;
+    }
+    
+    .input-con-regist{
+        width: 13rem;
+    }
+
+    .input-con-regist input{
+        width: 150px !important;
+    }   
+
+    .register-anc h6{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 502px) {
+    #regist-container {
+        width: 25rem;
+        height: 25rem;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .inputBox-regist{
+        font-size: 20px;
+    }
+
+    .conRegis-1{
+        height: 15rem;
+    }
+    .conRegis-1 i{
+        transform: translateX(-60px);
+    }
+    .logoRegis{
+        width: 8rem;
+        height: 8rem;
+    }
+    
+    .input-con-regist{
+        width: 13rem;
+    }
+
+    .input-con-regist input{
+        width: 150px !important;
+        font-size: 12px;
+    }   
+
+    .register-anc h6{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    #regist-container {
+        width: 18rem;
+        height: 19rem;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .inputBox-regist{
+        font-size: 10px;
+    }
+
+    .conRegis-1{
+        height: 10rem;
+    }
+    .conRegis-1 i{
+        transform: translateX(-50px);
+        font-size: 15px;
+    }
+    .logoRegis{
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .input-con-regist{
+        width: 8rem;
+    }
+
+    .input-con-regist input{
+        width: 150px !important;
+        font-size: 8px;
+    }   
+
+    .register-anc h6{
+        font-size: 7px;
+    }
+    .regis-btn{
+        width: 5rem;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+    .inputBox-regist{
+        padding-top: 30px;
+>>>>>>> 95b76e1 (Initial commit)
     }
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95b76e1 (Initial commit)

@@ -1,0 +1,177 @@
+.reservation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  gap: 70px;
+}
+
+.reserv-con1 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 10px;
+}
+
+.reserv-con2 {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.reserv-con2-sub1 {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(209, 208, 208);
+  align-items: center;
+  padding: 20px;
+  border-radius: 30px;
+}
+.reserv-con2-sub1 p {
+  font-size: 60%;
+  max-width: 400px;
+  text-align: center;
+}
+.reserv-con2-sub1 .date-input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: white;
+  width: 200px;
+  user-select: none;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+  margin-top: 30px;
+}
+.reserv-con2-sub1 .date-input {
+  transition: 0.2;
+  transform: scale(1.02);
+}
+
+.legend-con {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  align-self: flex-start;
+  font-size: 55%;
+  list-style-type: none;
+}
+.legend-con li {
+  display: flex;
+  align-items: center;
+}
+.legend-con .green-sqr {
+  background-color: rgb(9, 230, 9);
+  width: 15px;
+  height: 15px;
+}
+.legend-con .red-sqr {
+  background-color: rgb(251, 82, 21);
+  width: 15px;
+  height: 15px;
+}
+.legend-con .gray-sqr {
+  background-color: rgb(63, 65, 63);
+  width: 15px;
+  height: 15px;
+}
+
+.tables-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-content: center;
+  place-items: center;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  margin-top: 5px;
+}
+.tables-box .table-grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 35px;
+  box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.533);
+  gap: 10px;
+  font-size: 80%;
+  cursor: pointer;
+}.table-grid-item:hover{
+    background-color: rgb(174, 174, 174);
+}
+.table-grid-item .table-cap {
+  font-size: 60%;
+}
+
+.table-available {
+  background-color: rgb(9, 230, 9);
+}
+.table-reserved {
+  background-color: rgb(251, 82, 21);
+}
+.table-occupied {
+  background-color: rgb(63, 65, 63);
+  color: rgb(196, 193, 193);
+}
+.table-selected{
+    background-color: #007bff; /* Warna biru */
+  color: white;
+}
+
+.reserv-con2-sub2{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(209, 208, 208);
+    padding: 30px;
+    border-radius: 30px;
+    gap: 10px;
+}
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(174, 174, 174);
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+.reservation-form label {
+  font-size: 80%;
+  margin-top: 20px;
+}
+.reservation-form input,
+.reservation-form textarea {
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 15px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+  border: none;
+  resize: none;
+  margin-top: 5px;
+}
+.reservation-form input::placeholder {
+  color: gray;
+}
+.reservation-form .date-time-con {
+  display: flex;
+  gap: 10px;
+}
+.date-time-con input {
+  font-size: 80%;
+  width: 170px;
+}
+.reservation-form .reserv-btn{
+    margin-top: 20px;
+    padding: 10px 20px;
+    align-self: flex-end;
+    border-radius: 15px;
+    border: solid white 1px;
+    color: white;
+    background-color: rgb(1, 72, 1);
+}
+.reservation-form .reserv-btn:hover{
+    background-color: gray;
+    cursor: pointer;
+}

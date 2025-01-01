@@ -11,6 +11,7 @@ body {
     min-height: 110vh;
 }
 
+<<<<<<< HEAD
 .hamburger {
     display: none;
     flex-direction: column;
@@ -119,13 +120,19 @@ body {
 .main-home {
     padding-top: 100px;
 }
+=======
+>>>>>>> 95b76e1 (Initial commit)
 
 .main-home .beranda {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     min-height: 88vh;
+=======
+    min-height: 100vh;
+>>>>>>> 95b76e1 (Initial commit)
     background: url("../img/restoran_home.jpg") no-repeat center center/cover;
     overflow: hidden;
 }

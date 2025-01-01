@@ -13,7 +13,11 @@ const Feedback = () => {
             <div className="input-box">
               <form id="feedback-form">
               <div className="input">
+<<<<<<< HEAD
                   <label for="email">Nama:</label>
+=======
+                  <label htmlFor="email">Nama:</label>
+>>>>>>> 95b76e1 (Initial commit)
                   <input
                     name="email"
                     id="username"
@@ -22,7 +26,11 @@ const Feedback = () => {
                   />
                 </div>
                 <div className="input">
+<<<<<<< HEAD
                   <label for="email">Email:</label>
+=======
+                  <label htmlFor="email">Email:</label>
+>>>>>>> 95b76e1 (Initial commit)
                   <input
                     type="email"
                     name="email"
@@ -32,7 +40,11 @@ const Feedback = () => {
                   />
                 </div>
                 <div className="input">
+<<<<<<< HEAD
                   <label for="pesan">Pesan:</label>
+=======
+                  <label htmlFor="pesan">Pesan:</label>
+>>>>>>> 95b76e1 (Initial commit)
                   <textarea
                     name="pesan"
                     id="pesan"
@@ -41,7 +53,11 @@ const Feedback = () => {
                   ></textarea>
                 </div>
                 <div className="positif">
+<<<<<<< HEAD
                   <label for="positif">Ulasan Positif : </label>
+=======
+                  <label htmlFor="positif">Ulasan Positif : </label>
+>>>>>>> 95b76e1 (Initial commit)
                   <input type="checkbox" id="positif" />
                 </div>
                 <div className="btn-box">

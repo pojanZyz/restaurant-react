@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React, { useState } from "react"; 
 import "../css/app.css";
 import "../css/home.css";
 import home from "../img/restoran_home.jpg"
+=======
+import React, { useEffect, useState } from "react";
+import "../css/app.css";
+import "../css/home.css";
+>>>>>>> 95b76e1 (Initial commit)
 
 const Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +16,7 @@ const Dashboard = () => {
     setMenuOpen(!menuOpen);
   };
 
+<<<<<<< HEAD
   return(
     <div className="body-box">
       <div className="container-box">
@@ -30,11 +37,17 @@ const Dashboard = () => {
           </nav>
         </div>
 
+=======
+  return (
+    <div className="body-box">
+      <div className="container-box quicksand">
+>>>>>>> 95b76e1 (Initial commit)
         {/* Main Content */}
         <div className="main-home">
           {/* Home Section */}
           <div id="home" className="beranda">
             <div className="content-beranda">
+<<<<<<< HEAD
               <h1>Welcome to Our Restaurant</h1>
               <p>Experience the best dishes with a touch of elegance.</p>
               <div className="order-menu">
@@ -80,6 +93,17 @@ const Dashboard = () => {
               <p>Address: 123 Culinary Street, Food City</p>
             </div>
           </div>
+=======
+              <h1 className="poppins-regular">Welcome to Our Restaurant</h1>
+              <p>Experience the best dishes with a touch of elegance.</p>
+              <div className="order-menu">
+                <a href="/menu" className="poppins-regular">
+                  Order Now!!
+                </a>
+              </div>
+            </div>
+          </div>
+>>>>>>> 95b76e1 (Initial commit)
         </div>
       </div>
     </div>

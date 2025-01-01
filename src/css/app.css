@@ -16,6 +16,28 @@
     text-decoration: none;
     font-style: none;
 }
+<<<<<<< HEAD
+=======
+.quicksand {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.poppins-regular {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.agu-display {
+  font-family: "Agu Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 0;
+}
+>>>>>>> 95b76e1 (Initial commit)
 
 /* Container utama */
 .body-box {
@@ -59,7 +81,10 @@
     letter-spacing: 1px;
 }
 
+<<<<<<< HEAD
 /* Menu box */
+=======
+>>>>>>> 95b76e1 (Initial commit)
 .box-menu {
     display: flex;
     flex-direction: column;
@@ -114,8 +139,13 @@
 
 /* Active state untuk menu */
 .box-menu .active {
+<<<<<<< HEAD
     background-color: var(--warnaKetiga); /* Warna background aktif */
     color: white; /* Warna teks aktif */
+=======
+    background-color: var(--warnaKetiga); 
+    color: white; 
+>>>>>>> 95b76e1 (Initial commit)
     transition: transform 1s ease-out;
 }
 
@@ -126,11 +156,62 @@
 }
 
 .box-menu .active i:hover {
+<<<<<<< HEAD
     color: #000; /* Warna ikon aktif */
 }
 
 /* Responsif untuk layar tablet (768px - 1280px) */
 @media (min-width: 768px) and (max-width: 1280px) {
+=======
+    color: #000; 
+}
+
+
+.auth-con{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    gap: 10px;
+}
+#login{
+    padding: 3px 20px;
+    border: solid var(--warnaKedua) 3px;
+    background-color: transparent;
+    border-radius: 10px;
+    color: white;
+}
+#register{
+    padding: 3px 20px;
+    border: solid white 3px;
+    background-color: var(--warnaKedua);
+    border-radius: 10px;
+    color: black;
+}
+#login:hover, #register:hover{
+    background-color: var(--warnaKeempat);
+}
+.username{
+    color: white;
+    font-weight: bold;
+}
+
+
+.profile-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.profile-btn i{
+    color: white;  
+    font-size: 30px;
+}
+.profile-btn i:hover{
+    color: var(--warnaKeempat)
+}
+
+/* Responsif untuk layar tablet (768px - 1280px) */
+@media (min-width: 768px) and (max-width: 1395px) {
+>>>>>>> 95b76e1 (Initial commit)
     #sidebar {
         width: 15%;
     }
@@ -160,7 +241,11 @@
 }
 
 /* Responsif untuk layar kecil (max 768px) */
+<<<<<<< HEAD
 @media (max-width: 768px) {
+=======
+@media (max-width: 850px) {
+>>>>>>> 95b76e1 (Initial commit)
     #sidebar {
         width: 15%;
     }
@@ -263,23 +348,39 @@
 }
 
 .logout-btn {
+<<<<<<< HEAD
     background-color: transparent;
     border: none;
     color: #fff;
     font-size: 16px;
+=======
+    background-color: #f44336;
+    border-radius: 20px;
+    border: solid 2px white;
+    color: #fff;
+    font-size: 14px;
+>>>>>>> 95b76e1 (Initial commit)
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+<<<<<<< HEAD
     padding: 10px;
+=======
+    padding: 5px 10px;
+>>>>>>> 95b76e1 (Initial commit)
     width: 50%;
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .logout-btn:hover {
+<<<<<<< HEAD
     background-color: #f44336;
     transform: scale(1.1);
     border-radius: 20px;
+=======
+    background-color: var(--warnaKetiga);
+>>>>>>> 95b76e1 (Initial commit)
 }
 
 .logout-icon {
@@ -296,10 +397,19 @@
     .logout-btn {
         font-size: 14px;
         padding: 8px;
+<<<<<<< HEAD
+=======
+        background-color: transparent;
+        border: none;
+>>>>>>> 95b76e1 (Initial commit)
     }
     .logout-btn span{
         display: none;
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 95b76e1 (Initial commit)
 }
 
 /* Loader container */
