@@ -72,7 +72,7 @@ const Login = () => {
         <section id="login-container" className="container-login quicksand">
           <div className="conLogin-1">
             <Link to={"/"}>
-              <i class="bi bi-house-door-fill"></i>
+              <i className="bi bi-house-door-fill"></i>
             </Link>
             <img src={logo} alt="logo restoran" className="logo" />
           </div>
