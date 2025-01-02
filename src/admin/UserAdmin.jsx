@@ -35,6 +35,20 @@ const UserAdmin = () => {
     }
   }, [token, debouncedSearch, sort, role, page, limit]);
 
+  //events handler
+  const handleRoleChange = (roleValue) => {
+    setRole(roleValue);
+    setPage(1);
+  };
+  const handleSearchChange = (searchVal) => {
+    setSearch(searchVal)
+    setPage(1)
+  }
+  const handleLimitChange = (limitVal) => {
+    setLimit(limitVal)
+    setPage(1)
+  }
+
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -107,7 +121,7 @@ const UserAdmin = () => {
                   placeholder="Search user..."
                   className="quicksand"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                 />
               </div>
               <select
@@ -122,7 +136,7 @@ const UserAdmin = () => {
               <select
                 className="quicksand"
                 value={limit}
-                onChange={(e) => setLimit(Number(e.target.value))}
+                onChange={(e) => handleLimitChange(Number(e.target.value))}
               >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
@@ -134,7 +148,7 @@ const UserAdmin = () => {
                 className={
                   role === "" ? "active-btn poppins-regular" : "poppins-regular"
                 }
-                onClick={() => setRole("")}
+                onClick={() => handleRoleChange("")}
               >
                 <i className="bi bi-list"></i> All
               </button>
@@ -144,7 +158,7 @@ const UserAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setRole("customer")}
+                onClick={() => handleRoleChange("customer")}
               >
                 Customer
               </button>
@@ -154,7 +168,7 @@ const UserAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setRole("admin")}
+                onClick={() => handleRoleChange("admin")}
               >
                 Admin
               </button>

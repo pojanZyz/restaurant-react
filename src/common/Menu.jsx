@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../css/menu.css";
-import "../css/app.css";
-import Loader from "../components/Loader";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import NoData from "../components/NoData";
+import Swal from "sweetalert2";
+
+import "../css/menu.css";
+import Loader from "../components/Loader";
+import useAuth from "../js/useAuth";
 
 const Menu = ({ cart, addToCart }) => {
+  const { tokenLoading } = useAuth();
   const [loading, setLoading] = useState(false);
+
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
@@ -18,6 +21,7 @@ const Menu = ({ cart, addToCart }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [productCount, setProductCount] = useState(0);
   const [debouncedSearch, setDebouncedSearch] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,8 +32,24 @@ const Menu = ({ cart, addToCart }) => {
   }, [search]);
 
   useEffect(() => {
-    fetchProducts();
+    if (!tokenLoading) {
+      fetchProducts();
+    }
   }, [sort, category, debouncedSearch, page, limit]);
+
+  //events handler
+  const handleCategoryChange = (catValue) => {
+    setCategory(catValue);
+    setPage(1);
+  };
+  const handleSearchChange = (searchVal) => {
+    setSearch(searchVal);
+    setPage(1);
+  };
+  const handleLimitChange = (limitVal) => {
+    setLimit(limitVal);
+    setPage(1);
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -76,7 +96,7 @@ const Menu = ({ cart, addToCart }) => {
               type="text"
               className="quicksand"
               placeholder="Search..."
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
             />
           </div>
           <select
@@ -93,7 +113,7 @@ const Menu = ({ cart, addToCart }) => {
             id="limit"
             className="quicksand"
             value={limit}
-            onChange={(e) => setLimit(Number(e.target.value))}
+            onChange={(e) => handleLimitChange(Number(e.target.value))}
           >
             <option value={10}>10</option>
             <option value={20}>20</option>
@@ -107,7 +127,7 @@ const Menu = ({ cart, addToCart }) => {
             className={
               category === "" ? "active poppins-regular" : "poppins-regular"
             }
-            onClick={() => setCategory("")}
+            onClick={() => handleCategoryChange("")}
           >
             <i className="bi bi-list"></i> All
           </button>
@@ -115,7 +135,7 @@ const Menu = ({ cart, addToCart }) => {
             className={
               category === "food" ? "active poppins-regular" : "poppins-regular"
             }
-            onClick={() => setCategory("food")}
+            onClick={() => handleCategoryChange("food")}
           >
             <i className="bi bi-basket3"></i> Food
           </button>
@@ -125,7 +145,7 @@ const Menu = ({ cart, addToCart }) => {
                 ? "active poppins-regular"
                 : "poppins-regular"
             }
-            onClick={() => setCategory("drink")}
+            onClick={() => handleCategoryChange("drink")}
           >
             <i className="bi bi-cup-straw"></i> Drink
           </button>
@@ -135,7 +155,7 @@ const Menu = ({ cart, addToCart }) => {
                 ? "active poppins-regular"
                 : "poppins-regular"
             }
-            onClick={() => setCategory("other")}
+            onClick={() => handleCategoryChange("other")}
           >
             <i className="bi bi-grid"></i> Other
           </button>

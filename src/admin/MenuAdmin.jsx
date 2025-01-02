@@ -37,6 +37,20 @@ const MenuAdmin = () => {
     fetchProducts();
   }, [sort, category, debouncedSearch, page, limit]);
 
+  //events handler
+  const handleCategoryChange = (catValue) => {
+    setCategory(catValue);
+    setPage(1);
+  };
+  const handleSearchChange = (searchVal) => {
+    setSearch(searchVal);
+    setPage(1);
+  };
+  const handleLimitChange = (limitVal) => {
+    setLimit(limitVal);
+    setPage(1);
+  };
+
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -196,7 +210,7 @@ const MenuAdmin = () => {
                   className="quicksand"
                   type="search"
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder="Search..."
                 />
               </div>
@@ -212,7 +226,7 @@ const MenuAdmin = () => {
               <select
                 className="quicksand"
                 value={limit}
-                onChange={(e) => setLimit(Number(e.target.value))}
+                onChange={(e) => handleLimitChange(Number(e.target.value))}
               >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
@@ -232,7 +246,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setCategory("")}
+                onClick={() => handleCategoryChange("")}
               >
                 <i className="bi bi-list"></i> All
               </button>
@@ -242,7 +256,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setCategory("food")}
+                onClick={() => handleCategoryChange("food")}
               >
                 <i className="bi bi-basket3"></i> Food
               </button>
@@ -252,7 +266,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setCategory("drink")}
+                onClick={() => handleCategoryChange("drink")}
               >
                 <i className="bi bi-cup-straw"></i> Drink
               </button>
@@ -262,7 +276,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => setCategory("other")}
+                onClick={() => handleCategoryChange("other")}
               >
                 <i className="bi bi-grid"></i> Other
               </button>

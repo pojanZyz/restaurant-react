@@ -17,9 +17,7 @@ const Reservation = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [reservationTime, setReservationTime] = useState("");
   const [notes, setNotes] = useState("");
-  const [selectedTables, setSelectedTables] = useState([]); 
-
-  const [qrCode, setQrCode] = useState("")
+  const [selectedTables, setSelectedTables] = useState([]);
 
   const navigate = useNavigate();
 
@@ -100,8 +98,13 @@ const Reservation = () => {
         text: "Request is incomplete",
       });
     }
-    const confirmation = confirm("Make the reservation?");
-    if (confirmation) {
+    const confirmation = await Swal.fire({
+      icon: "question",
+      title: "Confirmation",
+      text: "Send the feedback?",
+      showCancelButton: true,
+    });
+    if (confirmation.isConfirmed) {
       setLoading(true);
 
       try {
@@ -112,22 +115,13 @@ const Reservation = () => {
           reservationDate: selectedDate,
           reservationTime,
           notes,
-          tableId: selectedTables.map((t) => t._id),
+          tableIds: selectedTables.map((t) => t._id),
         };
         const res = await axios.post("api/reservation", reservationData, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        // setQrCode(res.data.qrCode)
-        // Swal.fire({
-        //   icon: "success",
-        //   title: "Success",
-        //   text: res.data.message || "Reservation made successfully!",
-        //   showConfirmButton: false,
-        //   timer: 2000
-        // });
 
-        const snapToken = res.data.token
-
+        const snapToken = res.data.token;
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -162,73 +156,81 @@ const Reservation = () => {
           <div className="reserv-con2-sub2">
             <h4 className="poppins-regular">Fill this form below</h4>
             <form className="reservation-form" onSubmit={handleReservation}>
-              <label htmlFor="username">Name</label>
-              <input
-                className="quicksand"
-                type="text"
-                maxLength={20}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <label htmlFor="useremail">Email</label>
-              <input
-                className="quicksand"
-                type="email"
-                maxLength={30}
-                value={useremail}
-                onChange={(e) => setUseremail(e.target.value)}
-                required
-              />
-              <label htmlFor="phoneNumber">Active Phone Number</label>
-              <div>
+              <div className="customer-details">
+                <span>Customer Details</span>
+                <hr />
+                <label htmlFor="username">Name</label>
                 <input
                   className="quicksand"
-                  type="number"
-                  maxLength={14}
-                  value={phoneNumber}
-                  placeholder="08xxxxx"
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  type="text"
+                  maxLength={20}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                 />
-              </div>
-              <label htmlFor="date">Date and time</label>
-              <div className="date-time-con">
+                <label htmlFor="useremail">Email</label>
                 <input
-                  type="date"
-                  value={selectedDate}
-                  min={new Date().toISOString().split("T")[0]}
                   className="quicksand"
+                  type="email"
+                  maxLength={30}
+                  value={useremail}
+                  onChange={(e) => setUseremail(e.target.value)}
+                  required
+                />
+                <label htmlFor="phoneNumber">Active Phone Number</label>
+                <div>
+                  <input
+                    className="quicksand"
+                    type="number"
+                    maxLength={14}
+                    value={phoneNumber}
+                    placeholder="08xxxxx"
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="reserv-details">
+                <span>Reservation Details</span>
+                <hr />
+                <label htmlFor="date">Date and time</label>
+                <div className="date-time-con">
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    min={new Date().toISOString().split("T")[0]}
+                    className="quicksand"
+                    readOnly
+                  />
+                  <input
+                    type="time"
+                    value={reservationTime}
+                    onChange={(e) => setReservationTime(e.target.value)}
+                    className="quicksand"
+                  />
+                </div>
+                <label htmlFor="selectedTables">Selected Tables</label>
+                <input
+                  type="text"
+                  value={
+                    selectedTables.length > 0
+                      ? selectedTables
+                          .map((t) => `Table ${t.tableNumber}`)
+                          .join(", ")
+                      : "No tables selected"
+                  }
                   readOnly
-                />
-                <input
-                  type="time"
-                  value={reservationTime}
-                  onChange={(e) => setReservationTime(e.target.value)}
+                  required
                   className="quicksand"
                 />
+                <label htmlFor="notes">Notes (optional)</label>
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="quicksand"
+                  rows={4}
+                ></textarea>
               </div>
-              <label htmlFor="notes">Notes (optional)</label>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="quicksand"
-                rows={4}
-              ></textarea>
-              <label htmlFor="selectedTables">Selected Tables</label>
-              <input
-                type="text"
-                value={
-                  selectedTables.length > 0
-                    ? selectedTables
-                        .map((t) => `Table ${t.tableNumber}`)
-                        .join(", ")
-                    : "No tables selected"
-                }
-                readOnly
-                required
-                className="quicksand"
-              />
               <button type="submit" className="reserv-btn poppins-regular">
                 Submit
               </button>

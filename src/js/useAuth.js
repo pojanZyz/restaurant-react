@@ -5,20 +5,26 @@ import { jwtDecode } from "jwt-decode";
 const useAuth = () => {
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [tokenLoading, setTokenLoading] = useState(false);
 
   const getToken = async () => {
+    setTokenLoading(true);
     try {
       const res = await axios.get("api/token");
-      const decoded = jwtDecode(res.data.accessToken);
-      setUserData({
-        userId: decoded.userId,
-        username: decoded.username,
-        useremail: decoded.useremail,
-        role: decoded.role,
-      });
-      setToken(res.data.accessToken);
+      if (res.data.accessToken) {
+        const decoded = jwtDecode(res.data.accessToken);
+        setUserData({
+          userId: decoded.userId,
+          username: decoded.username,
+          useremail: decoded.useremail,
+          role: decoded.role,
+        });
+        setToken(res.data.accessToken);
+      }
     } catch (error) {
       console.error(error);
+    } finally {
+      setTokenLoading(false);
     }
   };
 
@@ -28,7 +34,7 @@ const useAuth = () => {
     }
   }, []);
 
-  return { token, userData, getToken };
+  return { token, userData, getToken, tokenLoading };
 };
 
 export default useAuth;
