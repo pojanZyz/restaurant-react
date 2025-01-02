@@ -9,9 +9,17 @@ import logo from "../img/logo_restoran.png";
 
 const Sidebar = () => {
   const [loading, setLoading] = useState(false);
-  const { token, userData, tokenLoading } = useAuth();  
+  const { token, userData, getToken } = useAuth();  
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if(token){
+      if(userData.role === "admin"){
+        navigate('/admin')
+      }
+    }
+  }, [token])
 
   //logout handler
   const handleLogout = () => {
@@ -93,7 +101,7 @@ const Sidebar = () => {
       </div>
 
       <div className="logout-container">
-        {tokenLoading ? (
+        {loading ? (
           <p>Processing...</p>
         ) : (
           <div className="auth-con poppins-regular">

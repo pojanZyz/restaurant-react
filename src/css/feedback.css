@@ -1,81 +1,417 @@
-.feedback-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  gap: 70px;
-}
 
-.fb-con1 {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  gap: 5px;
-  max-width: 60vw;
-}
-
-.fb-con2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 40px;
-  background-color: rgb(207, 206, 206);
-  border-radius: 20px;
-}
-.fb-con2 .form-header{
-    background-color: white;
-    padding: 20px;
-    margin: 0 40px;
-    border-radius: 15px;
+.content-fb-box {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background:var(--bg); 
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-self: stretch;
-}
-
-.feedback-form{
-    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-direction: column;
 }
-.feedback-form label{
-    margin-top: 25px;
-    font-size: 80%;
+
+.container-fb, 
+.dashboard {
+    margin-top: 65px;
+    padding: 20px;
+    width: 90%;
+    max-width: 60vw;  
+    border: 2px solid var(--warnaUtama);
+    box-shadow: 0px 0px 5px var(--warnaUtama);
+    background: var(--warnaElemen); /* Menggunakan warna gelap seperti hitam untuk container */
+    color: #fff; /* Mengubah warna teks menjadi putih agar kontras dengan background gelap */
+    border-radius: 15px;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out; /* Animasi fade in pada container */
+    transition: box-shadow .1s ease-in;
+    margin-bottom: 30px;
 }
-.feedback-form input, .feedback-form textarea{
-    margin-top: 5px;
-    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.29);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 18px;
-    width: 500px;
+
+.container-fb:hover, .dashboard:hover{
+    transition: box-shadow .2s ease-in;
+    box-shadow: 0 0px 10px var(--warnaUtama); /* Efek bayangan lebih besar */
+}
+
+.fb-header {
+    background: #fff; /* Transparan dengan sedikit gelap */
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #000;
+    backdrop-filter: blur(8px); /* Efek blur lebih kuat */
+    text-align: center;
+    padding: 30px 20px; /* Tambah padding untuk header */
+    animation: slideIn 0.5s ease-out; /* Animasi untuk header */
+}
+
+.fb-header h1 {
+    font-family: 'Courier New', monospace;
+    display: inline-block; /* Agar hanya teks terpengaruh */
+    white-space: nowrap; /* Tidak memotong teks */
+    overflow: hidden; /* Menyembunyikan teks yang belum muncul */
+    border-right: 2px solid #fff; /* Efek kursor */
+    width: 0; /* Mulai dari 0 */
+    font-size: 1.5rem;
+    animation: typing 7s steps(40, end) infinite, 
+    blink 0.7s step-end infinite;
+}
+
+.content-box {
+    padding: 30px;  /* Menambah padding */
+}
+
+.input-box .input {
+    margin-bottom: 25px; /* Jarak antar input lebih besar */
+}
+
+.input-box .input input{
+    background-color: #fff;
+}
+
+.input label {
+    font-size: 16px;  /* Ukuran font label lebih besar */
+    margin-bottom: 8px;
+    display: block;
+    color: #000; /* Mengubah warna label menjadi lebih terang agar kontras */
+}
+
+.input input,
+.input textarea {
+    width: 100%;
+    padding: 12px;  /* Ukuran padding lebih besar */
+    border: 1px solid #444; /* Warna border lebih gelap */
+    border-radius: 10px; /* Border lebih besar */
+    font-size: 16px; /* Ukuran font lebih besar */
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Transisi pada perubahan */
+    background-color: #fff; /* Menggunakan latar belakang gelap untuk input */
+    color: #000; /* Mengubah warna teks menjadi putih */
+}
+
+.positif{
+    color: #000;
+    font-size: 16px;
+}
+
+.input input:focus,
+.input textarea:focus {
+    outline: none;
+    color: white;
+    border-color: var(--warnaUtama);
+    box-shadow: 0 0 8px var(--warnaKedua);
+    background-color: #bfbfbf; /* Background lebih gelap saat fokus */
+}
+
+.input textarea {
+    height: 150px; /* Ukuran textarea lebih besar */
     resize: none;
 }
 
-.form-footer{
+.btn-box {
     display: flex;
-    align-items: center;
-    align-self: flex-end;
-    gap: 10px;
-    margin-top: 35px;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
 }
-.form-footer button{
-    padding: 5px 25px;
-    color: white;
+
+.btn-box button {
+    flex: 1;
+    padding: 15px 20px; /* Ukuran padding lebih besar */
+    font-size: 16px; /* Font lebih besar */
+    font-weight: bold;
+    border: none;
     border-radius: 10px;
-    border: solid 1px gray;
-    font-size: 14px;
-}
-.form-footer button:hover{
     cursor: pointer;
-    background-color: rgb(77, 77, 77);
+    transition: background 0.3s ease, transform 0.3s ease;
+    background-color: #555; /* Warna tombol yang lebih gelap */
+    color: #fff; /* Warna teks tombol putih */
 }
-.form-footer button:disabled{
-    color: gray;
+
+.btn-box button[type="submit"] {
+    background: var(--warnaUtama); /* Warna tombol submit tetap ungu */
 }
-.form-footer .send-btn{
-    background-color: rgb(1, 94, 1);
+
+.btn-box button[type="submit"]:hover {
+    transform: scale(1.05); /* Efek hover menambah ukuran tombol */
 }
-.form-footer .reset-btn{
-   background-color: rgb(165, 4, 4); 
+
+.btn-box button[type="reset"] {
+    background: #444; /* Tombol reset lebih gelap */
+    color: #fff; /* Warna teks tombol putih */
+}
+
+.btn-box button[type="reset"]:hover {
+    background: #333;
+    transform: scale(1.05); /* Efek hover pada tombol reset */
+}
+
+/* Animasi */
+
+/* Keyframes untuk animasi mengetik */
+@keyframes typing {
+    0% {
+        width: 0; /* Mulai dari kosong */
+    }
+    25% {
+        width: 50%; 
+    }
+    50% {
+        width: 100%; /* Teks sepenuhnya muncul */
+    }
+    100% {
+        width: 0; /* Kembali ke kosong */
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent; /* Kursor berkedip dengan transisi */
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsif untuk layar tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container-fb, .dashboard {
+        max-width: 400px; /* Ukuran lebih kecil pada tablet */
+       
+    }
+
+    .fb-header h1 {
+        font-size: 20px;  /* Ukuran font header lebih kecil */
+    }
+
+    .content-box {
+        padding: 20px;  /* Mengurangi padding pada konten */
+    }
+
+    .input input,
+    .input textarea {
+        padding: 10px;  /* Mengurangi padding input dan textarea */
+    }
+
+    .btn-box button {
+        padding: 12px 18px;  /* Mengurangi ukuran padding tombol */
+    }
+}
+
+/* Responsif untuk layar kecil (max-width: 768px) */
+@media (max-width: 768px) {
+    .container-fb, .dashboard {
+        max-width: 60%; /* Lebar container lebih kecil */
+       
+    }
+
+    .fb-header h1 {
+        font-size: 14px; /* Ukuran font header lebih kecil */
+        flex-wrap: wrap;
+    }
+
+    .content-box {
+        padding: 15px;  /* Mengurangi padding pada konten */
+    }
+    .side-head{
+        font-size: 20px;
+    }
+    .input input,
+    .input textarea {
+        padding: 8px;  /* Padding lebih kecil */
+    }
+
+    .btn-box button {
+        padding: 10px 15px;  /* Padding lebih kecil pada tombol */
+    }
+}
+
+/* Responsif untuk layar sangat kecil (max-width: 480px) */
+@media (max-width: 480px) {
+    .container-fb, .dashboard{
+        max-width: 85%;  /* Lebar container lebih besar */
+    }
+
+    .fb-header h1 {
+        font-size: 10px; /* Ukuran font header lebih kecil */
+        width: 100%;
+    }
+
+    .content-box {
+        padding: 10px;  /* Padding lebih kecil pada konten */
+    }
+
+    .input input,
+    .input textarea {
+        padding: 8px;  /* Padding lebih kecil */
+    }
+
+    .btn-box button {
+        padding: 8px 12px;  /* Ukuran tombol lebih kecil */
+    }
+}
+
+/*** dashboard ***/
+
+.dashboard {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background: var(--warnaElemen);
+    color: #000;
+}
+
+.dashboard h1,.dashboard h2{
+    font-size: 20px;
+}
+
+.stats-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    transition: transform .2s;
+    background: #333;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    margin-top: 10px;
+}
+
+.stat-box:hover,
+.review-table tr:hover{
+    box-shadow: 0px 0px 5px var(--warnaUtama);
+    transition: transform .2s;
+    transform: scale(1.01);
+}
+
+.stat-box h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #bbb;
+}
+
+.stat-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.review-table th,
+.review-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+    color: #fff;
+}
+
+.review-table th {
+    background: #444;
+    color: #ccc;
+}
+
+
+/* Responsif untuk layar tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .dashboard {
+        margin: 15px; /* Mengurangi margin pada dashboard */
+        padding: 20px; /* Mengurangi padding pada dashboard */
+    }
+
+    .stats-container {
+        flex-direction: column; /* Mengubah arah kolom */
+        gap: 15px; /* Mengurangi jarak antar box */
+    }
+
+    .stat-box {
+        flex: none;
+        width: 100%; /* Membuat stat-box penuh */
+    }
+
+    .review-table {
+        font-size: 14px; /* Mengurangi ukuran font tabel */
+    }
+
+    .review-table th, .review-table td {
+        padding: 10px 12px; /* Mengurangi padding dalam tabel */
+    }
+}
+
+/* Responsif untuk layar kecil (max-width: 768px) */
+@media (max-width: 768px) {
+    .dashboard {
+        margin: 20px; /* Mengurangi margin pada dashboard */
+        padding: 10px; /* Mengurangi padding pada dashboard */
+    }
+
+    .stats-container {
+        flex-direction: column; /* Mengubah arah kolom */
+        gap: 10px; /* Mengurangi jarak antar box */
+    }
+
+    .stat-box {
+        flex: none;
+        width: 100%; /* Membuat stat-box penuh */
+    }
+
+    .review-table {
+        font-size: 15px; /* Mengurangi ukuran font tabel */
+    }
+
+    .review-table th, .review-table td {
+        padding: 8px 10px; /* Mengurangi padding dalam tabel */
+    }
+}
+
+/* Responsif untuk layar sangat kecil (max-width: 480px) */
+@media (max-width: 480px) {
+    .dashboard {
+        margin: 10px; /* Mengurangi margin pada dashboard */
+        padding: 20px; /* Mengurangi padding pada dashboard */
+    }
+
+    .stats-container {
+        flex-direction: column; /* Mengubah arah kolom */
+        gap: 10px; /* Mengurangi jarak antar box */
+    }
+
+    .stat-box {
+        flex: none;
+        width: 100%; /* Membuat stat-box penuh */
+    }
+
+    .review-table {
+        font-size: 8px; /* Mengurangi ukuran font tabel */
+    }
+
+    .review-table th, .review-table td {
+        padding: 3px 3px; /* Mengurangi padding dalam tabel */
+    }
 }

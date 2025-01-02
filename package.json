@@ -10,12 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@asphalt-react/time-picker": "^2.0.0-rc.11",
     "axios": "^1.7.9",
+    "chart.js": "^4.4.7",
+    "html2canvas": "^1.4.1",
+    "jquery": "^3.7.1",
+    "jspdf": "^2.5.2",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-data-table-component": "^7.6.2",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^7.0.2",
+    "react-select": "^5.9.0",
+    "select2": "^4.1.0-rc.0",
     "sweetalert2": "^11.15.2"
   },
   "devDependencies": {
