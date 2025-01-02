@@ -7,55 +7,31 @@ import Swal from "sweetalert2";
 import useAuth from "../js/useAuth";
 import UpdatePopup from "../components/UpdatePopup";
 import CreatePopup from "../components/CreatePopup";
-import NoData from "../components/NoData";
 
 const MenuAdmin = () => {
-  const { token, userData, getToken } = useAuth();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [productCount, setProductCount] = useState(0);
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("")
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
   const [totalPages, setTotalPages] = useState(1);
+  const { token, userData, getToken } = useAuth();
   const [showUpdatePopup, setShowUpdatePopup] = useState(false);
   const [showCreatePopup, setShowCreatePopup] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
 
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      setDebouncedSearch(search); 
-    }, 1000);
-    return () => clearTimeout(delay); 
-  }, [search]);
-
   useEffect(() => {
     fetchProducts();
-  }, [sort, category, debouncedSearch, page, limit]);
+  }, [sort, category, search, page, limit]);
 
-  //events handler
-  const handleCategoryChange = (catValue) => {
-    setCategory(catValue);
-    setPage(1);
-  };
-  const handleSearchChange = (searchVal) => {
-    setSearch(searchVal);
-    setPage(1);
-  };
-  const handleLimitChange = (limitVal) => {
-    setLimit(limitVal);
-    setPage(1);
-  };
-
-  const fetchProducts = async () => {
+  const fetchProducts = async (req, res) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${debouncedSearch}&page=${page}`
+        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${search}&page=${page}`
       );
       setProducts(res.data.data);
       setTotalPages(res.data.totalPages);
@@ -210,7 +186,7 @@ const MenuAdmin = () => {
                   className="quicksand"
                   type="search"
                   value={search}
-                  onChange={(e) => handleSearchChange(e.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search..."
                 />
               </div>
@@ -226,7 +202,7 @@ const MenuAdmin = () => {
               <select
                 className="quicksand"
                 value={limit}
-                onChange={(e) => handleLimitChange(Number(e.target.value))}
+                onChange={(e) => setLimit(Number(e.target.value))}
               >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
@@ -246,7 +222,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => handleCategoryChange("")}
+                onClick={() => setCategory("")}
               >
                 <i className="bi bi-list"></i> All
               </button>
@@ -256,7 +232,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => handleCategoryChange("food")}
+                onClick={() => setCategory("food")}
               >
                 <i className="bi bi-basket3"></i> Food
               </button>
@@ -266,7 +242,7 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => handleCategoryChange("drink")}
+                onClick={() => setCategory("drink")}
               >
                 <i className="bi bi-cup-straw"></i> Drink
               </button>
@@ -276,99 +252,92 @@ const MenuAdmin = () => {
                     ? "active-btn poppins-regular"
                     : "poppins-regular"
                 }
-                onClick={() => handleCategoryChange("other")}
+                onClick={() => setCategory("other")}
               >
                 <i className="bi bi-grid"></i> Other
               </button>
             </div>
           </div>
-
-          {productCount === 0 ? (
-            <NoData str={"No product found"} />
-          ) : (
-            <>
-              <div className="count-con">
-                <div>
-                  <span className="poppins-regular">
-                    {productCount || 0}
-                    <i className="bi bi-cart-fill"></i>
-                  </span>
-                  <span className="span-2">PRODUCTS</span>
+          <div className="count-con">
+            <div>
+              <span className="poppins-regular">
+                {productCount || 0}
+                <i className="bi bi-cart-fill"></i>
+              </span>
+              <span className="span-2">PRODUCTS</span>
+            </div>
+            <div>
+              <i class="bi bi-columns"></i>
+              <span className="span-2">
+                Page {page} of {totalPages}
+              </span>
+            </div>
+          </div>
+          <div className="product-box">
+            {products.map((product) => (
+              <div className="product-item" key={product._id}>
+                <img src={product.productImagePath} alt="" loading="lazy" />
+                <span className="poppins-regular product-name">
+                  {product.productName}
+                </span>
+                <div className="product-details">
+                  <span>Rp. {product.productPrice}</span>
+                  <span>{product.isAvailable}</span>
                 </div>
-                <div>
-                  <i className="bi bi-columns"></i>
-                  <span className="span-2">
-                    Page {page} of {totalPages}
-                  </span>
-                </div>
-              </div>
-              <div className="product-box">
-                {products.map((product) => (
-                  <div className="product-item" key={product._id}>
-                    <img src={product.productImagePath} alt="" loading="lazy" />
-                    <span className="poppins-regular product-name">
-                      {product.productName}
-                    </span>
-                    <div className="product-details">
-                      <span>Rp. {product.productPrice}</span>
-                      <span>{product.isAvailable}</span>
-                    </div>
-                    <div className="product-action-btn">
-                      <button
-                        className="update-btn quicksand"
-                        title="Update this product"
-                        onClick={() => handleEdit(product)}
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="delete-btn quicksand"
-                        title="Delete this product"
-                        onClick={() => handleDelete(product._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="pagination">
-                <button
-                  className="quicksand"
-                  disabled={page === 1}
-                  onClick={() => setPage(page - 1)}
-                >
-                  Previous
-                </button>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                ).map((pg) => (
+                <div className="product-action-btn">
                   <button
-                    key={pg}
-                    className={`page-btn
+                    className="update-btn quicksand"
+                    title="Update this product"
+                    onClick={() => handleEdit(product)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-btn quicksand"
+                    title="Delete this product"
+                    onClick={() => handleDelete(product._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="pagination">
+          <button
+            className="quicksand"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (pg) => (
+              <button
+                key={pg}
+                className={`page-btn
                   ${
                     page === pg
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                    onClick={() => setPage(pg)}
-                  >
-                    {pg}
-                  </button>
-                ))}
-                <button
-                  className="quicksand"
-                  disabled={page === totalPages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  Next
-                </button>
-              </div>
-            </>
+                onClick={() => setPage(pg)}
+              >
+                {pg}
+              </button>
+            )
           )}
+          <button
+            className="quicksand"
+            disabled={page === totalPages}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
         </div>
       </div>
+
       {/* update popup */}
       <UpdatePopup
         isVisible={showUpdatePopup}

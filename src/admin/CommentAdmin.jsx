@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import useAuth from "../js/useAuth";
 import "../admin-css/admin-comment.css";
 import Loader from "../components/Loader";
-import NoData from "../components/NoData";
 
 const CommentAdmin = () => {
   const { token } = useAuth();
@@ -162,110 +161,103 @@ const CommentAdmin = () => {
             </div>
           </div>
 
-          {commentCount === 0 ? (
-            <NoData str={"No comment found"} />
-          ) : (
-            <>
-              <div className="comment-count-con">
-                <div>
-                  <span className="poppins-regular">
-                    {commentCount || 0}{" "}
-                    <i className="bi bi-chat-left-dots-fill"></i>
-                  </span>
-                  <span className="span-2">COMMENTS</span>
-                </div>
-                <div>
-                  <i className="bi bi-columns"></i>
-                  <span className="span-2">
-                    Page {page} of {totalPages}
-                  </span>
-                </div>
+          <div className="comment-count-con">
+            <div>
+              <span className="poppins-regular">
+                {commentCount || 0}{" "}
+                <i className="bi bi-chat-left-dots-fill"></i>
+              </span>
+              <span className="span-2">COMMENTS</span>
+            </div>
+            <div>
+              <i className="bi bi-columns"></i>
+              <span className="span-2">
+                Page {page} of {totalPages}
+              </span>
+            </div>
+          </div>
+          <div className="comment-box">
+            {comments.length === 0 ? (
+              <div className="comment-grid-item">
+                <p className="poppins-regular">No comments available</p>
               </div>
-              <div className="comment-box">
-                {comments.length === 0 ? (
-                  <div className="comment-grid-item">
-                    <p className="poppins-regular">No comments available</p>
+            ) : (
+              comments.map((comment) => (
+                <div className="comment-grid-item" key={comment._id}>
+                  <div className="comment-item-header">
+                    <span className="poppins-regular comment-username">
+                      <i className="bi bi-person-fill"></i>
+                      {comment.userId.username}
+                    </span>
+                    <span
+                      className={`poppins-regular ${
+                        comment.status === "Public"
+                          ? "status-public"
+                          : "status-private"
+                      }`}
+                    >
+                      {comment.status === "Public" ? (
+                        <i className="bi bi-globe"></i>
+                      ) : (
+                        <i className="bi bi-lock-fill"></i>
+                      )}
+                    </span>
                   </div>
-                ) : (
-                  comments.map((comment) => (
-                    <div className="comment-grid-item" key={comment._id}>
-                      <div className="comment-item-header">
-                        <span className="poppins-regular comment-username">
-                          <i className="bi bi-person-fill"></i>
-                          {comment.userId.username}
-                        </span>
-                        <span
-                          className={`poppins-regular ${
-                            comment.status === "Public"
-                              ? "status-public"
-                              : "status-private"
-                          }`}
-                        >
-                          {comment.status === "Public" ? (
-                            <i className="bi bi-globe"></i>
-                          ) : (
-                            <i className="bi bi-lock-fill"></i>
-                          )}
-                        </span>
-                      </div>
-                      <p>{comment.comment}</p>
-                      <div className="comment-item-footer">
-                        <button
-                          className="status-btn poppins-regular"
-                          onClick={() =>
-                            handleUpdateComment(comment._id, comment.status)
-                          }
-                        >
-                          {comment.status === "Public"
-                            ? "Make it private"
-                            : "Make it public"}
-                        </button>
-                        <button
-                          className="delete-btn poppins-regular"
-                          onClick={() => handleDeleteComment(comment._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-              <div className="pagination">
-                <button
-                  className="quicksand"
-                  disabled={page === 1}
-                  onClick={() => setPage(page - 1)}
-                >
-                  Previous
-                </button>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                ).map((pg) => (
-                  <button
-                    key={pg}
-                    className={`page-btn
+                  <p>{comment.comment}</p>
+                  <div className="comment-item-footer">
+                    <button
+                      className="status-btn poppins-regular"
+                      onClick={() =>
+                        handleUpdateComment(comment._id, comment.status)
+                      }
+                    >
+                      {comment.status === "Public"
+                        ? "Make it private"
+                        : "Make it public"}
+                    </button>
+                    <button
+                      className="delete-btn poppins-regular"
+                      onClick={() => handleDeleteComment(comment._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+        <div className="pagination">
+          <button
+            className="quicksand"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (pg) => (
+              <button
+                key={pg}
+                className={`page-btn
                   ${
                     page === pg
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                    onClick={() => setPage(pg)}
-                  >
-                    {pg}
-                  </button>
-                ))}
-                <button
-                  className="quicksand"
-                  disabled={page === totalPages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  Next
-                </button>
-              </div>
-            </>
+                onClick={() => setPage(pg)}
+              >
+                {pg}
+              </button>
+            )
           )}
+          <button
+            className="quicksand"
+            disabled={page === totalPages}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
