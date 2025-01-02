@@ -6,12 +6,33 @@ import Swal from "sweetalert2";
 import useAuth from "../js/useAuth";
 import logo from "../img/logo_restoran.png"; 
 import "../admin-css/admin-sidebar.css";
+import "../css/app.css";
 
 const AdminSidebar = () => {
   const [loading, setLoading] = useState(false); 
   const { token, userData, getToken } = useAuth(); 
-
+  const [isOpen, setIsOpen] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+      const bodyBox = document.querySelector(".body-box");
+      const controlPanel = document.querySelector(".control-panel");
+      const sideHead = document.querySelector("side-head");
+      if (bodyBox) {
+        bodyBox.style.marginLeft = isOpen ? "15%" : "0";
+        bodyBox.style.width = isOpen ? "85%" : "100%";
+        bodyBox.style.transition = "all 0.3s ease";
+      }
+  
+      if (controlPanel) {
+        controlPanel.style.width = isOpen ? "85vw" : "100vw";
+      }
+    }, [isOpen]);
 
   useEffect(() => {
       if(token){
@@ -50,99 +71,135 @@ const AdminSidebar = () => {
   };
 
   return (
-    <aside id="admin-sidebar" className="poppins-regular">
-      <div className="container-sidebar-admin">
-        {/* Header Sidebar */}
-        <div className="admin-side-head">
-          <img src={logo} alt="logo-resto" />
-          <h1 className="agu-display">CafeCoding</h1>
-        </div>
-
-        {/* Menu Navigasi */}
-        <nav className="admin-box-menu">
-          <hr />
-          <ul>
-            <li>
-              <NavLink
-                to="/admin"
-                end
-              >
-                <i className="bi bi-house-fill"></i>
-                <span>Dashboard</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/menu"
-              >
-                <i className="bi bi-cart-fill"></i>
-                <span>Products</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/user"
-              >
-                <i className="bi bi-person-fill"></i>
-                <span>Users</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/order"
-              >
-                <i className="bi bi-bag-check-fill"></i>
-                <span>Orders</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/table"
-              >
-                <i className="bi bi-table"></i>
-                <span>Tables</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/reservation"
-              >
-                <i className="bi bi-calendar-check"></i>
-                <span>Reservations</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/comment"
-              >
-                <i className="bi bi-chat-left-dots-fill"></i>
-                <span>Comments</span>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      {/* Logout Section */}
-      <div className="logout-container">
-        {loading ? (
-          <p>Processing...</p>
-        ) : (
-          <div className="auth-con poppins-regular">
-            <span className="username quicksand">
-              Admin: {userData?.username || "Unknown"}
-            </span>
-            <button
-              className="logout-btn poppins-regular"
-              onClick={handleLogout}
-            >
-              <i className="bi bi-box-arrow-right logout-icon"></i>
-              <span>{loading ? "Wait..." : "Logout"}</span>
+    <div className="topBar-box">
+      <div className="topBar">
+            <button onClick={toggleSidebar} className="profile-btn">
+              <i className="bi bi-list"></i>
             </button>
+    
+            <span>
+              <a href="">
+                  <div className="side-head">
+                    <img src={logo} alt="logo-resto" />
+                    <h1 className="agu-display">CafeCoding</h1>
+                  </div>
+              </a>
+            </span>
+            <span>
+              <a href="">
+                <i className="bi bi-envelope"></i> toko@gmail.com
+              </a>
+            </span>
           </div>
-        )}
-      </div>
-    </aside>
+          <aside id="admin-sidebar" className={`poppins-regular ${isOpen ? "open" : "closed"}`}>
+            <div className="container-sidebar-admin">
+              {/* Header Sidebar */}
+              <div className="admin-side-head none-head">
+                <img src={logo} alt="logo-resto" />
+                <h1 className="agu-display">CafeCoding</h1>
+              </div>
+
+              {/* Menu Navigasi */}
+              <nav className="admin-box-menu">
+                <hr className="none-head" />
+                <ul>
+                  <li>
+                    <NavLink
+                      to="/admin"
+                      end
+                    >
+                      <i className="bi bi-house-fill"></i>
+                      <span>Dashboard</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/menu"
+                    >
+                      <i className="bi bi-cart-fill"></i>
+                      <span>Products</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/user"
+                    >
+                      <i className="bi bi-person-fill"></i>
+                      <span>Users</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/order"
+                    >
+                      <i className="bi bi-bag-check-fill"></i>
+                      <span>Orders</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/table"
+                    >
+                      <i className="bi bi-table"></i>
+                      <span>Tables</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/reservation"
+                    >
+                      <i className="bi bi-calendar-check"></i>
+                      <span>Reservations</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/admin/comment"
+                    >
+                      <i className="bi bi-chat-left-dots-fill"></i>
+                      <span>Comments</span>
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            {/* Logout Section */}
+            <div className="logout-container">
+          {loading ? (
+            <p className="loading-proces">Processing...</p>
+          ) : (
+            <div className="auth-con poppins-regular">
+              <div className="dropdown">
+                <button
+                  className="dropdown-toggle poppins-regular"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  <i className="bi bi-person-fill-gear"></i>
+                  <span> Account</span>
+                  <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"}`}></i>
+                </button>
+                {dropdownOpen && (
+                  <div className="dropdown-menu">
+                    <span className="username quicksand">
+                      Admin: {userData?.username || "Unknown"}
+                    </span>
+                    <button
+                      className="logout-btn poppins-regular"
+                      onClick={handleLogout}
+                    >
+                      <i className="bi bi-box-arrow-right logout-icon"></i>
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+    
   );
 };
 

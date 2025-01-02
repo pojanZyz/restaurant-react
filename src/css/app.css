@@ -48,7 +48,7 @@
 }
 
 /* Side-bar */
-#sidebar {
+#sidebar, #admin-sidebar{
     width: 15%;
     background-color: var(--warnaUtama);
     color: #fff;
@@ -60,7 +60,7 @@
 }
 
 /* Sidebar header */
-.side-head {
+.side-head, .admin-side-head {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -68,7 +68,7 @@
     margin-bottom: 30px;
 }
 
-.side-head img {
+.side-head img, .admin-side-head img {
     margin-left: 8px;
     width: 50px;
     height: 50px;
@@ -76,39 +76,39 @@
     background-color: #fff;
 }
 
-.side-head h1 {
+.side-head h1, .admin-side-head h1 {
     font-size: 15px;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.box-menu {
+.box-menu, .admin-box-menu {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.box-menu hr {
+.box-menu hr, .admin-box-menu hr {
     border: 1px dashed white;
     margin-bottom: 20px;
     width: 80%;
 }
 
-.box-menu ul {
+.box-menu ul, .admin-box-menu ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.box-menu li {
+.box-menu li, .admin-box-menu li {
     margin-bottom: 15px;
     width: 100%;
     text-align: center;
 }
 
-.box-menu a {
+.box-menu a, .admin-box-menu a {
     text-decoration: none;
     color: #fff;
     display: flex;
@@ -127,11 +127,11 @@
     transform: scale(1.05); 
 }
 
-.box-menu a i {
+.box-menu a i, .admin-box-menu a i {
     font-size: 18px;
 }
 
-.box-menu a span {
+.box-menu a span, .admin-box-menu a span {
     font-size: 14px;
 }
 
@@ -260,33 +260,37 @@
     cursor: pointer;
 }
 
+.loading-proces{
+    margin-left: 4%;
+}
+
 
 /* Responsif untuk layar tablet (768px - 1280px) */
 @media (min-width: 768px) and (max-width: 1280px) {
-    #sidebar {
+    #sidebar, #admin-sidebar {
         width: 15%;
     }
 
-    .side-head {
+    .side-head, .admin-side-head {
         flex-direction: column;
         flex-wrap: wrap;
     }
 
-    .side-head img {
+    .side-head img, .admin-side-head img {
         width: 40px;
         height: 40px;
     }
 
-    .side-head h1 {
+    .side-head h1, .admin-side-head h1 {
         font-size: 13px;
     }
 
-    .box-menu ul li span{
+    .box-menu ul li span, .admin-box-menu ul li span{
         font-size: 0.6rem !important;
         padding: 3px;
     }
 
-    .box-menu li {
+    .box-menu li, .admin-box-menu li {
         margin-bottom: 10px;
     }
 
@@ -304,6 +308,9 @@
 
 /* Responsif untuk layar kecil (max 768px) */
 @media (max-width: 768px) {
+    .body-box{
+        margin-top: 2rem;
+    }
     .topBar-box {
         margin: 0;
         position: fixed;
@@ -326,15 +333,15 @@
         font-size: 0.5rem;
     }
 
-    #sidebar.closed {
+    #sidebar.closed, #admin-sidebar.closed {
         display: none;
       }
 
-    #sidebar {
+    #sidebar, #admin-sidebar {
         width: 15%;
     }
 
-    .side-head {
+    .side-head, .admin-side-head {
         display: flex;
         margin: 10px 0;
         justify-content: center;
@@ -346,26 +353,26 @@
         display: none !important;
     }
 
-    .side-head img {
+    .side-head img, .admin-side-head img{
         margin: 0;
         width: 100%;
     }
 
-    .side-head h1 {
+    .side-head h1, .admin-side-head h1 {
         font-size: 16px;
     }
 
-    .box-menu a {
+    .box-menu a, .admin-box-menu a {
         margin-top: 5px;
         font-size: 15px;
         padding: 8px 12px;
     }
 
-    .box-menu a span {
+    .box-menu a span, .admin-box-menu a span {
         display: none; 
     }
 
-    .side-head h1 {
+    .side-head h1, .admin-side-head h1 {
         display: none; 
     }
 
@@ -390,32 +397,32 @@
         left: 15% !important;
         bottom: 0;
     }
-    #sidebar {
+    #sidebar, #admin-sidebar {
         position: fixed;
         width: 15%; 
         height: 100%;
         transition: width 0.3s ease;
     }       
 
-    .side-head h1 {
+    .side-head h1, .side-head h1 {
         display: none;
     }
 
-    .box-menu li {
+    .box-menu li, .admin-box-menu li {
         margin: 10px 0;
     }
 
-    .box-menu a {
+    .box-menu a, .admin-box-menu a {
         flex-direction: column; /* Atur ikon di tengah */
         padding: 10px;
         font-size: 12px;
     }
 
-    .box-menu a span {
+    .box-menu a span, .admin-box-menu a span {
         display: none; /* Hanya tampilkan ikon */
     }
 
-    .box-menu a i {
+    .box-menu a i, .admin-box-menu a i {
         font-size: 20px; /* Perbesar ikon */
     }
 
@@ -429,24 +436,10 @@
         height: 2rem;
     }
 
-    .side-head img{
+    .side-head img, .admin-side-head img{
         width: 30px;
         height: 30px;
     }
-}
-
-/* Scrollbar custom untuk sidebar */
-#sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-#sidebar::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 10px;
-}
-
-#sidebar::-webkit-scrollbar-thumb:hover {
-    background: #777;
 }
 
 

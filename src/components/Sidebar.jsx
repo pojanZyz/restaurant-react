@@ -145,7 +145,7 @@ const Sidebar = () => {
 
         <div className="logout-container">
           {loading ? (
-            <p>Processing...</p>
+            <p className="loading-proces">Processing...</p>
           ) : (
             <div className="auth-con poppins-regular">
               {token ? (

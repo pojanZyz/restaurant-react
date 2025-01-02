@@ -125,7 +125,7 @@ const UserAdmin = () => {
                 />
               </div>
               <select
-                className="quicksand"
+                className="quicksand sort"
                 onChange={(e) => setSort(e.target.value)}
               >
                 <option value="">Default</option>
@@ -134,7 +134,7 @@ const UserAdmin = () => {
                 <option value="newest">Terbaru</option>
               </select>
               <select
-                className="quicksand"
+                className="quicksand numb"
                 value={limit}
                 onChange={(e) => handleLimitChange(Number(e.target.value))}
               >
@@ -195,6 +195,7 @@ const UserAdmin = () => {
                 </div>
               </div>
 
+              <div className="user-table-container">
               <table className="user-table">
                 <thead className="poppins-regular">
                   <tr>
@@ -225,6 +226,7 @@ const UserAdmin = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
               <div className="pagination">
                 <button
                   className="quicksand"

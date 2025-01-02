@@ -25,16 +25,16 @@ body {
     gap: 50px;
 }
 
-.conRegis-1{
+.conLogin-1{
     display: flex;
     flex-direction: column;
     height:max-content;
     justify-content: space-between;
 }
-.conRegis-1 i{
+.conLogin-1 i{
     color: white;
 }
-.conRegis-1 i:hover{
+.conLogin-1 i:hover{
     cursor: pointer;
     color: var(--warnaKedua);
 }
@@ -156,7 +156,7 @@ form .login-btn:hover {
 
 @media (max-width: 1110px) {
     #login-container {
-        width: 60%;
+        width: 35rem;
         height: auto;
         padding: 20px;
     }
@@ -165,30 +165,87 @@ form .login-btn:hover {
         margin-left: 0;
         text-align: center;
     }
-}
+}   
 
-@media (max-width: 912px) {
+@media (max-width: 580px) {
     #login-container {
-        /* width: 50%; */
+        width: 22rem;
         font-size: small;
-        height: auto;
+        height: 30rem;
         flex-direction: column;
         padding: 15px;
+        gap: 15px;
     }
 
-    #logo-wrapper img {
-        width: 8.5rem !important;
-        margin-bottom: 20px;
+    .conLogin-1{
+        align-items: center;
     }
 
-    #logo-wrapper {
+    .conLogin-1 img {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .conLogin-1 i{
+        font-size: 1rem;
+        position: absolute;
+        transform: translateX(-9rem) translateY(1rem);
+    }
+
+    .input-con{
+        height: 34px;
+    }
+
+    .input-con input{
+        font-size: 15px;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
         width: 100%;
-        display: flex;
-        justify-content: center;
+    }
+}
+@media (max-width: 360px) {
+    #login-container {
+        width: 15rem;
+        font-size: small;
+        height: 27rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
     }
 
-    #input-fields {
+    .conLogin-1{
+        align-items: center;
+    }
+
+    .conLogin-1 img {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .conLogin-1 i{
+        font-size: 1rem;
+        position: absolute;
+        transform: translateX(-6rem);
+    }
+
+    .input-con{
         width: 100%;
+        height: 30px;
+    }
+
+    .input-con input{
+        font-size: 13px;
+    }
+
+    .register-anc{
+        font-size: 15px;
     }
 
     #button-group {
