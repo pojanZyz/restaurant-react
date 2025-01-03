@@ -30,7 +30,6 @@
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 9999999 !important;
 }
 
 .control-panel-user input {
@@ -138,6 +137,7 @@
   background-color: #f4f4f4;
   color: #555;
   text-align: left;
+  font-size: 1rem;
 }
 
 .user-table td {
@@ -203,7 +203,7 @@
 
 @media (max-width: 768px) {
   .control-panel-user {
-    top: 2rem;
+    top: 4.5rem;
   }
   .user-admin-container {
     padding: 50px 15px;
@@ -236,6 +236,11 @@
 }
 
 @media (max-width: 501px) {
+
+  .admin-user-con1{
+    display: none;
+  }
+
   .control-panel-user {
     top: 10%;
   }
@@ -259,15 +264,15 @@
   }
 
   .control-panel-user-main .sort{
-    width: 3rem;
+    width: 2rem;
   }
 
-  /* Menghilangkan border-radius pada elemen saat di layar HP */
-  .control-panel-user-main,
-  .control-panel-user input,
-  .control-panel-user select,
-  .user-table td button.delete-button {
-    border-radius: 0;
+  .control-panel-user-extend button i{
+    display: none;
+  }
+
+  .control-panel-user-extend button{
+    padding: 6px;
   }
 
   .user-table th,

@@ -204,7 +204,7 @@
 }
 
 .category-filter button:hover {
-  background-color: #0056b3;
+  background-color: var(--warnaUtama);
 }
 
 .category-filter button.active {
@@ -213,8 +213,8 @@
   transition: transform 1.1s;
 }
 .category-filter button.active:hover {
-  background-color: #0056b3;
-  color: white;
+  background-color: var(--warnaKedua);
+  color: var(--warnaKelima);
 }
 
 /* Pagination */

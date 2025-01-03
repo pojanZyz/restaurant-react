@@ -85,7 +85,8 @@ const CreatePopup = ({ isVisible, onClose, onCreate }) => {
             <div>
               <label htmlFor="productPrice">Price</label>
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 id="productPrice"
                 className="quicksand"
                 value={productPrice}

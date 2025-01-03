@@ -61,7 +61,7 @@ const Sidebar = () => {
   useEffect(() => {
     const bodyBox = document.querySelector(".body-box");
     const controlPanel = document.querySelector(".control-panel");
-    const sideHead = document.querySelector("side-head");
+    const beranda = document.querySelector(".beranda");
     if (bodyBox) {
       bodyBox.style.marginLeft = isOpen ? "15%" : "0";
       bodyBox.style.width = isOpen ? "85%" : "100%";
@@ -76,23 +76,30 @@ const Sidebar = () => {
   return (
     <div className="topBar-box">
       <div className="topBar">
-        <button onClick={toggleSidebar} className="profile-btn">
-          <i className="bi bi-list"></i>
-        </button>
+        
+        <div className="profile-box">
+          <a onClick={toggleSidebar} className="profile-btn">
+            <i className="bi bi-list"></i>
+          </a>
+        </div>
 
-        <span>
-          <a href="">
-              <div className="side-head">
-                <img src={logo} alt="logo-resto" />
-                <h1 className="agu-display">CafeCoding</h1>
-              </div>
-          </a>
-        </span>
-        <span>
-          <a href="">
-            <i className="bi bi-envelope"></i> toko@gmail.com
-          </a>
-        </span>
+        <div className="logo-container">
+          <span>
+            <NavLink to="/feedback">
+                <div className="side-head">
+                  <img src={logo} alt="logo-resto" />
+                </div>
+            </NavLink>
+          </span>
+        </div>
+
+        <div className="mail-box">
+          <span>
+            <a href="">
+                <i className="bi bi-envelope top-mail"> </i>
+            </a>
+          </span>
+        </div>
       </div>
       <aside id="sidebar" className={`poppins-regular ${isOpen ? "open" : "closed"}`}>
         <div className="container-sidebar">
@@ -156,7 +163,7 @@ const Sidebar = () => {
                       className="dropdown-toggle poppins-regular"
                       onClick={toggleDropdown}
                     >
-                      <i class="bi bi-person-fill-gear"> </i> <span> Account</span> <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"}`}></i>
+                      <i className="bi bi-person-fill-gear logout-logo"> </i> <span> Account</span> <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"} logout-logo`} ></i>
                     </button>
                     {dropdownOpen && (
                       <div className="dropdown-menu">

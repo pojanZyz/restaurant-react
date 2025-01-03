@@ -166,19 +166,6 @@
 }
 
 
-.profile-btn{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-.profile-btn i{
-    color: var(--warnaKetiga);  
-    font-size: 30px;
-}
-.profile-btn i:hover{
-    color: var(--warnaKeempat)
-}
-
 /* Logout Container */
 .logout-container {
     position: fixed;
@@ -211,6 +198,10 @@
     bottom: 20px;
     left: 3%;
     z-index: 9999 !important;
+}
+
+.dropdown button span, .dropdown{
+    color: white !important;
 }
 
 .dropdown-toggle {
@@ -264,6 +255,47 @@
     margin-left: 4%;
 }
 
+.dropdown-menu button::before,
+.dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(to top left, var(--warnaKetiga), transparent);
+    height: 100%;
+    width: 100%;
+    top: 100%; 
+    left: -100%; 
+    z-index: -1; 
+    transition: all 0.5s ease; 
+    border-radius: 8px; 
+}
+
+.dropdown-menu button:hover::before,
+.dropdown-menu a:hover::before {
+    top: 0; 
+    left: 0; 
+    background: linear-gradient(to top left, var(--warnaKedua), var(--warnaUtama));
+}
+
+.dropdown-menu button,
+.dropdown-menu a {
+    position: relative;
+    overflow: hidden; 
+    z-index: 1; 
+    color: var(--warnaKetiga);
+    border-radius: 8px;
+    transition: color 0.3s ease;
+}
+
+.dropdown-menu-admin button:hover,
+.dropdown-menu-admin a:hover {
+    color: var(--warnaKeempat); 
+}
+
+.logout-logo{
+    color: #f1f1f1;
+}
+
+
 
 /* Responsif untuk layar tablet (768px - 1280px) */
 @media (min-width: 768px) and (max-width: 1280px) {
@@ -291,13 +323,21 @@
     }
 
     .box-menu li, .admin-box-menu li {
-        margin-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    .box-menu a, .admin-box-menu a {
+        padding: 5px;
+    }
+
+    .box-menu a i, .admin-box-menu a i {
+        font-size: 20px;
     }
 
     #login span i span {
         display: none;  
-        
     }
+
     .dropdown {
         left: 2.5%;
     }
@@ -312,25 +352,51 @@
         margin-top: 2rem;
     }
     .topBar-box {
+        background-color: var(--warnaUtama);
+        color: #fff;
         margin: 0;
         position: fixed;
         top: 0;
         left: 0; 
         width: 100%; 
         z-index: 1000; 
-        background-color: white; 
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         max-height: 10%;
     }
     
     .topBar {
+        background-color: var(--warnaUtama);
+        color: #fff;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px 10px; 
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--warnaKetiga);
         font-size: 0.5rem;
+    }
+
+    .topBar .logo-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+
+    .profile-btn i{
+        color: #f1f1f1;
+        font-size: 2rem;
+    }
+
+    .topBar .top-mail, .top-mail-admin{
+        color: #ddd;
+        font-size: 1.5rem;
+    }
+
+    .profile-box{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     #sidebar.closed, #admin-sidebar.closed {
@@ -382,6 +448,7 @@
     .dropdown {
         left: 6%;
     }
+
 }
 
 /* Responsif untuk layar sangat kecil (max 480px) */
@@ -432,6 +499,9 @@
 }
 
 @media (max-height: 600px){
+    .topBar{
+        padding: 1.5rem;
+    }
     .topBar, .topBar-box{
         height: 2rem;
     }
@@ -439,6 +509,82 @@
     .side-head img, .admin-side-head img{
         width: 30px;
         height: 30px;
+    }
+
+    .topBar img{
+        width: 25px;
+        height: 25px;
+    }
+
+    .topBar button i{
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-height: 480px){
+    .box-menu li, .admin-box-menu li {
+        margin: 3px 0;
+    }
+
+    .box-menu a, .admin-box-menu a {
+        padding: 4px;
+    }
+
+    .box-menu a i, .admin-box-menu a i {
+        font-size: 20px; 
+    }
+
+}
+
+@media (max-height: 393px){
+    .box-menu li, .admin-box-menu li {
+        margin: 3px 0;
+    }
+
+    .box-menu a, .admin-box-menu a {
+        padding: 4px;
+    }
+
+    .box-menu a span,
+    .admin-box-menu a span{
+        display: none;
+    }
+
+    .box-menu a i, .admin-box-menu a i {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-height: 361px){
+    .box-menu li, .admin-box-menu li {
+        margin: 1px 0;
+    }
+
+    .box-menu a, .admin-box-menu a {
+        padding: 5px;
+    }
+
+    .box-menu a span,
+    .admin-box-menu a span{
+        display: none;
+    }
+
+    .box-menu a i, .admin-box-menu a i {
+        font-size: 0.6rem !important;
+    }
+    .box-menu hr, .admin-box-menu hr {
+        margin-bottom: 5px;
+    }
+    .side-head, .admin-side-head {
+        margin: 15px;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-height: 320px){
+    .box-menu a, .admin-box-menu a {
+        padding: 2px;
     }
 }
 

@@ -107,7 +107,7 @@ const UserAdmin = () => {
       <div className="user-admin-container quicksand">
         <div className="admin-user-con1">
           <h2 className="poppins-regular">
-            <i className="bi bi-person-fill"></i> Users
+            <i className="bi bi-person-fill judul"></i> <span className="judul">User</span>
           </h2>
         </div>
 

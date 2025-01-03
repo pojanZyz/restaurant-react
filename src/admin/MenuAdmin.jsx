@@ -198,7 +198,7 @@ const MenuAdmin = () => {
       <div className="admin-menu-container quicksand">
         <div className="admin-menu-con1">
           <h2 className="poppins-regular">
-            <i className="bi bi-cart-fill"></i> Your products
+            <i className="bi bi-cart-fill judul"></i> <span className="judul">Your products</span>
           </h2>
         </div>
         <div className="admin-menu-con2">
@@ -216,6 +216,7 @@ const MenuAdmin = () => {
               </div>
               <select
                 className="quicksand"
+                id="sorting-char-menu"
                 onChange={(e) => setSort(e.target.value)}
               >
                 <option value="">Default</option>
@@ -225,6 +226,7 @@ const MenuAdmin = () => {
               </select>
               <select
                 className="quicksand"
+                id="sorting-number-menu"
                 value={limit}
                 onChange={(e) => handleLimitChange(Number(e.target.value))}
               >
@@ -236,7 +238,7 @@ const MenuAdmin = () => {
                 className="add-product-btn poppins-regular"
                 onClick={() => setShowCreatePopup(!showCreatePopup)}
               >
-                <i className="bi bi-plus-square"></i> Add new product
+                <i className="bi bi-plus-square"></i> <span>Add new product</span>
               </button>
             </div>
             <div className="controlpanel-extend">
@@ -248,7 +250,8 @@ const MenuAdmin = () => {
                 }
                 onClick={() => handleCategoryChange("")}
               >
-                <i className="bi bi-list"></i> All
+                <i className="bi bi-list"></i> 
+                <span>All</span>
               </button>
               <button
                 className={
@@ -258,7 +261,8 @@ const MenuAdmin = () => {
                 }
                 onClick={() => handleCategoryChange("food")}
               >
-                <i className="bi bi-basket3"></i> Food
+                <i className="bi bi-basket3"></i> 
+                <span>Food</span>
               </button>
               <button
                 className={
@@ -268,7 +272,8 @@ const MenuAdmin = () => {
                 }
                 onClick={() => handleCategoryChange("drink")}
               >
-                <i className="bi bi-cup-straw"></i> Drink
+                <i className="bi bi-cup-straw"></i> 
+                <span>Drink</span>
               </button>
               <button
                 className={
@@ -278,7 +283,8 @@ const MenuAdmin = () => {
                 }
                 onClick={() => handleCategoryChange("other")}
               >
-                <i className="bi bi-grid"></i> Other
+                <i className="bi bi-grid"></i> 
+                <span>Other</span>
               </button>
             </div>
           </div>

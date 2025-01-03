@@ -22,7 +22,6 @@ const AdminSidebar = () => {
   useEffect(() => {
       const bodyBox = document.querySelector(".body-box");
       const controlPanel = document.querySelector(".control-panel");
-      const sideHead = document.querySelector("side-head");
       if (bodyBox) {
         bodyBox.style.marginLeft = isOpen ? "15%" : "0";
         bodyBox.style.width = isOpen ? "85%" : "100%";
@@ -72,24 +71,30 @@ const AdminSidebar = () => {
 
   return (
     <div className="topBar-box">
-      <div className="topBar">
-            <button onClick={toggleSidebar} className="profile-btn">
-              <i className="bi bi-list"></i>
-            </button>
+      <div className="topBar topBar-Admin">
+            <div className="profile-box">
+              <a onClick={toggleSidebar} className="profile-btn">
+                <i className="bi bi-list"></i>
+              </a>
+            </div>
     
-            <span>
-              <a href="">
-                  <div className="side-head">
-                    <img src={logo} alt="logo-resto" />
-                    <h1 className="agu-display">CafeCoding</h1>
-                  </div>
-              </a>
-            </span>
-            <span>
-              <a href="">
-                <i className="bi bi-envelope"></i> toko@gmail.com
-              </a>
-            </span>
+            <div className="logo-container">
+              <span>
+                <NavLink to="/feedback">
+                    <div className="side-head">
+                      <img src={logo} alt="logo-resto" />
+                    </div>
+                </NavLink>
+              </span>
+            </div>
+
+            <div className="mail">
+              <span>
+                <a href="" className="admin-mail">
+                  <i className="bi bi-envelope top-mail-admin"></i>
+                </a>
+              </span>
+            </div>
           </div>
           <aside id="admin-sidebar" className={`poppins-regular ${isOpen ? "open" : "closed"}`}>
             <div className="container-sidebar-admin">
@@ -175,15 +180,12 @@ const AdminSidebar = () => {
                   className="dropdown-toggle poppins-regular"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
-                  <i className="bi bi-person-fill-gear"></i>
+                  <i className="bi bi-person-fill-gear logout-logo"></i>
                   <span> Account</span>
-                  <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"}`}></i>
+                  <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"} logout-logo`} ></i>
                 </button>
                 {dropdownOpen && (
-                  <div className="dropdown-menu">
-                    <span className="username quicksand">
-                      Admin: {userData?.username || "Unknown"}
-                    </span>
+                  <div className="dropdown-menu dropdown-menu-admin">
                     <button
                       className="logout-btn poppins-regular"
                       onClick={handleLogout}
