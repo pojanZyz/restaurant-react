@@ -222,22 +222,17 @@
     left: 15% !important;
     bottom: 0;
     background-color: #fff;
-    border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: block;
     z-index: 999999 !important;
-    padding: 8px 0;
     width: 200px !important;
 }
 
 .dropdown-item {
-    padding: 10px 15px;
+    padding: 8px 15px;
     cursor: pointer;
     display: block;
-}
-
-.dropdown-item:hover {
-    background-color: #f1f1f1;
+    width: 100%;
 }
 
 .dropdown-menu .logout-btn {
@@ -247,6 +242,7 @@
     padding: 8px 15px;
     background: none;
     border: none;
+    outline: none;
     width: 100%;
     cursor: pointer;
 }
@@ -266,7 +262,6 @@
     left: -100%; 
     z-index: -1; 
     transition: all 0.5s ease; 
-    border-radius: 8px; 
 }
 
 .dropdown-menu button:hover::before,
@@ -282,8 +277,8 @@
     overflow: hidden; 
     z-index: 1; 
     color: var(--warnaKetiga);
-    border-radius: 8px;
     transition: color 0.3s ease;
+    margin: 0;
 }
 
 .dropdown-menu-admin button:hover,
@@ -295,7 +290,18 @@
     color: #f1f1f1;
 }
 
-
+.topBar-box {
+    background-color: var(--warnaUtama);
+    color: #fff;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%; 
+    z-index: 1000; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 10%;
+}
 
 /* Responsif untuk layar tablet (768px - 1280px) */
 @media (min-width: 768px) and (max-width: 1280px) {
@@ -350,18 +356,6 @@
 @media (max-width: 768px) {
     .body-box{
         margin-top: 2rem;
-    }
-    .topBar-box {
-        background-color: var(--warnaUtama);
-        color: #fff;
-        margin: 0;
-        position: fixed;
-        top: 0;
-        left: 0; 
-        width: 100%; 
-        z-index: 1000; 
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        max-height: 10%;
     }
     
     .topBar {
@@ -502,7 +496,7 @@
     .topBar{
         padding: 1.5rem;
     }
-    .topBar, .topBar-box{
+    .topBar{
         height: 2rem;
     }
 

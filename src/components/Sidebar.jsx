@@ -186,7 +186,7 @@ const Sidebar = () => {
                       className="dropdown-toggle poppins-regular"
                       onClick={toggleAuthDropdown}
                     >
-                       <i class="bi bi-person-fill-gear"> </i> <span> Account</span> <i className={`bi bi-chevron-${authDropdownOpen ? "left" : "right"}`}></i>
+                       <i class="bi bi-person-fill-gear logout-logo"> </i> <span className="logout-logo"> Account</span> <i className={`bi bi-chevron-${authDropdownOpen ? "left" : "right"} logout-logo`}></i>
                     </button>
                     {authDropdownOpen && (
                       <div className="dropdown-menu">
