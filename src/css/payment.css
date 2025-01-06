@@ -1,0 +1,343 @@
+/* General Payment Summary Styling */
+.payment-summary {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.payment-summary table {
+    width: 100%;
+    margin-bottom: 15px;
+    border-collapse: collapse;
+}
+
+.payment-summary table th,
+.payment-summary table td {
+    text-align: left; /* Rata kiri */
+}
+
+.payment-summary td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.payment-summary table th {
+    font-weight: bold;
+    padding: 10px;
+}
+
+.payment-summary table td {
+    padding: 10px;
+}
+
+.total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Optional: Tambahkan sedikit efek striping */
+.payment-summary table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Buttons */
+.payment-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.payment-button button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.payment-button button:hover {
+    background-color: #218838;
+}
+
+/* Tombol + dan - */
+.payment-summary .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Jarak antara tombol dan angka */
+}
+
+.payment-summary .quantity-controls button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.payment-summary .quantity-controls button:hover {
+    background-color: #0056b3;
+}
+
+.payment-summary .quantity-controls span {
+    min-width: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Styling untuk ikon tong sampah */
+.payment-summary .btn-danger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px; /* Ukuran tombol */
+    border: none;
+    border-radius: 50%; /* Membuat tombol bulat */
+    background-color: #dc3545; /* Warna merah */
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transisi untuk efek hover */
+}
+
+.payment-summary .btn-danger:hover {
+    background-color: #c82333; /* Warna merah gelap saat hover */
+    transform: scale(1.1); /* Sedikit memperbesar tombol saat hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+}
+
+.payment-summary .btn-danger i {
+    font-size: 16px; /* Ukuran ikon tong sampah */
+}
+
+/* Efek klik pada ikon tong sampah */
+.payment-summary .btn-danger:active {
+    transform: scale(0.9); /* Sedikit mengecil saat ditekan */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Mengurangi bayangan */
+}
+
+/* Img Box */
+.img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-button {
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.img-button:hover {
+    background-color: #45a049;
+}
+
+/* Discount Section */
+.discount-section {
+    margin-top: 15px;
+}
+
+.discount-section input {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.discount-section button {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.discount-section button:hover {
+    background-color: #e0a800;
+}
+
+/* Receipt Styling */
+.receipt-card {
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    color: black;
+    max-width: 400px; /* Maksimal lebar untuk layar besar */
+    width: 100%; /* Penuh di layar kecil */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek card */
+}
+
+.receipt-card h4 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid black;
+    padding-bottom: 8px;
+}
+
+.receipt-card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.receipt-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.receipt-card th, .receipt-card td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.receipt-card th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.receipt-card tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.receipt-card .total {
+    font-weight: bold;
+    text-align: right;
+}
+
+.receipt-card-footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px dashed black;
+    padding-top: 8px;
+}
+
+/* Form Styling */
+.customer-name, .order-type, .delivery-address, .payment-method {
+    margin-bottom: 15px;
+}
+
+.customer-name label,
+.order-type label,
+.delivery-address label,
+.payment-method label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.customer-name input,
+.delivery-address textarea,
+.order-type select,
+.payment-method input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Styling untuk input metode pembayaran */
+.payment-method input {
+    background-color: #f9f9f9;
+    color: black; /* Pastikan teks warna hitam */
+    text-align: left;
+}
+
+.payment-method input:focus {
+    outline: none;
+    border: 1px solid #007bff; /* Border biru saat fokus */
+    background-color: #f4faff;
+}
+
+/* Remove default spinner on input[type="number"] */
+.payment-method input::-webkit-outer-spin-button,
+.payment-method input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.payment-method input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Responsiveness: Tablet and Mobile */
+@media (max-width: 768px) {
+    .payment-summary {
+        padding: 10px;
+    }
+
+    .payment-summary table,
+    .payment-summary input,
+    .payment-summary button {
+        font-size: 14px;
+    }
+
+    .payment-method input {
+        font-size: 14px; /* Menyesuaikan ukuran font input metode pembayaran */
+    }
+
+    .payment-button button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .receipt-card {
+        padding: 12px;
+        width: 100%;
+    }
+
+    .quantity-controls button {
+        font-size: 12px;
+    }
+
+    .discount-section input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-summary {
+        padding: 5px;
+    }
+
+    .payment-summary table th,
+    .payment-summary table td {
+        padding: 8px;
+    }
+
+    .payment-summary .quantity-controls {
+        flex-direction: column;
+    }
+
+    .payment-button button {
+        width: 100%;
+    }
+
+    .payment-method input,
+    .customer-name input,
+    .delivery-address textarea {
+        font-size: 12px;
+    }
+}

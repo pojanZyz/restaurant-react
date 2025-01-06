@@ -1,0 +1,270 @@
+.reservation-admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 70px;
+}
+
+.admin-reserv-con1 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 10px;
+}
+
+.admin-reserv-con2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-panel-extend-reserv{
+  padding: 10px 10px;
+  gap: 5px !important;
+}
+
+.res-count-con{
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: 80%;
+  margin-top: 50px;
+  gap: 20px;
+  padding: 10px;
+}
+
+.res-count-con .span-2{
+  font-size: 70%;
+
+
+}
+.res-count-con div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.reserv-table-container {
+  width: 100%;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
+}
+
+.reserv-table-container::-webkit-scrollbar {
+  height: 8px; 
+}
+
+.reserv-table-container::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 10px;
+}
+
+.reserv-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; 
+}
+
+.reserv-table-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+  border-radius: 10px; 
+}
+.reserv-table {
+  border-collapse: collapse;
+  margin-top: 30px;
+  font-size: 15px;
+  text-align: left;
+  border-radius: 8px;
+  border-collapse: collapse;
+  min-width: 100%; 
+  table-layout: fixed;
+}
+.reserv-table thead {
+  color: #333;
+}
+.reserv-table th,
+.reserv-table td {
+  padding: 10px;
+  width: 160px;
+  border-bottom: 1px solid #ddd;
+}
+.reserv-table tbody{
+  font-size: 14px;
+}
+.reserv-table tbody tr:nth-child(odd) {
+  background-color: #ededed;
+}
+.reserv-table tbody tr:hover {
+  background-color: #e2e1e1;
+  cursor: pointer;
+}
+.reserv-table tbody tr:nth-child(even):hover {
+  background-color: #e2e1e1;
+}
+.reserv-table th {
+  font-weight: 600;
+}
+.reserv-table td div {
+  margin: 5px 0;
+}
+.reserv-table button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.reserv-table button:hover {
+  background-color: #0056b3;
+}
+
+.res-pending, .res-confirmed, .res-cancelled{
+  border-radius: 10px;
+  padding: 3px 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+.res-pending{
+  background-color: rgb(69, 69, 69); 
+  color: rgb(218, 218, 218)
+}
+.res-confirmed{
+  background-color: green;
+  color: rgb(188, 247, 188)
+}
+.res-cancelled{
+  background-color: rgb(212, 17, 17);
+  color: rgb(247, 218, 218);
+}
+
+
+
+.res-details-card{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(238, 238, 238);
+  border-radius: 15px;
+  padding: 0px 15px;
+  
+}
+.content-1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.content-1 div{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.content-1 select{
+  font-size: 14px;
+  padding: 5px;
+}
+
+.content-2{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.content-2 .content-2-body{
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.res-notes{
+  margin-top: 10px;
+  max-width:350px;
+}
+.content-3{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.content-3-pay, .content-3-cus{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.res-card-footer{
+  display: flex;
+  align-self: flex-end;
+  gap: 15px;
+  margin: 20px;
+}
+.res-card-footer .delete-btn{
+  padding: 10px 20px;
+  border: solid gray 1px;
+  background-color: rgb(229, 47, 10);
+  border-radius: 10px;
+  color: white;
+}
+.delete-btn:hover{
+  background-color: gray;
+  color: black;
+  cursor: pointer;
+}
+
+@media (max-width: 720px){
+  .control-panel-extend button span{
+    display: none;
+  }
+
+  .judul{
+    font-size: 1rem;
+  }
+
+  .reserv-table-container {
+    overflow-x: auto; /* Allow horizontal scrolling */
+  }
+
+  .admin-reserv-con1,
+  .admin-reserv-con2, .reservation-admin-container {
+    width: 100%;
+    gap: 5px;
+  }
+
+  .reserv-table th,
+  .reserv-table td {
+    font-size: 13px; /* Smaller font size for smaller screens */
+    padding: 8px; /* Adjust padding */
+  }
+
+  .reserv-table td button {
+    font-size: 12px; /* Smaller font size for buttons */
+    padding: 5px 10px;
+  }
+}
+
+  @media (max-width: 480px){
+    .admin-reserv-con1{
+      display: none;
+    }
+
+    .update-con{
+      margin-top: 10%;
+    }
+
+  .reserv-table th,
+  .reserv-table td {
+    font-size: 12px; /* Further reduce font size for very small screens */
+    padding: 6px; /* Adjust padding further */
+  }
+
+  .reserv-table td button {
+    font-size: 11px; /* Adjust button size */
+    padding: 4px 8px;
+  }
+  }
+
+

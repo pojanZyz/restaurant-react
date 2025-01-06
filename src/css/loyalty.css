@@ -1,0 +1,71 @@
+.loyalty-container {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  gap: 70px;
+}
+
+.loy-con1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.loy-con1 .profile-box{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.375);
+  border-radius: 20px;
+}.profile-box span{
+  font-size: 15.5px;
+}.profile-box:hover{
+  cursor: pointer;
+  box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.375);
+  background-color: rgb(229, 226, 226);
+  transition: 0.3s all;
+}
+
+.loy-con2{
+  margin-top: 25px;
+  padding: 30px 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+ align-self: center;
+  gap: 30px;
+  border-radius: 20px;
+  background-color: rgb(227, 230, 202);
+}
+.loy-con2 i{
+  font-size: 30px;
+}
+.item-loy-con2{
+  box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.375);
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+.item-loy-con2 p{
+  font-size: 13px;
+}
+.item-loy-con2 sub{
+  font-size: 11px;
+}.item-loy-con2 span{
+  display: flex;
+  align-items: flex-end;
+  align-self: flex-end;
+}
+.cc-pts{
+  background-color: rgb(255, 231, 76);
+}
+.res-made{
+  background-color: rgb(95, 250, 224);
+}
+.ord-made{
+  background-color: rgb(100, 254, 100);
+}
