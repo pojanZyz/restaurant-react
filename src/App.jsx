@@ -20,6 +20,8 @@ import OrderAdmin from "./admin/OrderAdmin";
 import UserAdmin from "./admin/UserAdmin";
 import TableAdmin from "./admin/TableAdmin";
 import CommentAdmin from "./admin/CommentAdmin";
+import CashierNavbar from "./components/CashierNavbar";
+import Cashier from "./cashier/Cashier";
 function App() {
   const location = useLocation();
   const [cart, setCart] = useState([]); // Cart yang akan digunakan untuk seluruh aplikasi
@@ -36,10 +38,13 @@ function App() {
 
   const renderSidebar = () => {
     if (hideSidebar.includes(location.pathname)) {
-      return null; // Tidak ada sidebar untuk route tertentu
+      return null; 
     }
     if (location.pathname.startsWith("/admin")) {
-      return <AdminSidebar />; // AdminSidebar untuk route admin
+      return <AdminSidebar />;
+    }
+    if(location.pathname.startsWith("/cashier")){
+      return <CashierNavbar />
     }
     return <Sidebar />; // Sidebar umum untuk route lain
   };
@@ -181,6 +186,8 @@ function App() {
         <Route path="/admin/user" element={<UserAdmin />} />
         <Route path="/admin/table" element={<TableAdmin />} />
         <Route path="/admin/comment"  element={<CommentAdmin />}/>
+
+        <Route path="/cashier" element={<Cashier />} />
       </Routes>
     </>
   );

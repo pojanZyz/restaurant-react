@@ -1,0 +1,135 @@
+.cashier-container {
+  display: flex;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  background-color: rgb(230, 230, 230);
+  padding: 50px 20px;
+  position: fixed;
+  bottom: 0;
+  top: 60px;
+  overflow-y: auto;
+}
+.control-panel-cas .search-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+}
+.control-panel-cas input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.product-grid .product-item-cas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  font-size: 70%;
+  background-color: white;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.236);
+}
+.product-item-cas img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+}
+.product-item-cas .product-details-cas {
+  display: flex;
+  font-size: 70%;
+}
+.product-item-cas:hover {
+  cursor: pointer;
+  background-color: rgb(231, 231, 231);
+  transition: 0.3s;
+}
+.product-ava {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  z-index: 10;
+  border-radius: 10px;
+  padding: 0 3px;
+}
+.p-available {
+  background-color: rgba(6, 91, 6, 0.921);
+  color: white;
+}
+
+.right-container {
+  padding-left: 30vw;
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+.items-wrap {
+  background-color: rgb(228, 228, 228);
+  padding: 20px;
+}
+.cart-items {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  border-radius: 5px;
+  width: 60vw;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.cart-item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background-color: white;
+  padding: 7px 15px;
+}
+.cart-item span {
+  font-size: 16px;
+}
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(226, 226, 226);
+  padding: 3px 7px;
+}
+.cart-controls button {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border: white 1px solid;
+  padding: 3px 7px;
+}
+.cart-item .delete-btn {
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: white 1px solid;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.cart-item .delete-btn:hover {
+  border-color: gray;
+  background-color: rgb(111, 0, 0);
+}

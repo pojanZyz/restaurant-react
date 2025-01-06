@@ -178,7 +178,7 @@ const TableAdmin = () => {
               className="add-table-btn poppins-regular"
               onClick={() => setShowCreatePopup(!showCreatePopup)}
             >
-              <i className="bi bi-plus-square"></i> Add new product
+              <i className="bi bi-plus-square"></i> Add new table
             </button>
           </div>
           <div className="table-main-con">

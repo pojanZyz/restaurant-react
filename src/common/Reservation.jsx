@@ -5,9 +5,11 @@ import Swal from "sweetalert2";
 import Loader from "../components/Loader";
 import useAuth from "../js/useAuth";
 import "../css/reservation.css";
+import useSnap from "../js/useSnap";
 
 const Reservation = () => {
   const { token, userData } = useAuth();
+  const {triggerPayment} = useSnap(import.meta.env.VITE_MIDTRANS_CLIENT_KEY)
   const [loading, setLoading] = useState(false);
   const [tables, setTables] = useState([]);
 
@@ -28,6 +30,7 @@ const Reservation = () => {
 
   useEffect(() => {
     fetchTables();
+    setSelectedTables([])
   }, [selectedDate]);
 
   useEffect(() => {
@@ -101,7 +104,7 @@ const Reservation = () => {
     const confirmation = await Swal.fire({
       icon: "question",
       title: "Confirmation",
-      text: "Send the feedback?",
+      text: "Click OK to continue for payment, the fee is Rp. 30.000 via online",
       showCancelButton: true,
     });
     if (confirmation.isConfirmed) {
@@ -122,6 +125,8 @@ const Reservation = () => {
         });
 
         const snapToken = res.data.token;
+        const reservationId = res.data.reservationId
+        triggerPayment(snapToken, reservationId)
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -207,6 +212,8 @@ const Reservation = () => {
                     value={reservationTime}
                     onChange={(e) => setReservationTime(e.target.value)}
                     className="quicksand"
+                    max="24:00"
+                    min="00:00"
                   />
                 </div>
                 <label htmlFor="selectedTables">Selected Tables</label>
