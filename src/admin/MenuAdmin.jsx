@@ -26,31 +26,31 @@ const MenuAdmin = () => {
   const [selectedProduct, setSelectedProduct] = useState({});
 
 
-  useEffect(() => {
-    // Fungsi untuk menangani pergerakan mouse
-    const handleMouseMove = (e) => {
-      // Mendapatkan semua elemen dengan class "product-item"
-      const cards = document.querySelectorAll(".product-item");
-      cards.forEach((card) => {
-        // Mengambil posisi elemen dalam viewport
-        const rect = card.getBoundingClientRect();
-        // Menghitung posisi mouse relatif terhadap elemen
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        // Memperbarui custom properties CSS untuk mouse-x dan mouse-y
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-      });
-    };
+  // useEffect(() => {
+  //   // Fungsi untuk menangani pergerakan mouse
+  //   const handleMouseMove = (e) => {
+  //     // Mendapatkan semua elemen dengan class "product-item"
+  //     const cards = document.querySelectorAll(".product-item");
+  //     cards.forEach((card) => {
+  //       // Mengambil posisi elemen dalam viewport
+  //       const rect = card.getBoundingClientRect();
+  //       // Menghitung posisi mouse relatif terhadap elemen
+  //       const x = e.clientX - rect.left;
+  //       const y = e.clientY - rect.top;
+  //       // Memperbarui custom properties CSS untuk mouse-x dan mouse-y
+  //       card.style.setProperty("--mouse-x", `${x}px`);
+  //       card.style.setProperty("--mouse-y", `${y}px`);
+  //     });
+  //   };
 
     // Menambahkan event listener saat mouse bergerak
-    document.addEventListener("mousemove", handleMouseMove);
+  //   document.addEventListener("mousemove", handleMouseMove);
 
-    // Menghapus event listener saat komponen dibersihkan
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+  //   // Menghapus event listener saat komponen dibersihkan
+  //   return () => {
+  //     document.removeEventListener("mousemove", handleMouseMove);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {

@@ -625,3 +625,73 @@
 .no-data-con i{
     color: red;
 }
+
+
+/* navbar cashier */
+.navbar-con{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: rgb(89, 89, 250);
+    color: white;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.436);
+    z-index: 999;
+}
+
+.logo-con{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    gap: 10px;
+    font-size: 19px;
+}.logo-con img{
+    width: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.navs-con{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 16px;
+}
+.navs-con a{
+    padding: 3px 5px;
+    border-radius: 10px;
+}
+.no-act-nav{
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+}
+.active-nav{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(4, 4, 86);
+}
+
+.border-sep{
+    width: 1px;
+    height: 40px;
+    background-color: white;
+}
+.cas-profile{
+    display: flex;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.911);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-style: italic;
+    font-size: 12px;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
+}
+.cashier-box{
+    padding-top: 55px;
+}
