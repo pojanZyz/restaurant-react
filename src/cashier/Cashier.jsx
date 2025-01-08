@@ -184,7 +184,10 @@ const Cashier = () => {
             </div>
           </div>
 
-          <div className="form-group">
+      <form action="">
+
+        <div className="input-box-cashier">
+          <div className="form-group-cashier">
             <label>Table Number:</label>
             <input
               type="text"
@@ -194,7 +197,7 @@ const Cashier = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group-cashier">
             <label>Total Price:</label>
             <input
               type="text"
@@ -203,7 +206,7 @@ const Cashier = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group-cashier">
             <label>Payment Method:</label>
             <select
               value={paymentMethod}
@@ -215,7 +218,7 @@ const Cashier = () => {
             </select>
           </div>
 
-          <div className="form-group">
+          <div className="form-group-cashier">
             <label>Discount Code:</label>
             <input
               type="text"
@@ -225,9 +228,47 @@ const Cashier = () => {
             />
           </div>
 
-          <button onClick={handlePrintInvoice} className="generate-invoice-btn">
-            Generate Invoice
-          </button>
+          <div className="form-group-cashier">
+          <label>Coin:</label>
+            <input
+              type="text"
+              placeholder="Enter Coin Amounts "
+            />
+          </div>
+
+           <div className="btn-cashier-box">
+           <button onClick={handlePrintInvoice} className="generate-invoice-btn">
+           <i class="bi bi-printer-fill"></i>
+           </button>
+
+           <button type="submit" className="cashier-send-btn">Send</button>
+
+           </div>
+          
+
+          </div>
+      </form>
+        
+      {/* {showInvoice && (
+        <div className="invoice-modal">
+          <div className="invoice-content">
+            <h3>Invoice</h3>
+            <p>Table Number: {tableNumber}</p>
+            <p>Payment Method: {paymentMethod}</p>
+            <p>Discount Code: {discountCode}</p>
+            <ul>
+              {cart.map((item) => (
+                <li key={item._id}>
+                  {item.productName} x {item.quantity} - Rp. {item.productPrice * item.quantity}
+                </li>
+              ))}
+            </ul>
+            <p>Total: Rp. {calculateTotalPrice()}</p>
+            <button onClick={closeInvoice}>Close</button>
+          </div>
+        </div>
+      )} */}
+
         </div>
       </div>
     </div>
