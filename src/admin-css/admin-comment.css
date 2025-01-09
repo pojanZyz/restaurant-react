@@ -140,3 +140,78 @@
   cursor: pointer;
   background-color: gray;
 }
+
+/* Responsive untuk layar dengan lebar maksimum 1024px */
+@media (max-width: 1024px) {
+  .comment-box {
+    grid-template-columns: repeat(2, 1fr); /* Ubah grid menjadi 2 kolom */
+    gap: 30px;
+  }
+
+  .comment-grid-item {
+    max-width: 280px; /* Sesuaikan lebar item */
+    width: 100%;
+    font-size: 85%; /* Kecilkan ukuran font */
+  }
+}
+
+@media (max-width: 780px) {
+
+  .control-panel-comment{
+    top: 8%;
+  }
+  .comment-box {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+  }
+
+  .comment-grid-item {
+    max-width: 100%;
+    font-size: 80%;
+  }
+
+  .comment-count-con{
+    margin-top: 40px;
+  }
+}
+
+/* Responsive untuk layar dengan lebar maksimum 480px */
+@media (max-width: 480px) {
+
+  .control-panel-comment{
+    top: 11%;
+  }
+
+  .control-panel-comment-extend span{
+    display: none;
+  }
+
+  .control-panel-comment-main{
+    gap: 10px;
+    padding: 10px 15px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .control-panel-comment-extend{
+    margin-top: -20px;
+  }
+
+  .admin-comment-con1{
+    display: none;
+  }
+  .comment-admin-container {
+    padding: 20px;
+    gap: 40px;
+  }
+
+  .comment-box {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .comment-grid-item {
+    font-size: 75%;
+    padding: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}

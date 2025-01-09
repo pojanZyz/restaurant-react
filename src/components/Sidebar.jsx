@@ -62,6 +62,7 @@ const Sidebar = () => {
     const bodyBox = document.querySelector(".body-box");
     const controlPanel = document.querySelector(".control-panel");
     const beranda = document.querySelector(".beranda");
+
     if (bodyBox) {
       bodyBox.style.marginLeft = isOpen ? "15%" : "0";
       bodyBox.style.width = isOpen ? "85%" : "100%";
@@ -71,6 +72,7 @@ const Sidebar = () => {
     if (controlPanel) {
       controlPanel.style.width = isOpen ? "85vw" : "100vw";
     }
+
   }, [isOpen]);
 
   return (

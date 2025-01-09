@@ -137,7 +137,7 @@ const CommentAdmin = () => {
                 }
                 onClick={() => setStatus("")}
               >
-                <i className="bi bi-list"></i> All
+                <i className="bi bi-list"></i> <span>All</span>
               </button>
               <button
                 className={
@@ -147,7 +147,7 @@ const CommentAdmin = () => {
                 }
                 onClick={() => setStatus("Public")}
               >
-                <i className="bi bi-globe"></i> Public
+                <i className="bi bi-globe"></i> <span>Public</span>
               </button>
               <button
                 className={
@@ -157,7 +157,7 @@ const CommentAdmin = () => {
                 }
                 onClick={() => setStatus("Private")}
               >
-                <i className="bi bi-lock-fill"></i> Private
+                <i className="bi bi-lock-fill"></i> <span>Private</span>
               </button>
             </div>
           </div>

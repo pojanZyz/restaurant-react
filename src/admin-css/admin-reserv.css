@@ -18,6 +18,12 @@
   align-items: center;
 }
 
+.control-panel-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .control-panel-extend-reserv{
   padding: 10px 10px;
   gap: 5px !important;
@@ -253,6 +259,10 @@
 
     .update-con{
       margin-top: 10%;
+    }
+
+    .control-panel-main select{
+      width: 20%;
     }
 
   .reserv-table th,

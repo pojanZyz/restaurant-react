@@ -285,6 +285,7 @@
 .dropdown-menu-admin button:hover,
 .dropdown-menu-admin a:hover {
     color: var(--warnaKeempat); 
+    
 }
 
 .logout-logo{
@@ -330,7 +331,7 @@
     }
 
     .box-menu li, .admin-box-menu li {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
 
     .box-menu a, .admin-box-menu a {
@@ -388,10 +389,21 @@
     }
 
     .profile-box{
-        width: 15%;
+        width: 10%;
+        margin-left: 1.5%;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all ease 0.2s ;
+    }
+
+    .profile-box:hover{
+        background-color: #cecef1;
+        border-radius: 5px;
+    }
+
+    .profile-box:hover i{
+        color: black !important;
     }
 
     #sidebar.closed, #admin-sidebar.closed {
@@ -446,8 +458,11 @@
 
 }
 
-/* Responsif untuk layar sangat kecil (max 480px) */
 @media (max-width: 480px) {
+    .profile-box{
+        margin-left: 0%;
+        height: 38px;
+    }
     .logout-container {
         left: 10px;
     }

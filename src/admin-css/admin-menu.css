@@ -341,6 +341,10 @@
   .product-box{
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .card-row4 select{
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px){
