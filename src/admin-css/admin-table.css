@@ -317,6 +317,10 @@
     gap: 10px;
   }
 
+  .table-admin-container .admin-table-grid-item{
+    padding: 5px 30px;
+  }
+
   .table-main-con ul{
     display: flex;
     flex-direction: column;
@@ -368,6 +372,7 @@
   .table-main-con {
     padding: 20px;
     gap: 5px;
+    width: 90%;
   }
 
   .admin-legend-con {

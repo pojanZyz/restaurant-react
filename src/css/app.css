@@ -17,6 +17,10 @@
     font-style: none;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 .quicksand {
   font-family: "Quicksand", serif;
   font-optical-sizing: auto;
