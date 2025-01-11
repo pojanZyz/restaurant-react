@@ -326,9 +326,11 @@ const Dashboard = () => {
             <div className="footer-container">
               <div className="footer-contact">
                 <h3>Contact Us</h3>
+                <div className="text-footer-contact">
                 <p>Email: cafe@example.com</p>
                 <p>Phone: +62 812-3456-7890</p>
                 <p>Address: 123 Main Street, Jakarta</p>
+                </div>
                   <ul className="contact-social-links">
                     <li><a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a></li>
                     <li><a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a></li>

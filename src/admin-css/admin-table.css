@@ -313,7 +313,7 @@
     margin-bottom: 30px;
   }
   .admin-tables-box {
-    grid-columns: auto;
+    grid-column: auto;
     gap: 10px;
   }
 

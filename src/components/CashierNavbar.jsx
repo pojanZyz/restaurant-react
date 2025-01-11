@@ -22,10 +22,10 @@ const CashierNavbar = () => {
           <span>Cashier</span>
         </NavLink>
         <NavLink
-          to={"/cashier/order-history"}
+          to={"/cashier/history"}
           className={({ isActive }) => (isActive ? "active-nav" : "no-act-nav")}
         >
-          <span>Order History</span>
+          <span>History</span>
         </NavLink>
         <div className="border-sep">
             

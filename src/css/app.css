@@ -714,3 +714,53 @@ html {
 .cashier-box{
     padding-top: 55px;
 }
+@media (max-width:480px){
+    .navbar-con .logo-con{
+        font-size: 50%;
+        margin-left: -13%
+    }
+
+    .navbar-con{
+        justify-content: start;
+        gap: 40px;
+    }
+
+    .navs-con{
+        gap:10px;
+        font-size: 40%;
+    }
+
+    .cas-profile{
+        font-size: 110%;
+    }
+
+    .logo-con img{
+        width: 40%;
+    }
+}
+
+/* sama aja kayak height 600px ip 5*/
+@media (max-width: 320px) {
+    .logo-con img{
+        width: 20%;
+    }
+
+    .cas-profile{
+        font-size: 80%;
+    }
+
+    .navbar-con .logo-con{
+        font-size: 40%;
+        margin-left: -13%
+    }
+
+    .navbar-con{
+        justify-content: start;
+        gap: 25px;
+    }
+
+    .navs-con{
+        gap:10px;
+        font-size: 30%;
+    }
+}
