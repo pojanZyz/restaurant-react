@@ -127,20 +127,23 @@
   margin-top: 30px;
 }
 
-.user-table th,
 .user-table td {
+  font-size: 1.2rem;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
 .user-table th {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
   background-color: #f4f4f4;
+  font-size: 1.4rem;
   color: #555;
   text-align: left;
-  font-size: 1rem;
 }
 
 .user-table td {
+  padding: 10px 20px;
   color: #333;
   word-wrap: break-word;
   white-space: normal;

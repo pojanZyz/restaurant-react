@@ -36,31 +36,6 @@ const Menu = ({ cart, addToCart }) => {
       fetchProducts();
     }
   }, [sort, category, debouncedSearch, page, limit]);
-  
-  // useEffect(() => {
-  //   // Menyimpan referensi ke elemen menu-item
-  //   const menuItems = document.querySelectorAll(".menu-item");
-  
-  //   const handleMouseMove = (e) => {
-  //     menuItems.forEach((item) => {
-  //       const rect = item.getBoundingClientRect();
-  //       const x = e.clientX - rect.left;
-  //       const y = e.clientY - rect.top;
-  
-  //       // Memperbarui nilai custom properties CSS untuk posisi mouse
-  //       item.style.setProperty("--mouse-x", `${x}px`);
-  //       item.style.setProperty("--mouse-y", `${y}px`);
-  //     });
-  //   };
-  
-  //   // Menambahkan event listener untuk mousemove
-  //   document.addEventListener("mousemove", handleMouseMove);
-  
-    // Membersihkan event listener saat komponen unmount
-  //   return () => {
-  //     document.removeEventListener("mousemove", handleMouseMove);
-  //   };
-  // }, []); // Pastikan ini hanya dipanggil sekali saat komponen mount
 
   //events handler
   const handleCategoryChange = (catValue) => {

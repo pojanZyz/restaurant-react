@@ -22,6 +22,8 @@ import TableAdmin from "./admin/TableAdmin";
 import CommentAdmin from "./admin/CommentAdmin";
 import CashierNavbar from "./components/CashierNavbar";
 import Cashier from "./cashier/Cashier";
+import OrdHistory from "./cashier/OrdHistory";
+
 function App() {
   const location = useLocation();
   const [cart, setCart] = useState([]); // Cart yang akan digunakan untuk seluruh aplikasi
@@ -188,6 +190,7 @@ function App() {
         <Route path="/admin/comment"  element={<CommentAdmin />}/>
 
         <Route path="/cashier" element={<Cashier />} />
+        <Route path="/cashier/history" element={<OrdHistory />} />
       </Routes>
     </>
   );
