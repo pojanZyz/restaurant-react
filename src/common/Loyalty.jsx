@@ -37,7 +37,7 @@ const Loyalty = () => {
           <h2 className="poppins-regular">
             <i className="bi bi-person-hearts"></i> Loyalty
           </h2>
-          <div className="profile-box">
+          <div className="akun-box">
             <span>{userData?.useremail || "Loading.."}</span>
             <i className="bi bi-person-circle"></i>
           </div>
