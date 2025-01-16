@@ -1,0 +1,302 @@
+/* General Styling */
+.user-admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  gap: 70px;
+  min-height: 100vh;
+}
+
+/* Container 1 */
+.admin-user-con1 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 20px;
+}
+
+/* Container 2 */
+.admin-user-con2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Control Panel */
+.control-panel-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.control-panel-user input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: 17px;
+}
+
+.control-panel-user .search-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.control-panel-user select {
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.control-panel-user-main {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background-color: rgb(89, 89, 250);
+  padding: 15px 25px;
+  border-radius: 17px;
+}
+
+.control-panel-user-extend {
+  padding: 5px 15px;
+  background-color: rgb(89, 89, 250); 
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.control-panel-user-extend button {
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: beige;
+  border: none;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.control-panel-user-extend .active-btn {
+  background-color: var(--warnaKeempat);
+  color: black;
+}
+
+.control-panel-user-extend button:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+/* User Count */
+.user-count-con {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: 80%;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.user-count-con .span-2 {
+  font-size: 70%;
+}
+
+.user-count-con div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Table Styling */
+.user-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.user-table td {
+  font-size: 1.2rem;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f4f4f4;
+  font-size: 1.4rem;
+  color: #555;
+  text-align: left;
+}
+
+.user-table td {
+  padding: 10px 20px;
+  color: #333;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+}
+
+.user-table td button.delete-button {
+  padding: 6px 12px;
+  background-color: #e53e3e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-table td button.delete-button:hover {
+  background-color: #c53030;
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Scrollbar Styling */
+.user-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.user-table-container::-webkit-scrollbar-thumb {
+  background: rgb(89, 89, 250);
+  border-radius: 10px;
+}
+
+.user-table-container::-webkit-scrollbar-thumb:hover {
+  background: rgb(68, 68, 200);
+}
+
+.user-table-container::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .user-admin-container {
+    padding: 50px 20px;
+    gap: 50px;
+  }
+
+  .user-table th,
+  .user-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .control-panel-user {
+    top: 4.5rem;
+  }
+  .user-admin-container {
+    padding: 50px 15px;
+    gap: 30px;
+  }
+
+  .control-panel-user-main {
+    gap: 10px;
+    padding: 10px 1px;
+    justify-content: center; /* Menjaga kontrol panel tetap di tengah */
+  }
+
+  .control-panel-user-main .search-input{
+    width: 50%;
+  }
+
+  .control-panel-user-main .search-input input{
+    width: 100%;
+  }
+
+  .control-panel-user-extend {
+    padding: 5px 20px;
+  }
+
+  .user-table th,
+  .user-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 501px) {
+
+  .admin-user-con1{
+    display: none;
+  }
+
+  .control-panel-user {
+    top: 10%;
+  }
+
+  .user-admin-container {
+    padding: 30px 10px;
+    gap: 20px;
+  }
+
+  .admin-user-con1,
+  .admin-user-con2 {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .control-panel-user-main {
+    gap: 5px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .control-panel-user-main .sort{
+    width: 2rem;
+  }
+
+  .control-panel-user-extend button i{
+    display: none;
+  }
+
+  .control-panel-user-extend button{
+    padding: 6px;
+  }
+
+  .user-table th,
+  .user-table td {
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  .user-table td button.delete-button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .user-count-con {
+    font-size: 60%;
+    gap: 10px;
+  }
+
+  .control-panel-user input,
+  .control-panel-user select {
+    font-size: 14px;
+    padding: 5px;
+  }
+}

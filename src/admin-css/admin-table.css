@@ -1,0 +1,397 @@
+/* General styling */
+.table-admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  gap: 70px;
+  min-height: 100vh;
+  margin-bottom: 100px;
+  margin-top: 3%;
+}
+
+/*con 1*/
+.admin-table-con1 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 20px;
+}
+
+/* con 2 */
+.admin-table-con2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.control-panel-table {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 2px;
+  background-color: rgb(89, 89, 250);
+  padding: 20px;
+  border-radius: 17px;
+  gap: 20px;
+}
+.control-panel-table input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: white;
+  width: 200px;
+  user-select: none;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+}
+.date-input:hover {
+  transition: 0.2;
+  transform: scale(1.02);
+}
+.control-panel-table select {
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+  cursor: pointer;
+}
+.table-count-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 60%;
+  color: white;
+}
+.control-panel-table .add-table-btn{
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: rgb(22, 120, 22);
+  border: solid white 2px;
+  color: white;
+  font-size: 60%;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.533);
+}.control-panel-table .add-table-btn:hover{
+  background-color: rgb(132, 249, 132);
+  color: gray;
+  cursor: pointer;
+}
+
+.table-main-con {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(209, 208, 208);
+  padding: 30px;
+  border-radius: 30px;
+  gap: 10px;
+  margin-top: 30px;
+}
+.table-main-con h4{
+  align-self: center;
+}
+
+.admin-legend-con {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  align-self: flex-start;
+  font-size: 55%;
+  list-style-type: none;
+}
+.admin-legend-con li {
+  display: flex;
+  align-items: center;
+}
+.admin-legend-con .green-sqr {
+  background-color: rgb(9, 230, 9);
+  width: 15px;
+  height: 15px;
+}
+.admin-legend-con .red-sqr {
+  background-color: rgb(251, 82, 21);
+  width: 15px;
+  height: 15px;
+}
+.admin-legend-con .gray-sqr {
+  background-color: rgb(63, 65, 63);
+  width: 15px;
+  height: 15px;
+}
+
+.admin-tables-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-content: center;
+  place-items: center;
+  gap: 40px;
+  background-color: white;
+  padding: 20px;
+  margin-top: 5px;
+}
+.admin-tables-box .admin-table-grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.533);
+  gap: 10px;
+  font-size: 90%;
+  cursor: pointer;
+}.admin-table-grid-item:hover{
+    background-color: rgb(174, 174, 174);
+}
+.admin-table-grid-item .table-cap {
+  font-size: 70%;
+}
+
+.table-form-update {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}.table-form-update label{
+  font-size: 70%;
+  margin-top: 20px;
+  align-self: flex-start;
+}.table-form-update input, .table-form-update select{
+  padding: 5px 8px;
+  resize: none;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.189);
+  border-radius: 8px;
+  border: solid gray 1px;
+  margin-top: 5px;
+  font-size: 80%;
+}
+
+.table-form-update .stat-date{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgb(213, 211, 211);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.table-form-update .stat-date div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}.stat-date label{
+  margin-top: 0;
+}
+
+.table-card-footer{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  align-self: flex-end;
+  padding: 20px
+}
+.table-card-footer .table-delete-btn{
+  padding: 5px 20px;
+  border: solid gray 1px;
+  background-color: rgb(145, 30, 15);
+  border-radius: 10px;
+  color: white;
+}
+.table-card-footer .table-update-btn{
+  padding: 5px 20px;
+  border: solid gray 1px;
+  background-color: rgb(0, 102, 255);
+  border-radius: 10px;
+  color: white;
+}
+.table-card-footer .table-create-btn{
+  padding: 5px 20px;
+  border: solid gray 1px;
+  background-color: rgb(2, 108, 41);
+  border-radius: 10px;
+  color: white;
+}
+.table-card-footer .table-update-btn:hover, .table-card-footer .table-delete-btn:hover, .table-card-footer .table-create-btn:hover{
+  background-color: gray;
+  cursor: pointer;
+}
+
+
+
+/* Layout Responsiveness */
+@media (max-width: 1200px) {
+  .table-admin-container {
+    padding: 20px;
+    gap: 40px;
+  }
+  .admin-tables-box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .control-panel-table {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 25px;
+  }
+}
+
+@media (max-width: 992px) {
+  .table-admin-container {
+    padding: 15px;
+    gap: 30px;
+  }
+  .control-panel-table {
+    padding: 15px;
+  }
+  .admin-tables-box {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .table-admin-container {
+    padding: 10px;
+    gap: 20px;
+    margin-top: 5%;
+  }
+  .control-panel-table {
+    padding: 10px;
+  }
+  .admin-tables-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .control-panel-table{
+    top: 8%;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .stat-date{
+    flex-direction: column;
+  }
+
+  .update-card{
+    margin-top: 30%;
+    overflow: hidden;
+  }
+
+  .table-card-footer{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
+
+  .stat-date #date{
+    width: 70%;
+  }
+
+  .stat-date div .date-label{
+    margin-left: 30px;
+  }
+
+  .table-admin-container {
+    padding: 10px;
+    gap: 15px;
+    margin-top: 10%;
+  }
+
+  .admin-table-con1{
+    display: none;
+  }
+
+  .control-panel-table {
+    justify-content: center;
+    gap: 20px;
+    padding: 3px;
+    top: 10%;
+    margin-bottom: 30px;
+  }
+  .admin-tables-box {
+    grid-column: auto;
+    gap: 10px;
+  }
+
+  .table-admin-container .admin-table-grid-item{
+    padding: 5px 30px;
+  }
+
+  .table-main-con ul{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Vertical Orientation for Phones */
+@media (max-width: 576px) and (orientation: portrait) {
+  .table-admin-container {
+    gap: 10px;
+    padding: 5px;
+  }
+  .control-panel-table {
+    padding: 5px;
+    width: 80%;
+    top: 13%;
+    gap: 10px;
+  }
+
+  .control-panel-table .date-input{
+    width: 55%;
+  }
+
+  .table-count-con .span-2{
+    display: none;
+  }
+
+  .add-table-btn span{
+    display: none;
+  }
+
+  .admin-tables-box {
+    gap: 20px;
+  }
+}
+
+/* Text Scaling */
+@media (max-width: 768px) {
+  .control-panel-table input,
+  .control-panel-table select,
+  .control-panel-table .add-table-btn,
+  .admin-legend-con,
+  .table-card-footer .table-delete-btn,
+  .table-card-footer .table-update-btn,
+  .table-card-footer .table-create-btn {
+    font-size: 80%;
+  }
+
+  .table-main-con {
+    padding: 20px;
+    gap: 5px;
+    width: 90%;
+  }
+
+  .admin-legend-con {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .control-panel-table input,
+  .control-panel-table select,
+  .control-panel-table .add-table-btn,
+  .admin-legend-con,
+  .table-card-footer .table-delete-btn,
+  .table-card-footer .table-update-btn,
+  .table-card-footer .table-create-btn {
+    font-size: 70%;
+  }
+
+  .admin-legend-con li {
+    gap: 5px;
+  }
+}

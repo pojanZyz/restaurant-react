@@ -1,0 +1,106 @@
+.ordhis-container {
+  padding-top: 53px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ordhis-wrap {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 150px;
+  width: 100%;
+}
+.ordhis-wrap h3 {
+  align-self: center;
+}
+
+.history-tabs {
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+  margin-top: 40px;
+  border-bottom: solid 2px gray;
+}
+.tab-button {
+  border: none;
+  border-bottom: solid 4px transparent;
+  background-color: transparent;
+  font-size: 16px;
+  color: #333333;
+  padding: 5px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab-button:hover {
+  background-color: #e6e6e6;
+}
+
+.active-tab {
+  border-bottom: 4px solid rgb(223, 223, 0);
+}
+
+/* Responsivitas untuk layar hingga 1024px */
+@media (max-width: 1024px) {
+  .ordhis-wrap {
+    margin: 40px 50px;
+  }
+
+  .histories-wrap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 0 30px;
+  }
+
+  .histories {
+    max-width: 40vw;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .histories p {
+    font-size: 14px;
+  }
+}
+
+/* Responsivitas untuk layar tablet */
+@media (max-width: 768px) {
+  .ordhis-wrap {
+    margin: 30px 20px;
+  }
+
+  .histories-wrap {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .histories {
+    max-width: 90%;
+    padding: 15px;
+  }
+}
+
+/* Responsivitas untuk layar ponsel */
+@media (max-width: 480px) {
+  .ordhis-wrap {
+    margin: 20px 10px;
+  }
+
+  .histories-wrap {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .histories {
+    max-width: 100%;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .histories p {
+    font-size: 12px;
+  }
+}

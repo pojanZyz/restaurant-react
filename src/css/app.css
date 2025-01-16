@@ -1,0 +1,902 @@
+:root {
+  --warnaUtama: #b45309;
+  --warnaKedua: #fde68a;
+  --warnaKetiga: #92400e;
+  --warnaKeempat: #fcd34d;
+  --warnaKelima: #78350f;
+  --warnaElemen: #f3f4f6;
+  --bg: linear-gradient(to bottom right, #fff, #fff);
+}
+
+/* Reset styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.quicksand {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.poppins-regular {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.agu-display {
+  font-family: "Agu Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "MORF" 0;
+}
+
+/* Container utama */
+.topBar {
+  display: none;
+}
+
+.body-box {
+  margin-left: 15%;
+  width: 85%;
+}
+
+@media (max-width: 780px) {
+  .body-box,
+  .control-panel{
+    margin-left: 0;
+    width: 100vw !important;
+  }
+}
+
+/* Side-bar */
+#sidebar,
+#admin-sidebar {
+  width: 15%;
+  background-color: var(--warnaUtama);
+  color: #fff;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+}
+
+/* Sidebar header */
+.side-head,
+.admin-side-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px;
+  margin-bottom: 30px;
+}
+
+.side-head img,
+.admin-side-head img {
+  margin-left: 8px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.side-head h1,
+.admin-side-head h1 {
+  font-size: 15px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.box-menu,
+.admin-box-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-menu hr,
+.admin-box-menu hr {
+  border: 1px dashed white;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.box-menu ul,
+.admin-box-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.box-menu li,
+.admin-box-menu li {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.box-menu a,
+.admin-box-menu a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.box-menu a:hover {
+  background-color: var(--warnaKedua);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.box-menu a i,
+.admin-box-menu a i {
+  font-size: 18px;
+}
+
+.box-menu a span,
+.admin-box-menu a span {
+  font-size: 14px;
+}
+
+/* Active state untuk menu */
+.box-menu .active {
+  background-color: var(--warnaKetiga);
+  color: white;
+  transition: transform 1s ease-out;
+}
+
+.box-menu .active:hover,
+.box-menu i:hover {
+  background-color: var(--warnaKedua);
+  color: #000;
+  transform: scale(1.1);
+}
+
+.box-menu .active i:hover {
+  color: #000;
+}
+
+.auth-con {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.username {
+  color: white;
+  font-weight: bold;
+}
+
+/* Logout Container */
+.logout-container {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  left: 10px;
+}
+
+.logout-container div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Logout Icon */
+.logout-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.logout-btn span {
+  font-size: 14px;
+}
+
+/* Dropdown Akun */
+.dropdown {
+  position: fixed;
+  bottom: 20px;
+  left: 3%;
+  z-index: 9999 !important;
+}
+
+.dropdown button span,
+.dropdown {
+  color: white !important;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle span {
+  margin: 0 5px;
+}
+
+.dropdown-menu {
+  position: fixed;
+  left: 15% !important;
+  bottom: 0px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  z-index: 999999 !important;
+  width: 200px !important;
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  padding: 8px 15px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-menu .logout-btn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 15px;
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.loading-proces {
+  margin-left: 4%;
+}
+
+.dropdown-menu button::before,
+.dropdown-menu a::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(to top left, var(--warnaKetiga), transparent);
+  height: 100%;
+  width: 100%;
+  top: 100%;
+  left: -100%;
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.dropdown-menu button:hover::before,
+.dropdown-menu a:hover::before {
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to top left,
+    var(--warnaKedua),
+    var(--warnaUtama)
+  );
+}
+
+.dropdown-menu button,
+.dropdown-menu a {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: var(--warnaKetiga);
+  transition: color 0.3s ease;
+  margin: 0;
+}
+
+.dropdown-menu-admin button:hover,
+.dropdown-menu-admin a:hover {
+  color: var(--warnaKeempat);
+}
+
+.logout-logo {
+  color: #f1f1f1;
+}
+
+.topBar-box {
+  background-color: var(--warnaUtama);
+  color: #fff;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 10%;
+}
+
+/* Responsif untuk layar tablet (768px - 1280px) */
+@media (min-width: 768px) and (max-width: 1280px) {
+  #sidebar,
+  #admin-sidebar {
+    width: 15%;
+  }
+
+  .side-head,
+  .admin-side-head {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .side-head img,
+  .admin-side-head img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .side-head h1,
+  .admin-side-head h1 {
+    font-size: 13px;
+  }
+
+  .box-menu ul li span,
+  .admin-box-menu ul li span {
+    font-size: 0.6rem !important;
+    padding: 3px;
+  }
+
+  .box-menu li,
+  .admin-box-menu li {
+    margin-bottom: 10px;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    padding: 5px;
+  }
+
+  .box-menu a i,
+  .admin-box-menu a i {
+    font-size: 20px;
+  }
+
+  #login span i span {
+    display: none;
+  }
+
+  .dropdown {
+    left: 2.5%;
+  }
+  .dropdown button span {
+    font-size: 12px;
+  }
+}
+
+/* Responsif untuk layar kecil (max 768px) */
+@media (max-width: 768px) {
+  .body-box {
+    margin-top: 2rem;
+  }
+
+  .topBar {
+    background-color: var(--warnaUtama);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--warnaKetiga);
+    font-size: 0.5rem;
+  }
+
+  .topBar .logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-btn i {
+    color: #f1f1f1;
+    font-size: 2rem;
+  }
+
+  .topBar .top-mail,
+  .top-mail-admin {
+    color: #ddd;
+    font-size: 1.5rem;
+  }
+
+  .profile-box {
+    width: 10%;
+    margin-left: 1.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.2s;
+  }
+
+  .profile-box:hover {
+    background-color: #cecef1;
+    border-radius: 5px;
+  }
+
+  .profile-box:hover i {
+    color: black !important;
+  }
+
+  #sidebar.closed,
+  #admin-sidebar.closed {
+    display: none;
+  }
+
+  #sidebar,
+  #admin-sidebar {
+    width: 15%;
+  }
+
+  .side-head,
+  .admin-side-head {
+    display: flex;
+    margin: 10px 0;
+    justify-content: center;
+    align-items: center;
+    min-width: 3rem;
+  }
+
+  .none-head {
+    display: none !important;
+  }
+
+  .side-head img,
+  .admin-side-head img {
+    margin: 0;
+    width: 100%;
+  }
+
+  .side-head h1,
+  .admin-side-head h1 {
+    font-size: 16px;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    margin-top: 5px;
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+
+  .box-menu a span,
+  .admin-box-menu a span {
+    display: none;
+  }
+
+  .side-head h1,
+  .admin-side-head h1 {
+    display: none;
+  }
+
+  .dropdown-toggle span {
+    display: none;
+  }
+  .dropdown {
+    left: 6%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-box {
+    margin-left: 0%;
+    height: 38px;
+  }
+  .logout-container {
+    left: 10px;
+  }
+  .dropdown {
+    bottom: 20px;
+    left: 15px;
+  }
+  .dropdown-menu {
+    left: 15% !important;
+  }
+  #sidebar,
+  #admin-sidebar {
+    position: fixed;
+    width: 15%;
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+
+  .side-head h1,
+  .side-head h1 {
+    display: none;
+  }
+
+  .box-menu li,
+  .admin-box-menu li {
+    margin: 10px 0;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    flex-direction: column; /* Atur ikon di tengah */
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .box-menu a span,
+  .admin-box-menu a span {
+    display: none; /* Hanya tampilkan ikon */
+  }
+
+  .box-menu a i,
+  .admin-box-menu a i {
+    font-size: 20px; /* Perbesar ikon */
+  }
+
+  .logout-container {
+    font-size: 9px;
+  }
+}
+
+@media (max-height: 600px) {
+  .topBar {
+    padding: 1.5rem;
+  }
+  .topBar {
+    height: 2rem;
+  }
+
+  .side-head img,
+  .admin-side-head img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .topBar img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .topBar button i {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-height: 480px) {
+  .box-menu li,
+  .admin-box-menu li {
+    margin: 3px 0;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    padding: 4px;
+  }
+
+  .box-menu a i,
+  .admin-box-menu a i {
+    font-size: 20px;
+  }
+}
+
+@media (max-height: 393px) {
+  .box-menu li,
+  .admin-box-menu li {
+    margin: 3px 0;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    padding: 4px;
+  }
+
+  .box-menu a span,
+  .admin-box-menu a span {
+    display: none;
+  }
+
+  .box-menu a i,
+  .admin-box-menu a i {
+    font-size: 20px;
+  }
+}
+
+@media (max-height: 361px) {
+  .box-menu li,
+  .admin-box-menu li {
+    margin: 1px 0;
+  }
+
+  .box-menu a,
+  .admin-box-menu a {
+    padding: 5px;
+  }
+
+  .box-menu a span,
+  .admin-box-menu a span {
+    display: none;
+  }
+
+  .box-menu a i,
+  .admin-box-menu a i {
+    font-size: 0.6rem !important;
+  }
+  .box-menu hr,
+  .admin-box-menu hr {
+    margin-bottom: 5px;
+  }
+  .side-head,
+  .admin-side-head {
+    margin: 15px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-height: 320px) {
+  .box-menu a,
+  .admin-box-menu a {
+    padding: 2px;
+  }
+}
+
+/* Loader container */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Simple spinner loader */
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey border */
+  border-top: 8px solid #3498db; /* Blue top border */
+  border-radius: 50%; /* Make it a circle */
+  width: 50px;
+  height: 50px;
+  animation: spin 1.5s linear infinite;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cas-loader-container {
+  position: fixed;
+  top: 58px; /* Sesuaikan dengan tinggi navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 54px); /* Kurangi tinggi navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Warna latar belakang dengan sedikit transparansi */
+  z-index: 999; /* Pastikan di atas konten lainnya */
+}
+
+.cas-loader {
+  border: 5px solid #f3f3f3; /* Warna latar loader */
+  border-top: 5px solid #3498db; /* Warna utama loader */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* Animasi spinning */
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*no-data styling*/
+.no-data-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  margin: 20px;
+  margin-top: 50px;
+}
+.no-data-con i {
+  color: red;
+}
+
+/* navbar cashier */
+.navbar-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: rgb(89, 89, 250);
+  color: white;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.436);
+  z-index: 999;
+}
+
+.logo-con {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 10px;
+  font-size: 19px;
+}
+.logo-con img {
+  width: 40px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.navs-con {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 16px;
+}
+.navs-con a {
+  padding: 3px 5px;
+  border-radius: 10px;
+}
+.no-act-nav {
+  color: white;
+  font-weight: bold;
+  background-color: transparent;
+}
+.active-nav {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(4, 4, 86);
+}
+
+.border-sep {
+  width: 1px;
+  height: 40px;
+  background-color: white;
+}
+.cas-profile {
+  display: flex;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.911);
+  color: rgba(0, 0, 0, 0.789);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-style: italic;
+  font-size: 12px;
+  border: none;
+}
+.cas-profile:hover{
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
+}
+/*account popup*/
+.acc-detail-card{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color:black;
+  border-radius: 10px;
+  padding:15px 30px;
+  gap: 20px;
+  margin-bottom: 80px;
+}
+.acc-body{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+.acc-body label{
+  color: gray;
+  font-size: 13px;
+}
+.acc-input-con{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 10px;
+  border: solid 1px gray;
+  border-radius: 10px;
+  box-shadow: 2px 4px 5px gray;
+}
+.acc-input-con input{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 16px;
+}
+.acc-input-con input::placeholder{
+  color: gray;
+}
+.acc-input-con input:read-only{
+  color: gray;
+  font-style: italic;
+}
+
+.cashier-box {
+  padding-top: 55px;
+}
+@media (max-width: 480px) {
+  .navbar-con .logo-con {
+    font-size: 50%;
+    margin-left: -13%;
+  }
+
+  .navbar-con {
+    justify-content: start;
+    gap: 40px;
+  }
+
+  .navs-con {
+    gap: 10px;
+    font-size: 40%;
+  }
+
+  .cas-profile {
+    font-size: 110%;
+  }
+
+  .logo-con img {
+    width: 40%;
+  }
+}
+
+/* sama aja kayak height 600px ip 5*/
+@media (max-width: 320px) {
+  .logo-con img {
+    width: 20%;
+  }
+
+  .cas-profile {
+    font-size: 80%;
+  }
+
+  .navbar-con .logo-con {
+    font-size: 40%;
+    margin-left: -13%;
+  }
+
+  .navbar-con {
+    justify-content: start;
+    gap: 25px;
+  }
+
+  .navs-con {
+    gap: 10px;
+    font-size: 30%;
+  }
+}
