@@ -18,6 +18,7 @@ const Revenue = () => {
     fetchRevenue();
   }, []);
 
+  //get today revenue
   const fetchRevenue = async () => {
     setLoading(true);
     try {
@@ -34,19 +35,19 @@ const Revenue = () => {
     }
   };
 
+  //pie chart
   const pieData = {
     labels: ["Orders", "Reservations"],
     datasets: [
       {
         data: [revenueData.orders, revenueData.reservations],
-        backgroundColor: ["#FFEB3B", "#F44336"], // Warna kuning untuk Orders, merah untuk Reservations
-        hoverBackgroundColor: ["#FDD835", "#D32F2F"], // Warna hover
-        borderColor: "#ffffff", // Border putih
-        borderWidth: 2, // Lebar border
+        backgroundColor: ["#FFEB3B", "#F44336"],
+        hoverBackgroundColor: ["#FDD835", "#D32F2F"], 
+        borderColor: "#ffffff", 
+        borderWidth: 2,
       },
     ],
   };
-
   const pieOptions = {
     plugins: {
       legend: {
@@ -62,8 +63,31 @@ const Revenue = () => {
       },
     },
     responsive: true,
-    maintainAspectRatio: true, // Responsif
+    maintainAspectRatio: true, 
   };
+
+  const date = new Date()
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "Desember",
+  ];
+
+  // Dapatkan hari, bulan, dan tahun
+  const day = date.getDate();
+  const monthName = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  const niceFormattedDate = `${day} ${monthName} ${year}`
 
   return (
     <div className="rev-con">
@@ -76,6 +100,7 @@ const Revenue = () => {
             <div className="total-revenue">
               <p className="poppins-regular">Total Revenue Today:</p>
               <h1 className="quicksand">Rp {revenueData.total.toLocaleString()}</h1>
+              <p className="poppins-regular" style={{color: "gray"}}>{niceFormattedDate}</p>
             </div>
             <div className="revenue-chart">
               <Pie data={pieData} options={pieOptions} />

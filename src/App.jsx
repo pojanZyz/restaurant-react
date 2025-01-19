@@ -23,6 +23,8 @@ import CommentAdmin from "./admin/CommentAdmin";
 import CashierNavbar from "./components/CashierNavbar";
 import Cashier from "./cashier/Cashier";
 import OrdHistory from "./cashier/OrdHistory";
+import PaymentResult from "./common/PaymentResult";
+import CasReservation from "./cashier/CasReservation";
 
 function App() {
   const location = useLocation();
@@ -36,7 +38,7 @@ function App() {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [discountCode, setDiscountCode] = useState("");
 
-  const hideSidebar = ["/login", "/register"];
+  const hideSidebar = ["/login", "/register", "/payment-result"];
 
   const renderSidebar = () => {
     if (hideSidebar.includes(location.pathname)) {
@@ -48,7 +50,7 @@ function App() {
     if(location.pathname.startsWith("/cashier")){
       return <CashierNavbar />
     }
-    return <Sidebar />; // Sidebar umum untuk route lain
+    return <Sidebar />;
   };
 
   const addToCart = (product) => {
@@ -139,7 +141,7 @@ function App() {
   };
 
   axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = "https://cafemdn-api.vercel.app/"
+  axios.defaults.baseURL = "http://localhost:8080/"
 
   return (
     <>
@@ -191,6 +193,9 @@ function App() {
 
         <Route path="/cashier" element={<Cashier />} />
         <Route path="/cashier/history" element={<OrdHistory />} />
+        <Route path="/cashier/reservation" element={<CasReservation />}/>
+
+        <Route path="/payment-result" element={<PaymentResult />} />
       </Routes>
     </>
   );

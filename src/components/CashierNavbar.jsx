@@ -68,6 +68,12 @@ const CashierNavbar = () => {
           <span>Cashier</span>
         </NavLink>
         <NavLink
+          to={"/cashier/reservation"}
+          className={({ isActive }) => (isActive ? "active-nav" : "no-act-nav")}
+        >
+          <span>Cashier-Res</span>
+        </NavLink>
+        <NavLink
           to={"/cashier/history"}
           className={({ isActive }) => (isActive ? "active-nav" : "no-act-nav")}
         >

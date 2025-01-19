@@ -5,7 +5,7 @@
   gap: 20px;
 }
 
-.history-con2{
+.history-con2 {
   align-self: flex-start;
   display: flex;
   margin-top: 40px;
@@ -69,16 +69,15 @@
 .order-table-wrap .body .left-body {
   padding: 20px 30px;
   border-right: solid black 1px;
-  min-height: 80vh;
+  max-height: 80vh;
+  overflow-y: auto;
   max-width: 100%;
 }
 .order-table-wrap .order-table {
-  margin: 20px;
-  border-collapse: collapse;
-  font-size: 16px;
+  font-size: 15px;
   text-align: left;
   border-radius: 8px;
-  border-collapse: collapse;
+  border: none;
   table-layout: fixed;
 }
 .order-table thead tr {
@@ -87,7 +86,6 @@
 }
 .order-table th,
 .order-table td {
-  padding: 18px 15px;
   border-bottom: 1px solid #ddd;
 }
 .order-table tbody tr:nth-child(odd) {
@@ -130,51 +128,65 @@
 .order-table-wrap .filters label:hover {
   background-color: rgb(209, 227, 237);
 }
+.order-table-wrap .filters .reset-fil-btn{
+  padding: 5px 15px;
+  margin-top: 10px;
+  background-color: red;
+  color: white;
+  border: solid gray 1px;
+  border-radius: 5px;
+}.order-table-wrap .filters .reset-fil-btn:hover{
+  cursor: pointer;
+  background-color: gray;
+}
 
 .order-type-cas {
   border-radius: 10px;
   padding: 1px 3px;
   background-color: rgb(1, 1, 100);
   color: cyan;
-  font-size: 13px;
+  font-size: 12px;
 }
 .order-type-onl {
   border-radius: 10px;
   padding: 1px 3px;
   background-color: rgb(95, 100, 1);
   color: rgb(183, 255, 0);
-  font-size: 13px;
+  font-size: 12px;
 }
 .empty-lbl {
   color: gray;
   font-style: italic;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* order details popup */
 .order-details-con {
   position: fixed;
-  top: 60px;
+  top: 50px;
   right: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.437);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   z-index: 999;
 }
 
 .ord-detail-card {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: rgba(238, 238, 238, 0.948);
   color: black;
   border-radius: 2px;
   padding: 15px 30px;
   gap: 20px;
-  margin-bottom: 80px;
+  margin-top: 50px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .ord-card-header {
   display: flex;
@@ -194,6 +206,7 @@
   font-family: monospace;
   font-size: 15px;
   padding: 15px;
+  background-color: white;
   border: solid 1px rgba(0, 0, 0, 0.388);
   width: 270px;
 }
@@ -203,7 +216,7 @@
   font-size: 12px;
 }
 .receipt-items,
-.receipt-fee {
+.receipt-fee{
   font-size: 12px;
   display: flex;
   flex-direction: column;
@@ -213,6 +226,14 @@
 .receipt-fee .item {
   display: flex;
   justify-content: space-between;
+}
+.receipt-closing{
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  text-align: center;
 }
 
 .ord-card-footer {
@@ -238,19 +259,97 @@
   cursor: pointer;
 }
 
+/* res details cas */
+.res-details-cas {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(238, 238, 238, 0.886);
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 50px;
+}
+.res-body1,
+.res-body2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+.res-body1 div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+.res-body1 select {
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px 0;
+}
+
+.res-body2 {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 17px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+.res-body2 hr,
+.res-body2 h5,
+.res-body3 hr,
+.res-body3 h5 {
+  align-self: center;
+}
+.res-body2 div {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 5px;
+  gap: 10px;
+}
+
+.res-body3 {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  margin-top: 10px;
+  gap: 10px;
+}
+.res-body3 div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: white;
+}
+.res-body3 span{
+  margin-top: 5px;
+}
+
 /*table status styling*/
 .table-box {
-  width: 100%; 
+  width: 100%;
 }
 
 .order-table {
-  width: 100%; 
+  width: 100%;
 }
 
-.order-table th, .order-table td {
-  min-width: 150px; 
+.order-table th,
+.order-table td {
+  min-width: 150px;
   padding: 10px;
-  border: 1px solid #ddd; 
+  border: 1px solid #ddd;
 }
 
 .tablestat-con {
@@ -352,23 +451,23 @@
   padding: 10px 20px;
   border-radius: 10px;
 }
-.rev-con h4{
+.rev-con h4 {
   border-radius: 10px;
   padding: 10px;
   background-color: rgb(238, 238, 238);
 }
-.rev-datas{
+.rev-datas {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   gap: 30px;
   align-items: center;
 }
-.total-revenue{
+.total-revenue {
   font-size: 15px;
 }
 .rev-con canvas {
-  height: 250px; 
+  height: 250px;
   width: 250px;
 }
 
@@ -396,12 +495,11 @@
     visibility: hidden;
   }
 
-  .receipt, .receipt * {
+  .receipt,
+  .receipt * {
     visibility: visible;
   }
 }
-
-
 
 /* Layar Lebar (1024px ke atas) */
 @media screen and (max-width: 1024px) {
@@ -472,12 +570,10 @@
   .rev-datas {
     gap: 20px;
   }
-
 }
 
 /* Layar Menengah (780px ke atas) */
 @media screen and (max-width: 780px) {
-
   .history-con1 {
     align-items: center;
   }
@@ -518,19 +614,20 @@
 
   .table-box {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; 
-    max-width: 100%; 
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
   }
-  
+
   .order-table {
     min-width: 700px;
     border-collapse: collapse;
   }
-  
-  .order-table th, .order-table td {
-    min-width: 150px; 
+
+  .order-table th,
+  .order-table td {
+    min-width: 150px;
     padding: 10px;
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
   }
 
   .receipt {
@@ -542,7 +639,7 @@
   }
 
   .tablestat-con .tablestat-box {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .rev-con {
@@ -571,7 +668,6 @@
 
 /* Layar Kecil (480px ke atas) */
 @media screen and (max-width: 480px) {
-
   .history-con1 {
     flex-direction: column;
     align-items: center;

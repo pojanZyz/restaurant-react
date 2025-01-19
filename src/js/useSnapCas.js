@@ -32,13 +32,12 @@ const useSnapCas = (clientKey) => {
         //payment success
         onSuccess: (result) => {
           Swal.fire({
-            title: "Success",
             icon: "success",
-            text: "Payment Success! Order made",
+            title: "Success",
+            text: "Order creation success!",
             timer: 2000,
-            showConfirmButton: false,
+            showCancelButton: false,
           });
-          navigate("/cashier");
         },
 
         //payment pending
@@ -48,7 +47,6 @@ const useSnapCas = (clientKey) => {
             title: "Information",
             text: "Payment on pending",
           });
-          navigate("/cashier");
         },
 
         //payment error
@@ -78,9 +76,7 @@ const useSnapCas = (clientKey) => {
                 text: err.response?.data?.message || "Something went wrong",
               });
             })
-            .finally(() => {
-              navigate("/cashier");
-            });
+            .finally(() => {});
         },
       });
     } else {

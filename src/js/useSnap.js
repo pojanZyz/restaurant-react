@@ -38,7 +38,6 @@ const useSnap = (clientKey) => {
             timer: 2000,
             showConfirmButton: false,
           });
-          navigate("/loyalty");
         },
 
         //payment pending

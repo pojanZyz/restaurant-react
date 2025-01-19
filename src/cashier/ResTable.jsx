@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import useAuth from "../js/useAuth";
 import NoData from "../components/NoData";
-import OrderDetails from "../components/orderDetails";
+import OrderDetails from "../components/OrderDetails";
 import CashierLoader from "../components/CashierLoader";
+import ResDetailsCas from "../components/ResDetailsCas";
 
 const ResTable = () => {
   const { token, userData } = useAuth();
@@ -23,7 +25,7 @@ const ResTable = () => {
   const [limit, setLimit] = useState(50);
 
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState("");
+  const [selectedReservation, setSelectedReservation] = useState({});
 
   //debounces
   useEffect(() => {
@@ -52,6 +54,68 @@ const ResTable = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  //handle update res
+  const handleUpdateRes = async (
+    resId,
+    newReservationStatus,
+    oldReservationStatus
+  ) => {
+    if (newReservationStatus === oldReservationStatus) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Oops, you didn't make any changes",
+      });
+    }
+    const confirmation = await Swal.fire({
+      icon: "question",
+      title: "Confirmation",
+      text: "Update this reservation?",
+      showCancelButton: true,
+    });
+    if (confirmation.isConfirmed) {
+      setLoading(true);
+      setShowDetailsPopup(false);
+      try {
+        const res = await axios.patch(`api/reservation/${resId}`, {
+          reservationStatus: newReservationStatus,
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: res.data.message || "Reservation updated",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        fetchReservations();
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.response?.data?.message || "Something went wrong",
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  //handle reset filter
+  const handleResetFilter = () => {
+    setSearch("");
+    setFilterDate("");
+    setSort("");
+    setLimit(50);
+    setResType("");
+    setPaymentStatus("");
+  };
+
+  //handle btn details
+  const handleDetails = (reservation) => {
+    setSelectedReservation(reservation);
+    setShowDetailsPopup(!showDetailsPopup);
   };
 
   return (
@@ -90,97 +154,106 @@ const ResTable = () => {
             ) : (
               <>
                 <div className="table-box">
-                <table className="order-table">
-                  <thead>
-                    <tr className="poppins-regular">
-                      <th>Code</th>
-                      <th>Type</th>
-                      <th>Cus Name</th>
-                      <th>Table Number</th>
-                      <th>Res Status</th>
-                      <th>Payment Status</th>
-                      <th>Created At</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reservations.map((reservation) => (
-                      <tr
-                        key={reservation._id}
-                        className="quicksand"
-                      >
-                        <td>{reservation.resNumber}</td>
-                        <td>
-                          <span
-                            className={`poppins-regular ${
-                              reservation.resType === "cashier"
-                                ? "order-type-cas"
-                                : "order-type-onl"
-                            }`}
-                          >
-                            {reservation.resType === "cashier" ? "CAS" : "ONL"}
-                          </span>
-                        </td>
-                        <td
-                          className={`${
-                            reservation.userInfo?.username ? "" : "empty-lbl"
-                          }`}
-                        >
-                          {reservation.userInfo?.username || "Empty"}
-                        </td>
-                        <td
-                          className={`${
-                            reservation.tableInfo
-                              ? ""
-                              : "empty-lbl"
-                          }`}
-                        >
-                          {reservation.tableInfo
-                            .map((table) => table.tableNumber)
-                            .join(", ")}
-                        </td>
-                        <td>
-                          <span
-                            className={`${
-                              reservation.reservationStatus === "Pending"
-                                ? "res-pending"
-                                : reservation.reservationStatus === "Confirmed"
-                                ? "res-confirmed"
-                                : "res-cancelled"
-                            }`}
-                          >
-                            {reservation.reservationStatus}
-                          </span>
-                        </td>
-                        <td>
-                          <span
-                            className={`${
-                              reservation.paymentStatus === "Pending"
-                                ? "res-pending"
-                                : reservation.paymentStatus === "Paid"
-                                ? "res-confirmed"
-                                : "res-cancelled"
-                            }`}
-                          >
-                            {reservation.paymentStatus}
-                          </span>
-                        </td>
-                        <td>
-                          {new Date(reservation.createdAt).toLocaleDateString(
-                            "id-ID"
-                          )}{" "}
-                          -{" "}
-                          {new Date(reservation.createdAt).toLocaleTimeString(
-                            "id-ID",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          )}
-                        </td>
+                  <table className="order-table">
+                    <thead>
+                      <tr className="poppins-regular">
+                        <th>Code</th>
+                        <th>Type</th>
+                        <th>Cus Name</th>
+                        <th>Table Number</th>
+                        <th>Res Status</th>
+                        <th>Payment Status</th>
+                        <th>Created At</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {reservations.map((reservation) => (
+                        <tr
+                          key={reservation._id}
+                          className="quicksand"
+                          onClick={() => handleDetails(reservation)}
+                        >
+                          <td style={{ fontWeight: "bold" }}>
+                            {reservation.resNumber}
+                          </td>
+                          <td>
+                            <span
+                              className={`poppins-regular ${
+                                reservation.resType === "cashier"
+                                  ? "order-type-cas"
+                                  : "order-type-onl"
+                              }`}
+                            >
+                              {reservation.resType === "cashier"
+                                ? "CAS"
+                                : "ONL"}
+                            </span>
+                          </td>
+                          <td
+                            className={`${
+                              reservation.userInfo?.username ||
+                              reservation.customerDetails?.name
+                                ? ""
+                                : "empty-lbl"
+                            }`}
+                          >
+                            {reservation.userInfo?.username ||
+                              reservation.customerDetails?.name ||
+                              "Empty"}
+                          </td>
+                          <td
+                            className={`${
+                              reservation.tableInfo ? "" : "empty-lbl"
+                            }`}
+                          >
+                            {reservation.tableInfo
+                              .map((table) => table.tableNumber)
+                              .join(", ")}
+                          </td>
+                          <td>
+                            <span
+                              className={`${
+                                reservation.reservationStatus === "Pending"
+                                  ? "res-pending"
+                                  : reservation.reservationStatus ===
+                                    "Confirmed"
+                                  ? "res-confirmed"
+                                  : "res-cancelled"
+                              }`}
+                            >
+                              {reservation.reservationStatus}
+                            </span>
+                          </td>
+                          <td>
+                            <span
+                              className={`${
+                                reservation.paymentStatus === "Pending"
+                                  ? "res-pending"
+                                  : reservation.paymentStatus === "Paid"
+                                  ? "res-confirmed"
+                                  : "res-cancelled"
+                              }`}
+                            >
+                              {reservation.paymentStatus}
+                            </span>
+                          </td>
+                          <td>
+                            {new Date(reservation.createdAt).toLocaleDateString(
+                              "id-ID"
+                            )}{" "}
+                            -{" "}
+                            {new Date(reservation.createdAt).toLocaleTimeString(
+                              "id-ID",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
                 <div className="pagination">
                   <button
@@ -304,13 +377,20 @@ const ResTable = () => {
               />{" "}
               Cancelled
             </label>
+            <button
+              className="reset-fil-btn poppins-regular"
+              onClick={handleResetFilter}
+            >
+              Reset Filters
+            </button>
           </div>
         </div>
       </div>
-      <OrderDetails
+      <ResDetailsCas
         isVisible={showDetailsPopup}
         onClose={() => setShowDetailsPopup(false)}
-        order={selectedOrder}
+        onUpdate={handleUpdateRes}
+        reservation={selectedReservation}
       />
     </>
   );

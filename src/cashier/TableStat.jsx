@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 import CashierLoader from "../components/CashierLoader";
+import TablePopupCas from "../components/TablePopupCas";
+import useAuth from "../js/useAuth";
 
 const TableStat = () => {
+  const { token, userData } = useAuth();
   const [loading, setLoading] = useState(false);
   const [tables, setTables] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [showUpdatePopup, setShowUpdatePopup] = useState(false);
+  const [selectedTable, setSelectedTable] = useState({});
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -33,6 +39,44 @@ const TableStat = () => {
         setLoading(false);
       }
     }
+  };
+
+  //handle update
+  const handleUpdateTable = async (updatedTable) => {
+    setLoading(true);
+    setShowUpdatePopup(false);
+    try {
+      const res = await axios.patch(
+        `api/table-cas/${updatedTable._id}`,
+        updatedTable,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: res.data.message,
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      fetchTables();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.response.data.message || "Something went wrong",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //table click
+  const handleTableClick = (table) => {
+    setSelectedTable(table);
+    setShowUpdatePopup(!showUpdatePopup);
   };
   return (
     <div className="tablestat-con quicksand">
@@ -72,6 +116,7 @@ const TableStat = () => {
                     : "table-occupied"
                 }`}
                 key={table._id}
+                onClick={() => handleTableClick(table)}
               >
                 <div className="table-cap">
                   <i className="bi bi-people-fill"></i>
@@ -83,6 +128,13 @@ const TableStat = () => {
           </div>
         </>
       )}
+      <TablePopupCas
+        isVisible={showUpdatePopup}
+        onClose={() => setShowUpdatePopup(false)}
+        onUpdate={handleUpdateTable}
+        table={selectedTable}
+        selectedDate={selectedDate}
+      />
     </div>
   );
 };

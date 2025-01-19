@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import "../admin-css/history.css";
-import { NavLink } from "react-router-dom";
 
 import "../admin-css/ordercas.css";
 import axios from "axios";
 import CashierLoader from "../components/CashierLoader";
 import NoData from "../components/NoData";
-import OrderDetails from "../components/orderDetails";
+import OrderDetails from "../components/OrderDetails";
 
 const OrderTable = () => {
   const [loading, setLoading] = useState(false);
@@ -61,6 +60,16 @@ const OrderTable = () => {
     }
   };
 
+  //handle reset filter
+  const handleResetFilter = () => {
+    setSearch("")
+    setFilterDate("")
+    setSort("")
+    setLimit(50)
+    setOrderType("")
+    setPaymentStatus("")
+  }
+
   //handle open details
   const handleOpenDetails = (order) => {
     setSelectedOrder(order);
@@ -97,90 +106,92 @@ const OrderTable = () => {
           <div className="left-body">
             {loading ? (
               <CashierLoader />
-            ) : orderCount === 0 ? (
+            ) : orderCount === 0 || orders.length === 0 ? (
               <NoData str={"No order found"} />
             ) : (
               <>
-               <div className="table-box">
-               <table className="order-table">
-                  <thead>
-                    <tr className="poppins-regular">
-                      <th>Code</th>
-                      <th>Type</th>
-                      <th>Cus Name</th>
-                      <th>Table Number</th>
-                      <th>Payment Status</th>
-                      <th>Fee</th>
-                      <th>Created At</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map((order) => (
-                      <tr
-                        key={order._id}
-                        className="quicksand"
-                        onClick={() => handleOpenDetails(order)}
-                      >
-                        <td>{order.orderNumber}</td>
-                        <td>
-                          <span
-                            className={`poppins-regular ${
-                              order.orderType === "cashier"
-                                ? "order-type-cas"
-                                : "order-type-onl"
-                            }`}
-                          >
-                            {order.orderType === "cashier" ? "CAS" : "ONL"}
-                          </span>
-                        </td>
-                        <td
-                          className={`${
-                            order.userInfo?.username ? "" : "empty-lbl"
-                          }`}
-                        >
-                          {order.userInfo?.username || "Empty"}
-                        </td>
-                        <td
-                          className={`${
-                            order.tableInfo?.tableNumber ? "" : "empty-lbl"
-                          }`}
-                        >
-                          {order.tableInfo?.tableNumber || "Empty"}
-                        </td>
-                        <td>
-                          <span
-                            className={`${
-                              order.paymentStatus === "Pending"
-                                ? "res-pending"
-                                : order.paymentStatus === "Paid"
-                                ? "res-confirmed"
-                                : "res-cancelled"
-                            }`}
-                          >
-                            {order.paymentStatus}
-                          </span>
-                        </td>
-                        <td style={{ color: "#048727", fontWeight: "800" }}>
-                          Rp. {order.fee.toLocaleString("id-ID")}
-                        </td>
-                        <td>
-                          {new Date(order.createdAt).toLocaleDateString(
-                            "id-ID"
-                          )}{" "}
-                          -{" "}
-                          {new Date(order.createdAt).toLocaleTimeString(
-                            "id-ID",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          )}
-                        </td>
+                <div className="table-box">
+                  <table className="order-table">
+                    <thead>
+                      <tr className="poppins-regular">
+                        <th>Code</th>
+                        <th>Type</th>
+                        <th>Cus Name</th>
+                        <th>Table Number</th>
+                        <th>Payment Status</th>
+                        <th>Fee</th>
+                        <th>Created At</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-               </div>
+                    </thead>
+                    <tbody>
+                      {orders.map((order) => (
+                        <tr
+                          key={order._id}
+                          className="quicksand"
+                          onClick={() => handleOpenDetails(order)}
+                        >
+                          <td style={{ fontWeight: "bold" }}>
+                            {order.orderNumber}
+                          </td>
+                          <td>
+                            <span
+                              className={`poppins-regular ${
+                                order.orderType === "cashier"
+                                  ? "order-type-cas"
+                                  : "order-type-onl"
+                              }`}
+                            >
+                              {order.orderType === "cashier" ? "CAS" : "ONL"}
+                            </span>
+                          </td>
+                          <td
+                            className={`${
+                              order.userInfo?.username ? "" : "empty-lbl"
+                            }`}
+                          >
+                            {order.userInfo?.username || "Empty"}
+                          </td>
+                          <td
+                            className={`${
+                              order.tableInfo?.tableNumber ? "" : "empty-lbl"
+                            }`}
+                          >
+                            {order.tableInfo?.tableNumber || "Empty"}
+                          </td>
+                          <td>
+                            <span
+                              className={`${
+                                order.paymentStatus === "Pending"
+                                  ? "res-pending"
+                                  : order.paymentStatus === "Paid"
+                                  ? "res-confirmed"
+                                  : "res-cancelled"
+                              }`}
+                            >
+                              {order.paymentStatus}
+                            </span>
+                          </td>
+                          <td style={{ color: "#048727", fontWeight: "800" }}>
+                            Rp. {order.fee.toLocaleString("id-ID")}
+                          </td>
+                          <td>
+                            {new Date(order.createdAt).toLocaleDateString(
+                              "id-ID"
+                            )}{" "}
+                            -{" "}
+                            {new Date(order.createdAt).toLocaleTimeString(
+                              "id-ID",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
                 <div className="pagination">
                   <button
                     className="quicksand"
@@ -303,6 +314,12 @@ const OrderTable = () => {
               />{" "}
               Cancelled
             </label>
+            <button
+              className="reset-fil-btn poppins-regular"
+              onClick={handleResetFilter}
+            >
+              Reset Filters
+            </button>
           </div>
         </div>
       </div>

@@ -7,12 +7,12 @@ const AccountPopup = ({ isVisible, onClose, onLogout, profile }) => {
   useEffect(() => {
     setUsername(profile?.username);
     setUseremail(profile?.useremail);
-  }, [profile]);
+  }, [profile, isVisible]);
 
   //handle logout
   const handleLogout = () => {
-    onLogout()
-  }
+    onLogout();
+  };
 
   if (!isVisible) return null;
 
@@ -78,7 +78,9 @@ const AccountPopup = ({ isVisible, onClose, onLogout, profile }) => {
           </div>
         </form>
         <div className="acc-footer">
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <button className="logout-btn poppins-regular" onClick={handleLogout}>
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </button>
         </div>
       </div>
     </div>

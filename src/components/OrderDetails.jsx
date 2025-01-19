@@ -4,12 +4,12 @@ import html2canvas from "html2canvas";
 const OrderDetails = ({ isVisible, onClose, order }) => {
   //handle download sebagai gambar
   const handleDownloadAsImage = () => {
-    const element = document.querySelector(".receipt"); 
+    const element = document.querySelector(".receipt");
     html2canvas(element).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = imgData;
-      link.download = `order_${order.orderNumber}.png`; // Nama file gambar
+      link.download = `${order.orderNumber}_${new Date()}.png`;
       link.click();
     });
   };
@@ -31,7 +31,7 @@ const OrderDetails = ({ isVisible, onClose, order }) => {
       <div className="ord-detail-card">
         <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
-          <p className="poppins-regular">Order Details</p>
+          <p className="poppins-regular">{order.orderNumber}</p>
         </div>
         <div className="receipt">
           <strong>CafeCoding</strong>
@@ -40,7 +40,7 @@ const OrderDetails = ({ isVisible, onClose, order }) => {
           <span>==============================</span>
           <div className="receipt-date">
             <div>Code: {order.orderNumber}</div>
-            <div>Cashier: nama kasir</div>
+            <div>Cashier: {order.cashierInfo?.username}</div>
             <div>
               {new Date(order.createdAt).toLocaleDateString("id-ID")} -{" "}
               {new Date(order.createdAt).toLocaleTimeString("id-ID", {
@@ -67,11 +67,17 @@ const OrderDetails = ({ isVisible, onClose, order }) => {
           <div className="receipt-fee">
             <div className="item">
               <span>Tax:</span>
-              <span>tax here</span>
+              <span>-</span>
             </div>
             <div className="item">
               <span>Discount:</span>
-              <span>disc here</span>
+              <span>
+                {order.discountInfo?.discountType === "fixed"
+                  ? `Rp${order.discountInfo?.discountValue}`
+                  : order.discountInfo?.discountType === "percentage"
+                  ? `${order.discountInfo?.discountValue}%`
+                  : "-"}
+              </span>
             </div>
             <div className="item">
               <span>Total:</span>
@@ -85,15 +91,24 @@ const OrderDetails = ({ isVisible, onClose, order }) => {
               ""
             ) : (
               <>
-                <div>Money: Rp.money here</div>
-                <div>Change: Rp.change here</div>
+                <div>Pay: Rp{order.cashAmount.toLocaleString("id-ID")}</div>
+                <div>
+                  Change: Rp
+                  {(order.cashAmount - order.fee).toLocaleString("id-ID")}
+                </div>
               </>
             )}
+          </div>
+          <span>==============================</span>
+          <div className="receipt-closing">
+            <span>Visit our Website</span>
+            <span>[QR CODE HERE]</span>
           </div>
         </div>
         <div className="ord-card-footer">
           <button className="download-btn" onClick={handleDownloadAsImage}>
-            <i className="bi bi-file-earmark-arrow-down-fill"></i> Download as Image
+            <i className="bi bi-file-earmark-arrow-down-fill"></i> Download as
+            Image
           </button>
           <button className="print-btn" onClick={handlePrint}>
             <i className="bi bi-printer-fill"></i> Print

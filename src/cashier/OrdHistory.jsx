@@ -6,11 +6,16 @@ import TableStat from "./TableStat";
 import Revenue from "./Revenue";
 import OrderTable from "./OrderTable";
 import ResTable from "./ResTable";
+import { Helmet } from "react-helmet";
 
 const OrdHistory = () => {
   const [activeTab, setActiveTab] = useState("orders");
 
   return (
+    <>
+    <Helmet>
+      <title>CafeCoding | Cashier History</title>
+    </Helmet>
     <div className="ordhis-container">
       <div className="ordhis-wrap">
         <h3 className="poppins-regular">
@@ -36,7 +41,7 @@ const OrdHistory = () => {
             }`}
             onClick={() => setActiveTab("reservations")}
           >
-            <i class="bi bi-calendar-event-fill"></i> Reservations
+            <i className="bi bi-calendar-event-fill"></i> Reservations
           </button>
         </div>
 
@@ -45,6 +50,7 @@ const OrdHistory = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

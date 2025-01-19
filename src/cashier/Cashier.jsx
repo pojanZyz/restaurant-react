@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-dropdown-select";
@@ -7,11 +7,15 @@ import "../admin-css/cashier.css";
 import useAuth from "../js/useAuth";
 import useSnapCas from "../js/useSnapCas";
 import NoData from "../components/NoData";
+import OrderDetails from "../components/OrderDetails";
+import { Helmet } from "react-helmet";
 
 const Cashier = () => {
   const [loading, setLoading] = useState(false);
   const { token, userData, tokenLoading } = useAuth();
-  const { triggerPayment } = useSnapCas(import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
+  const { triggerPayment } = useSnapCas(
+    import.meta.env.VITE_MIDTRANS_CLIENT_KEY
+  );
 
   const [products, setProducts] = useState([]);
   const [tables, setTables] = useState([]);
@@ -37,6 +41,9 @@ const Cashier = () => {
   const [isCusEmailValid, setIsCusEmailValid] = useState("");
 
   const [discountsDetails, setDiscountsDetails] = useState({});
+
+  const [showDetailsPopup, setShowDetailsPopup] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState("");
 
   //debounces
   useEffect(() => {
@@ -116,7 +123,7 @@ const Cashier = () => {
     if (customerEmail == "") return setIsCusEmailValid("");
     setCusEmailLoading(true);
     try {
-      const res = await axios.get(`api/user-by-email/${customerEmail}`);
+      const res = await axios.get(`api/user-by-email/${debouncedCusEmail}`);
       setIsCusEmailValid(res.status === 200 ? "valid" : "invalid");
     } catch (error) {
       console.error(error);
@@ -129,6 +136,13 @@ const Cashier = () => {
   //create order
   const handleOrder = async (e) => {
     e.preventDefault();
+    if(!token){
+      return Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Token is invalid or expired"
+      })
+    }
     if (!cart.length || !paymentMethod) {
       return Swal.fire({
         icon: "warning",
@@ -136,11 +150,21 @@ const Cashier = () => {
         text: "Please complete the inputs",
       });
     }
-    if(isCusEmailValid === "invalid" || isDiscountValid === "invalid"){
+    if (isCusEmailValid === "invalid" || isDiscountValid === "invalid") {
       return Swal.fire({
         icon: "warning",
         title: "Warning",
         text: "Email or Discount code is invalid",
+      });
+    }
+    if (
+      paymentMethod === "Cash" &&
+      (customerMoney < calculateFinalPrice() || !customerMoney)
+    ) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "Cash amount invalid",
       });
     }
     const confirmation = await Swal.fire({
@@ -169,6 +193,7 @@ const Cashier = () => {
             customerEmail: customerEmail || null,
             cashierId: userData?._id || null,
             discountId: discountsDetails.discountId || null,
+            cashAmount: customerMoney || null,
           },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -189,12 +214,15 @@ const Cashier = () => {
             timer: 2000,
             showConfirmButton: false,
           });
+          setTimeout(() => {
+            handleOpenDetails(res.data.data);
+          }, 2000);
         }
 
         if (res.data.snapToken) {
           const snapToken = res.data.snapToken;
           const orderId = res.data.orderId;
-          triggerPayment(snapToken, orderId);
+          triggerPayment(snapToken, orderId)
         }
       } catch (error) {
         console.error(error);
@@ -296,7 +324,17 @@ const Cashier = () => {
     return calculateTotalPrice() - calculateDiscount();
   };
 
+  //handle open details
+  const handleOpenDetails = (order) => {
+    setSelectedOrder(order);
+    setShowDetailsPopup(!showDetailsPopup);
+  };
+
   return (
+    <>
+    <Helmet>
+      <title>CafeCoding | Cashier</title>
+    </Helmet>
     <div className="cashier-box">
       <div className="cashier-container quicksand">
         <div className="left-container">
@@ -404,7 +442,7 @@ const Cashier = () => {
                 <div className="no-cart">
                   <i className="bi bi-info-circle-fill"></i>
                   <h4>TIP</h4>
-                  <p>Select the product in the left side of the screen</p>
+                  <p>Select the product on the left side of the screen</p>
                 </div>
               ) : (
                 <div className="cart-items">
@@ -585,7 +623,7 @@ const Cashier = () => {
               <div className="form-group-row2">
                 {paymentMethod === "Cash" ? (
                   <>
-                    <label>Customer money</label>
+                    <label>Cash Amount (customer)</label>
                     <input
                       className="quicksand customer-money"
                       type="number"
@@ -620,7 +658,14 @@ const Cashier = () => {
           </form>
         </div>
       </div>
+      {/* receipt */}
+      <OrderDetails
+        isVisible={showDetailsPopup}
+        onClose={() => setShowDetailsPopup(false)}
+        order={selectedOrder}
+      />
     </div>
+    </>
   );
 };
 
