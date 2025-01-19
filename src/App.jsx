@@ -141,7 +141,7 @@ function App() {
   };
 
   axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = "http://localhost:8080/"
+  axios.defaults.baseURL = "https://cafemdn-api.vercel.app/"
 
   return (
     <>
