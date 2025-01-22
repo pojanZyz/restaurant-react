@@ -1,7 +1,7 @@
 import React from "react";
 import html2canvas from "html2canvas";
 
-const OrderDetails = ({ isVisible, onClose, order }) => {
+const OrderDetails = ({ isVisible, onClose, order, from }) => {
   //handle download sebagai gambar
   const handleDownloadAsImage = () => {
     const element = document.querySelector(".receipt");
@@ -23,9 +23,9 @@ const OrderDetails = ({ isVisible, onClose, order }) => {
 
   return (
     <div
-      className={`order-details-con poppins-regular ${
-        isVisible ? "ani-appear" : ""
-      }`}
+      className={`${
+        from === "cashier" ? "order-details-con" : "common-con"
+      } poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
       <div className="ord-detail-card">

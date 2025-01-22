@@ -10,14 +10,14 @@ import Home from "./common/Home";
 import Menu from "./common/Menu";
 import Order from "./common/Order";
 import Reservation from "./common/Reservation";
-import Loyalty from "./common/Loyalty";
+import Loyalty from "./common/loyalty/Loyalty";
 import Feedback from "./common/Feedback";
 
 import AdminHome from "./admin/AdminHome";
-import MenuAdmin from "./admin/MenuAdmin";
+import MenuAdmin from "./admin/products/MenuAdmin";
 import ReservationAdmin from "./admin/ReservationAdmin";
 import OrderAdmin from "./admin/OrderAdmin";
-import UserAdmin from "./admin/UserAdmin";
+import UserAdmin from "./admin/users/UserAdmin";
 import TableAdmin from "./admin/TableAdmin";
 import CommentAdmin from "./admin/CommentAdmin";
 import CashierNavbar from "./components/CashierNavbar";

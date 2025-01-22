@@ -663,6 +663,7 @@ const Cashier = () => {
         isVisible={showDetailsPopup}
         onClose={() => setShowDetailsPopup(false)}
         order={selectedOrder}
+        from={"cashier"}
       />
     </div>
     </>

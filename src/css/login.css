@@ -81,7 +81,7 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 3px solid var(--warnaKeempat);
+    border: 3px solid var(--warnaKedua);
     border-radius: 20px;
     background-color: rgb(255, 255, 255);
     color: #0d0d0d;

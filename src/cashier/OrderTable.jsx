@@ -327,6 +327,7 @@ const OrderTable = () => {
         isVisible={showDetailsPopup}
         onClose={() => setShowDetailsPopup(false)}
         order={selectedOrder}
+        from={"cashier"}
       />
     </>
   );

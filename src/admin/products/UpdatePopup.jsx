@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "../admin-css/admin-menu.css";
 
-const UpdatePopup = ({ isVisible, onClose, onUpdate, product }) => {
+const UpdatePopup = ({ isVisible, onClose, onUpdate, onDelete, product }) => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
@@ -44,6 +43,9 @@ const UpdatePopup = ({ isVisible, onClose, onUpdate, product }) => {
     };
     onUpdate(updatedProduct);
   };
+  const handleDelete = () => {
+    onDelete(product._id);
+  };
 
   if (!isVisible) return null;
 
@@ -55,7 +57,7 @@ const UpdatePopup = ({ isVisible, onClose, onUpdate, product }) => {
       <div className="update-card" onClick={(e) => e.stopPropagation()}>
         <div className="card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
-          <span>Update Product</span>
+          <span>Product Details</span>
         </div>
         <div className="card-content">
           <div className="card-row1">
@@ -137,13 +139,18 @@ const UpdatePopup = ({ isVisible, onClose, onUpdate, product }) => {
                 id="isAvailable"
                 className="quicksand"
                 checked={isAvailable === "Available"}
-                onChange={(e) => setIsAvailable(e.target.checked ? "Available" : "Unavailable")}
+                onChange={(e) =>
+                  setIsAvailable(e.target.checked ? "Available" : "Unavailable")
+                }
                 required
               />
             </div>
           </div>
         </div>
         <div className="card-footer">
+          <button className="delete-btn poppins-regular" onClick={handleDelete}>
+            Delete
+          </button>
           <button className="update-btn poppins-regular" onClick={handleUpdate}>
             Update
           </button>

@@ -93,6 +93,7 @@ const CashierNavbar = () => {
         onClose={() => setShowAccountPopup(!showAccountPopup)}
         onLogout={handleLogout}
         profile={userData}
+        from={"cashier"}
       />
     </nav>
   );

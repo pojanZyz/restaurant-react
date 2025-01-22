@@ -71,10 +71,7 @@ const Sidebar = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
       if (
@@ -163,12 +160,16 @@ const Sidebar = () => {
                   <span>Reservation</span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/loyalty">
-                  <i className="bi bi-person-hearts"></i>
-                  <span>Loyalty</span>
-                </NavLink>
-              </li>
+              {token ? (
+                <li>
+                  <NavLink to="/loyalty">
+                    <i className="bi bi-person-hearts"></i>
+                    <span>Loyalty</span>
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
               <li>
                 <NavLink to="/feedback">
                   <i className="bi bi-envelope-paper-heart-fill"></i>
@@ -187,10 +188,7 @@ const Sidebar = () => {
               {token ? (
                 <>
                   {/* Dropdown untuk akun */}
-                  <div
-                    className="dropdown"
-                    ref={dropdownRef}
-                  >
+                  <div className="dropdown" ref={dropdownRef}>
                     <button
                       className="dropdown-toggle poppins-regular"
                       onClick={toggleDropdown}
@@ -200,7 +198,8 @@ const Sidebar = () => {
                       <i
                         className={`bi bi-chevron-${
                           dropdownOpen ? "left" : "right"
-                        } logout-logo`}></i>
+                        } logout-logo`}
+                      ></i>
                     </button>
                     {dropdownOpen && (
                       <div className="dropdown-menu">
@@ -218,10 +217,7 @@ const Sidebar = () => {
               ) : (
                 <>
                   {/* Dropdown untuk login/register */}
-                  <div
-                    className="dropdown"
-                    ref={authDropdownRef}
-                  >
+                  <div className="dropdown" ref={authDropdownRef}>
                     <button
                       className="dropdown-toggle poppins-regular"
                       onClick={toggleAuthDropdown}
@@ -231,7 +227,8 @@ const Sidebar = () => {
                       <i
                         className={`bi bi-chevron-${
                           authDropdownOpen ? "left" : "right"
-                        } logout-logo`}></i>
+                        } logout-logo`}
+                      ></i>
                     </button>
                     {authDropdownOpen && (
                       <div className="dropdown-menu">

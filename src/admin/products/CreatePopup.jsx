@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "../admin-css/admin-menu.css";
 
 const CreatePopup = ({ isVisible, onClose, onCreate }) => {
   const [productName, setProductName] = useState("");

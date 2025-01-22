@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const AccountPopup = ({ isVisible, onClose, onLogout, profile }) => {
+const AccountPopup = ({ isVisible, onClose, onLogout, profile, from }) => {
   const [username, setUsername] = useState("");
   const [useremail, setUseremail] = useState("");
 
@@ -18,7 +18,7 @@ const AccountPopup = ({ isVisible, onClose, onLogout, profile }) => {
 
   return (
     <div
-      className={`order-details-con poppins-regular ${
+      className={`${from === "cashier" ? "order-details-con" : "common-con"} poppins-regular ${
         isVisible ? "ani-appear" : ""
       }`}
       onClick={onClose}
