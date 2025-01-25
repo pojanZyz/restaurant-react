@@ -79,107 +79,101 @@ const AdminSidebar = () => {
   return (
     <div className="topBar-box">
       <div className="topBar topBar-Admin">
-            <div className="profile-box">
-              <a onClick={toggleSidebar} className="profile-btn">
-                <i className="bi bi-list"></i>
-              </a>
-            </div>
-    
-            <div className="logo-container">
-              <span>
-                <NavLink to="/feedback">
-                    <div className="side-head">
-                      <img src={logo} alt="logo-resto" />
-                    </div>
-                </NavLink>
-              </span>
-            </div>
+        <div className="profile-box">
+          <a onClick={toggleSidebar} className="profile-btn">
+            <i className="bi bi-list"></i>
+          </a>
+        </div>
 
-            <div className="mail">
-              <span>
-                <a href="" className="admin-mail">
-                  <i className="bi bi-envelope top-mail-admin"></i>
-                </a>
-              </span>
-            </div>
+        <div className="logo-container">
+          <span>
+            <NavLink to="/feedback">
+              <div className="side-head">
+                <img src={logo} alt="logo-resto" />
+              </div>
+            </NavLink>
+          </span>
+        </div>
+
+        <div className="mail">
+          <span>
+            <a href="" className="admin-mail">
+              <i className="bi bi-envelope top-mail-admin"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <aside
+        id="admin-sidebar"
+        className={`poppins-regular ${isOpen ? "open" : "closed"}`}
+        ref={sidebarRef}
+      >
+        <div className="container-sidebar-admin">
+          {/* Header Sidebar */}
+          <div className="admin-side-head none-head">
+            <img src={logo} alt="logo-resto" />
+            <h1 className="agu-display">CafeCoding</h1>
           </div>
 
-          
-          <aside id="admin-sidebar" className={`poppins-regular ${isOpen ? "open" : "closed"}`} ref={sidebarRef}>
-            <div className="container-sidebar-admin">
-              {/* Header Sidebar */}
-              <div className="admin-side-head none-head">
-                <img src={logo} alt="logo-resto" />
-                <h1 className="agu-display">CafeCoding</h1>
-              </div>
+          {/* Menu Navigasi */}
+          <nav className="admin-box-menu">
+            <hr className="none-head" />
+            <ul>
+              <li>
+                <NavLink to="/admin" end>
+                  <i className="bi bi-house-fill"></i>
+                  <span>Dashboard</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/menu">
+                  <i className="bi bi-cart-fill"></i>
+                  <span>Products</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/user">
+                  <i className="bi bi-person-fill"></i>
+                  <span>Users</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/order">
+                  <i className="bi bi-bag-check-fill"></i>
+                  <span>Orders</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/discount">
+                  <i className="bi bi-percent"></i>
+                  <span>Discounts</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/table">
+                  <i className="bi bi-table"></i>
+                  <span>Tables</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/reservation">
+                  <i className="bi bi-calendar-check"></i>
+                  <span>Reservations</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/comment">
+                  <i className="bi bi-chat-left-dots-fill"></i>
+                  <span>Comments</span>
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-              {/* Menu Navigasi */}
-              <nav className="admin-box-menu">
-                <hr className="none-head" />
-                <ul>
-                  <li>
-                    <NavLink
-                      to="/admin"
-                      end
-                    >
-                      <i className="bi bi-house-fill"></i>
-                      <span>Dashboard</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/menu"
-                    >
-                      <i className="bi bi-cart-fill"></i>
-                      <span>Products</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/user"
-                    >
-                      <i className="bi bi-person-fill"></i>
-                      <span>Users</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/order"
-                    >
-                      <i className="bi bi-bag-check-fill"></i>
-                      <span>Orders</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/table"
-                    >
-                      <i className="bi bi-table"></i>
-                      <span>Tables</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/reservation"
-                    >
-                      <i className="bi bi-calendar-check"></i>
-                      <span>Reservations</span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/admin/comment"
-                    >
-                      <i className="bi bi-chat-left-dots-fill"></i>
-                      <span>Comments</span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-
-            {/* Logout Section */}
-            <div className="logout-container">
+        {/* Logout Section */}
+        <div className="logout-container">
           {loading ? (
             <p className="loading-proces">Processing...</p>
           ) : (
@@ -191,7 +185,11 @@ const AdminSidebar = () => {
                 >
                   <i className="bi bi-person-fill-gear logout-logo"></i>
                   <span> Account</span>
-                  <i className={`bi bi-chevron-${dropdownOpen ? "left" : "right"} logout-logo`} ></i>
+                  <i
+                    className={`bi bi-chevron-${
+                      dropdownOpen ? "left" : "right"
+                    } logout-logo`}
+                  ></i>
                 </button>
                 {dropdownOpen && (
                   <div className="dropdown-menu dropdown-menu-admin">
@@ -210,7 +208,6 @@ const AdminSidebar = () => {
         </div>
       </aside>
     </div>
-    
   );
 };
 

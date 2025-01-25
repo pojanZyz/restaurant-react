@@ -97,13 +97,20 @@ const ProductStat = ({ productCount, bestSellingProducts, catCount }) => {
     },
   };
 
-  // Data untuk chart Pie
+  const colorMap = {
+    food: "#fce40a",
+    drink: "#28fad3",
+    other: "#807e6e",
+  };
+  //pie
   const pieChartData = {
-    labels: catCount.map((category) => category._id),
+    labels: (catCount || []).map((category) => category._id),
     datasets: [
       {
-        data: catCount.map((category) => category.count),
-        backgroundColor: ["#254d49", "#4db6f7", "#f7e94d"],
+        data: (catCount || []).map((category) => category.count),
+        backgroundColor: (catCount || []).map(
+          (category) => colorMap[category._id] || "#ccc"
+        ),
       },
     ],
   };

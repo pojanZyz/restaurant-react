@@ -24,6 +24,8 @@ ChartJS.register(
 import avatar from "../../img/avatar.jpeg"
 
 const UserStat = ({ userCount, mostCoins, roleCount }) => {
+
+  //bar
   const chartData = {
     labels: mostCoins.map((user) => user.username),
     datasets: [
@@ -36,8 +38,6 @@ const UserStat = ({ userCount, mostCoins, roleCount }) => {
       },
     ],
   };
-
-  // Opsi untuk chart Bar
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -96,18 +96,23 @@ const UserStat = ({ userCount, mostCoins, roleCount }) => {
     },
   };
 
-  // Data untuk chart Pie
+  const colorMap = {
+    admin: "#38fc45",
+    customer: "#fce40a",
+    cashier: "#28fad3",
+  };
+  //pie
   const pieChartData = {
-    labels: roleCount.map((user) => user._id),
+    labels: (roleCount || []).map((user) => user._id),
     datasets: [
       {
-        data: roleCount.map((user) => user.count),
-        backgroundColor: ["#254d49", "#4db6f7", "#f7e94d"],
+        data: (roleCount || []).map((user) => user.count),
+        backgroundColor: (roleCount || []).map(
+          (user) => colorMap[user._id] || "#ccc"
+        ),
       },
     ],
   };
-
-  // Opsi untuk chart Pie
   const pieChartOptions = {
     responsive: true,
     plugins: {

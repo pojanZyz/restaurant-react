@@ -111,13 +111,19 @@ const DetailsResPopup = ({
                 <strong>
                   <i className="bi bi-person-fill"></i>
                 </strong>{" "}
-                {reservation.userInfo.username}
+                {reservation.userInfo?.username ||
+                  reservation.customerDetails?.name}
               </div>
               <div>
                 <strong>
                   <i className="bi bi-envelope-fill"></i>
                 </strong>{" "}
-                {reservation.userInfo.useremail}
+                {reservation.userInfo?.useremail || "-"}
+              </div>
+              <div>
+                <i className="bi bi-telephone-fill"></i>{" "}
+                {reservation.userInfo?.phoneNumber ||
+                  reservation.customerDetails?.phoneNumber}
               </div>
             </div>
             <div className="content-3-pay">

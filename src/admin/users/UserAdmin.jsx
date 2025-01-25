@@ -40,7 +40,7 @@ const UserAdmin = () => {
     }
   }, [token, debouncedSearch, sort, role, page, limit]);
   useEffect(() => {
-    fetchProdStats();
+    fetchUserStats();
   }, [users]);
 
   //events handler
@@ -78,7 +78,7 @@ const UserAdmin = () => {
   };
 
   //get user stats
-  const fetchProdStats = async () => {
+  const fetchUserStats = async () => {
     try {
       const res = await axios.get("api/user-stats");
       setRoleCount(res.data.roleCount);
@@ -145,6 +145,15 @@ const UserAdmin = () => {
           </div>
 
           <div className="admin-menu-con3">
+            <div className="table-det">
+              <div className="page-ttl">
+                <i className="bi bi-columns"></i>
+                <span className="span-2">
+                  Page {page} of {totalPages}
+                </span>
+              </div>
+            </div>
+
             <div className="filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>

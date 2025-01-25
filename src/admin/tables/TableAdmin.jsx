@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import "../admin-css/admin-table.css";
-import useAuth from "../js/useAuth";
-import Loader from "../components/Loader";
-import UpdateTablePopup from "../components/UpdateTablePopup";
-import CreateTablePopup from "../components/CreateTablePopup";
+import "./admin-table.css";
+import useAuth from "../../js/useAuth";
+import Loader from "../../components/Loader";
+import UpdateTablePopup from "./UpdateTablePopup";
+import CreateTablePopup from "./CreateTablePopup";
 
 const TableAdmin = () => {
   const { token } = useAuth();
@@ -160,35 +160,24 @@ const TableAdmin = () => {
         </div>
 
         <div className="admin-table-con2">
-          <div className="control-panel-table">
+          <div className="table-stat">
+            <div className="tableadd-con" onClick={() => setShowCreatePopup(!showCreatePopup)}>
+              <i className="bi bi-table"></i>
+              <div>
+                <i className="bi bi-plus-square-dotted"></i>
+                <p>Add new table</p>
+              </div>
+            </div>
+          </div>
+          <div className="table-main-con">
+            <h4 className="poppins-regular">Table Status</h4>
             <input
               type="date"
               value={selectedDate}
               min={new Date().toISOString().split("T")[0]}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="date-input"
+              className="date-input quicksand"
             />
-            <div className="table-count-con">
-              <span className="poppins-regular">
-                {tableCount || 0} <i className="bi bi-table"></i>
-              </span>
-              <span className="span-2">TABLES</span>
-            </div>
-            <button
-              className="add-table-btn poppins-regular"
-              onClick={() => setShowCreatePopup(!showCreatePopup)}
-            >
-              <i className="bi bi-plus-square"></i> <span>Add new table</span>
-            </button>
-          </div>
-          <div className="table-main-con">
-            <h4 className="poppins-regular">Click to do actions</h4>
-            <p>
-              Table in: {selectedDate}{" "}
-              {selectedDate == new Date().toISOString().split("T")[0]
-                ? "(Today)"
-                : " "}
-            </p>
             <ul className="admin-legend-con">
               <li>
                 <div className="green-sqr"></div> : Available

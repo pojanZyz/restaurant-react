@@ -15,16 +15,17 @@ import Feedback from "./common/Feedback";
 
 import AdminHome from "./admin/AdminHome";
 import MenuAdmin from "./admin/products/MenuAdmin";
-import ReservationAdmin from "./admin/ReservationAdmin";
+import ReservationAdmin from "./admin/reservations/ReservationAdmin";
 import OrderAdmin from "./admin/OrderAdmin";
 import UserAdmin from "./admin/users/UserAdmin";
-import TableAdmin from "./admin/TableAdmin";
-import CommentAdmin from "./admin/CommentAdmin";
+import TableAdmin from "./admin/tables/TableAdmin";
+import CommentAdmin from "./admin/comments/CommentAdmin";
 import CashierNavbar from "./components/CashierNavbar";
 import Cashier from "./cashier/Cashier";
 import OrdHistory from "./cashier/OrdHistory";
 import PaymentResult from "./common/PaymentResult";
 import CasReservation from "./cashier/CasReservation";
+import DiscountAdmin from "./admin/discounts/DiscountAdmin";
 
 function App() {
   const location = useLocation();
@@ -186,6 +187,7 @@ function App() {
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/menu" element={<MenuAdmin />} />
         <Route path="/admin/order" element={<OrderAdmin />} />
+        <Route path="/admin/discount" element={<DiscountAdmin />} />
         <Route path="/admin/reservation" element={<ReservationAdmin />} />
         <Route path="/admin/user" element={<UserAdmin />} />
         <Route path="/admin/table" element={<TableAdmin />} />

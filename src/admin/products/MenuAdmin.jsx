@@ -252,6 +252,19 @@ const MenuAdmin = () => {
           </div>
 
           <div className="admin-menu-con3">
+            <div className="table-det">
+              <div className="page-ttl">
+                <i className="bi bi-columns"></i>
+                <span className="span-2">
+                  Page {page} of {totalPages}
+                </span>
+              </div>
+              <div className="page-ttl">
+                <i className="bi bi-hand-index-thumb"></i>
+                <span>Click each items to see details.</span>
+              </div>
+            </div>
+            
             <div className="filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
