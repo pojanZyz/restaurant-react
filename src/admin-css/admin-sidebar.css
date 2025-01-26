@@ -1,0 +1,75 @@
+/* Side-bar */
+#admin-sidebar {
+  background-color: rgb(89, 89, 250);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Menu box */
+.admin-box-menu a:hover {
+  background-color: rgb(206, 206, 241);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.admin-box-menu .active {
+  background-color: rgb(5, 5, 96);
+  color: white;
+  transition: transform 1s ease-out;
+}
+
+.admin-box-menu .active:hover,
+.admin-box-menu i:hover {
+  background-color: rgb(206, 206, 241);
+  color: #000;
+  transform: scale(1.1);
+}
+.admin-box-menu .active i:hover {
+  color: #000; 
+}
+
+.dropdown-menu-admin button::before,
+.dropdown-menu-admin a::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(to top left, rgb(89, 89, 250), transparent);
+    height: 100%;
+    width: 100%;
+    top: 100%; 
+    left: -100%; 
+    z-index: -1; 
+    transition: all 0.5s ease; 
+}
+
+.dropdown-menu-admin button:hover::before,
+.dropdown-menu-admin a:hover::before {
+    background: linear-gradient(to top left, rgb(206, 206, 241), rgb(89, 89, 250));
+}
+
+.dropdown-menu-admin button i,
+.dropdown-menu-admin button{
+    color: black; 
+}
+
+.dropdown-menu-admin button:hover i,
+.dropdown-menu-admin button:hover{
+    color: rgb(206, 206, 241); 
+}
+
+
+@media (max-height: 600px){
+  .admin-box-menu ul li a i{
+    font-size: 12px;
+  }
+
+
+}
+
+@media (max-width: 768px) { 
+  .topBar-Admin {
+    background-color: rgb(89, 89, 250);
+    border-bottom: 1px solid rgb(5, 5, 96);
+}
+
+}

@@ -1,0 +1,369 @@
+body {
+    font-size: 1.5rem;
+}
+
+.main-regist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../img/bg_login.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.container-regist {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background: rgba(241, 242, 243, 0.064);
+    box-shadow: 0px 0px 15px var(--warnaUtama);
+    border: 3px solid var(--warnaKedua) ;
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(25px);
+    gap: 20px;
+    width: 46rem;
+}
+
+.conRegis-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 16.5rem;
+    justify-content: end;
+}
+.conRegis-1 i{
+    color: white;
+    position: absolute;
+    transform: translateX(-10rem) translateY(-4rem);
+}
+.conRegis-1 i:hover{
+    cursor: pointer;
+    color: var(--warnaKedua);
+}
+.conRegis-1 img{
+    margin-right: 40px;
+}
+
+#input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+#input-wrapper h1 {
+    margin-bottom: 10px;
+}
+
+#input-wrapper h1 a {
+    font-style: none;
+    font-size: small;
+    text-decoration: none;
+    color: white;
+}
+
+.input-con-regist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid var(--warnaKedua);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    color: #0d0d0d;
+    mix-blend-mode: difference;
+    padding: 5px 15px;
+    width: 300px;
+}
+
+.input-con-regist i{
+    color: rgb(0, 0, 0);
+}
+.input-con-regist input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 15px ;
+    font-weight: 600;
+    margin: 0;
+}
+
+.input-con-regist input::placeholder {
+    color: #404040e4;
+}
+
+hr {
+    width: 80%;
+}
+
+#input-fields {
+    margin-top: 20px;
+    width: 280px;
+}
+
+#input-fields form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#input-fields .login-input {
+    font-size: 15px;
+    padding: 5px 15px;
+    width: 100%;
+    border: 2px solid var(--warnaKedua);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+input::placeholder {
+    color: black;
+}
+
+#input-fields .login-input:focus {
+    outline: none;
+    box-shadow: 0px 0px 15px #C79E73;
+    border: solid #C79E73;
+    background-color: var(--warnaKedua);
+    color: black;
+}
+
+#remember {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 20px !important;
+    display: block;
+    margin-right: 10px !important;
+}
+
+#remember-me {
+    display: flex;
+    width: 100%;
+    font-size: 16px;
+    mix-blend-mode: difference;
+}
+
+ form .regis-btn {
+    padding: 7px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0px;
+    background-color: green;
+    border: white solid 1px;
+    background-size: 200%;
+    color: white;
+    align-self: flex-end;
+}
+form .regis-btn:disabled{
+    background-color: rgb(2, 36, 2);
+    color: rgba(255, 255, 255, 0.364);
+    border: solid rgba(255, 255, 255, 0.352) 1px;
+    cursor: not-allowed;
+}
+
+form .regis-btn:hover {
+    background-color: rgb(79, 236, 79);
+}
+
+@keyframes warna {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 50% 100%;
+    }
+}
+
+@media (max-width: 912px) {
+    #regist-container {
+        width: 40rem;
+        height: 25rem;
+        /* flex-direction: column; */
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .conRegis-1{
+        align-items: center;
+    }
+
+    .conRegis-1 img {
+        /* width: 8rem; */
+        /* height: 8rem; */
+    }
+
+    .conRegis-1 i{
+        font-size: 1.5rem;
+        position: absolute;
+        transform: translateX(-8rem) translateY(-3rem);
+    }
+
+    #input-wrapper{
+        font-size: 1rem;
+    }
+    #logo-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #input-fields {
+        width: 100%;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
+        width: 100%;
+    }
+}
+@media (max-width: 668px) {
+    #regist-container {
+        width: 23rem;
+        height: 35rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .conRegis-1{
+        align-items: center;
+    }
+
+    .conRegis-1 img {
+        width: 8rem;
+        height: 8rem;
+        margin-right: 0;
+    }
+
+    .conRegis-1 i{
+        font-size: 1.2rem;
+        position: absolute;
+        transform: translateX(-9.5rem) translateY(-1rem);
+    }
+
+    .input-con-regist{
+        width: 18rem;
+        height: 40px;
+    }
+
+    #input-fields {
+        width: 100%;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
+        width: 100%;
+    }
+}
+@media (max-width: 400px) {
+    #regist-container {
+        width: 18rem;
+        height: 32rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .conRegis-1{
+        align-items: center;
+    }
+
+    .conRegis-1 img {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .conRegis-1 i{
+        font-size: 1.2rem;
+        position: absolute;
+        transform: translateX(-7.5rem);
+    }
+
+    .input-con-regist{
+        width: 15rem;
+        height: 30px;
+    }
+
+    #input-fields {
+        width: 100%;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
+        width: 100%;
+    }
+}
+
+
+@media (max-height: 570px){
+    #regist-container {
+        width: 15rem;
+        height: 25rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+    }
+    .conRegis-1 img {
+        width: 4rem;
+        height: 4rem;
+    }
+    .conRegis-1 i{
+        font-size: .9rem !important;
+        position: absolute;
+        transform: translateX(-6rem) translateY(0.5rem);
+    }
+
+    .input-con-regist{
+        width: 10rem;
+        height: 30px;
+    }
+    .input-con-regist input{
+        font-size: 10px;
+    }
+    #input-wrapper h1{
+        font-size: 1rem;
+    }
+
+    #input-wrapper hr {
+        width: 60%;
+    }
+
+    .register-anc{
+        font-size: 0.5rem !important;
+    }
+
+    form .regis-btn {
+        width: 90px;
+        height: 30px;
+        margin-top: -8px;
+        font-size: 10px;
+    }
+}
+
+
+
+
+

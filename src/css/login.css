@@ -1,0 +1,260 @@
+body {
+    font-size: 1.5rem;
+}
+
+#login-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../img/bg_login.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#login-container {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background: rgba(241, 242, 243, 0.064);
+    box-shadow: 0px 0px 15px var(--warnaUtama);
+    border: 3px solid var(--warnaKedua) ;
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(25px);
+    gap: 30px;
+}
+
+.conLogin-1{
+    display: flex;
+    flex-direction: column;
+    height:max-content;
+    justify-content: space-between;
+}
+.conLogin-1 i{
+    color: white;
+}
+.conLogin-1 i:hover{
+    cursor: pointer;
+    color: var(--warnaKedua);
+}
+.logo{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: white;
+    margin-top: 40px;
+}
+
+#input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+#input-wrapper h1 {
+    margin-bottom: 10px;
+}
+
+#input-wrapper h1 a {
+    font-style: none;
+    font-size: small;
+    text-decoration: none;
+    color: white;
+}
+
+hr {
+    width: 80%;
+}
+
+#input-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.input-login-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid var(--warnaKedua);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    color: #0d0d0d;
+    mix-blend-mode: difference;
+    padding: 5px 15px;
+    width: 300px;
+}
+.input-login-con i{
+    color: rgb(0, 0, 0);
+}
+.input-login-con input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 15px ;
+    font-weight: 600;
+    margin: 0;
+}
+
+.input-login-con input::placeholder {
+    color: #404040e4;
+}
+
+.register-anc{
+    font-size: 13px;
+    align-self: center;
+    font-weight: 500;
+}
+.register-anc a{
+    color: cyan;
+    font-weight: 700;
+}
+.register-anc a:hover{
+    text-decoration: underline;
+}
+
+form .login-btn {
+    padding: 7px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0px;
+    background-color: green;
+    border: white solid 1px;
+    background-size: 200%;
+    color: white;
+    align-self: flex-end;
+}
+form .login-btn:disabled{
+    background-color: rgb(2, 36, 2);
+    color: rgba(255, 255, 255, 0.364);
+    border: solid rgba(255, 255, 255, 0.352) 1px;
+    cursor: not-allowed;
+}
+
+form .login-btn:hover {
+    background-color: rgb(79, 236, 79);
+}
+
+
+/* @media (max-width: 1280px) {
+    #login-container {
+        width: 50%;
+        height: auto;
+        padding: 20px;
+    }
+
+    #input-wrapper {
+        margin-left: 0;
+        text-align: center;
+    }
+} */
+
+/* @media (max-width: 1110px) {
+    #login-container {
+        width: 35rem;
+        height: auto;
+        padding: 20px;
+    }
+
+    #input-wrapper {
+        margin-left: 0;
+        text-align: center;
+    }
+}    */
+
+@media (max-width: 580px) {
+    #login-container {
+        width: 22rem;
+        font-size: small;
+        height: 30rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .conLogin-1{
+        align-items: center;
+    }
+
+    .conLogin-1 img {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .conLogin-1 i{
+        font-size: 1rem;
+        position: absolute;
+        transform: translateX(-9rem) translateY(1rem);
+    }
+
+    .input-login-con{
+        height: 34px;
+    }
+
+    .input-login-con input{
+        font-size: 15px;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
+        width: 100%;
+    }
+}
+@media (max-width: 360px) {
+    #login-container {
+        width: 15rem;
+        font-size: small;
+        height: 27rem;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .conLogin-1{
+        align-items: center;
+    }
+
+    .conLogin-1 img {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .conLogin-1 i{
+        font-size: 1rem;
+        position: absolute;
+        transform: translateX(-6rem);
+    }
+
+    .input-login-con{
+        width: 100%;
+        height: 30px;
+    }
+
+    .input-login-con input{
+        font-size: 13px;
+    }
+
+    .register-anc{
+        font-size: 15px;
+    }
+
+    #button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #button-group button {
+        width: 100%;
+    }
+}
