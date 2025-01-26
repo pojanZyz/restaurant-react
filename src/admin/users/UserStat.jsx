@@ -168,7 +168,6 @@ const UserStat = ({ userCount, mostCoins, roleCount }) => {
       <div className="prodstat-3">
         <div>
           <p>Role Distribution</p>
-          <span>Admin | Customer | Cashier</span>
         </div>
         <div>
           <Pie

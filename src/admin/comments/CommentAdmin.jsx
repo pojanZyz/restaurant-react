@@ -7,6 +7,7 @@ import "./admin-comment.css";
 import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import CommentStat from "./CommentStat";
+import { Helmet } from "react-helmet";
 
 const CommentAdmin = () => {
   const { token } = useAuth();
@@ -138,6 +139,10 @@ const CommentAdmin = () => {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>CafeCoding | Admin-Comments</title>
+    </Helmet>
     <div className="body-box">
       {loading && (
         <div className="loader-overlay">
@@ -293,6 +298,7 @@ const CommentAdmin = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

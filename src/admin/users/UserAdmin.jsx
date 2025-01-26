@@ -207,7 +207,11 @@ const UserAdmin = () => {
                 </thead>
                 <tbody>
                   {userCount === 0 || users.length === 0 ? (
-                    <NoData str={"No user found"} />
+                    <tr>
+                      <td colSpan={6}>
+                        <NoData str={"No user found"} />
+                      </td>
+                    </tr>
                   ) : (
                     users.map((user) => (
                       <tr key={user._id}>

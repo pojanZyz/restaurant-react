@@ -6,6 +6,7 @@ import useAuth from "../../js/useAuth";
 import Loader from "../../components/Loader";
 import UpdateTablePopup from "./UpdateTablePopup";
 import CreateTablePopup from "./CreateTablePopup";
+import { Helmet } from "react-helmet";
 
 const TableAdmin = () => {
   const { token } = useAuth();
@@ -146,6 +147,10 @@ const TableAdmin = () => {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>CafeCoding | Admin-Tables</title>
+    </Helmet>
     <div className="body-box">
       {loading && (
         <div className="loader-overlay">
@@ -230,6 +235,7 @@ const TableAdmin = () => {
         onCreate={handleCreateTable}
       />
     </div>
+    </>
   );
 };
 

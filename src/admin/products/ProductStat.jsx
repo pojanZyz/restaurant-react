@@ -171,7 +171,6 @@ const ProductStat = ({ productCount, bestSellingProducts, catCount }) => {
       <div className="prodstat-3">
         <div>
           <p>Category Distribution</p>
-          <span>Food | Drink | Other</span>
         </div>
         <div>
           <Pie

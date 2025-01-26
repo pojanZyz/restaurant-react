@@ -1,0 +1,121 @@
+.disc-admin-container {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  gap: 20px;
+  margin-bottom: 100px;
+}
+
+.add-disc {
+  background-color: rgb(196, 252, 196);
+  transition: 0.4s;
+}
+.add-disc:hover {
+  cursor: pointer;
+  background-color: rgb(116, 250, 116) !important;
+}
+.add-disc span {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(66, 66, 66);
+}
+.add-disc td i {
+  margin-right: 5px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.type-per,
+.status-ava {
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(155, 250, 155);
+  background-color: rgb(1, 98, 1);
+  text-transform: uppercase;
+}
+.type-fix {
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(250, 248, 155);
+  background-color: rgb(87, 98, 1);
+  text-transform: uppercase;
+}
+.status-used {
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(249, 216, 216);
+  background-color: rgb(212, 0, 0);
+  text-transform: uppercase;
+}
+.status-exp {
+  padding: 3px 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(243, 255, 243);
+  background-color: rgb(74, 74, 74);
+  text-transform: uppercase;
+}
+
+.createdsc-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+.createdsc-form .lbl-type {
+  margin: 0 4px;
+  font-weight: bold;
+}
+
+.createdsc-form label {
+  font-size: 13px;
+}
+.createdsc-form input {
+  margin-bottom: 20px;
+  padding: 3px 5px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: solid gray 1px;
+  box-shadow: 1px 3px 3px gray;
+}
+.createdsc-form select {
+  margin-bottom: 15px;
+  padding: 2px 4px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: solid gray 1px;
+  box-shadow: 1px 3px 3px gray;
+}
+.createdsc-form .type-val {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.createdsc-form .type-val div {
+  display: flex;
+  flex-direction: column;
+}
+
+.prodstat-1 .nearest-exp {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: rgb(185, 185, 185) solid 1px;
+  border-radius: 5px;
+}
+.disc-list {
+  display: flex;
+  flex-direction: column;
+}
+.disc-list span, .disc-list i{
+    font-size: 14px;
+    font-weight: 600;
+}

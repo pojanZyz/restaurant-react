@@ -51,6 +51,11 @@ html {
 }
 
 @media (max-width: 780px) {
+  /* body{
+    transform: scale(0.75);
+    transform-origin: 0 0;
+  } */
+
   .body-box,
   .control-panel{
     margin-left: 0;
@@ -122,7 +127,7 @@ html {
 
 .box-menu li,
 .admin-box-menu li {
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   width: 100%;
   text-align: center;
 }
@@ -732,7 +737,7 @@ html {
   color: red;
 }
 
-/* navbar cashier */
+/* Default Styles */
 .navbar-con {
   display: flex;
   align-items: center;
@@ -754,6 +759,7 @@ html {
   gap: 10px;
   font-size: 16px;
 }
+
 .logo-con img {
   width: 30px;
   background-color: white;
@@ -766,15 +772,18 @@ html {
   gap: 30px;
   font-size: 14px;
 }
+
 .navs-con a {
   padding: 3px 5px;
   border-radius: 10px;
 }
+
 .no-act-nav {
   color: white;
   font-weight: bold;
   background-color: transparent;
 }
+
 .active-nav {
   color: white;
   font-weight: bold;
@@ -786,6 +795,7 @@ html {
   height: 40px;
   background-color: white;
 }
+
 .cas-profile {
   display: flex;
   gap: 10px;
@@ -797,10 +807,63 @@ html {
   font-size: 10px;
   border: none;
 }
-.cas-profile:hover{
+
+.cas-profile:hover {
   background-color: rgb(218, 218, 218);
   cursor: pointer;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar-con {
+    padding: 0 20px;
+  }
+
+  .logo-con {
+    font-size: 14px;
+  }
+
+  .navs-con {
+    gap: 20px;
+    font-size: 12px;
+  }
+
+  .cas-profile {
+    padding: 3px 8px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 576px) {
+  .cas-profile,
+  .border-sep{
+    display: none;
+  }
+
+  .logo-con {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .cas-profile {
+    font-size: 10px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navs-con {
+    gap: 5px;
+    font-size: 0.5rem;
+  }
+
+
+}
+
+
+
+
+
 /*account popup*/
 .acc-detail-card{
   display: flex;
@@ -859,54 +922,4 @@ html {
 
 .cashier-box {
   padding-top: 55px;
-}
-@media (max-width: 480px) {
-  .navbar-con .logo-con {
-    font-size: 50%;
-    margin-left: -13%;
-  }
-
-  .navbar-con {
-    justify-content: start;
-    gap: 40px;
-  }
-
-  .navs-con {
-    gap: 10px;
-    font-size: 40%;
-  }
-
-  .cas-profile {
-    font-size: 110%;
-  }
-
-  .logo-con img {
-    width: 40%;
-  }
-}
-
-/* sama aja kayak height 600px ip 5*/
-@media (max-width: 320px) {
-  .logo-con img {
-    width: 20%;
-  }
-
-  .cas-profile {
-    font-size: 80%;
-  }
-
-  .navbar-con .logo-con {
-    font-size: 40%;
-    margin-left: -13%;
-  }
-
-  .navbar-con {
-    justify-content: start;
-    gap: 25px;
-  }
-
-  .navs-con {
-    gap: 10px;
-    font-size: 30%;
-  }
 }

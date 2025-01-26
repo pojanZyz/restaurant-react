@@ -1,3 +1,3 @@
-# React + Vite
+# FE Test POS
 
-Inilah project dari siswa smkn-9 membuat website restoran untuk di gunakan secara langsung oleh pihak restorannya
+Fully developed POS website with admin dashboard, virtual cashier, and common section

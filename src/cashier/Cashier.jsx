@@ -113,6 +113,7 @@ const Cashier = () => {
     } catch (error) {
       console.error(error);
       setIsDiscountValid("invalid");
+      setDiscountsDetails({})
     } finally {
       setDiscLoading(false);
     }

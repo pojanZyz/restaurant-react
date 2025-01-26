@@ -152,7 +152,6 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
       <div className="prodstat-3">
         <div>
           <p>Res-Status Distribution</p>
-          <span>Pending | Confirmed | Cancelled</span>
         </div>
         <div>
           <Pie

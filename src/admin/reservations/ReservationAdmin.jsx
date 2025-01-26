@@ -271,12 +271,16 @@ const ReservationAdmin = () => {
                     <th>No. Table</th>
                     <th>Res-Status</th>
                     <th>Payment Status</th>
-                    <th>Created At</th>
+                    <th>Res-Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {reservationCount === 0 || reservations.length === 0 ? (
-                    <NoData str={"No reservation found"} />
+                    <tr>
+                      <td colSpan={7}>
+                        <NoData str={"No reservation found"} />
+                      </td>
+                    </tr>
                   ) : (
                     reservations.map((reservation) => (
                       <tr
@@ -345,17 +349,10 @@ const ReservationAdmin = () => {
                           </span>
                         </td>
                         <td>
-                          {new Date(reservation.createdAt).toLocaleDateString(
-                            "id-ID"
-                          )}{" "}
-                          -{" "}
-                          {new Date(reservation.createdAt).toLocaleTimeString(
-                            "id-ID",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          )}
+                          {new Date(
+                            reservation.reservationDate
+                          ).toLocaleDateString("id-ID")}{" "}
+                          - {reservation.reservationTime}
                         </td>
                       </tr>
                     ))
