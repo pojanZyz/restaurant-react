@@ -1,5 +1,5 @@
 import React from "react";
-import "../admin-css/admin-home.css";
+import "../admin/dashboard/admin-home.css";
 
 const InfoCard = ({ img, num, str }) => {
   const truncatedStr = str?.length > 10 ? str.slice(0, 9) + "..." : str;

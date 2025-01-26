@@ -1,0 +1,13 @@
+.empty-lbl {
+  color: rgb(167, 166, 166);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 12px;
+}
+.date-input {
+  border: solid gray 1px;
+  font-size: 15px;
+  background-color: rgba(251, 251, 251, 0.918);
+  padding: 5px 10px;
+  border-radius: 5px;
+}

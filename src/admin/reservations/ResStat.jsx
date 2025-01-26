@@ -127,17 +127,32 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
             <img src={reserved} loading="lazy" />
           </div>
           <div>
-            <h5 className="poppins-regular">
-              {nearestRes.customerDetails?.name || nearestRes.userInfo?.username}
-            </h5>
-            <p>{nearestRes.customerDetails?.phoneNumber || nearestRes.userInfo?.phoneNumber}</p>
-            <p>
-              <i className="bi bi-calendar-fill"></i>{" "}
-              {new Date(nearestRes.reservationDate).toLocaleDateString("id-ID")}
-            </p>
-            <p>
-              <i className="bi bi-clock-fill"></i> {nearestRes.reservationTime}
-            </p>
+            {nearestRes ? (
+              <>
+                <h5 className="poppins-regular">
+                  {nearestRes.customerDetails?.name ||
+                    nearestRes.userInfo?.username ||
+                    "N/A"}
+                </h5>
+                <p>
+                  {nearestRes.customerDetails?.phoneNumber ||
+                    nearestRes.userInfo?.phoneNumber ||
+                    "N/A"}
+                </p>
+                <p>
+                  <i className="bi bi-calendar-fill"></i>{" "}
+                  {new Date(nearestRes.reservationDate).toLocaleDateString(
+                    "id-ID"
+                  ) || "N/A"}
+                </p>
+                <p>
+                  <i className="bi bi-clock-fill"></i>{" "}
+                  {nearestRes.reservationTime || "N/A"}
+                </p>
+              </>
+            ) : (
+              <h5 className="poppins-regular" style={{padding: "0 20px"}}>N/A</h5>
+            )}
           </div>
         </div>
       </div>

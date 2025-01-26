@@ -75,16 +75,22 @@ const DiscStat = ({ discountCount, nearestExp, typeCount, statCount }) => {
             <img src={expired} />
           </div>
           <div className="disc-list">
+            {nearestExp ? (
+              <>
             <div>
               <i className="bi bi-calendar-event-fill"></i>
               <span>
                 {" "}
-                {new Date(nearestExpDate).toLocaleDateString("id-ID")}
+                {new Date(nearestExpDate).toLocaleDateString("id-ID") || "N/A"}
               </span>
             </div>
             {nearestExp.map((discount) => (
-              <p key={discount._id}>- {discount.discountCode}</p>
+              <p key={discount._id}>- {discount.discountCode || "N/A"}</p>
             ))}
+              </>
+            ): (
+              <h5 className="poppins-regular">N/A</h5>
+            )}
           </div>
         </div>
       </div>

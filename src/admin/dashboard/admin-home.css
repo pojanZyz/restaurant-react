@@ -1,0 +1,35 @@
+
+.admin-home-con1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 10px;
+}
+.all-counts-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.info-card {
+  display: flex;
+  align-items: center;
+  border: solid 1px rgb(124, 124, 124);
+  border-radius: 5px;
+  max-width: 170px;
+  width: 170px;
+  padding: 20px;
+  gap: 20px;
+  background-color: white;
+}
+.info-card div {
+  display: flex;
+  flex-direction: column;
+  font-size: 95%;
+}
+.info-card div p {
+  font-size: 70%;
+}
+.info-card i {
+  font-size: 30px;
+}

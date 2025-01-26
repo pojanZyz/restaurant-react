@@ -13,10 +13,10 @@ import Reservation from "./common/Reservation";
 import Loyalty from "./common/loyalty/Loyalty";
 import Feedback from "./common/Feedback";
 
-import AdminHome from "./admin/AdminHome";
+import AdminHome from "./admin/dashboard/AdminHome";
 import MenuAdmin from "./admin/products/MenuAdmin";
 import ReservationAdmin from "./admin/reservations/ReservationAdmin";
-import OrderAdmin from "./admin/OrderAdmin";
+import OrderAdmin from "./admin/orders/OrderAdmin";
 import UserAdmin from "./admin/users/UserAdmin";
 import TableAdmin from "./admin/tables/TableAdmin";
 import CommentAdmin from "./admin/comments/CommentAdmin";
