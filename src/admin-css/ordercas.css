@@ -258,6 +258,9 @@
   background-color: gray;
   cursor: pointer;
 }
+.delete-con{
+  align-self: flex-end;
+}
 
 /* res details cas */
 .res-details-cas {
@@ -450,6 +453,7 @@
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.326);
   padding: 10px 20px;
   border-radius: 10px;
+  gap: 10px
 }
 .rev-con h4 {
   border-radius: 10px;

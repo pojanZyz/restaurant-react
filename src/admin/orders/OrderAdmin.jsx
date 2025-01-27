@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import "./admin-order.css";
 import OrderStat from "./OrderStat";
 import OrderDetails from "../../components/OrderDetails";
+import useAuth from "../../js/useAuth";
 
 const OrderAdmin = () => {
+  const { token } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const [orders, setOrders] = useState([]);
@@ -94,6 +97,42 @@ const OrderAdmin = () => {
       setBestOrders(res.data.topOrders);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  //delete order
+  const handleDeleteOrder = async (orderId) => {
+    const confirmation = await Swal.fire({
+      icon: "question",
+      title: "Confirmation",
+      text: "Delete this order? This will make the record gone forever",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    });
+    if (confirmation.isConfirmed) {
+      try {
+        setLoading(true);
+        setShowDetailsPopup(false);
+        const res = await axios.delete(`api/order/${orderId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: res.data.message || "Order deleted",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        fetchOrders();
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.response?.data?.message || "Something went wrong",
+        });
+      } finally {
+        setLoading(false);
+      }
     }
   };
   return (
@@ -320,7 +359,8 @@ const OrderAdmin = () => {
           isVisible={showDetailsPopup}
           onClose={() => setShowDetailsPopup(!showDetailsPopup)}
           order={selectedOrder}
-          from={"loyalty"}
+          from={"admin"}
+          onDelete={handleDeleteOrder}
         />
       </div>
     </>

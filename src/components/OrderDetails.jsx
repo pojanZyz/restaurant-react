@@ -1,7 +1,7 @@
 import React from "react";
 import html2canvas from "html2canvas";
 
-const OrderDetails = ({ isVisible, onClose, order, from }) => {
+const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
   //handle download sebagai gambar
   const handleDownloadAsImage = () => {
     const element = document.querySelector(".receipt");
@@ -17,6 +17,11 @@ const OrderDetails = ({ isVisible, onClose, order, from }) => {
   //handle print
   const handlePrint = () => {
     window.print();
+  };
+
+  //handle delete
+  const handleDelete = () => {
+    onDelete(order._id);
   };
 
   if (!isVisible) return null;
@@ -114,6 +119,16 @@ const OrderDetails = ({ isVisible, onClose, order, from }) => {
             <i className="bi bi-printer-fill"></i> Print
           </button>
         </div>
+        {from === "admin" && (
+          <div className="delete-con">
+            <button
+              className="delete-btn poppins-regular"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -24,11 +24,32 @@
 .table-stat{
   display: flex;
   flex-direction: column;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  width: 50%;
+}
+.table-stat .row-1{
+  display: flex;
   gap: 10px;
 }
+.table-stat .ttl-product{
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  border: rgb(185, 185, 185) solid 1px;
+  border-radius: 5px;
+  gap: 20px;
+  flex-grow: 1;
+}
 .tableadd-con{
+  flex-grow: 2;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: rgb(216, 215, 215) solid 1px;
   border-radius: 5px;
   padding: 5px 20px;
@@ -50,6 +71,24 @@
 }
 .tableadd-con div p{
   font-size: 12px;
+}
+.scat-chart{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px rgb(211, 211, 211);
+}
+.scat-chart p{
+  padding: 5px 10px;
+  background-color: rgb(235, 235, 235);
+  font-size: 14px;
+  border-radius: 10px;
+  font-weight: 600;
 }
 
 .table-main-con {
