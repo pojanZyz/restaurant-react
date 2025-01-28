@@ -1,0 +1,185 @@
+.loyalty-container {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.loyalty-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.loyalty-header button {
+  display: flex;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.911);
+  color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  border: solid gray 1px;
+}
+.loyalty-header button:hover {
+  background-color: rgb(241, 241, 241);
+  cursor: pointer;
+}
+
+.loy-body1 {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-radius: 5px;
+  background: rgb(239, 239, 239);
+  margin-top: 20px;
+}
+
+.card-loy1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: white;
+  border-radius: 7px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px;
+}
+.card-loy1:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+.card-loy1 i {
+  font-size: 2rem;
+  color: #0351a5;
+}
+.card-loy1 div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.card-loy1 div p {
+  font-size: 13px;
+}
+
+.loy-body2 {
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+  margin-top: 40px;
+  border-bottom: solid 2px gray;
+}
+
+/*orders grid*/
+.loy-body3 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.loy-body3 .search-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: solid gray 1px;
+}
+
+.loy-body3 .filters {
+  display: flex;
+  gap: 20px;
+}
+.loy-body3 .search-input input,
+.loy-body3 .search-input i {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  color: black;
+}
+.loy-body3 .date-input,
+.loy-body3 select {
+  border: solid gray 1px;
+  font-size: 15px;
+  background-color: rgba(251, 251, 251, 0.918);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.loy-body3 .orders-grid {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgb(241, 241, 241);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border-radius: 5px;
+}
+.orders-grid .order-item-grid {
+  gap: 2px;
+  border: solid rgb(199, 199, 199) 1px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.orders-grid .order-item-grid:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+.order-item-grid .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-item-grid .ord-num {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(42, 42, 42);
+}
+.order-item-grid .product-list {
+  font-size: 15px;
+  padding: 3px 10px;
+  list-style-type: none;
+  background-color: rgb(228, 238, 238);
+  border-radius: 10px;
+}
+.product-list .prod-etc {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(53, 53, 53);
+  font-style: italic;
+}
+.order-item-grid .item-footer {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+.order-item-grid .item-footer .day-details{
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(53, 53, 53);
+  font-style: italic;
+}
+
+.common-con {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 85%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.437);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}

@@ -1,0 +1,85 @@
+p{
+  font-size: 80%;
+}
+.admin-home-con1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 10px;
+}
+.all-counts-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.info-card {
+  display: flex;
+  align-items: center;
+  border: solid 1px rgb(124, 124, 124);
+  border-radius: 5px;
+  max-width: 170px;
+  width: 170px;
+  padding: 20px;
+  gap: 20px;
+  background-color: white;
+}
+.info-card div {
+  display: flex;
+  flex-direction: column;
+  font-size: 95%;
+}
+.info-card div p {
+  font-size: 70%;
+}
+.info-card i {
+  font-size: 30px;
+}
+
+.admin-home-con3{
+  display: flex;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+}
+.line-wrap{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: solid 1px gray;
+}
+.line-wrap h4{
+  text-align: center;
+  padding: 5px 10px;
+  background-color: rgb(241, 241, 241);
+}
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-self: center;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  color: rgb(55, 55, 55);
+  border: solid white 2px;
+}
+
+.filter-btn.active {
+  background-color: #007bff;
+  color: #fff;
+}
+.line-wrap .line-chart{
+  width: 100%;
+}
