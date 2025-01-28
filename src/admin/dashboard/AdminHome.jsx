@@ -132,13 +132,13 @@ const AdminHome = () => {
           <Loader />
         </div>
       )}
-      <div className="admin-menu-container quicksand">
-        <div className="admin-menu-con1">
+      <div className="admin-home-container .home quicksand">
+        <div className="admin-home-con1">
           <h2 className="poppins-regular">
             Welcome, {userData?.username || ""}
           </h2>
         </div>
-        <div className="admin-menu-con2">
+        <div className="admin-home-con2">
           <div className="all-counts-grid">
             <InfoCard
               img="bi bi-cart-fill"
