@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-
-import Loader from "../components/Loader";
-import useAuth from "../js/useAuth";
-import "../css/feedback.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import Loader from "../components/Loader";
+import useAuth from "../js/useAuth";
+import LoginAlert from "../components/LoginAlert";
+import "../css/feedback.css";
+
 const Feedback = () => {
-  const { token, userData } = useAuth();
+  const { token, tokenLoading, userData } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const [username, setUsername] = useState("");
@@ -85,6 +86,7 @@ const Feedback = () => {
       )}
       <div className="feedback-container quicksand">
         <div className="fb-con1">
+          {tokenLoading ? " " : <LoginAlert token={token} />}
           <h2 className="poppins-regular">
             <i className="bi bi-envelope-paper-heart-fill"></i> Feedback
           </h2>

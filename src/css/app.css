@@ -419,3 +419,27 @@ html {
 .cashier-box {
   padding-top: 55px;
 }
+
+
+/*login alert*/
+.loginalert-con{
+  background-color: rgba(254, 81, 81, 0.311);
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+.loginalert-con a{
+  font-weight: bold;
+  color: rgb(35, 2, 222);
+}
+.loginalert-con a:hover{
+  text-decoration: underline;
+}
+.loginalert-con button{
+  cursor: pointer;
+}

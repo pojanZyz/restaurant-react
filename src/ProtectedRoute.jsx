@@ -20,7 +20,7 @@ const ProtectedRoute = ({ requiredRole }) => {
     return <Navigate to="/" replace />;
   }
 
-  return <Outlet />; // Mengizinkan akses ke route anak
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

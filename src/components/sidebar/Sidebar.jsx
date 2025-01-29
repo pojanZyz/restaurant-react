@@ -121,11 +121,11 @@ const Sidebar = () => {
           ) : token ? (
             userData?.role === "admin" ? (
               <NavLink to="/admin">
-                <i class="bi bi-bar-chart-line-fill"></i> <span>Admin</span>
+                <i className="bi bi-bar-chart-line-fill"></i> <span>Admin</span>
               </NavLink>
             ) : userData?.role === "cashier" ? (
               <NavLink to="/cashier">
-                <i class="bi bi-calculator-fill"></i> <span>Cashier</span>
+                <i className="bi bi-calculator-fill"></i> <span>Cashier</span>
               </NavLink>
             ) : (
               <NavLink to="/loyalty">

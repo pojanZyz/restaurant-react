@@ -6,10 +6,11 @@ import Loader from "../components/Loader";
 import useAuth from "../js/useAuth";
 import "../css/reservation.css";
 import useSnap from "../js/useSnap";
+import LoginAlert from "../components/LoginAlert";
 
 const Reservation = () => {
-  const { token, userData } = useAuth();
-  const {triggerPayment} = useSnap(import.meta.env.VITE_MIDTRANS_CLIENT_KEY)
+  const { token, tokenLoading, userData } = useAuth();
+  const { triggerPayment } = useSnap(import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
   const [loading, setLoading] = useState(false);
   const [tables, setTables] = useState([]);
 
@@ -30,7 +31,7 @@ const Reservation = () => {
 
   useEffect(() => {
     fetchTables();
-    setSelectedTables([])
+    setSelectedTables([]);
   }, [selectedDate]);
 
   useEffect(() => {
@@ -125,8 +126,8 @@ const Reservation = () => {
         });
 
         const snapToken = res.data.token;
-        const reservationId = res.data.reservationId
-        triggerPayment(snapToken, reservationId)
+        const reservationId = res.data.reservationId;
+        triggerPayment(snapToken, reservationId);
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -148,6 +149,7 @@ const Reservation = () => {
       )}
       <div className="reservation-container quicksand">
         <div className="reserv-con1">
+          {tokenLoading ? " " : <LoginAlert token={token} />}
           <h2 className="poppins-regular">
             <i className="bi bi-calendar-check"></i> Table reservation
           </h2>
@@ -243,6 +245,7 @@ const Reservation = () => {
               </button>
             </form>
           </div>
+
           <div className="reserv-con2-sub1">
             <h4 className="poppins-regular">Select the table based on date</h4>
             <p>

@@ -9,6 +9,7 @@ import Loader from "../../components/Loader";
 import OrdersGrid from "./OrdersGrid.jsx"
 import "./loyalty.css";
 import ResGrid from "./ResGrid.jsx";
+import DiscountTab from "./DiscountTab.jsx";
 
 const Loyalty = () => {
   const { token, userData, tokenLoading } = useAuth();
@@ -149,7 +150,7 @@ const Loyalty = () => {
           ) : activeTab === "reservations" ? (
             <ResGrid />
           ) : (
-            ""
+            <DiscountTab />
           )}
         </div>
       </div>

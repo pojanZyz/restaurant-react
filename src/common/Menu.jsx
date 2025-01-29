@@ -51,7 +51,7 @@ const Menu = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `api/product?sort=${sort}&category=${category}&limit=${limit}&search=${debouncedSearch}&page=${page}`
+        `api/product?sort=asc&category=${category}&limit=${limit}&search=${debouncedSearch}&page=${page}`
       );
       setProducts(res.data.data);
       setTotalPages(res.data.totalPages);
@@ -63,6 +63,35 @@ const Menu = () => {
     }
   };
 
+  const [cart, setCart] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  });
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item._id === product._id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: `${product.productName} has been added to your cart!`,
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  };
+
   return (
     <div className="body-box">
       {loading && (
@@ -70,115 +99,118 @@ const Menu = () => {
           <Loader />
         </div>
       )}
-
-      <div className="menu-container">
-        {/* Search bar */}
-        <div className="control-panel ">
-          <div className="search">
-            <i className="bi bi-search"></i>
-            <input
-              value={search}
-              type="text"
-              className="quicksand"
-              placeholder="Search..."
-              onChange={(e) => handleSearchChange(e.target.value)}
-            />
-          </div>
-          <select
-            className="sorting quicksand"
-            id="sortOptions"
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="">Default</option>
-            <option value="asc">A-Z</option>
-            <option value="dsc">Z-A</option>
-            <option value="newest">Terbaru</option>
-          </select>
-          <select
-            id="limit"
-            className="quicksand"
-            value={limit}
-            onChange={(e) => handleLimitChange(Number(e.target.value))}
-          >
-            <option value={30}>30</option>
-            <option value={50}>50</option>
-            <option value={80}>80</option>
-          </select>
+      <div className="menu-container quicksand">
+        <div className="menu-con1">
+          <h2 className="poppins-regular">
+            <i className="bi bi-cart"></i> Menu
+          </h2>
         </div>
 
-        {/* Category Filter */}
-        <div className="category-filter">
-          <button
-            className={
-              category === "" ? "active poppins-regular" : "poppins-regular"
-            }
-            onClick={() => handleCategoryChange("")}
-          >
-            <i className="bi bi-list"></i> All
-          </button>
-          <button
-            className={
-              category === "food" ? "active poppins-regular" : "poppins-regular"
-            }
-            onClick={() => handleCategoryChange("food")}
-          >
-            <i className="bi bi-basket3"></i> Food
-          </button>
-          <button
-            className={
-              category === "drink"
-                ? "active poppins-regular"
-                : "poppins-regular"
-            }
-            onClick={() => handleCategoryChange("drink")}
-          >
-            <i className="bi bi-cup-straw"></i> Drink
-          </button>
-          <button
-            className={
-              category === "other"
-                ? "active poppins-regular"
-                : "poppins-regular"
-            }
-            onClick={() => handleCategoryChange("other")}
-          >
-            <i className="bi bi-grid"></i> Other
-          </button>
-        </div>
-
-        {productCount === 0 ? (
-          <NoData str={"No product found"} />
-        ) : (
-          <>
-            {/* Menu grid */}
-            <div className="container-menuGrid">
-              <div className="menu-grid" id="menuGrid">
-                {products.map((product) => (
-                  <div key={product._id} className="menu-item">
-                    <img
-                      src={product.productImagePath}
-                      alt={product.productName}
-                    />
-                    <div className="menu-details">
-                      <h3 className="poppins-regular">{product.productName}</h3>
-                      <p className="description quicksand">
-                        {product.productDescription}
-                      </p>
-                      <div className="add-to-cart">
-                        <p className="price quicksand">
-                          Rp {product.productPrice.toLocaleString()}
-                        </p>
-                        <button>
-                          <i className="bi bi-cart"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        <div className="menu-con2">
+          <div className="menu-filters">
+            <div className="fil-row-1">
+              <div className="search-input">
+                <i className="bi bi-search"></i>
+                <input
+                  className="quicksand"
+                  type="search"
+                  value={search}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  placeholder="Search..."
+                />
               </div>
+              <select
+                className="quicksand"
+                onChange={(e) => handleLimitChange(e.target.value)}
+              >
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="80">80</option>
+              </select>
             </div>
 
-            {/* Pagination */}
+            <div className="cat-btn-group">
+              <button
+                className={` ${
+                  category === "" ? "cat-active" : ""
+                } all-btn poppins-regular`}
+                onClick={() => handleCategoryChange("")}
+              >
+                <i className="bi bi-list"></i> All
+              </button>
+              <button
+                className={`${
+                  category === "food" ? "cat-active" : ""
+                } food-btn poppins-regular`}
+                onClick={() => handleCategoryChange("food")}
+              >
+                <i className="bi bi-egg-fried"></i> Food
+              </button>
+              <button
+                className={` ${
+                  category === "drink" ? "cat-active" : ""
+                } drink-btn poppins-regular`}
+                onClick={() => handleCategoryChange("drink")}
+              >
+                <i className="bi bi-cup-straw"></i>
+                Drink
+              </button>
+              <button
+                className={` ${
+                  category === "other" ? "cat-active" : ""
+                } other-btn poppins-regular`}
+                onClick={() => handleCategoryChange("other")}
+              >
+                Other
+              </button>
+            </div>
+          </div>
+
+          <div className="table-det">
+            <div className="page-ttl">
+              <i className="bi bi-columns"></i>
+              <span className="span-2">
+                Page {page} of {totalPages}
+              </span>
+            </div>
+            <div className="page-ttl">
+              <i className="bi bi-cart"></i>
+              <span className="span-2">{products.length} Products</span>
+            </div>
+          </div>
+
+          <div className="menu-grid">
+            {productCount === 0 ? (
+              <NoData str={"No product found"} />
+            ) : (
+              products.map((product) => (
+                <div className="menu-grid-item" key={product._id}>
+                  <img
+                    src={product.productImagePath}
+                    alt={product.productName}
+                  />
+                  <div className="menu-det">
+                    <div>
+                      <h5 className="poppins-regular">{product.productName}</h5>
+                      <p>{product.productDescription}</p>
+                      <span>
+                        Rp{product.productPrice.toLocaleString("id-ID")}
+                      </span>
+                    </div>
+                    <button
+                      className="poppins-regular"
+                      onClick={() => addToCart(product)}
+                    >
+                      <i className="bi bi-cart"></i> Add to cart
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+          {productCount === 0 ? (
+            ""
+          ) : (
             <div className="pagination">
               <button
                 className="quicksand"
@@ -191,9 +223,12 @@ const Menu = () => {
                 (pg) => (
                   <button
                     key={pg}
-                    className={
-                      page === pg ? "active poppins-regular" : "poppins-regular"
-                    }
+                    className={`page-btn
+                  ${
+                    page === pg
+                      ? "active-btn poppins-regular"
+                      : "poppins-regular"
+                  }`}
                     onClick={() => setPage(pg)}
                   >
                     {pg}
@@ -208,14 +243,14 @@ const Menu = () => {
                 Next
               </button>
             </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
-
-      {/* Floating cart button */}
       <div className="floating-cart" onClick={() => navigate("/order")}>
         <i className="bi bi-cart" style={{ fontSize: "2rem" }}></i>
-        <span className="cart-count">0</span>
+        <span className="cart-count">
+          {cart.reduce((acc, item) => acc + item.quantity, 0)}
+        </span>
       </div>
     </div>
   );
