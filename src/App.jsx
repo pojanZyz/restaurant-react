@@ -8,8 +8,8 @@ import Footer from "./components/Footer";
 
 import "./css/app.css"
 
-import Register from "./common/Register";
-import Login from "./common/Login";
+import Register from "./common/auth/Register";
+import Login from "./common/auth/Login";
 import Home from "./common/Home";
 import Menu from "./common/Menu";
 import Order from "./common/Order";

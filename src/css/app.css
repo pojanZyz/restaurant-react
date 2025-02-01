@@ -20,7 +20,12 @@
 html {
   scroll-behavior: smooth;
 }
-
+hr {
+  width: 80%;
+}
+body {
+  font-size: 1.5rem;
+}
 .quicksand {
   font-family: "Quicksand", serif;
   font-optical-sizing: auto;
@@ -208,10 +213,9 @@ html {
   justify-content: center;
   text-align: center;
   margin: 20px;
-  margin-top: 50px;
 }
 .no-data-con i {
-  color: red;
+  color: rgb(133, 133, 133);
 }
 
 .navbar-con {

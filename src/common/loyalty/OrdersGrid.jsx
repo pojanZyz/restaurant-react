@@ -1,52 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-import useAuth from "../../js/useAuth";
-import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import OrderDetails from "../../components/OrderDetails";
 
-const OrdersGrid = () => {
-  const { token, tokenLoading } = useAuth();
-  const [loading, setLoading] = useState(false);
-
-  const [orders, setOrders] = useState([]);
-  const [orderCount, setOrderCount] = useState(0);
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [filterDate, setFilterDate] = useState("");
-
-  const [selectedOrder, setSelectedOrder] = useState({})
-  const [showDetailsPopup, setShowDetailsPopup] = useState(false)
-
-  useEffect(() => {
-    const delay = setTimeout(() => setDebouncedSearch(search), 500);
-    return () => clearTimeout(delay);
-  }, [search]);
-  useEffect(() => {
-    if (!token || tokenLoading) {
-      return;
-    }
-    fetchOrders();
-  }, [token, tokenLoading, debouncedSearch, sort, filterDate]);
-
-  //get user orders
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(
-        `api/order-user?search=${debouncedSearch}&sort=${sort}&date=${filterDate}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setOrders(res.data.data);
-      setOrderCount(res.data.dataCount);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const OrdersGrid = ({ orders = [], onSearch, onSort, onFilterDate }) => {
+  const [selectedOrder, setSelectedOrder] = useState({});
+  const [showDetailsPopup, setShowDetailsPopup] = useState(false);
 
   //handle open details
   const handleOpenDetails = (order) => {
@@ -55,36 +14,34 @@ const OrdersGrid = () => {
   };
   return (
     <>
-      {(loading || tokenLoading) && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
       <div className="filters">
         <div className="search-input">
           <i className="bi bi-search"></i>
           <input
             className="quicksand"
             type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => onSearch(e.target.value)}
             placeholder="Search..."
           />
         </div>
-        <input
-          type="date"
-          value={filterDate}
-          max={new Date().toISOString().split("T")[0]}
-          onChange={(e) => setFilterDate(e.target.value)}
-          className="date-input"
-        />
-        <select className="quicksand" onChange={(e) => setSort(e.target.value)}>
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </select>
+        <div className="other-filt">
+          <input
+            type="date"
+            max={new Date().toISOString().split("T")[0]}
+            onChange={(e) => onFilterDate(e.target.value)}
+            className="date-input"
+          />
+          <select
+            className="quicksand"
+            onChange={(e) => onSort(e.target.value)}
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
       </div>
       <div className="orders-grid">
-        {orders.length === 0 || orderCount === 0 ? (
+        {orders.length === 0 ? (
           <NoData str={"No order found"} />
         ) : (
           orders.map((order) => (
@@ -118,7 +75,7 @@ const OrdersGrid = () => {
               </div>
               <ul className="product-list">
                 {order.productInfo.slice(0, 2).map((product) => (
-                  <li>
+                  <li key={product._id}>
                     {product.productName} x{product.quantity}
                   </li>
                 ))}

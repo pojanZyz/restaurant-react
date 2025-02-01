@@ -128,7 +128,7 @@ const Sidebar = () => {
                 <i className="bi bi-calculator-fill"></i> <span>Cashier</span>
               </NavLink>
             ) : (
-              <NavLink to="/loyalty">
+              <NavLink to="/loyalty" onClick={() => setIsOpen(false)}>
                 <i className="bi bi-person-hearts"></i> <span>Loyalty</span>
               </NavLink>
             )

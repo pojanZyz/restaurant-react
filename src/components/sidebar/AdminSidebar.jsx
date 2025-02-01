@@ -80,35 +80,35 @@ const AdminSidebar = () => {
           {/* Menu Navigasi */}
           <hr />
           <nav className="box-menu">
-            <NavLink to="/admin" end>
+            <NavLink to="/admin" end onClick={() => setIsOpen(false)}>
               <i class="bi bi-bar-chart-line-fill"></i> <span>Dashboard</span>
             </NavLink>
 
-            <NavLink to="/admin/menu">
+            <NavLink to="/admin/menu" onClick={() => setIsOpen(false)}>
               <i className="bi bi-cart-fill"></i> <span>Products</span>
             </NavLink>
 
-            <NavLink to="/admin/user">
+            <NavLink to="/admin/user" onClick={() => setIsOpen(false)}>
               <i className="bi bi-person-fill"></i> <span>Users</span>
             </NavLink>
 
-            <NavLink to="/admin/order">
+            <NavLink to="/admin/order" onClick={() => setIsOpen(false)}>
               <i className="bi bi-bag-check-fill"></i> <span>Orders</span>
             </NavLink>
 
-            <NavLink to="/admin/discount">
+            <NavLink to="/admin/discount" onClick={() => setIsOpen(false)}>
               <i className="bi bi-percent"></i> <span>Discounts</span>
             </NavLink>
 
-            <NavLink to="/admin/table">
+            <NavLink to="/admin/table" onClick={() => setIsOpen(false)}>
               <i className="bi bi-table"></i> <span>Tables</span>
             </NavLink>
 
-            <NavLink to="/admin/reservation">
+            <NavLink to="/admin/reservation" onClick={() => setIsOpen(false)}>
               <i className="bi bi-calendar-check"></i> <span>Reservations</span>
             </NavLink>
 
-            <NavLink to="/admin/comment">
+            <NavLink to="/admin/comment" onClick={() => setIsOpen(false)}>
               <i className="bi bi-chat-left-dots-fill"></i>{" "}
               <span>Comments</span>
             </NavLink>

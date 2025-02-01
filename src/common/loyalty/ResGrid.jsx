@@ -1,52 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-import useAuth from "../../js/useAuth";
-import Loader from "../../components/Loader";
 import NoData from "../../components/NoData";
 import ResDetails from "./ResDetails";
 
-const ResGrid = () => {
-  const { token, tokenLoading } = useAuth();
-  const [loading, setLoading] = useState(false);
-
-  const [reservations, setReservations] = useState([]);
-  const [resCount, setResCount] = useState(0);
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [filterDate, setFilterDate] = useState("");
-
+const ResGrid = ({ reservations = [], onSearch, onSort, onFilterDate }) => {
   const [selectedRes, setSelectedRes] = useState({});
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
-
-  useEffect(() => {
-    const delay = setTimeout(() => setDebouncedSearch(search), 500);
-    return () => clearTimeout(delay);
-  }, [search]);
-  useEffect(() => {
-    if (!token || tokenLoading) {
-      return;
-    }
-    fetchReservations();
-  }, [token, tokenLoading, debouncedSearch, sort, filterDate]);
-
-  //get all reservations
-  const fetchReservations = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(
-        `api/res-user?search=${debouncedSearch}&sort=${sort}&date=${filterDate}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setReservations(res.data.data);
-      setResCount(res.data.dataCount);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const calculateDaysToGo = (reservation) => {
     if (reservation.paymentStatus === "Cancelled") {
@@ -73,37 +32,35 @@ const ResGrid = () => {
 
   return (
     <>
-      {(loading || tokenLoading) && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
       <div className="filters">
         <div className="search-input">
           <i className="bi bi-search"></i>
           <input
             className="quicksand"
             type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => onSearch(e.target.value)}
             placeholder="Search..."
           />
         </div>
-        <input
-          type="date"
-          value={filterDate}
-          max={new Date().toISOString().split("T")[0]}
-          onChange={(e) => setFilterDate(e.target.value)}
-          className="date-input"
-        />
-        <select className="quicksand" onChange={(e) => setSort(e.target.value)}>
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </select>
+        <div className="other-filt">
+          <input
+            type="date"
+            max={new Date().toISOString().split("T")[0]}
+            onChange={(e) => onFilterDate(e.target.value)}
+            className="date-input"
+          />
+          <select
+            className="quicksand"
+            onChange={(e) => onSort(e.target.value)}
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
       </div>
       <div className="orders-grid">
-        {reservations.length === 0 || resCount === 0 ? (
-          <NoData str={"No order found"} />
+        {reservations.length === 0 ? (
+          <NoData str={"No reservation found"} />
         ) : (
           reservations.map((reservation) => (
             <div
@@ -151,7 +108,7 @@ const ResGrid = () => {
                   )}
                 </li>
                 <li>
-                  <i class="bi bi-clock-fill"></i> {reservation.reservationTime}
+                  <i className="bi bi-clock-fill"></i> {reservation.reservationTime}
                 </li>
                 <li>
                   <i className="bi bi-grid-fill"></i>
