@@ -298,11 +298,6 @@
     flex-direction: column;
   }
 
-  .update-card {
-    margin-top: 30%;
-    overflow: hidden;
-  }
-
   .table-card-footer {
     display: flex;
     gap: 5px;

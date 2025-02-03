@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import axios from "axios";
+
 import Sidebar from "./components/sidebar/Sidebar";
 import AdminSidebar from "./components/sidebar/AdminSidebar"
-import ProtectedRoute from "./ProtectedRoute";
 import Footer from "./components/Footer";
+import CashierNavbar from "./components/sidebar/CashierNavbar";
 
+import ProtectedRoute from "./ProtectedRoute";
 import "./css/app.css"
 
 import Register from "./common/auth/Register";
@@ -24,17 +26,15 @@ import OrderAdmin from "./admin/orders/OrderAdmin";
 import UserAdmin from "./admin/users/UserAdmin";
 import TableAdmin from "./admin/tables/TableAdmin";
 import CommentAdmin from "./admin/comments/CommentAdmin";
-import CashierNavbar from "./components/CashierNavbar";
+import DiscountAdmin from "./admin/discounts/DiscountAdmin";
+
 import Cashier from "./cashier/Cashier";
 import OrdHistory from "./cashier/OrdHistory";
 import PaymentResult from "./common/PaymentResult";
 import CasReservation from "./cashier/CasReservation";
-import DiscountAdmin from "./admin/discounts/DiscountAdmin";
-import useAuth from "./js/useAuth";
 
 function App() {
   const location = useLocation();
-  const {token, tokenLoading, userData} = useAuth()
   const hideSidebar = ["/login", "/register", "/payment-result"];
 
   const renderSidebar = () => {

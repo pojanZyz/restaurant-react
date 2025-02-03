@@ -126,6 +126,8 @@
   font-size: 12px;
   font-weight: bold;
   text-align: center;
+  width: fit-content;
+  height: fit-content;
 }
 .res-pending {
   background-color: rgb(69, 69, 69);

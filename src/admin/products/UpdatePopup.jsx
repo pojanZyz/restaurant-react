@@ -51,7 +51,7 @@ const UpdatePopup = ({ isVisible, onClose, onUpdate, onDelete, product }) => {
 
   return (
     <div
-      className={`update-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
+      className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
       <div className="update-card" onClick={(e) => e.stopPropagation()}>

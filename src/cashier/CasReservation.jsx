@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 import "../admin-css/cas-res.css";
-import CashierLoader from "../components/CashierLoader";
+import Loader from "../components/Loader";
 import useAuth from "../js/useAuth";
 import useSnap from "../js/useSnap";
 import { Helmet } from "react-helmet";
@@ -11,9 +11,7 @@ import { Helmet } from "react-helmet";
 const CasReservation = () => {
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
-  const { triggerPayment } = useSnap(
-    import.meta.env.VITE_MIDTRANS_CLIENT_KEY
-  );
+  const { triggerPayment } = useSnap(import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
 
   const [tables, setTables] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
@@ -198,12 +196,15 @@ const CasReservation = () => {
 
   return (
     <>
-    <Helmet>
-      <title>CafeCoding | Reservation Cashier</title>
-    </Helmet>
-    <div className="casres-container">
-      {loading && <CashierLoader />}
-      <div className="casres-wrap quicksand">
+      <Helmet>
+        <title>CafeCoding | Reservation Cashier</title>
+      </Helmet>
+      {loading && (
+        <div className="loader-overlay">
+          <Loader />
+        </div>
+      )}
+      <div className="casres-container quicksand">
         <div className="table-wrap">
           <h4 className="poppins-regular">Select the table based on date</h4>
           <p>
@@ -228,7 +229,7 @@ const CasReservation = () => {
               <div className="gray-sqr"></div> : Occupied
             </li>
           </ul>
-          <div className="casres-tablesbox">
+          <div className="tables-box">
             {tables.map((table) => (
               <div
                 className={`table-grid-item ${
@@ -389,7 +390,6 @@ const CasReservation = () => {
           </form>
         </div>
       </div>
-    </div>
     </>
   );
 };

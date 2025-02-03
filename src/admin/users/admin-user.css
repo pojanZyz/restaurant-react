@@ -23,13 +23,17 @@
 .users-wrap {
   max-width: 100%;
   overflow-x: auto; 
+  border: solid rgb(198, 197, 197) 0.5px;
+  border-radius: 5px;
+  padding: 3px;
+  margin-top: 10px;
+  background-color: white;
 }
 
 .user-table {
   width: 100%; 
   min-width: 800px;
   border-collapse: collapse;
-  margin-top: 10px;
 }
 
 .user-table td {
@@ -69,7 +73,7 @@
 }
 
 .user-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #edf2f4;
 }
 
 .user-table tr:hover {
@@ -189,10 +193,6 @@
   }
 
 
-
-  .page-ttl {
-    max-width: 100px;
-  }
 }
 
 /* For screen width 480px */
@@ -222,13 +222,7 @@
   }
 
 
-  .page-ttl {
-    max-width: 80px;
-  }
 
-  .page-ttl i {
-    font-size: 12px;
-  }
 }
 
 /* For screen width 380px */
@@ -259,11 +253,5 @@
 
 
 
-  .page-ttl {
-    max-width: 70px;
-  }
 
-  .page-ttl i {
-    font-size: 10px;
-  }
 }

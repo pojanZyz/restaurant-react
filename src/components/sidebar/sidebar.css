@@ -27,7 +27,8 @@
   display: none;
 }
 #sidebar hr,
-#admin-sidebar hr {
+#admin-sidebar hr,
+#cas-sidebar hr {
   align-self: center;
 }
 .top-side {
@@ -146,6 +147,93 @@
   }
 }
 
+/*cas navbar */
+#cas-sidebar {
+  display: none;
+}
+.navbar-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #2c3e50;
+  color: white;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.436);
+  z-index: 9999;
+}
+.cas-logo-con {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 10px;
+  font-size: 16px;
+}
+.cas-logo-con img {
+  width: 30px;
+  background-color: white;
+  border-radius: 50%;
+}
+.navs-con {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 14px;
+}
+.navs-con a {
+  padding: 3px 5px;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.no-act-nav {
+  color: white;
+  font-weight: bold;
+  background-color: transparent;
+}
+.active-nav {
+  color: black;
+  font-weight: bold;
+  background-color: var(--warnaKetiga);
+}
+.border-sep {
+  width: 1px;
+  height: 40px;
+  background-color: white;
+}
+.cas-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.911);
+  color: rgba(0, 0, 0, 0.789);
+  padding: 0 5px;
+  border-radius: 50%;
+  font-style: italic;
+  font-size: 10px;
+  border: none;
+  text-align: center;
+}
+.cas-profile i {
+  font-weight: bolder;
+  font-size: 1.25rem;
+}
+.cas-profile:hover {
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
+}
+.cas-hammenu {
+  display: none;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
 @media (max-width: 1200px) {
   #sidebar,
   #admin-sidebar {
@@ -161,7 +249,8 @@
     background-color: white;
     border-radius: 50%;
   }
-  .top-bar .logo-con{
+  .top-bar .logo-con,
+  .cas-logo-con {
     display: flex;
     padding: 10px 0;
     gap: 5px;
@@ -172,6 +261,10 @@
   .account-container .regis-btn {
     font-size: 80%;
   }
+
+  .navs-con a, .navs-con button i{
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 800px) {
@@ -181,8 +274,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Gelap */
-    z-index: 999; /* Pastikan overlay berada di atas konten */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
   }
   #sidebar {
     position: fixed;
@@ -214,12 +307,33 @@
     overflow-y: auto;
     font-size: 80%;
   }
+  #cas-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50vw;
+    background-color: var(--warnaUtama);
+    color: #ecf0f1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateX(-100%);
+    opacity: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    font-size: 80%;
+  }
   #sidebar.open,
-  #admin-sidebar.open {
+  #admin-sidebar.open,
+  #cas-sidebar.open {
     transform: translateX(0);
     opacity: 1;
   }
-  #sidebar.closed #admin-sidebar.closed {
+  #sidebar.closed,
+  #admin-sidebar.closed,
+  #cas-sidebar.closed {
     transform: translateX(-100%);
     opacity: 0;
   }
@@ -238,14 +352,17 @@
     top: 0;
     right: 0;
     left: 0;
-    z-index: 100;
+    z-index: 999;
   }
-  .top-bar img {
+  .top-bar img,
+  .cas-logo-con img {
     object-fit: cover;
     width: 30px;
     height: 30px;
   }
-  #sidebar img, #admin-sidebar img{
+  #sidebar img,
+  #admin-sidebar img,
+  #cas-sidebar img {
     object-fit: cover;
     width: 35px;
     height: 35px;
@@ -256,10 +373,18 @@
     color: white;
     font-size: 20px;
   }
-  .top-bar button hover {
+
+  .navbar-con {
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0 15px;
+    z-index: 1000;
+  }
+  .navs-con {
+    display: none;
+  }
+  .cas-hammenu {
     display: flex;
   }
 }
-
-
-

@@ -14,10 +14,6 @@ const AdminSidebar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -81,7 +77,7 @@ const AdminSidebar = () => {
           <hr />
           <nav className="box-menu">
             <NavLink to="/admin" end onClick={() => setIsOpen(false)}>
-              <i class="bi bi-bar-chart-line-fill"></i> <span>Dashboard</span>
+              <i className="bi bi-bar-chart-line-fill"></i> <span>Dashboard</span>
             </NavLink>
 
             <NavLink to="/admin/menu" onClick={() => setIsOpen(false)}>
@@ -129,7 +125,7 @@ const AdminSidebar = () => {
                 className="logout-btn poppins-regular"
                 onClick={handleLogout}
               >
-                <i class="bi bi-box-arrow-right"></i> Logout
+                <i className="bi bi-box-arrow-right"></i> Logout
               </button>
             </>
           ) : (

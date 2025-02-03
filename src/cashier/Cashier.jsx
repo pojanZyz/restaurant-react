@@ -9,6 +9,7 @@ import useSnapCas from "../js/useSnapCas";
 import NoData from "../components/NoData";
 import OrderDetails from "../components/OrderDetails";
 import { Helmet } from "react-helmet";
+import Loader from "../components/Loader";
 
 const Cashier = () => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ const Cashier = () => {
   const { triggerPayment } = useSnapCas(
     import.meta.env.VITE_MIDTRANS_CLIENT_KEY
   );
+  const [isOpen, setIsOpen] = useState(false);
 
   const [products, setProducts] = useState([]);
   const [tables, setTables] = useState([]);
@@ -67,7 +69,7 @@ const Cashier = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `api/product?sort=&category=&limit=${limit}&search=${debouncedSearch}&page=${page}`
+        `api/product?sort=asc&limit=${limit}&search=${debouncedSearch}&page=${page}`
       );
       setProducts(res.data.data);
       setProductCount(res.data.dataCount);
@@ -113,7 +115,7 @@ const Cashier = () => {
     } catch (error) {
       console.error(error);
       setIsDiscountValid("invalid");
-      setDiscountsDetails({})
+      setDiscountsDetails({});
     } finally {
       setDiscLoading(false);
     }
@@ -137,12 +139,12 @@ const Cashier = () => {
   //create order
   const handleOrder = async (e) => {
     e.preventDefault();
-    if(!token){
+    if (!token) {
       return Swal.fire({
         icon: "warning",
         title: "Warning",
-        text: "Token is invalid or expired"
-      })
+        text: "Token is invalid or expired",
+      });
     }
     if (!cart.length || !paymentMethod) {
       return Swal.fire({
@@ -223,7 +225,7 @@ const Cashier = () => {
         if (res.data.snapToken) {
           const snapToken = res.data.snapToken;
           const orderId = res.data.orderId;
-          triggerPayment(snapToken, orderId)
+          triggerPayment(snapToken, orderId);
         }
       } catch (error) {
         console.error(error);
@@ -333,12 +335,16 @@ const Cashier = () => {
 
   return (
     <>
-    <Helmet>
-      <title>CafeCoding | Cashier</title>
-    </Helmet>
-    <div className="cashier-box">
+      <Helmet>
+        <title>CafeCoding | Cashier</title>
+      </Helmet>
+      {loading && (
+        <div className="loader-overlay">
+          <Loader />
+        </div>
+      )}
       <div className="cashier-container quicksand">
-        <div className="left-container">
+        <div className={`left-container ${isOpen ? "open" : "closed"}`}>
           <div className="control-panel-cas">
             <div className="search-input">
               <i className="bi bi-search"></i>
@@ -360,9 +366,7 @@ const Cashier = () => {
               <option value={80}>80</option>
             </select>
           </div>
-          {loading ? (
-            <div className="poppins-regular">Wait..</div>
-          ) : productCount === 0 ? (
+          {productCount === 0 ? (
             <NoData str={"No product found"} />
           ) : (
             <>
@@ -430,233 +434,249 @@ const Cashier = () => {
           )}
         </div>
 
-        <div className="right-container">
-          <h3 className="poppins-regular">
-            Cashier <span className="order-type-cas">CAS</span>
-          </h3>
+        <div className="rightcon-wrap">
+          <div className="right-container">
+            <h3 className="poppins-regular">
+              Cashier <span className="order-type-cas">CAS</span>
+            </h3>
 
-          <div className="right-con1">
-            <div className="items-wrap">
-              <h4>Items</h4>
-              <hr />
-              {cart.length === 0 ? (
-                <div className="no-cart">
-                  <i className="bi bi-info-circle-fill"></i>
-                  <h4>TIP</h4>
-                  <p>Select the product on the left side of the screen</p>
+            <div className="right-con1">
+              <div className="items-wrap">
+                <div className="items-header">
+                  <h4>Items</h4>
+                  {isOpen && (
+                    <div
+                      className="overlay"
+                      onClick={() => setIsOpen(false)}
+                    ></div>
+                  )}
+                  <button
+                    className="poppins-regular"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    Open Products
+                  </button>
                 </div>
-              ) : (
-                <div className="cart-items">
-                  {cart.map((item) => (
-                    <div key={item._id} className="cart-item">
-                      <div className="cart-item-details">
-                        <img
-                          src={item.productImagePath}
-                          alt={item.productName}
-                        />
-                        <div className="cart-item-details-ext">
+                <hr />
+                {cart.length === 0 ? (
+                  <div className="no-cart">
+                    <i className="bi bi-info-circle-fill"></i>
+                    <h4>TIP</h4>
+                    <p>Select the product on the left side of the screen</p>
+                  </div>
+                ) : (
+                  <div className="cart-items">
+                    {cart.map((item) => (
+                      <div key={item._id} className="cart-item">
+                        <div className="cart-item-details">
+                          <img
+                            src={item.productImagePath}
+                            alt={item.productName}
+                          />
+                          <div className="cart-item-details-ext">
+                            <span className="poppins-regular">
+                              {item.productName}
+                            </span>
+                            <span>
+                              Rp. {item.productPrice.toLocaleString("id-ID")}
+                              {item.quantity === 1 ? "" : ` x${item.quantity}`}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="cart-controls">
+                          <button
+                            onClick={() => handleQuantityChange(item._id, -1)}
+                          >
+                            -
+                          </button>
                           <span className="poppins-regular">
-                            {item.productName}
+                            {item.quantity}
                           </span>
-                          <span>
-                            Rp. {item.productPrice.toLocaleString("id-ID")}
-                            {item.quantity === 1 ? "" : ` x${item.quantity}`}
-                          </span>
+                          <button
+                            onClick={() => handleQuantityChange(item._id, 1)}
+                          >
+                            +
+                          </button>
+                          <button
+                            onClick={() => handleRemoveFromCart(item._id)}
+                            className="delete-btn"
+                          >
+                            <i className="bi bi-trash3-fill"></i>
+                          </button>
                         </div>
                       </div>
-                      <div className="cart-controls">
-                        <button
-                          onClick={() => handleQuantityChange(item._id, -1)}
-                        >
-                          -
-                        </button>
-                        <span className="poppins-regular">{item.quantity}</span>
-                        <button
-                          onClick={() => handleQuantityChange(item._id, 1)}
-                        >
-                          +
-                        </button>
-                        <button
-                          onClick={() => handleRemoveFromCart(item._id)}
-                          className="delete-btn"
-                        >
-                          <i className="bi bi-trash3-fill"></i>
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="pricing-details">
-              <div className="form-group">
-                <label>Sub Total</label>
-                <h5>Rp. {calculateTotalPrice().toLocaleString("id-ID")}</h5>
-              </div>
-              <div className="form-group">
-                <label>Tax</label>
-                <h5>Rp. -</h5>
-              </div>
-              <div className="form-group">
-                <label>Discount</label>
-                <h5>
-                  {discountsDetails.discountType === "percentage"
-                    ? `${discountsDetails.discountValue}%`
-                    : discountsDetails.discountType === "fixed"
-                    ? `Rp. ${discountsDetails.discountValue}`
-                    : "-"}
-                </h5>
-              </div>
-              <div className="form-group">
-                <label>Final Price</label>
-                <h2>
-                  Rp. {calculateFinalPrice().toLocaleString("id-ID") || "-"}
-                </h2>
-              </div>
-            </div>
-          </div>
-
-          <form className="cas-form" onSubmit={handleOrder}>
-            {/* Informasi Pelanggan */}
-            <div className="fcas-row-1">
-              <div className="form-group">
-                <label>Table Number</label>
-                <Select
-                  options={tables}
-                  values={selectedTable}
-                  onChange={(values) => setSelectedTable(values)}
-                  labelField="tableNumber"
-                  valueField="_id"
-                  searchable
-                  searchBy="tableNumber"
-                  placeholder="Search.."
-                  noDataLabel="No data found"
-                  className="select-table quicksand"
-                  dropdownHeight="200px"
-                />
-              </div>
-              <div className="form-group">
-                <label>Customer Email</label>
-                <div className="cas-special-input">
-                  <input
-                    className="quicksand"
-                    type="email"
-                    value={customerEmail}
-                    onChange={(e) => setCustomerEmail(e.target.value)}
-                    placeholder="Enter customer email"
-                  />
-                  <div className="disc-status">
-                    {cusEmailLoading ? (
-                      <div className="small-loader"></div>
-                    ) : isCusEmailValid === "valid" ? (
-                      <i
-                        className="bi bi-check-circle-fill"
-                        style={{ color: "green" }}
-                      ></i>
-                    ) : isCusEmailValid === "invalid" ? (
-                      <i
-                        className="bi bi-x-circle-fill"
-                        style={{ color: "red" }}
-                      ></i>
-                    ) : (
-                      ""
-                    )}
+                    ))}
                   </div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Discount Code</label>
-                <div className="cas-special-input">
-                  <input
-                    className="quicksand"
-                    type="text"
-                    value={discountCode}
-                    onChange={(e) => setDiscountCode(e.target.value)}
-                    placeholder="Enter discount code"
-                  />
-                  <div className="disc-status">
-                    {discLoading ? (
-                      <div className="small-loader"></div>
-                    ) : isDiscountValid === "valid" ? (
-                      <i
-                        className="bi bi-check-circle-fill"
-                        style={{ color: "green" }}
-                      ></i>
-                    ) : isDiscountValid === "invalid" ? (
-                      <i
-                        className="bi bi-x-circle-fill"
-                        style={{ color: "red" }}
-                      ></i>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr />
-
-            <div className="fcas-row2">
-              <div className="form-group-row2">
-                <label>Payment Method</label>
-                <label>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="Cash"
-                    checked={paymentMethod === "Cash"}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />{" "}
-                  Cash
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="Online"
-                    checked={paymentMethod === "Online"}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />{" "}
-                  Online (via Midtrans)
-                </label>
-              </div>
-
-              <div className="form-group-row2">
-                {paymentMethod === "Cash" ? (
-                  <>
-                    <label>Cash Amount (customer)</label>
-                    <input
-                      className="quicksand customer-money"
-                      type="number"
-                      value={customerMoney}
-                      onChange={(e) => setCustomerMoney(e.target.value)}
-                      placeholder="Enter customer money"
-                    />
-                    <span className="change-mny">
-                      {customerMoney === ""
-                        ? ""
-                        : customerMoney < calculateFinalPrice()
-                        ? "Not enough money"
-                        : `Change: Rp. ${(
-                            customerMoney - calculateFinalPrice()
-                          ).toLocaleString("id-ID")}`}
-                    </span>
-                  </>
-                ) : (
-                  ""
                 )}
               </div>
+              <div className="pricing-details">
+                <div className="form-group">
+                  <label>Sub Total</label>
+                  <h5>Rp. {calculateTotalPrice().toLocaleString("id-ID")}</h5>
+                </div>
+                <div className="form-group">
+                  <label>Tax</label>
+                  <h5>Rp. -</h5>
+                </div>
+                <div className="form-group">
+                  <label>Discount</label>
+                  <h5>
+                    {discountsDetails.discountType === "percentage"
+                      ? `${discountsDetails.discountValue}%`
+                      : discountsDetails.discountType === "fixed"
+                      ? `Rp. ${discountsDetails.discountValue}`
+                      : "-"}
+                  </h5>
+                </div>
+                <div className="form-group">
+                  <label>Final Price</label>
+                  <h2>
+                    Rp. {calculateFinalPrice().toLocaleString("id-ID") || "-"}
+                  </h2>
+                </div>
+              </div>
             </div>
 
-            <div className="form-section">
+            <form className="cas-form" onSubmit={handleOrder}>
+              {/* Informasi Pelanggan */}
+              <div className="fcas-row-1">
+                <div className="form-group">
+                  <label>Table Number</label>
+                  <Select
+                    options={tables}
+                    values={selectedTable}
+                    onChange={(values) => setSelectedTable(values)}
+                    labelField="tableNumber"
+                    valueField="_id"
+                    searchable
+                    searchBy="tableNumber"
+                    placeholder="Search.."
+                    noDataLabel="No data found"
+                    className="select-table quicksand"
+                    dropdownHeight="200px"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Customer Email</label>
+                  <div className="cas-special-input">
+                    <input
+                      className="quicksand"
+                      type="email"
+                      value={customerEmail}
+                      onChange={(e) => setCustomerEmail(e.target.value)}
+                      placeholder="Enter customer email"
+                    />
+                    <div className="disc-status">
+                      {cusEmailLoading ? (
+                        <div className="small-loader"></div>
+                      ) : isCusEmailValid === "valid" ? (
+                        <i
+                          className="bi bi-check-circle-fill"
+                          style={{ color: "green" }}
+                        ></i>
+                      ) : isCusEmailValid === "invalid" ? (
+                        <i
+                          className="bi bi-x-circle-fill"
+                          style={{ color: "red" }}
+                        ></i>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Discount Code</label>
+                  <div className="cas-special-input">
+                    <input
+                      className="quicksand"
+                      type="text"
+                      value={discountCode}
+                      onChange={(e) => setDiscountCode(e.target.value)}
+                      placeholder="Enter discount code"
+                    />
+                    <div className="disc-status">
+                      {discLoading ? (
+                        <div className="small-loader"></div>
+                      ) : isDiscountValid === "valid" ? (
+                        <i
+                          className="bi bi-check-circle-fill"
+                          style={{ color: "green" }}
+                        ></i>
+                      ) : isDiscountValid === "invalid" ? (
+                        <i
+                          className="bi bi-x-circle-fill"
+                          style={{ color: "red" }}
+                        ></i>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+
+              <div className="fcas-row2">
+                <div className="form-group-row2">
+                  <label>Payment Method</label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="Cash"
+                      checked={paymentMethod === "Cash"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />{" "}
+                    Cash
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="Online"
+                      checked={paymentMethod === "Online"}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />{" "}
+                    Online (via Midtrans)
+                  </label>
+                </div>
+
+                <div className="form-group-row2">
+                  {paymentMethod === "Cash" ? (
+                    <>
+                      <label>Cash Amount (customer)</label>
+                      <input
+                        className="quicksand customer-money"
+                        type="number"
+                        value={customerMoney}
+                        onChange={(e) => setCustomerMoney(e.target.value)}
+                        placeholder="Enter customer money"
+                      />
+                      <span className="change-mny">
+                        {customerMoney === ""
+                          ? ""
+                          : customerMoney < calculateFinalPrice()
+                          ? "Not enough money"
+                          : `Change: Rp. ${(
+                              customerMoney - calculateFinalPrice()
+                            ).toLocaleString("id-ID")}`}
+                      </span>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+
               <button
                 onClick={handleOrder}
                 className="order-btn poppins-regular"
               >
                 Done
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
       {/* receipt */}
@@ -666,7 +686,6 @@ const Cashier = () => {
         order={selectedOrder}
         from={"cashier"}
       />
-    </div>
     </>
   );
 };

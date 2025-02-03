@@ -204,7 +204,7 @@ const OrderAdmin = () => {
                 <option value="oldest">Oldest</option>
               </select>
               <select
-                className="quicksand"
+                className="quicksand pay-status"
                 onChange={(e) => handlePayStatus(e.target.value)}
               >
                 <option value="">All</option>

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 import CashierLoader from "../components/CashierLoader";
 import TablePopupCas from "../components/TablePopupCas";
+import Loader from "../components/Loader";
 import useAuth from "../js/useAuth";
 
 const TableStat = () => {
@@ -79,63 +80,68 @@ const TableStat = () => {
     setShowUpdatePopup(!showUpdatePopup);
   };
   return (
-    <div className="tablestat-con quicksand">
-      {loading ? (
-        <CashierLoader />
-      ) : (
-        <>
-          <div className="header">
-            <h5 className="poppins-regular">Table Status: {selectedDate}</h5>
-          </div>
-          <input
-            type="date"
-            value={selectedDate}
-            min={new Date().toISOString().split("T")[0]}
-            onChange={(e) => setSelectedDate(e.target.value)}
-            className="date-input quicksand"
-          />
-          <ul className="legendstat-con">
-            <li>
-              <div className="green-sqr"></div> :Available
-            </li>
-            <li>
-              <div className="red-sqr"></div> :Reserved
-            </li>
-            <li>
-              <div className="gray-sqr"></div> :Occupied
-            </li>
-          </ul>
-          <div className="tablestat-box">
-            {tables.map((table) => (
-              <div
-                className={`tablestat-grid-item ${
-                  table.status === "Available"
-                    ? "table-available"
-                    : table.status === "Reserved"
-                    ? "table-reserved"
-                    : "table-occupied"
-                }`}
-                key={table._id}
-                onClick={() => handleTableClick(table)}
-              >
-                <div className="table-cap">
-                  <i className="bi bi-people-fill"></i>
-                  {table.capacity}
-                </div>
-                <div className="poppins-regular">{table.tableNumber}</div>
-              </div>
-            ))}
-          </div>
-        </>
+    <>
+      {loading && (
+        <div className="loader-overlay">
+          <Loader />
+        </div>
       )}
-      <TablePopupCas
-        isVisible={showUpdatePopup}
-        onClose={() => setShowUpdatePopup(false)}
-        onUpdate={handleUpdateTable}
-        table={selectedTable}
-        selectedDate={selectedDate}
-      />
-    </div>
+      <div className="table-wrap quicksand">
+        <h4 className="poppins-regular">Table Status</h4>
+        <p>
+          {new Date(selectedDate).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </p>
+        <input
+          type="date"
+          value={selectedDate}
+          min={new Date().toISOString().split("T")[0]}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="date-input quicksand"
+        />
+        <ul className="legend-con">
+          <li>
+            <div className="green-sqr"></div> : Available
+          </li>
+          <li>
+            <div className="red-sqr"></div> : Reserved
+          </li>
+          <li>
+            <div className="gray-sqr"></div> : Occupied
+          </li>
+        </ul>
+        <div className="tables-box">
+          {tables.map((table) => (
+            <div
+              className={`table-grid-item ${
+                table.status === "Available"
+                  ? "table-available"
+                  : table.status === "Reserved"
+                  ? "table-reserved"
+                  : "table-occupied"
+              }`}
+              key={table._id}
+              onClick={() => handleTableClick(table)}
+            >
+              <div className="table-cap">
+                <i className="bi bi-people-fill"></i>
+                {table.capacity}
+              </div>
+              <div className="poppins-regular">{table.tableNumber}</div>
+            </div>
+          ))}
+        </div>
+        <TablePopupCas
+          isVisible={showUpdatePopup}
+          onClose={() => setShowUpdatePopup(false)}
+          onUpdate={handleUpdateTable}
+          table={selectedTable}
+        />
+      </div>
+    </>
   );
 };
 

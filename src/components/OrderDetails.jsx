@@ -39,10 +39,12 @@ const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
           <p className="poppins-regular">{order.orderNumber}</p>
         </div>
         <div className="receipt">
-          <strong>CafeCoding</strong>
-          <p>Jl. Cinta Kasih No. 123</p>
-          <p>Telp No.08391920321</p>
-          <span>==============================</span>
+          <div className="receipt-header">
+            <strong>CafeCoding</strong>
+            <p>Jl. Cinta Kasih No. 123</p>
+            <p>Telp No.08391920321</p>
+          </div>
+          <div className="border-double"></div>
           <div className="receipt-date">
             <div>Code: {order.orderNumber}</div>
             <div>Cashier: {order.cashierInfo?.username}</div>
@@ -54,7 +56,7 @@ const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
               })}
             </div>
           </div>
-          <span>----------------------------</span>
+          <div className="border-single"></div>
           <div className="receipt-items">
             {order.productInfo.map((item) => (
               <div className="item" key={item._id}>
@@ -68,7 +70,7 @@ const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
               </div>
             ))}
           </div>
-          <span>----------------------------</span>
+          <div className="border-single"></div>
           <div className="receipt-fee">
             <div className="item">
               <span>Tax:</span>
@@ -89,7 +91,7 @@ const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
               <span>Rp{order.fee.toLocaleString("id-ID")}</span>
             </div>
           </div>
-          <span>----------------------------</span>
+          <div className="border-single"></div>
           <div className="receipt-final">
             <div>Payment Method: {order.paymentMethod}</div>
             {order.paymentMethod !== "Cash" ? (
@@ -104,7 +106,7 @@ const OrderDetails = ({ isVisible, onClose, order, from, onDelete }) => {
               </>
             )}
           </div>
-          <span>==============================</span>
+          <div className="border-double"></div>
           <div className="receipt-closing">
             <span>Visit our Website</span>
             <span>[QR CODE HERE]</span>
