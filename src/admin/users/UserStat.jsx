@@ -40,6 +40,7 @@ const UserStat = ({ userCount, mostCoins, roleCount }) => {
   };
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -114,7 +115,7 @@ const UserStat = ({ userCount, mostCoins, roleCount }) => {
     ],
   };
   const pieChartOptions = {
-    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",

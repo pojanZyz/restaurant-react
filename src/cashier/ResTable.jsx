@@ -7,50 +7,18 @@ import NoData from "../components/NoData";
 import Loader from "../components/Loader";
 import ResDetailsCas from "../components/ResDetailsCas";
 
-const ResTable = () => {
-  const { token, userData } = useAuth();
-  const [loading, setLoading] = useState(false);
-
-  const [reservations, setReservations] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [resStatus, setResStatus] = useState("");
-  const [sort, setSort] = useState("");
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-
+const ResTable = ({
+  reservations,
+  onSearch,
+  onSort,
+  onResStatus,
+  onLimit,
+  onPage,
+  page,
+  totalPages
+}) => {
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
   const [selectedReservation, setSelectedReservation] = useState({});
-
-  //debounces
-  useEffect(() => {
-    const delay = setTimeout(() => setDebouncedSearch(search), 500);
-    return () => clearTimeout(delay);
-  }, [search]);
-  useEffect(() => {
-    fetchReservations();
-  }, [debouncedSearch, sort, resStatus, page, limit]);
-
-  //get all res
-  const fetchReservations = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(
-        `api/reservation?search=${debouncedSearch}&sort=${sort}&page=${page}&limit=${limit}&reservationStatus=${resStatus}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setReservations(res.data.data);
-      setResCount(res.data.dataCount);
-      setTotalPages(res.data.totalPages);
-    } catch (error) {
-      console.error(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   //handle update res
   const handleUpdateRes = async (
@@ -85,7 +53,6 @@ const ResTable = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-        fetchReservations();
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -98,20 +65,6 @@ const ResTable = () => {
     }
   };
 
-  //events handler
-  const handleSearchChange = (searchVal) => {
-    setSearch(searchVal);
-    setPage(1);
-  };
-  const handleLimitChange = (limitVal) => {
-    setLimit(limitVal);
-    setPage(1);
-  };
-  const handleResStatus = (resStatusVal) => {
-    setResStatus(resStatusVal);
-    setPage(1);
-  };
-
   //handle btn details
   const handleDetails = (reservation) => {
     setSelectedReservation(reservation);
@@ -120,11 +73,6 @@ const ResTable = () => {
 
   return (
     <>
-      {loading && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
       <div className="order-table-wrap quicksand">
         <div className="table-det">
           <div className="page-ttl">
@@ -144,15 +92,14 @@ const ResTable = () => {
             <input
               className="quicksand"
               type="search"
-              value={search}
-              onChange={(e) => handleSearchChange(e.target.value)}
+              onChange={(e) => onSearch(e.target.value)}
               placeholder="Search..."
             />
           </div>
           <div className="other-filt">
             <select
               className="quicksand"
-              onChange={(e) => setSort(e.target.value)}
+              onChange={(e) => onSort(e.target.value)}
             >
               <option value="newest">Newest</option>
               <option value="asc">A-Z</option>
@@ -161,7 +108,7 @@ const ResTable = () => {
             </select>
             <select
               className="quicksand"
-              onChange={(e) => handleResStatus(e.target.value)}
+              onChange={(e) => onResStatus(e.target.value)}
             >
               <option value="">All</option>
               <option value="Pending">Pending</option>
@@ -170,7 +117,7 @@ const ResTable = () => {
             </select>
             <select
               className="quicksand"
-              onChange={(e) => handleLimitChange(e.target.value)}
+              onChange={(e) => onLimit(e.target.value)}
             >
               <option value="50">50</option>
               <option value="70">70</option>
@@ -278,7 +225,7 @@ const ResTable = () => {
             <button
               className="quicksand"
               disabled={page === 1}
-              onClick={() => setPage(page - 1)}
+              onClick={() => onPage(page - 1)}
             >
               Previous
             </button>
@@ -292,7 +239,7 @@ const ResTable = () => {
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                  onClick={() => setPage(pg)}
+                  onClick={() => onPage(pg)}
                 >
                   {pg}
                 </button>
@@ -301,7 +248,7 @@ const ResTable = () => {
             <button
               className="quicksand"
               disabled={page === totalPages}
-              onClick={() => setPage(page + 1)}
+              onClick={() => onPage(page + 1)}
             >
               Next
             </button>

@@ -139,6 +139,7 @@ const TableStat = () => {
           onClose={() => setShowUpdatePopup(false)}
           onUpdate={handleUpdateTable}
           table={selectedTable}
+          selectedDate={selectedDate}
         />
       </div>
     </>

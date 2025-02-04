@@ -54,8 +54,8 @@ const UpdatePopup = ({ isVisible, onClose, onUpdate, onDelete, product }) => {
       className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
           <span>Product Details</span>
         </div>

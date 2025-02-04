@@ -4,7 +4,7 @@
   flex-direction: column;
   padding: 50px;
   gap: 20px;
-  margin-bottom: 50vh;
+  margin-bottom: 20vh;
 }
 .history-container .header-title {
   margin-top: 50px;
@@ -12,10 +12,31 @@
 }
 
 .history-main {
-  align-items: start;
   display: flex;
   gap: 20px;
   margin: 30px 1rem 0 1rem;
+}
+.history-secondary{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.history-data{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.history-data .card-1{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 10px;
+  border: solid 0.5px rgb(149, 149, 149);
+  border-radius: 5px;
+}
+.history-data .card-1 p{
+  font-size: 1rem;
 }
 .history-main-content {
   display: flex;
@@ -394,6 +415,15 @@
     align-items: center;
     margin: 0px;
   }
+  .history-secondary{
+    flex-direction: row;
+  }
+  .history-data{
+    flex-direction: column;
+  }
+  .history-data .card-1{
+    justify-content: center;
+  }
 
   .table-det {
     justify-content: center;
@@ -417,6 +447,15 @@
     gap: 10px;
   }
 
+  .cas-filters .search-input input,
+  .cas-filters
+  .search-input i,
+  .cas-filters select,
+  .cas-filters .date-input {
+    font-size: 0.9rem;
+  }
+
+
   .table-det span {
     font-size: 0.8rem;
   }
@@ -432,6 +471,18 @@
   .history-container .header-title {
     margin-bottom: 30px;
   }
+  .history-secondary{
+    flex-direction: column-reverse;
+  }
+  .history-data{
+    flex-direction: row;
+  }
+  .history-data .card-1 p{
+    font-size: 0.65rem;
+  }
+  .history-data h3{
+    font-size: 1.2rem;
+  }
   .history-main-content {
     margin: 0 5px;
   }
@@ -444,7 +495,7 @@
   }
 
   .cas-filters .search-input input,
-  .cas-filters,
+  .cas-filters
   .search-input i,
   .cas-filters select,
   .cas-filters .date-input {
@@ -458,11 +509,11 @@
   .cashier-table th {
     display: none;
   }
-  .cashier-table td {
+  .cashier-table td, .td-username {
     display: grid;
     grid-template-columns: 20ch 1fr;
     padding: 4px;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
   }
   .cashier-table td span {
     font-size: 0.6rem;

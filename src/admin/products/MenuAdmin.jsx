@@ -238,8 +238,7 @@ const MenuAdmin = () => {
         <div className="admin-menu-container quicksand">
           <div className="admin-menu-con1">
             <h2 className="poppins-regular">
-              <i className="bi bi-cart-fill judul"></i>{" "}
-              <span className="judul">Your products</span>
+              <i className="bi bi-cart-fill"></i> <span>Your products</span>
             </h2>
           </div>
 
@@ -264,8 +263,8 @@ const MenuAdmin = () => {
                 <span>Click each items to see details.</span>
               </div>
             </div>
-            
-            <div className="filters">
+
+            <div className="cas-filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
                 <input
@@ -276,32 +275,34 @@ const MenuAdmin = () => {
                   placeholder="Search..."
                 />
               </div>
-              <select
-                className="quicksand"
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="newest">Newest</option>
-                <option value="asc">A-Z</option>
-                <option value="dsc">Z-A</option>
-                <option value="oldest">Oldest</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleCategoryChange(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="food">Food</option>
-                <option value="drink">Drink</option>
-                <option value="other">Other</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleLimitChange(e.target.value)}
-              >
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="80">80</option>
-              </select>
+              <div className="other-filt">
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="asc">A-Z</option>
+                  <option value="dsc">Z-A</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleCategoryChange(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="food">Food</option>
+                  <option value="drink">Drink</option>
+                  <option value="other">Other</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
             </div>
             <div className="products-wrap">
               <div className="products-grid">

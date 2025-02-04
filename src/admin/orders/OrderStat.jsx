@@ -51,6 +51,7 @@ const OrderStat = ({ orderCount, bestOrders, revenue }) => {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -123,6 +124,7 @@ const OrderStat = ({ orderCount, bestOrders, revenue }) => {
   };
   const lineChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,

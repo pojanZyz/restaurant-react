@@ -19,6 +19,11 @@ p{
   padding: 10px;
   gap: 10px;
 }
+.admin-menu-con2 canvas{
+  height: 170px !important;
+  width: 300px !important;
+  align-self: center;
+}
 /*product-stat*/
 .prodstat-1 {
   display: flex;
@@ -34,6 +39,7 @@ p{
   border: rgb(185, 185, 185) solid 1px;
   border-radius: 5px;
   gap: 20px;
+  flex-grow: 1;
 }
 .prodstat-1 .ttl-product p,
 .prodstat-1 .most-selled p {
@@ -60,6 +66,7 @@ p{
 .prodstat-2 {
   background-color: white;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: start;
   padding: 10px;
@@ -74,8 +81,8 @@ p{
 .prodstat-3 {
   background-color: white;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  flex-direction: column;
   padding: 10px;
   border: rgb(185, 185, 185) solid 1px;
   border-radius: 5px;
@@ -152,7 +159,8 @@ p{
   font-size: 70%;
   background-color: white;
   position: relative;
-  min-height: 190px;
+  min-height: fit-content;
+  max-width: 150px;
   border-radius: 5px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.236);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -199,6 +207,8 @@ p{
 }
 .product-item-grid h4 {
   margin-top: 5px;
+  text-align: center;
+  text-wrap: nowrap;
 }
 .product-item-grid .product-ava {
   position: absolute;
@@ -235,12 +245,18 @@ p{
   }
 }
 
-.update-card {
+.admin-popup {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  border-radius: 15px;
-  padding: 0px 15px;
+  background-color: rgba(238, 238, 238, 0.948);
+  color: black;
+  border-radius: 5px;
+  padding: 15px 20px;
+  gap: 5px;
+  margin-top: 50px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .card-header {
   display: flex;
@@ -248,23 +264,20 @@ p{
   align-items: center;
   padding: 3px 20px;
   font-size: 60%;
-  background-color: rgba(0, 0, 0, 0.815);
-  color: white;
-  border-radius: 100px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
 }
 .card-header .x-btn:hover {
   color: var(--warnaKeempat);
   cursor: pointer;
 }
 .card-content {
-  padding: 30px 0px;
-  font-size: 70%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  font-size: 70%;
+  background-color: white;
+  padding: 10px;
+  gap: 10px;
 }
+
 .card-content input,
 .card-content textarea,
 .card-content select {
@@ -377,192 +390,158 @@ p{
 }
 
 
-/* For screen width 1024px */
-@media screen and (max-width: 1024px) {
-  .admin-menu-container {
-    padding: 30px;
-    margin-bottom: 50px;
+@media (max-width: 1100px){
+  .products-grid{
+    grid-template-columns:  repeat(4, 1fr);
+  }
+
+  .products-grid .product-item-grid{
+    min-height: fit-content;
+  }
+  .product-item-grid img, .product-item-grid .plus-icon{
+    width: 100px;
+    height: 100px;
+    font-size: 0.7rem
+  }
+  .product-item-grid h4{
+    font-size: 0.85rem;
+  }
+  .product-item-grid span{
+    font-size: 0.8rem;
   }
 
   .admin-menu-con2{
     flex-direction: column;
   }
-
-  .prodstat-1 .ttl-product {
+  .prodstat-1{
     flex-direction: row;
-    align-items: center;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .product-item-grid {
-    min-height: 160px;
   }
 }
 
-/* For screen width 780px */
-@media screen and (max-width: 780px) {
+
+
+@media (max-width: 800px){
   .admin-menu-container {
-    padding: 20px;
-    padding-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  .admin-home-con2{
-    flex-direction: column;
-  }
-
-  .prodstat-1 .ttl-product {
-    flex-direction: row;
+    padding: 5px;
+    gap: 0;
+    margin-top: 5rem;
     align-items: center;
   }
-
-  .prodstat-2,
-  .prodstat-3 {
-    font-size: 12px;
+  .admin-menu-container h2{
+    font-size: 1.5rem;
   }
 
-  .products-grid {
+  
+  .admin-menu-con2{
+    flex-wrap: wrap;
+  }
+  .admin-menu-con2 canvas{
+    height: 200px !important;
+    width: 250px !important;
+    align-self: center;
+  }
+  .prodstat-3{
+    flex-direction: row;
+    flex-grow: 4;
+    justify-content: center;
+  }
+  .prodstat-1{
+    flex-direction: row;
+    gap: 5px;
+  }
+  .prodstat-1 .ttl-product h3, .prodstat-1 .most-selled h5{
+    font-size: 1.1rem;
+  }
+  .prodstat-1 .most-selled, .prodstat-1 .ttl-product{
+    gap: 10px;
+  }
+  .prodstat-1 .most-selled .ms-title{
+    font-size: 0.7rem;
+  }
+  .most-selled img{
+    width: 80px;
+    height: 60px;
+  }
+  
+
+
+  .admin-menu-con3{
+    width: 90vw;
+  }
+  .products-wrap{
+    margin-top: 10px;
+  }
+  .products-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .products-grid .product-item-grid{
+    min-height: fit-content;
+  }
+  .product-item-grid img, .product-item-grid .plus-icon{
+    width: 100px;
+    height: 100px;
+    font-size: 0.7rem
+  }
+  .product-item-grid h4{
+    font-size: 0.85rem;
+  }
+  .product-item-grid span{
+    font-size: 0.8rem;
+  }
+  
+  .card-content input, .card-content textarea{
+    font-size: 0.9rem;
+  }
+  
+}
+
+@media (max-width: 500px){
+  .admin-menu-con2{
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  .prodstat-1{
+    flex-direction: row;
+    gap: 5px;
+  }
+  .prodstat-3{
+    flex-direction: column;
+  }
+  .products-grid{
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .product-item-grid {
-    min-height: 140px;
+
+  .prodstat-1 .ttl-product h3, .prodstat-1 .most-selled h5{
+    font-size: 1rem;
+  }
+  .prodstat-1 .most-selled, .prodstat-1 .ttl-product{
+    gap: 7px;
+  }
+  .prodstat-1 .most-selled .ms-title{
+    font-size: 0.65rem;
+  }
+  .most-selled img{
+    width: 70px;
+    height: 60px;
   }
 
-  .update-card {
-    width: 90%;
-  }
-}
-
-/* For screen width 480px */
-@media screen and (max-width: 480px) {
-  .admin-menu-container {
-    padding: 15px;
-    padding-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  .prodstat-1 .ttl-product {
-    align-items: center;
-  }
-
-  .product-item-grid {
-    min-height: 120px;
-  }
-
-
-  .update-card {
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .card-header {
-    flex-direction: column;
-    font-size: 50%;
-    padding: 5px 10px;
-  }
-
-  .card-content {
-    padding: 20px 0px;
-    font-size: 60%;
-    gap: 10px;
-  }
-
-  .card-content input,
-  .card-content textarea,
-  .card-content select {
-    font-size: 100%;
-    padding: 5px;
-  }
-
-  .card-row1 img {
-    height: 80px;
-    width: 25%;
-    border-radius: 15px;
-  }
-
-  .update-btn,
-  .create-btn,
-  .delete-btn {
-    padding: 5px 15px;
-    font-size: 80%;
-  }
-}
-
-@media (max-width: 380px) {
-  .admin-menu-container {
-    padding: 10px;
-    padding-top: 30px;
-    margin-bottom: 15px;
-  }
-
-  .product-item-grid {
-    min-height: 100px;
-  }
-
-  .update-card {
-    padding: 5px;
-    border-radius: 8px;
-    max-width: 90%; 
-    margin: 0 auto;
-  }
-
-  /* Header card */
-  .card-header {
-    font-size: 40%; 
-    padding: 2px 5px;
-    text-align: center;
-  }
-
-  /* Konten card */
-  .card-content {
-    padding: 8px 0; 
-    font-size: 50%; 
-    display: flex;
-    flex-direction: column; 
-    flex-wrap: wrap; 
-    gap: 5px;
-    justify-content: center;
-  }
-
-  /* Input, textarea, dan select */
-  .card-content input,
-  .card-content textarea,
-  .card-content select {
-    font-size: 80%; 
-    padding: 2px 4px; 
-    box-shadow: none; 
-    border-radius: 5px; 
-    border: 1px solid #ccc;
-  }
-
-  /* Gambar dalam card-row1 */
-  .card-row1 img {
-    height: 45px; 
-    width: 25%;
+  .card-content .card-row1 img{
+    width: 70px;
+    height: 70px;
     border-radius: 5px;
   }
-
-  /* Footer card (tombol) */
-  .card-footer {
-    gap: 5px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: center;
+  .card-content .label-inp{
+    font-size: 0.6rem;
   }
-
-  /* Tombol (update, create, delete) */
-  .update-btn,
-  .create-btn,
-  .delete-btn {
-    padding: 3px 5px; 
-    font-size: 50%; 
-    border-radius: 5px; 
-    text-align: center;
+  .card-content label{
+    font-size: 0.8rem;
+  }
+  .card-content select{
+    font-size: 0.8rem;
+  }
+  .card-content .card-row2{
+    flex-direction: column;
   }
 }

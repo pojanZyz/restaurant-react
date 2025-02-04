@@ -7,74 +7,20 @@ import NoData from "../components/NoData";
 import OrderDetails from "../components/OrderDetails";
 import Loader from "../components/Loader";
 
-const OrderTable = () => {
-  const [loading, setLoading] = useState(false);
-
-  const [orders, setOrders] = useState([]);
-  const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [filterDate, setFilterDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [paymentStatus, setPaymentStatus] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(50);
-
+const OrderTable = ({
+  orders,
+  onSearch,
+  onSort,
+  onFilterDate,
+  onPaymentStatus,
+  onLimit,
+  onPage,
+  page, 
+  totalPages,
+  filterDate
+}) => {
   const [showDetailsPopup, setShowDetailsPopup] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState("");
-
-  useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    setFilterDate(today);
-  }, []);
-  //debounces
-  useEffect(() => {
-    const delay = setTimeout(() => setDebouncedSearch(search), 500);
-    return () => clearTimeout(delay);
-  }, [search]);
-
-  useEffect(() => {
-    fetchOrders();
-  }, [
-    debouncedSearch,
-    sort,
-    filterDate,
-    paymentStatus,
-    page,
-    limit,
-  ]);
-
-  //get all orders
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(
-        `api/order?search=${debouncedSearch}&sort=${sort}&date=${filterDate}&paymentStatus=${paymentStatus}&page=${page}&limit=${limit}`
-      );
-      setOrders(res.data.data);
-      setOrderCount(res.data.dataCount);
-      setTotalPages(res.data.totalPages);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  //events handler
-  const handleSearchChange = (searchVal) => {
-    setSearch(searchVal);
-    setPage(1);
-  };
-  const handleLimitChange = (limitVal) => {
-    setLimit(limitVal);
-    setPage(1);
-  };
-  const handlePayStatus = (payStatusVal) => {
-    setPaymentStatus(payStatusVal);
-    setPage(1);
-  };
 
   //handle open details
   const handleOpenDetails = (order) => {
@@ -83,11 +29,6 @@ const OrderTable = () => {
   };
   return (
     <>
-      {loading && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
       <div className="order-table-wrap quicksand">
         <div className="table-det">
           <div className="page-ttl">
@@ -108,22 +49,21 @@ const OrderTable = () => {
             <input
               className="quicksand"
               type="search"
-              value={search}
-              onChange={(e) => handleSearchChange(e.target.value)}
+              onChange={(e) => onSearch(e.target.value)}
               placeholder="Search..."
             />
           </div>
           <div className="other-filt">
             <input
               type="date"
-              value={filterDate}
+              defaultValue={new Date().toISOString().split("T")[0]}
               max={new Date().toISOString().split("T")[0]}
-              onChange={(e) => setFilterDate(e.target.value)}
+              onChange={(e) => onFilterDate(e.target.value)}
               className="date-input"
             />
             <select
               className="quicksand"
-              onChange={(e) => setSort(e.target.value)}
+              onChange={(e) => onSort(e.target.value)}
             >
               <option value="newest">Newest</option>
               <option value="asc">A-Z</option>
@@ -132,7 +72,7 @@ const OrderTable = () => {
             </select>
             <select
               className="quicksand pay-status"
-              onChange={(e) => handlePayStatus(e.target.value)}
+              onChange={(e) => onPaymentStatus(e.target.value)}
             >
               <option value="">All</option>
               <option value="Pending">Pending</option>
@@ -141,7 +81,7 @@ const OrderTable = () => {
             </select>
             <select
               className="quicksand"
-              onChange={(e) => handleLimitChange(e.target.value)}
+              onChange={(e) => onLimit(e.target.value)}
             >
               <option value="50">50</option>
               <option value="70">70</option>
@@ -192,7 +132,7 @@ const OrderTable = () => {
                   </td>
                   <td>
                     <span
-                      className={`${
+                      className={`td-username ${
                         order.userInfo?.username ? "" : "empty-lbl"
                       }`}
                     >
@@ -243,7 +183,7 @@ const OrderTable = () => {
             <button
               className="quicksand"
               disabled={page === 1}
-              onClick={() => setPage(page - 1)}
+              onClick={() => onPage(page - 1)}
             >
               Previous
             </button>
@@ -257,7 +197,7 @@ const OrderTable = () => {
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                  onClick={() => setPage(pg)}
+                  onClick={() => onPage(pg)}
                 >
                   {pg}
                 </button>
@@ -266,7 +206,7 @@ const OrderTable = () => {
             <button
               className="quicksand"
               disabled={page === totalPages}
-              onClick={() => setPage(page + 1)}
+              onClick={() => onPage(page + 1)}
             >
               Next
             </button>

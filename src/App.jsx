@@ -54,8 +54,11 @@ function App() {
     if (hideSidebar.includes(location.pathname)) {
       return null;
     }
-    if (location.pathname.startsWith("/cashier")) {
+    if (location.pathname == "/cashier") {
       return "";
+    }
+    if( location.pathname === "/cashier/reservation" || location.pathname === "/cashier/history"){
+      return <Footer from={"cashier"} />
     }
     if (location.pathname.startsWith("/payment-result")) {
       return <Footer from={"cashier"} />;

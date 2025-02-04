@@ -41,6 +41,7 @@ const ProductStat = ({ productCount, bestSellingProducts, catCount }) => {
   // Opsi untuk chart Bar
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -118,6 +119,7 @@ const ProductStat = ({ productCount, bestSellingProducts, catCount }) => {
   // Opsi untuk chart Pie
   const pieChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -152,7 +154,7 @@ const ProductStat = ({ productCount, bestSellingProducts, catCount }) => {
         {bestSellingProducts.slice(0, 1).map((product) => (
           <div className="most-selled" key={product._id}>
             <div>
-              <p>#1 Product Sales</p>
+              <p className="ms-title">#1 Product Sales</p>
               <img src={product.productImagePath} alt={product.productName} />
             </div>
             <div>

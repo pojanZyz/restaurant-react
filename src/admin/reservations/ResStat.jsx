@@ -47,6 +47,7 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
   };
   const pieChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -78,6 +79,7 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
   };
   const lineChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,

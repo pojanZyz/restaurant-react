@@ -1,6 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-const TablePopupCas = ({ isVisible, onClose, onUpdate, table, selectedDate }) => {
+const TablePopupCas = ({
+  isVisible,
+  onClose,
+  onUpdate,
+  table,
+  selectedDate,
+}) => {
   const [status, setStatus] = useState("Available");
   const [date, setDate] = useState("");
 
@@ -29,31 +35,35 @@ const TablePopupCas = ({ isVisible, onClose, onUpdate, table, selectedDate }) =>
       }`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
           <span>Table no: {table.tableNumber || 0}</span>
         </div>
-        <form className="table-form-update" onSubmit={handleUpdate}>
-          <label htmlFor="tableNumber">Table Number</label>
-          <input
-            id="tableNumber"
-            type="number"
-            value={table.tableNumber}
-            className="quicksand"
-            required
-            readOnly
-          />
-          <label htmlFor="capacity">Capacity</label>
-          <input
-            id="capacity"
-            type="number"
-            value={table.capacity}
-            className="quicksand"
-            required
-            readOnly
-          />
-          <div className="stat-date">
+        <div className="card-content">
+          <div className="card-row3">
+            <label htmlFor="tableNumber">Table Number</label>
+            <input
+              id="tableNumber"
+              type="number"
+              value={table.tableNumber}
+              className="quicksand"
+              required
+              readOnly
+            />
+          </div>
+          <div className="card-row3">
+            <label htmlFor="capacity">Capacity</label>
+            <input
+              id="capacity"
+              type="number"
+              value={table.capacity}
+              className="quicksand"
+              required
+              readOnly
+            />
+          </div>
+          <div className="card-row1">
             <div>
               <label htmlFor="status">Status</label>
               <select
@@ -76,18 +86,15 @@ const TablePopupCas = ({ isVisible, onClose, onUpdate, table, selectedDate }) =>
                 id="date"
                 type="date"
                 value={date}
-                className="quicksand"
+                className="quicksand table-cas-dateinp"
                 required
                 readOnly
               />
             </div>
           </div>
-        </form>
-        <div className="table-card-footer">
-          <button
-            className="table-update-btn poppins-regular"
-            onClick={handleUpdate}
-          >
+        </div>
+        <div className="card-footer">
+          <button className="update-btn poppins-regular" onClick={handleUpdate}>
             Update
           </button>
         </div>

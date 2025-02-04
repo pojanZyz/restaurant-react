@@ -78,7 +78,7 @@ input[type=date], input[type=time]{
   font-size: 12px;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 800px) {
   /* body{
     transform: scale(0.75);
     transform-origin: 0 0;

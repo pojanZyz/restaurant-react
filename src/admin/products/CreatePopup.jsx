@@ -36,13 +36,13 @@ const CreatePopup = ({ isVisible, onClose, onCreate }) => {
 
   return (
     <div
-      className={`update-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
+      className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
-          <span>Create Product</span>
+          <p className="poppins-regular">Create Product</p>
         </div>
         <div className="card-content">
           <div className="card-row1">

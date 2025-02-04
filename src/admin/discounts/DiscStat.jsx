@@ -32,6 +32,7 @@ const DiscStat = ({ discountCount, nearestExp, typeCount, statCount }) => {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",

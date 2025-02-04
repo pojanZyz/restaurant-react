@@ -210,6 +210,9 @@
 .stat-date label {
   margin-top: 0;
 }
+.table-cas-dateinp{
+  margin-top: 10px;
+}
 
 .table-card-footer {
   display: flex;

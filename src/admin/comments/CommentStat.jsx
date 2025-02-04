@@ -46,6 +46,7 @@ const CommentStat = ({ comCount, topCommenter, commentDateStats, statCount }) =>
   };
   const pieChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
@@ -77,6 +78,7 @@ const CommentStat = ({ comCount, topCommenter, commentDateStats, statCount }) =>
   };
   const lineChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
