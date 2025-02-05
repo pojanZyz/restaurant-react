@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import useAuth from "../js/useAuth";
 import LoginAlert from "../components/LoginAlert";
 import "../css/feedback.css";
+import { Helmet } from "react-helmet";
 
 const Feedback = () => {
   const { token, tokenLoading, userData } = useAuth();
@@ -78,80 +79,85 @@ const Feedback = () => {
   };
 
   return (
-    <div className="body-box">
-      {loading && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
-      <div className="feedback-container quicksand">
-        <div className="fb-con1">
-          {tokenLoading ? " " : <LoginAlert token={token} />}
-          <h2 className="poppins-regular">
-            <i className="bi bi-envelope-paper-heart-fill"></i> Feedback
-          </h2>
-          <p>
-            Your feedback is important to us. By sharing your thoughts, you help
-            us understand what works well and what can be improved, so we can
-            provide a better experience for everyone!
-          </p>
-        </div>
-
-        <div className="fb-con2">
-          <div className="form-header">
-            <h4 className="poppins-regular">Fill this form</h4>
+    <>
+      <Helmet>
+        <title>CafeCoding Feedback</title>
+      </Helmet>
+      <div className="body-box">
+        {loading && (
+          <div className="loader-overlay">
+            <Loader />
           </div>
-          <form className="feedback-form" onSubmit={handleComment}>
-            <label htmlFor="username">Name</label>
-            <input
-              className="quicksand"
-              type="text"
-              id="name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              maxLength={20}
-              required
-            />
-            <label htmlFor="email">Email</label>
-            <input
-              className="quicksand"
-              type="text"
-              id="email"
-              value={useremail}
-              onChange={(e) => setUseremail(e.target.value)}
-              maxLength={35}
-              required
-            />
-            <label htmlFor="comment">Your feedback</label>
-            <textarea
-              className="quicksand"
-              rows={4}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              maxLength={150}
-              required
-            />
-            <div className="form-footer">
-              <button
-                type="reset"
-                className="reset-btn poppins-regular"
-                disabled={!username && !useremail && !comment}
-                onClick={resetComment}
-              >
-                Reset
-              </button>
-              <button
-                type="submit"
-                className="send-btn poppins-regular"
-                disabled={!comment || !username || !useremail}
-              >
-                Send
-              </button>
+        )}
+        <div className="feedback-container quicksand">
+          <div className="fb-con1">
+            {tokenLoading ? " " : <LoginAlert token={token} />}
+            <h2 className="poppins-regular">
+              <i className="bi bi-envelope-paper-heart-fill"></i> Feedback
+            </h2>
+            <p>
+              Your feedback is important to us. By sharing your thoughts, you
+              help us understand what works well and what can be improved, so we
+              can provide a better experience for everyone!
+            </p>
+          </div>
+
+          <div className="fb-con2">
+            <div className="form-header">
+              <h4 className="poppins-regular">Fill this form</h4>
             </div>
-          </form>
+            <form className="feedback-form" onSubmit={handleComment}>
+              <label htmlFor="username">Name</label>
+              <input
+                className="quicksand"
+                type="text"
+                id="name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                maxLength={20}
+                required
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                className="quicksand"
+                type="text"
+                id="email"
+                value={useremail}
+                onChange={(e) => setUseremail(e.target.value)}
+                maxLength={35}
+                required
+              />
+              <label htmlFor="comment">Your feedback</label>
+              <textarea
+                className="quicksand"
+                rows={4}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                maxLength={150}
+                required
+              />
+              <div className="form-footer">
+                <button
+                  type="reset"
+                  className="reset-btn poppins-regular"
+                  disabled={!username && !useremail && !comment}
+                  onClick={resetComment}
+                >
+                  Reset
+                </button>
+                <button
+                  type="submit"
+                  className="send-btn poppins-regular"
+                  disabled={!comment || !username || !useremail}
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

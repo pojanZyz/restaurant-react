@@ -28,6 +28,7 @@ import useAuth from "../../js/useAuth";
 import InfoCard from "../../components/InfoCard";
 import Revenue from "../../cashier/Revenue";
 import Loader from "../../components/Loader";
+import { Helmet } from "react-helmet";
 
 const AdminHome = () => {
   const { token, userData } = useAuth();
@@ -92,6 +93,7 @@ const AdminHome = () => {
   };
    const chartOptions = {
      responsive: true,
+     maintainAspectRatio: false,
      plugins: {
        legend: {
          display: true,
@@ -126,6 +128,10 @@ const AdminHome = () => {
    };
 
   return (
+    <>
+    <Helmet>
+      <title>CafeCoding | Admin-Dashboard</title>
+    </Helmet>
     <div className="body-box">
       {loading && (
         <div className="loader-overlay">
@@ -210,6 +216,7 @@ const AdminHome = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

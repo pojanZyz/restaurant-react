@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import { Helmet } from "react-helmet";
 
 const Order = () => {
   return (
-    <div className='body-box'>
-      NOT FINISHED
-    </div>
-  )
-}
+    <>
+    <Helmet>
+      <title>CafeCoding Order</title>
+    </Helmet>
+      <div className="body-box">NOT FINISHED</div>
+    </>
+  );
+};
 
-export default Order
+export default Order;
