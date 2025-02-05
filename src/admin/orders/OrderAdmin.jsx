@@ -82,6 +82,7 @@ const OrderAdmin = () => {
       );
       setOrders(res.data.data);
       setOrderCount(res.data.dataCount);
+      setTotalPages(res.data.totalPages)
     } catch (error) {
       console.error(error);
     } finally {
