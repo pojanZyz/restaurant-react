@@ -251,7 +251,7 @@ const DiscountAdmin = () => {
               </div>
             </div>
 
-            <div className="filters">
+            <div className="cas-filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
                 <input
@@ -262,31 +262,33 @@ const DiscountAdmin = () => {
                   placeholder="Search..."
                 />
               </div>
-              <select
-                className="quicksand"
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-                <option value="valueAsc">Value ASC</option>
-                <option value="valueDsc">Value DSC</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleTypeChange(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="percentage">Percentage</option>
-                <option value="fixed">Fixed</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleLimitChange(e.target.value)}
-              >
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="80">80</option>
-              </select>
+              <div className="other-filt">
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="valueAsc">Value ASC</option>
+                  <option value="valueDsc">Value DSC</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleTypeChange(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="percentage">Percentage</option>
+                  <option value="fixed">Fixed</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
             </div>
 
             <div className="users-wrap">
@@ -359,6 +361,8 @@ const DiscountAdmin = () => {
                                 ? "status-ava"
                                 : discount.status === "Used"
                                 ? "status-used"
+                                : discount.status === "Owned"
+                                ? "status-owned"
                                 : "status-exp"
                             }`}
                           >

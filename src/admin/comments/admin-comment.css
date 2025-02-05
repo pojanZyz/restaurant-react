@@ -9,11 +9,10 @@
 .admin-comment-con1 {
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
   gap: 10px;
 }
 
-.comments-wrap{
+.comments-wrap {
   display: flex;
   flex-direction: column;
   background-color: rgb(241, 241, 241);
@@ -21,12 +20,12 @@
   padding: 10px;
   border-radius: 5px;
 }
-.comments-grid{
+.comments-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 10px;
 }
-.comment-item-grid{
+.comment-item-grid {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -35,64 +34,66 @@
   padding: 5px 10px;
   border-radius: 5px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.236);
-  transition:  box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
-.comment-item-grid:hover{
+.comment-item-grid:hover {
   cursor: pointer;
   background-color: rgb(246, 246, 246);
   box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.15);
 }
-.comment-item-grid .header{
+.comment-item-grid .header {
   display: flex;
   align-items: center;
   font-size: 13px;
   position: relative;
   gap: 5px;
 }
-.comment-item-grid .header div{
+.comment-item-grid .header div {
   display: flex;
   flex-direction: column;
 }
-.comment-item-grid .header .email, .comment-item-grid .header .date{
+.comment-item-grid .header .email,
+.comment-item-grid .header .date {
   font-size: 11px;
 }
-.comment-item-grid .header .date{
+.comment-item-grid .header .date {
   font-weight: 600;
   font-style: italic;
   color: rgb(33, 33, 33);
 }
-.icon-access{
+.icon-access {
   position: absolute;
   top: 3px;
   right: 3px;
   color: white;
 }
-.icon-access .lock{
+.icon-access .lock {
   background-color: rgb(131, 121, 121);
   padding: 0 4px;
   border-radius: 50%;
 }
-.icon-access .world{
+.icon-access .world {
   background-color: rgb(3, 208, 3);
   padding: 0 4px;
   border-radius: 50%;
 }
 
-.comment-item-grid .body{
+.comment-item-grid .body {
   background-color: rgb(241, 241, 241);
   font-size: 18px;
   border-radius: 5px;
   padding: 3px 5px;
+  flex-grow: 1;
 }
 
-.comment-item-grid .footer-com{
+.comment-item-grid .footer-com {
   display: flex;
   align-items: center;
   gap: 10px;
   align-self: flex-end;
   margin-top: 10px;
 }
-.comment-item-grid .footer-com .update-com{
+.comment-item-grid .footer-com .update-com {
   font-size: 10px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -100,7 +101,7 @@
   background-color: rgb(26, 85, 223);
   color: white;
 }
-.comment-item-grid .footer-com .delete-com{
+.comment-item-grid .footer-com .delete-com {
   font-size: 10px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -108,8 +109,28 @@
   background-color: rgb(222, 37, 20);
   color: white;
 }
-.comment-item-grid .footer-com button:hover{
+.comment-item-grid .footer-com button:hover {
   cursor: pointer;
-  background-color: gray;
-  color: black;
+}
+
+@media (max-width: 800px) {
+  .comment-admin-container {
+    padding: 5px;
+    gap: 0;
+    margin-top: 5rem;
+    align-items: center;
+  }
+  .comments-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .admin-comment-con1 h2 {
+    font-size: 1.5rem;
+  }
+
+  .comment-item-grid .header span {
+    font-size: 0.65rem;
+  }
+  .comment-item-grid .body p {
+    font-size: 0.7rem;
+  }
 }

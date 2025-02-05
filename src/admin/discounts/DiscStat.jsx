@@ -19,13 +19,21 @@ const DiscStat = ({ discountCount, nearestExp, typeCount, statCount }) => {
     ],
   };
 
+  const colorMap = {
+    Expired: "gray",
+    Used: "red",
+    Available: "green",
+    Owned: "gold",
+  };
   //pie 2
   const statChartData = {
     labels: (statCount || []).map((stat) => stat._id),
     datasets: [
       {
         data: (statCount || []).map((stat) => stat.count),
-        backgroundColor: ["green", "red", "gray"],
+        backgroundColor: (statCount || []).map(
+          (disc) => colorMap[disc._id] || "#ccc"
+        ),
       },
     ],
   };
@@ -55,7 +63,7 @@ const DiscStat = ({ discountCount, nearestExp, typeCount, statCount }) => {
   };
 
   useEffect(() => {
-    console.log(nearestExp)
+    console.log(nearestExp);
     if (nearestExp && nearestExp.length > 0) {
       setNearestExpDate(nearestExp[0].expiryDate);
     }

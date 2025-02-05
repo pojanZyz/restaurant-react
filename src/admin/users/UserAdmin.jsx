@@ -10,7 +10,7 @@ import UserStat from "./UserStat";
 import { Helmet } from "react-helmet";
 
 const UserAdmin = () => {
-  const { token, getToken } = useAuth();
+  const { token, tokenLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -33,12 +33,11 @@ const UserAdmin = () => {
   }, [search]);
 
   useEffect(() => {
-    if (token) {
-      fetchUsers();
-    } else {
-      getToken();
+    if(!token || tokenLoading){
+      return;
     }
-  }, [token, debouncedSearch, sort, role, page, limit]);
+    fetchUsers();
+  }, [token, tokenLoading, debouncedSearch, sort, role, page, limit]);
   useEffect(() => {
     fetchUserStats();
   }, [users]);
@@ -131,8 +130,7 @@ const UserAdmin = () => {
         <div className="user-admin-container quicksand">
           <div className="admin-user-con1">
             <h2 className="poppins-regular">
-              <i className="bi bi-person-fill judul"></i>{" "}
-              <span className="judul">User</span>
+              <i className="bi bi-person-fill"></i> <span>Users</span>
             </h2>
           </div>
 
@@ -154,7 +152,7 @@ const UserAdmin = () => {
               </div>
             </div>
 
-            <div className="filters">
+            <div className="cas-filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
                 <input
@@ -165,32 +163,34 @@ const UserAdmin = () => {
                   placeholder="Search..."
                 />
               </div>
-              <select
-                className="quicksand"
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="newest">Newest</option>
-                <option value="asc">A-Z</option>
-                <option value="dsc">Z-A</option>
-                <option value="oldest">Oldest</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleRoleChange(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="admin">Admin</option>
-                <option value="customer">Customer</option>
-                <option value="cashier">Cashier</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleLimitChange(e.target.value)}
-              >
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="80">80</option>
-              </select>
+              <div className="other-filt">
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="asc">A-Z</option>
+                  <option value="dsc">Z-A</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleRoleChange(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="admin">Admin</option>
+                  <option value="customer">Customer</option>
+                  <option value="cashier">Cashier</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
             </div>
 
             <div className="users-wrap">

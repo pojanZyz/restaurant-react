@@ -189,9 +189,7 @@ const OrderStat = ({ orderCount, bestOrders, revenue }) => {
 
       <div className="prodstat-2">
         <p>Revenue Over Time</p>
-        <div>
-          <Line data={lineChartData} options={lineChartOptions} />
-        </div>
+        <Line data={lineChartData} options={lineChartOptions} />
       </div>
     </>
   );

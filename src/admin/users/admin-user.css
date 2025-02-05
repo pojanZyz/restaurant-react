@@ -6,13 +6,6 @@
   margin-bottom: 100px;
 }
 
-.admin-user-con1 {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  gap: 20px;
-}
-
 .admin-user-con2 {
   display: flex;
   flex-direction: column;
@@ -22,7 +15,7 @@
 /* Table Styling */
 .users-wrap {
   max-width: 100%;
-  overflow-x: auto; 
+  overflow-x: auto;
   border: solid rgb(198, 197, 197) 0.5px;
   border-radius: 5px;
   padding: 3px;
@@ -31,7 +24,7 @@
 }
 
 .user-table {
-  width: 100%; 
+  width: 100%;
   min-width: 800px;
   border-collapse: collapse;
 }
@@ -85,7 +78,7 @@
   font-weight: 700;
   font-size: 12px;
 }
-.rl-cashier{
+.rl-cashier {
   padding: 2px 4px;
   background-color: rgb(4, 98, 170);
   color: rgb(99, 252, 252);
@@ -94,7 +87,7 @@
   text-align: center;
   font-size: 11px;
 }
-.rl-admin{
+.rl-admin {
   padding: 2px 4px;
   background-color: rgb(20, 126, 32);
   color: rgb(126, 255, 83);
@@ -103,7 +96,7 @@
   text-align: center;
   font-size: 12px;
 }
-.rl-customer{
+.rl-customer {
   padding: 2px 4px;
   background-color: rgb(106, 97, 0);
   color: rgb(221, 255, 83);
@@ -114,12 +107,12 @@
 }
 
 /*table det */
-.table-det{
+.table-det {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-.page-ttl{
+.page-ttl {
   max-width: 100px;
   display: flex;
   flex-direction: column;
@@ -127,131 +120,82 @@
   text-align: center;
   margin-top: 5px;
 }
-.table-det span{
+.table-det span {
   font-size: 12px;
 }
-.page-ttl i{
+.page-ttl i {
   font-size: 14px;
 }
 
-
-/* For screen width 1024px */
-@media screen and (max-width: 1024px) {
-  .user-admin-container {
-    padding: 30px;
-    margin-bottom: 50px;
-  }
-
-  .admin-user-con1 {
-    gap: 10px;
-  }
-
-  .user-table th, .user-table td {
+@media (max-width: 1200px) {
+  .user-table td {
     font-size: 1rem;
+    padding: 5px 10px;
   }
-
-  .user-table td button.delete-button {
-    padding: 4px 8px;
-  }
-
-  .rl-cashier,
-  .rl-admin,
-  .rl-customer {
-    font-size: 10px;
-  }
-
-
-  .page-ttl {
-    max-width: 120px;
-  }
-}
-
-/* For screen width 780px */
-@media screen and (max-width: 780px) {
-  .user-admin-container {
-    padding: 20px;
-    padding-top: 30px;
-    margin-bottom: 40px;
-  }
-
-  .admin-user-con1 {
-    gap: 15px;
-  }
-
-  .user-table th, .user-table td {
+  .user-table th {
     font-size: 0.9rem;
+    padding: 5px 10px;
   }
 
-  .user-table td button.delete-button {
-    padding: 4px 10px;
-  }
-
-  .rl-cashier,
   .rl-admin,
-  .rl-customer {
-    font-size: 9px;
-  }
-
-
-}
-
-/* For screen width 480px */
-@media screen and (max-width: 480px) {
-  .user-admin-container {
-    padding: 15px;
-    padding-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  .admin-user-con1 {
-    gap: 10px;
-  }
-
-  .user-table th, .user-table td {
-    font-size: 0.85rem;
-  }
-
-  .user-table td button.delete-button {
-    padding: 3px 8px;
-  }
-
   .rl-cashier,
-  .rl-admin,
-  .rl-customer {
-    font-size: 8px;
+  .rl-customer,
+  .order-type-cas,
+  .order-type-onl,
+  .res-pending,
+  .res-confirmed,
+  .res-cancelled,
+  .status-owned,
+  .status-ava,
+  .status-used,
+  .status-exp,
+  .type-fix,
+  .type-per {
+    font-size: 0.8rem !important;
   }
-
-
-
-}
-
-/* For screen width 380px */
-@media screen and (max-width: 380px) {
-  .user-admin-container {
-    padding: 10px;
-    padding-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  .admin-user-con1 {
-    gap: 10px;
-  }
-
-  .user-table th, .user-table td {
+  .user-table td button.delete-button {
     font-size: 0.8rem;
   }
+}
+
+@media (max-width: 800px) {
+  .user-admin-container {
+    padding: 5px;
+    gap: 0;
+    margin-top: 5rem;
+    align-items: center;
+  }
+  .admin-user-con1 h2 {
+    font-size: 1.5rem;
+  }
+
+  .user-table td {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+  .user-table th {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  .rl-admin,
+  .rl-cashier,
+  .rl-customer,
+  .order-type-cas,
+  .order-type-onl,
+  .res-pending,
+  .res-confirmed,
+  .res-cancelled,
+  .status-owned,
+  .status-ava,
+  .status-used,
+  .status-exp,
+  .type-fix,
+  .type-per {
+    font-size: 0.6rem !important;
+  }
 
   .user-table td button.delete-button {
-    padding: 3px 6px;
+    font-size: 0.6rem;
   }
-
-  .rl-cashier,
-  .rl-admin,
-  .rl-customer {
-    font-size: 7px;
-  }
-
-
-
-
 }

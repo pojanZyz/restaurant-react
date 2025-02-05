@@ -153,7 +153,9 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
                 </p>
               </>
             ) : (
-              <h5 className="poppins-regular" style={{padding: "0 20px"}}>N/A</h5>
+              <h5 className="poppins-regular" style={{ padding: "0 20px" }}>
+                N/A
+              </h5>
             )}
           </div>
         </div>
@@ -161,9 +163,7 @@ const ResStat = ({ resCount, nearestRes, revenue, resStatusCount }) => {
 
       <div className="prodstat-2">
         <p>Revenue Over Time</p>
-        <div>
-          <Line data={lineChartData} options={lineChartOptions} />
-        </div>
+        <Line data={lineChartData} options={lineChartOptions} />
       </div>
 
       <div className="prodstat-3">

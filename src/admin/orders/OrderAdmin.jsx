@@ -176,7 +176,7 @@ const OrderAdmin = () => {
               </div>
             </div>
 
-            <div className="filters">
+            <div className="cas-filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
                 <input
@@ -187,39 +187,41 @@ const OrderAdmin = () => {
                   placeholder="Search..."
                 />
               </div>
-              <input
-                type="date"
-                value={filterDate}
-                max={new Date().toISOString().split("T")[0]}
-                onChange={(e) => setFilterDate(e.target.value)}
-                className="date-input"
-              />
-              <select
-                className="quicksand"
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="newest">Newest</option>
-                <option value="asc">A-Z</option>
-                <option value="dsc">Z-A</option>
-                <option value="oldest">Oldest</option>
-              </select>
-              <select
-                className="quicksand pay-status"
-                onChange={(e) => handlePayStatus(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Pending">Pending</option>
-                <option value="Paid">Paid</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleLimitChange(e.target.value)}
-              >
-                <option value="50">50</option>
-                <option value="70">70</option>
-                <option value="100">100</option>
-              </select>
+              <div className="other-filt">
+                <input
+                  type="date"
+                  value={filterDate}
+                  max={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setFilterDate(e.target.value)}
+                  className="date-input"
+                />
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="asc">A-Z</option>
+                  <option value="dsc">Z-A</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <select
+                  className="quicksand pay-status"
+                  onChange={(e) => handlePayStatus(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="50">50</option>
+                  <option value="70">70</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
             </div>
 
             <div className="users-wrap">
@@ -239,7 +241,7 @@ const OrderAdmin = () => {
                   {orderCount === 0 || orders.length === 0 ? (
                     <tr>
                       <td colSpan={7}>
-                        <NoData str={"No reservation found"} />
+                        <NoData str={"No order found"} />
                       </td>
                     </tr>
                   ) : (

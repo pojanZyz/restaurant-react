@@ -25,10 +25,12 @@ import Loader from "../../components/Loader";
 import CreateTablePopup from "./CreateTablePopup";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAuth from "../../js/useAuth";
 
 const TableStat = ({ tableCount, reservedCount }) => {
   const [showCreatePopup, setShowCreatePopup] = useState(false);
   const [loading, setLoading] = useState(false);
+  const {token} = useAuth()
 
   //handle create
   const handleCreateTable = async (newTable) => {
@@ -43,16 +45,18 @@ const TableStat = ({ tableCount, reservedCount }) => {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: res.data.message,
+          text: res.data?.message || "Table Created",
           showConfirmButton: false,
           timer: 2000,
         });
-        fetchTables();
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: error.response.data.message || "Something went wrong",
+          text: error.response?.data?.message || "Something went wrong",
         });
       } finally {
         setLoading(false);
@@ -79,6 +83,7 @@ const TableStat = ({ tableCount, reservedCount }) => {
   // Opsi untuk scatter chart
   const scatterChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",

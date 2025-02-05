@@ -27,7 +27,12 @@ ChartJS.register(
 
 import avatar from "../../img/avatar.jpeg";
 
-const CommentStat = ({ comCount, topCommenter, commentDateStats, statCount }) => {
+const CommentStat = ({
+  comCount,
+  topCommenter,
+  commentDateStats,
+  statCount,
+}) => {
   const colorMap = {
     Private: "#818f81",
     Public: "#38fc45",
@@ -124,22 +129,20 @@ const CommentStat = ({ comCount, topCommenter, commentDateStats, statCount }) =>
         </div>
         <div className="most-selled">
           <div>
-            <p>#1 Most Commented</p>
+            <p className="ms-title">#1 Most Commented</p>
             <img src={avatar} loading="lazy" />
           </div>
           <div>
             <h5 className="poppins-regular">{topCommenter.username}</h5>
-            <p>{topCommenter.email}</p>
-            <p>{topCommenter.commentCount} comments</p>
+            <p className="ms-title">{topCommenter.email}</p>
+            <p className="ms-title">{topCommenter.commentCount} comments</p>
           </div>
         </div>
       </div>
 
       <div className="prodstat-2">
         <p>Comment Over Time</p>
-        <div>
-          <Line data={lineChartData} options={lineChartOptions} />
-        </div>
+        <Line data={lineChartData} options={lineChartOptions} />
       </div>
 
       <div className="prodstat-3">

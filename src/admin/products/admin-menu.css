@@ -19,7 +19,7 @@ p{
   padding: 10px;
   gap: 10px;
 }
-.admin-menu-con2 canvas{
+.admin-menu-con2 canvas, .table-stat canvas{
   height: 170px !important;
   width: 300px !important;
   align-self: center;
@@ -77,6 +77,7 @@ p{
 .prodstat-2 canvas,
 .prodstat-3 canvas{
   max-width: 100%;
+  align-self: center;
 }
 .prodstat-3 {
   background-color: white;
@@ -253,7 +254,7 @@ p{
   border-radius: 5px;
   padding: 15px 20px;
   gap: 5px;
-  margin-top: 50px;
+  margin-top: 10px;
   max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -435,7 +436,7 @@ p{
   .admin-menu-con2{
     flex-wrap: wrap;
   }
-  .admin-menu-con2 canvas{
+  .admin-menu-con2 canvas, .table-stat canvas{
     height: 200px !important;
     width: 250px !important;
     align-self: center;
@@ -543,5 +544,18 @@ p{
   }
   .card-content .card-row2{
     flex-direction: column;
+  }
+}
+
+@media (max-width: 375px){
+  .prodstat-1 .ttl-product h3, .prodstat-1 .most-selled h5{
+    font-size: 0.9rem;
+  }
+  .prodstat-1 .most-selled, .prodstat-1 .ttl-product{
+    gap: 5px;
+  }
+  .most-selled img{
+    width: 60px;
+    height: 50px;
   }
 }

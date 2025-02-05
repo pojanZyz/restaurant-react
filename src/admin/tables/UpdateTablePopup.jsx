@@ -36,42 +36,46 @@ const UpdateTablePopup = ({
 
   //handle delete
   const handleDelete = () => {
-    const tableId = table._id
-    onDelete(tableId)
-  }
+    const tableId = table._id;
+    onDelete(tableId);
+  };
 
   if (!isVisible) return null;
 
   return (
     <div
-      className={`update-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
+      className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
-          <span>Table no: {tableNumber || 0}</span>
+          <span>Table no: {table.tableNumber || 0}</span>
         </div>
-        <form className="table-form-update" onSubmit={handleUpdate}>
-          <label htmlFor="tableNumber">Table Number</label>
-          <input
-            id="tableNumber"
-            type="number"
-            value={tableNumber}
-            className="quicksand"
-            onChange={(e) => setTableNumber(e.target.value)}
-            required
-          />
-          <label htmlFor="capacity">Capacity</label>
-          <input
-            id="capacity"
-            type="number"
-            value={capacity}
-            className="quicksand"
-            onChange={(e) => setCapacity(e.target.value)}
-            required
-          />
-          <div className="stat-date">
+        <div className="card-content">
+          <div className="card-row3">
+            <label htmlFor="tableNumber">Table Number</label>
+            <input
+              id="tableNumber"
+              type="number"
+              value={table.tableNumber}
+              className="quicksand"
+              required
+              readOnly
+            />
+          </div>
+          <div className="card-row3">
+            <label htmlFor="capacity">Capacity</label>
+            <input
+              id="capacity"
+              type="number"
+              value={table.capacity}
+              className="quicksand"
+              required
+              readOnly
+            />
+          </div>
+          <div className="card-row1">
             <div>
               <label htmlFor="status">Status</label>
               <select
@@ -87,21 +91,25 @@ const UpdateTablePopup = ({
               </select>
             </div>
             <div>
-              <label className="date-label" htmlFor="date">Date</label>
+              <label className="date-label" htmlFor="date">
+                Date
+              </label>
               <input
                 id="date"
                 type="date"
                 value={date}
-                className="quicksand"
+                className="quicksand table-cas-dateinp"
                 required
                 readOnly
               />
             </div>
           </div>
-        </form>
-        <div className="table-card-footer">
-          <button className="table-delete-btn poppins-regular" onClick={handleDelete}>Delete</button>
-          <button className="table-update-btn poppins-regular" onClick={handleUpdate}>
+        </div>
+        <div className="card-footer">
+          <button className="delete-btn poppins-regular" onClick={handleDelete}>
+            Delete
+          </button>
+          <button className="update-btn poppins-regular" onClick={handleUpdate}>
             Update
           </button>
         </div>

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-const UpdateDiscPopup = ({ isVisible, onClose, onUpdate, onDelete, discount }) => {
+const UpdateDiscPopup = ({
+  isVisible,
+  onClose,
+  onUpdate,
+  onDelete,
+  discount,
+}) => {
   const [discountCode, setDiscountCode] = useState("");
   const [discountType, setDiscountType] = useState("");
   const [discountValue, setDiscountValue] = useState("");
@@ -32,31 +38,33 @@ const UpdateDiscPopup = ({ isVisible, onClose, onUpdate, onDelete, discount }) =
 
   //handle delete
   const handleDelete = () => {
-    onDelete(discount._id)
-  }
+    onDelete(discount._id);
+  };
 
   if (!isVisible) return null;
 
   return (
     <div
-      className={`update-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
+      className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
           <span>{discount.discountCode}</span>
         </div>
         <form className="createdsc-form" onSubmit={handleUpdate}>
-          <label htmlFor="discCode">Discount Code</label>
-          <input
-            type="text"
-            className="quicksand"
-            value={discountCode}
-            onChange={(e) => setDiscountCode(e.target.value)}
-            required
-            maxLength={10}
-          />
+          <div className="disc-code">
+            <label htmlFor="discCode">Discount Code</label>
+            <input
+              type="text"
+              className="quicksand"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+              required
+              maxLength={10}
+            />
+          </div>
           <div className="type-val">
             <div>
               <label htmlFor="discValue">Discount Value</label>
@@ -86,33 +94,34 @@ const UpdateDiscPopup = ({ isVisible, onClose, onUpdate, onDelete, discount }) =
               </select>
             </div>
           </div>
-          <label htmlFor="expDate">Expiry Date</label>
-          <input
-            type="date"
-            value={expiryDate}
-            min={new Date().toISOString().split("T")[0]}
-            onChange={(e) => setExpiryDate(e.target.value)}
-            className="quicksand"
-            required
-          />
-          <label htmlFor="expDate">CCPoints Cost</label>
-          <input
-            type="number"
-            value={costInCoins}
-            onChange={(e) => setCostInCoins(e.target.value)}
-            className="quicksand"
-            required
-          />
+          <div className="disc-code">
+            <label htmlFor="expDate">Expiry Date</label>
+            <input
+              type="date"
+              value={expiryDate}
+              min={new Date().toISOString().split("T")[0]}
+              onChange={(e) => setExpiryDate(e.target.value)}
+              className="quicksand"
+              required
+            />
+          </div>
+          <div className="disc-code">
+            <label htmlFor="expDate">CCPoints Cost</label>
+            <input
+              type="number"
+              value={costInCoins}
+              onChange={(e) => setCostInCoins(e.target.value)}
+              className="quicksand"
+              required
+            />
+          </div>
         </form>
-        <div className="table-card-footer">
-          <button
-            className="table-delete-btn poppins-regular"
-            onClick={handleDelete}
-          >
+        <div className="card-footer">
+          <button className="delete-btn poppins-regular" onClick={handleDelete}>
             Delete
           </button>
           <button
-            className="table-update-btn poppins-regular"
+            className="update-btn poppins-regular"
             onClick={handleUpdate}
             type="submit"
           >

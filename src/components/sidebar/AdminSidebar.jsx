@@ -15,18 +15,26 @@ const AdminSidebar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setIsOpen(false); // Menutup sidebar jika klik di luar
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      const handleClickOutside = (event) => {
+        const sidebar = document.getElementById("admin-sidebar");
+        const toggleButton = document.querySelector(".top-bar button");
+  
+        // Tutup sidebar hanya jika klik terjadi di luar sidebar dan tombol toggle
+        if (
+          isOpen &&
+          sidebar &&
+          !sidebar.contains(event.target) &&
+          !toggleButton.contains(event.target)
+        ) {
+          setIsOpen(false);
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [isOpen]);
 
   // Handler untuk logout
   const handleLogout = () => {

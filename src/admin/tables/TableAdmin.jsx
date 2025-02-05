@@ -17,7 +17,7 @@ const TableAdmin = () => {
   const [selectedTable, setSelectedTable] = useState({});
   const [showUpdatePopup, setShowUpdatePopup] = useState(false);
 
-  const [reservedCount, setReservedCount] = useState([])
+  const [reservedCount, setReservedCount] = useState([]);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -28,8 +28,8 @@ const TableAdmin = () => {
     fetchTables();
   }, [selectedDate]);
   useEffect(() => {
-    fetchTableStats()
-  }, [tables])
+    fetchTableStats();
+  }, [tables]);
 
   //get all tables
   const fetchTables = async () => {
@@ -54,13 +54,12 @@ const TableAdmin = () => {
   //get table stat
   const fetchTableStats = async () => {
     try {
-      const res = await axios.get('api/table-stats')
-      setReservedCount(res.data.data)
-      console.log(res.data)
+      const res = await axios.get("api/table-stats");
+      setReservedCount(res.data.data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   const handleTableClick = (table) => {
     setSelectedTable(table);
@@ -152,8 +151,15 @@ const TableAdmin = () => {
 
           <div className="admin-table-con2">
             <TableStat tableCount={tableCount} reservedCount={reservedCount} />
-            <div className="table-main-con">
+            <div className="table-wrap quicksand">
               <h4 className="poppins-regular">Table Status</h4>
+              <p>
+                {new Date(selectedDate).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
               <input
                 type="date"
                 value={selectedDate}
@@ -161,7 +167,7 @@ const TableAdmin = () => {
                 onChange={(e) => setSelectedDate(e.target.value)}
                 className="date-input quicksand"
               />
-              <ul className="admin-legend-con">
+              <ul className="legend-con">
                 <li>
                   <div className="green-sqr"></div> : Available
                 </li>
@@ -172,11 +178,10 @@ const TableAdmin = () => {
                   <div className="gray-sqr"></div> : Occupied
                 </li>
               </ul>
-
-              <div className="admin-tables-box">
+              <div className="tables-box">
                 {tables.map((table) => (
                   <div
-                    className={`admin-table-grid-item ${
+                    className={`table-grid-item ${
                       table.status === "Available"
                         ? "table-available"
                         : table.status === "Reserved"
@@ -206,7 +211,6 @@ const TableAdmin = () => {
           onDelete={handleDeleteTable}
           selectedDate={selectedDate}
         />
-
       </div>
     </>
   );

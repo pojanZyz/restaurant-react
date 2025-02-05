@@ -194,8 +194,8 @@ const ReservationAdmin = () => {
         <div className="reservation-admin-container quicksand">
           <div className="admin-reserv-con1">
             <h2 className="poppins-regular">
-              <i className="bi bi-calendar-check judul"></i>{" "}
-              <span className="judul">Reservations</span>
+              <i className="bi bi-calendar-check"></i>{" "}
+              <span>Reservations</span>
             </h2>
           </div>
 
@@ -222,7 +222,7 @@ const ReservationAdmin = () => {
               </div>
             </div>
 
-            <div className="filters">
+            <div className="cas-filters">
               <div className="search-input">
                 <i className="bi bi-search"></i>
                 <input
@@ -233,32 +233,34 @@ const ReservationAdmin = () => {
                   placeholder="Search..."
                 />
               </div>
-              <select
-                className="quicksand"
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="newest">Newest</option>
-                <option value="asc">A-Z</option>
-                <option value="dsc">Z-A</option>
-                <option value="oldest">Oldest</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleResStatus(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Pending">Pending</option>
-                <option value="Confirmed">Confirmed</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-              <select
-                className="quicksand"
-                onChange={(e) => handleLimitChange(e.target.value)}
-              >
-                <option value="50">50</option>
-                <option value="70">70</option>
-                <option value="100">100</option>
-              </select>
+              <div className="other-filt">
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="asc">A-Z</option>
+                  <option value="dsc">Z-A</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleResStatus(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="50">50</option>
+                  <option value="70">70</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
             </div>
 
             <div className="users-wrap">

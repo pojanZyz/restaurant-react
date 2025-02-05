@@ -9,7 +9,6 @@
 .admin-reserv-con1 {
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
   gap: 10px;
 }
 
@@ -215,55 +214,26 @@
   cursor: pointer;
 }
 
-@media (max-width: 720px) {
-  .control-panel-extend button span {
-    display: none;
-  }
-
-  .judul {
-    font-size: 1rem;
-  }
-
-  .reserv-table-container {
-    overflow-x: auto; 
-  }
-
-  .admin-reserv-con1,
-  .admin-reserv-con2,
+@media (max-width: 800px) {
   .reservation-admin-container {
-    width: 100%;
-    gap: 5px;
+    padding: 5px;
+    gap: 0;
+    margin-top: 5rem;
+    align-items: center;
+  }
+  .admin-reserv-con1 h2{
+    font-size: 1.5rem;
   }
 
-  .reserv-table th,
-  .reserv-table td {
-    font-size: 13px; 
-    padding: 8px;
+  .res-body1, .res-body2, .res-body3 div{
+    padding: 5px 10px !important;
   }
-
-  .reserv-table td button {
-    font-size: 12px; 
-    padding: 5px 10px;
+  .res-body1 div p{
+    font-size: 0.8rem;
   }
-}
-
-@media (max-width: 480px) {
-  .admin-reserv-con1 {
-    display: none;
-  }
-
-  .update-con {
-    margin-top: 10%;
-  }
-
-  .reserv-table th,
-  .reserv-table td {
-    font-size: 12px; 
-    padding: 6px; 
-  }
-
-  .reserv-table td button {
-    font-size: 11px;
-    padding: 4px 8px;
+  .res-body3 div span{
+    font-size: 0.8rem;
+    text-wrap: nowrap;
+    margin-top: 2px;
   }
 }

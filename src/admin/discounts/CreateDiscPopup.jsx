@@ -33,23 +33,25 @@ const CreateDiscPopup = ({ isVisible, onClose, onCreate }) => {
 
   return (
     <div
-      className={`update-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
+      className={`common-con poppins-regular ${isVisible ? "ani-appear" : ""}`}
       onClick={onClose}
     >
-      <div className="update-card" onClick={(e) => e.stopPropagation()}>
-        <div className="card-header">
+      <div className="admin-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="ord-card-header">
           <i className="bi bi-x-square-fill x-btn" onClick={onClose}></i>
           <span>Create Discount</span>
         </div>
         <form className="createdsc-form" onSubmit={handleCreate}>
-          <label htmlFor="discCode">Discount Code</label>
-          <input
-            type="text"
-            value={discountCode}
-            onChange={(e) => setDiscountCode(e.target.value)}
-            required
-            maxLength={10}
-          />
+          <div className="disc-code">
+            <label htmlFor="discCode">Discount Code</label>
+            <input
+              type="text"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+              required
+              maxLength={10}
+            />
+          </div>
           <div className="type-val">
             <div>
               <label htmlFor="discValue">Discount Value</label>
@@ -77,27 +79,31 @@ const CreateDiscPopup = ({ isVisible, onClose, onCreate }) => {
               </select>
             </div>
           </div>
-          <label htmlFor="expDate">Expiry Date</label>
-          <input
-            type="date"
-            value={expiryDate}
-            min={new Date().toISOString().split("T")[0]}
-            onChange={(e) => setExpiryDate(e.target.value)}
-            className="quicksand"
-            required
-          />
-          <label htmlFor="expDate">CCPoints Cost</label>
-          <input
-            type="number"
-            value={costInCoins}
-            onChange={(e) => setCostInCoins(e.target.value)}
-            className="quicksand"
-            required
-          />
+          <div className="disc-code">
+            <label htmlFor="expDate">Expiry Date</label>
+            <input
+              type="date"
+              value={expiryDate}
+              min={new Date().toISOString().split("T")[0]}
+              onChange={(e) => setExpiryDate(e.target.value)}
+              className="quicksand"
+              required
+            />
+          </div>
+          <div className="disc-code">
+            <label htmlFor="expDate">CCPoints Cost</label>
+            <input
+              type="number"
+              value={costInCoins}
+              onChange={(e) => setCostInCoins(e.target.value)}
+              className="quicksand"
+              required
+            />
+          </div>
         </form>
-        <div className="table-card-footer">
+        <div className="card-footer">
           <button
-            className="table-create-btn poppins-regular"
+            className="create-btn poppins-regular"
             onClick={handleCreate}
             type="submit"
           >

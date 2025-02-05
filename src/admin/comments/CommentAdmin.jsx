@@ -140,164 +140,175 @@ const CommentAdmin = () => {
 
   return (
     <>
-    <Helmet>
-      <title>CafeCoding | Admin-Comments</title>
-    </Helmet>
-    <div className="body-box">
-      {loading && (
-        <div className="loader-overlay">
-          <Loader />
-        </div>
-      )}
-      <div className="comment-admin-container quicksand">
-        <div className="admin-comment-con1">
-          <h2 className="poppins-regular">
-            <i className="bi bi-chat-left-dots-fill"></i> Comments
-          </h2>
-        </div>
-
-        <div className="admin-menu-con2">
-          <CommentStat
-            comCount={commentCount}
-            topCommenter={topCommenter}
-            commentDateStats={commentDate}
-            statCount={statCount}
-          />
-        </div>
-
-        <div className="admin-menu-con3">
-          <div className="table-det">
-            <div className="page-ttl">
-              <i className="bi bi-columns"></i>
-              <span className="span-2">
-                Page {page} of {totalPages}
-              </span>
-            </div>
+      <Helmet>
+        <title>CafeCoding | Admin-Comments</title>
+      </Helmet>
+      <div className="body-box">
+        {loading && (
+          <div className="loader-overlay">
+            <Loader />
+          </div>
+        )}
+        <div className="comment-admin-container quicksand">
+          <div className="admin-comment-con1">
+            <h2 className="poppins-regular">
+              <i className="bi bi-chat-left-dots-fill"></i> Comments
+            </h2>
           </div>
 
-          <div className="filters">
-            <div className="search-input">
-              <i className="bi bi-search"></i>
-              <input
-                className="quicksand"
-                type="search"
-                value={search}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                placeholder="Search..."
-              />
-            </div>
-            <select
-              className="quicksand"
-              onChange={(e) => setSort(e.target.value)}
-            >
-              <option value="newest">Newest</option>
-              <option value="asc">A-Z</option>
-              <option value="dsc">Z-A</option>
-              <option value="oldest">Oldest</option>
-            </select>
-            <select
-              className="quicksand"
-              onChange={(e) => handleStatusChange(e.target.value)}
-            >
-              <option value="">All</option>
-              <option value="Private">Private</option>
-              <option value="Public">Public</option>
-            </select>
-            <select
-              className="quicksand"
-              onChange={(e) => handleLimitChange(e.target.value)}
-            >
-              <option value="30">30</option>
-              <option value="50">50</option>
-              <option value="80">80</option>
-            </select>
+          <div className="admin-menu-con2">
+            <CommentStat
+              comCount={commentCount}
+              topCommenter={topCommenter}
+              commentDateStats={commentDate}
+              statCount={statCount}
+            />
           </div>
 
-          <div className="comments-wrap">
-            <div className="comments-grid">
-              {commentCount === 0 ? (
-                <NoData str={"No comment found"} />
-              ) : (
-                comments.map((comment) => (
-                  <div className="comment-item-grid" key={comment._id}>
-                    <div className="header">
-                      <div>
-                        <span className="poppins-regular">
-                          {comment.userInfo.username}
-                        </span>
-                        <span className="quicksand email">
-                          {comment.userInfo.useremail}
-                        </span>
-                      </div>
-                      <span className="date">
-                        {new Date(comment.createdAt).toLocaleDateString(
-                          "id-ID"
-                        )}
-                      </span>
-                      <div className="icon-access">
-                        {comment.status === "Private" ? (
-                          <i className="bi bi-lock-fill lock"></i>
-                        ) : (
-                          <i className="bi bi-globe world"></i>
-                        )}
-                      </div>
-                    </div>
-                    <div className="body">
-                      <p className="quicksand">{comment.comment}</p>
-                    </div>
-                    <div className="footer-com">
-                      <button className="poppins-regular update-com" onClick={() => handleUpdateComment(comment._id, comment.status)}>
-                        Change to {comment.status === "Private" ? "Public" : "Private"} 
-                      </button>
-                      <button className="poppins-regular delete-com" onClick={() => handleDeleteComment(comment._id)}>
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))
-              )}
+          <div className="admin-menu-con3">
+            <div className="table-det">
+              <div className="page-ttl">
+                <i className="bi bi-columns"></i>
+                <span className="span-2">
+                  Page {page} of {totalPages}
+                </span>
+              </div>
             </div>
-            {commentCount === 0 ? (
-              ""
-            ) : (
-              <div className="pagination">
-                <button
+
+            <div className="cas-filters">
+              <div className="search-input">
+                <i className="bi bi-search"></i>
+                <input
                   className="quicksand"
-                  disabled={page === 1}
-                  onClick={() => setPage(page - 1)}
+                  type="search"
+                  value={search}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  placeholder="Search..."
+                />
+              </div>
+              <div className="other-filt">
+                <select
+                  className="quicksand"
+                  onChange={(e) => setSort(e.target.value)}
                 >
-                  Previous
-                </button>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                ).map((pg) => (
+                  <option value="newest">Newest</option>
+                  <option value="asc">A-Z</option>
+                  <option value="dsc">Z-A</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleStatusChange(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="Private">Private</option>
+                  <option value="Public">Public</option>
+                </select>
+                <select
+                  className="quicksand"
+                  onChange={(e) => handleLimitChange(e.target.value)}
+                >
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="comments-wrap">
+              <div className="comments-grid">
+                {commentCount === 0 || comments.length === 0 ? (
+                  <NoData str={"No comment found"} />
+                ) : (
+                  comments.map((comment) => (
+                    <div className="comment-item-grid" key={comment._id}>
+                      <div className="header">
+                        <div>
+                          <span className="poppins-regular">
+                            {comment.userInfo.username}
+                          </span>
+                          <span className="quicksand email">
+                            {comment.userInfo.useremail}
+                          </span>
+                        </div>
+                        <span className="date">
+                          {new Date(comment.createdAt).toLocaleDateString(
+                            "id-ID"
+                          )}
+                        </span>
+                        <div className="icon-access">
+                          {comment.status === "Private" ? (
+                            <i className="bi bi-lock-fill lock"></i>
+                          ) : (
+                            <i className="bi bi-globe world"></i>
+                          )}
+                        </div>
+                      </div>
+                      <div className="body">
+                        <p className="quicksand">{comment.comment}</p>
+                      </div>
+                      <div className="footer-com">
+                        <button
+                          className="poppins-regular update-com"
+                          onClick={() =>
+                            handleUpdateComment(comment._id, comment.status)
+                          }
+                        >
+                          Change to{" "}
+                          {comment.status === "Private" ? "Public" : "Private"}
+                        </button>
+                        <button
+                          className="poppins-regular delete-com"
+                          onClick={() => handleDeleteComment(comment._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+              {commentCount === 0 ? (
+                ""
+              ) : (
+                <div className="pagination">
                   <button
-                    key={pg}
-                    className={`page-btn
+                    className="quicksand"
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                  >
+                    Previous
+                  </button>
+                  {Array.from(
+                    { length: totalPages },
+                    (_, index) => index + 1
+                  ).map((pg) => (
+                    <button
+                      key={pg}
+                      className={`page-btn
                   ${
                     page === pg
                       ? "active-btn poppins-regular"
                       : "poppins-regular"
                   }`}
-                    onClick={() => setPage(pg)}
+                      onClick={() => setPage(pg)}
+                    >
+                      {pg}
+                    </button>
+                  ))}
+                  <button
+                    className="quicksand"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
                   >
-                    {pg}
+                    Next
                   </button>
-                ))}
-                <button
-                  className="quicksand"
-                  disabled={page === totalPages}
-                  onClick={() => setPage(page + 1)}
-                >
-                  Next
-                </button>
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
